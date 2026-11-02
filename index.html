@@ -1014,7 +1014,7 @@ ul.clean.small{font-size:.86rem;gap:6px}
   ];
   var list=document.getElementById("repList"), note=document.getElementById("repNote"), adv=document.getElementById("sunAdvice");
   function setAge(age){
-    document.querySelectorAll(".age-pick button").forEach(function(b){b.setAttribute("aria-pressed",String(+b.dataset.age===age))});
+    document.querySelectorAll(".age-pick button[data-age]").forEach(function(b){b.setAttribute("aria-pressed",String(+b.dataset.age===age))});
     list.innerHTML="";
     REP.forEach(function(r){
       var ok=r.min===-1?"cloth":(age>=r.min?"ok":"no");
@@ -1028,7 +1028,7 @@ ul.clean.small{font-size:.86rem;gap:6px}
     adv.textContent=SUN[age];
     try{localStorage.setItem("aptechka-age",String(age))}catch(e){}
   }
-  document.querySelectorAll(".age-pick button").forEach(function(b){b.addEventListener("click",function(){setAge(+b.dataset.age)})});
+  document.querySelectorAll(".age-pick button[data-age]").forEach(function(b){b.addEventListener("click",function(){setAge(+b.dataset.age)})});
   var a0=2; try{var s=localStorage.getItem("aptechka-age"); if(s!==null&&/^[0-3]$/.test(s))a0=+s}catch(e){}
   setAge(a0);
 

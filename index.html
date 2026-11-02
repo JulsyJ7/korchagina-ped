@@ -2,6 +2,15 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0D5C6B">
+<meta name="description" content="Памятка для родителей от врача-педиатра Корчагиной Ю.А.: чек-лист детской аптечки, калькулятор доз, репелленты и SPF по возрасту, красные флаги.">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Аптечка">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>html{color-scheme:light}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Аптечка в путешествие</title>
@@ -222,12 +231,68 @@ ul.clean.small{font-size:.86rem;gap:6px}
 .tag.t5{background:#E1DCF5;color:#3E2F7A}
 .myth.tip{background:var(--chip);color:var(--ink)}
 .myth.tip strong{color:var(--sea)}
-.groups>.group:last-child{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-.groups>.group:last-child .group-head{grid-column:1/-1}
-@media (max-width:860px){.groups>.group:last-child{grid-template-columns:1fr}}
+.groups>.group:nth-child(n+3){grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.groups>.group:nth-child(n+3) .group-head{grid-column:1/-1}
+@media (max-width:860px){.groups>.group:nth-child(n+3){grid-template-columns:1fr}}
 .spf-age{margin-top:20px}
 .spf-age .sub{color:var(--muted);font-size:.86rem;margin-top:2px}
 .spf-age .age-pick{margin-bottom:0}
+
+/* ---------- sticky nav ---------- */
+html{scroll-behavior:smooth}
+section,[id]{scroll-margin-top:76px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--card)}
+.topnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topnav-in{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:8px;display:flex;align-items:center;gap:10px}
+.kid-chip{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:99px;background:#0D5C6B;color:#fff;text-decoration:none;font-size:.84rem;font-weight:700;white-space:nowrap}
+.kid-chip b{color:var(--sun);font-weight:800}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1;mask-image:linear-gradient(90deg,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;padding:7px 12px;border-radius:99px;color:var(--ink);text-decoration:none;font-size:.86rem;font-weight:700;white-space:nowrap;transition:background .2s,color .2s}
+.tabs a:hover{background:var(--chip)}
+.tabs a.on{background:var(--chip);color:var(--sea)}
+.tabs a.red{color:var(--coral)}
+.tabs a.red.on{background:var(--alert-bg);color:var(--alert-ink)}
+
+/* ---------- child panel ---------- */
+.child{padding-block:28px 0}
+.child-card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:22px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,1fr);gap:22px;align-items:start;border:2px solid color-mix(in srgb,var(--sea) 30%,transparent)}
+.child-head h2{font-size:1.5rem}
+.child-head p{color:var(--muted);font-size:.92rem;margin-top:6px}
+.flabel{display:block;font-family:var(--f-mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--sea);margin-bottom:10px}
+.ages{display:flex;flex-wrap:wrap;gap:6px}
+.ages button{border:2px solid var(--sea);background:transparent;color:var(--sea);border-radius:99px;padding:6px 11px;font-weight:800;font-size:.86rem;cursor:pointer;transition:all .2s}
+.ages button[aria-pressed="true"]{background:var(--sea);color:#fff}
+.for-age{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.92rem;color:var(--muted);margin-bottom:16px}
+.for-age b{color:var(--ink)}
+.for-age a,.calc-age a{color:var(--sea);font-weight:800;text-underline-offset:3px}
+.calc-age{font-size:.88rem;color:var(--muted)}
+.calc-age b{color:var(--ink)}
+.res.na{opacity:.55}
+.res.na .num{text-decoration:line-through;text-decoration-thickness:2px}
+tr.hit td{background:color-mix(in srgb,var(--sun) 30%,transparent)}
+tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
+.age-hit-note{font-size:.8rem;color:var(--sea);font-weight:700}
+
+/* ---------- collapsible checklist ---------- */
+.js .item:not(.open) > div > p{display:none}
+.more-btn{display:inline-flex;align-items:center;gap:4px;margin-top:4px;border:0;background:none;padding:2px 0;color:var(--sea);font-weight:700;font-size:.84rem;cursor:pointer}
+.more-btn::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.item.open .more-btn::after{transform:rotate(-135deg) translateY(-1px)}
+.no-js-hide{display:none}
+.js .no-js-hide{display:inline-flex}
+
+/* ---------- SOS button ---------- */
+.sos{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:99px;background:#B02A31;color:#fff;text-decoration:none;font-weight:800;font-size:.95rem;box-shadow:0 10px 24px -8px rgba(126,24,32,.7);transition:transform .25s,opacity .25s}
+.sos .pulse{width:30px;height:30px}
+.sos .pulse svg{width:17px;height:17px}
+.sos.away{opacity:0;transform:translateY(20px);pointer-events:none}
+@media (max-width:860px){
+  .child-card{grid-template-columns:1fr}
+  .sos span.t{display:inline}
+}
+@media (max-width:480px){.kid-chip .lbl{display:none}.sos{padding:9px 14px 9px 9px;font-size:.9rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 /* entrance motion: elements are visible at rest; animation only adds a short rise */
 .rise{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
 @keyframes rise{from{transform:translateY(14px)}to{transform:none}}
@@ -244,6 +309,20 @@ ul.clean.small{font-size:.86rem;gap:6px}
 @media (max-width:480px){.tiles{grid-template-columns:1fr}.item{grid-template-columns:48px minmax(0,1fr) auto}.item svg.pic{width:48px;height:48px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
+
+<style>
+.install{padding-block:40px 0}
+.install-card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;border:2px dashed color-mix(in srgb,var(--sea) 40%,transparent)}
+.install-card img{width:72px;height:72px;border-radius:18px;box-shadow:0 8px 18px -8px rgba(13,92,107,.6)}
+.install-card h2{font-size:1.4rem}
+.install-card p{color:var(--muted);margin-top:6px}
+.inst-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.inst-steps div{background:var(--chip);border-radius:14px;padding:12px 14px;font-size:.92rem}
+.inst-steps b{display:block;margin-bottom:4px;color:var(--sea)}
+.inst-btn{margin-top:14px;border:0;border-radius:99px;background:var(--sea);color:#fff;font-weight:800;padding:10px 18px;cursor:pointer}
+.offline-ok{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:.86rem;font-weight:700;color:var(--leaf)}
+@media (max-width:640px){.install-card{grid-template-columns:1fr}.inst-steps{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
@@ -258,6 +337,7 @@ ul.clean.small{font-size:.86rem;gap:6px}
     <linearGradient id="gSyr" x1="0" x2="1"><stop offset="0" stop-color="#DDEFF5"/><stop offset=".5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#BFDCE6"/></linearGradient>
     <radialGradient id="gWing" cx=".5" cy=".4"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset="1" stop-color="#BFD8E2" stop-opacity=".55"/></radialGradient>
     <linearGradient id="gBody" x1="0" x2="1"><stop offset="0" stop-color="#2B2B2B"/><stop offset=".5" stop-color="#5A5550"/><stop offset="1" stop-color="#1E1E1E"/></linearGradient>
+    <linearGradient id="gKit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F47A7F"/><stop offset=".55" stop-color="#E2474F"/><stop offset="1" stop-color="#B8262E"/></linearGradient>
     <radialGradient id="gSun" cx=".4" cy=".35"><stop offset="0" stop-color="#FFE38A"/><stop offset="1" stop-color="#FFB21E"/></radialGradient>
   </defs>
   <!-- syrup bottle -->
@@ -473,6 +553,20 @@ ul.clean.small{font-size:.86rem;gap:6px}
     <text x="60" y="104" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" fill="#0D5C6B">ГЕЛЬ 0,1%</text>
     <text x="60" y="116" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="#4C6870">от зуда</text>
   </symbol>
+  <!-- red first-aid kit -->
+  <symbol id="i-medkit" viewBox="0 0 180 150">
+    <ellipse cx="90" cy="142" rx="70" ry="6" fill="#000" opacity=".16"/>
+    <path d="M64 42V28a12 12 0 0112-12h28a12 12 0 0112 12v14" stroke="#9E1F27" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <rect x="12" y="38" width="156" height="100" rx="20" fill="url(#gKit)"/>
+    <rect x="12" y="38" width="156" height="30" rx="20" fill="#E85158"/>
+    <rect x="12" y="58" width="156" height="10" fill="#E85158"/>
+    <path d="M12 68h156" stroke="#9E1F27" stroke-width="3" opacity=".45"/>
+    <rect x="36" y="62" width="14" height="12" rx="3" fill="#C9D4D8"/><rect x="130" y="62" width="14" height="12" rx="3" fill="#C9D4D8"/>
+    <rect x="78" y="76" width="24" height="56" rx="6" fill="#fff"/>
+    <rect x="62" y="92" width="56" height="24" rx="6" fill="#fff"/>
+    <path d="M26 52c4-6 10-8 18-8" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".45" fill="none"/>
+    <path d="M22 84v38" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".25"/>
+  </symbol>
   <symbol id="i-x" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M5 5l6 6M11 5l-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-bang" viewBox="0 0 24 24"><path d="M12 3L2 21h20z" fill="#C0392B"/><path d="M12 9v6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="18" r="1.4" fill="#fff"/></symbol>
 </svg>
@@ -499,7 +593,42 @@ ul.clean.small{font-size:.86rem;gap:6px}
   <svg class="wave" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30c180-30 360-30 540 0s360 30 540 0 270-24 360-10v26H0z" fill="currentColor"/></svg>
 </header>
 
+<nav class="topnav" aria-label="Разделы памятки">
+  <div class="topnav-in">
+    <a href="#child" class="kid-chip"><span class="lbl">Ребёнок:</span> <b id="kidSum">1–2 года · 10 кг</b></a>
+    <div class="tabs">
+      <a href="#pack">Собрать</a><a href="#dose">Дозы</a><a href="#store">Хранение</a><a href="#road">Дорога</a><a href="#sun">Солнце</a><a href="#tropics">Тропики</a><a href="#flags" class="red">Красные флаги</a>
+    </div>
+  </div>
+</nav>
+<a href="#flags" class="sos" id="sos"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><span class="t">Срочно к врачу</span></a>
+
 <main>
+
+  <section id="child" class="child">
+    <div class="wrap">
+      <div class="child-card">
+        <div class="child-head">
+          <span class="eyebrow">Ваш ребёнок</span>
+          <h2>Возраст и вес</h2>
+          <p>Укажите один раз — памятка покажет подходящие дозы, репелленты, солнцезащитные кремы и препараты по возрасту.</p>
+        </div>
+        <div>
+          <span class="flabel">Возраст</span>
+          <div class="ages" role="group" aria-label="Возраст ребёнка"><button type="button" data-m="0" aria-pressed="false">до 1 мес</button><button type="button" data-m="1" aria-pressed="false">1–2 мес</button><button type="button" data-m="2" aria-pressed="false">2–3 мес</button><button type="button" data-m="3" aria-pressed="false">3–6 мес</button><button type="button" data-m="6" aria-pressed="false">6–12 мес</button><button type="button" data-m="12" aria-pressed="true">1–2 года</button><button type="button" data-m="24" aria-pressed="false">2–3 года</button><button type="button" data-m="36" aria-pressed="false">3–4 года</button><button type="button" data-m="48" aria-pressed="false">4–7 лет</button><button type="button" data-m="84" aria-pressed="false">7–12 лет</button><button type="button" data-m="144" aria-pressed="false">старше 12 лет</button></div>
+        </div>
+        <div>
+          <label class="flabel" for="kw">Вес</label>
+          <div class="w-row">
+            <button type="button" class="step" data-d="-0.5" aria-label="Уменьшить вес">−</button>
+            <input id="kw" class="kw" type="number" inputmode="decimal" min="3" max="40" step="0.5" value="10">
+            <span class="unit">кг</span>
+            <button type="button" class="step" data-d="0.5" aria-label="Увеличить вес">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- PACKING -->
   <section id="pack">
     <div class="wrap">
@@ -523,7 +652,7 @@ ul.clean.small{font-size:.86rem;gap:6px}
             <svg class="pic" viewBox="0 0 120 140" aria-hidden="true"><use href="#i-ors"/></svg>
             <div>
               <h3>Раствор для оральной регидратации</h3>
-              <p>Порошки в пакетиках со сниженной осмолярностью — при рвоте и диарее. Разводить строго по инструкции.</p>
+              <p>Порошки в пакетиках со сниженной осмолярностью (около 240 мОсм/л) — при рвоте и диарее. Например: Реакватант Оптим, Гидровит, Хумана Электролит. Обычный Регидрон детям до 12 лет не подходит: по его инструкции им нужны растворы с меньшей осмолярностью. Разводить строго по инструкции.</p>
             </div>
             <input type="checkbox" class="check" id="c-ors" aria-label="Раствор для регидратации собран">
           </label>
@@ -542,6 +671,14 @@ ul.clean.small{font-size:.86rem;gap:6px}
               <p>Диметинден, гель 0,1% (например, Фенистил гель) — при укусах насекомых, крапивнице, лёгком солнечном ожоге. С 1 месяца; до 2 лет — по назначению врача. Тонким слоем 2–4 раза в день, не дольше 7 дней. Малышам — не на большие участки и не на расчёсанную кожу; намазанные места не держать на солнце.</p>
             </div>
             <input type="checkbox" class="check" id="c-gel" aria-label="Гель от зуда собран">
+          </label>
+          <label class="item" for="c-saline">
+            <svg class="pic" viewBox="0 0 110 160" aria-hidden="true"><use href="#i-saline"/></svg>
+            <div>
+              <h3>Солевой раствор для носа</h3>
+              <p>Изотонический (0,9%) раствор натрия хлорида или морской воды: капли для малышей, спрей для старших. Увлажняет слизистую в самолёте и при кондиционере, размягчает слизь при насморке. 2–3 раза в день.</p>
+            </div>
+            <input type="checkbox" class="check" id="c-saline" aria-label="Солевой раствор собран">
           </label>
           <label class="item" for="c-daily">
             <svg class="pic" viewBox="0 0 130 110" aria-hidden="true"><use href="#i-case"/></svg>
@@ -579,6 +716,23 @@ ul.clean.small{font-size:.86rem;gap:6px}
             </div>
             <input type="checkbox" class="check" id="c-thermo" aria-label="Термометр и пинцет собраны">
           </label>
+          <label class="item" for="c-aspir">
+            <svg class="pic" viewBox="0 0 150 120" aria-hidden="true"><use href="#i-aspir"/></svg>
+            <div>
+              <h3>Назальный аспиратор</h3>
+              <p>Для малышей, которые ещё не умеют сморкаться. Сначала 2–3 капли солевого раствора в каждый носовой ход лёжа, через минуту — аспиратор. Лучше перед кормлением и не чаще 3 раз в день: частое отсасывание раздражает слизистую.</p>
+            </div>
+            <input type="checkbox" class="check" id="c-aspir" aria-label="Аспиратор собран">
+          </label>
+          <label class="item" for="c-neb">
+            <svg class="pic" viewBox="0 0 150 160" aria-hidden="true"><use href="#i-neb"/></svg>
+            <div>
+              <h3>Меш-небулайзер и лекарства к нему</h3>
+              <p>Только если ребёнку назначены ингаляции: бронхиальная астма или обструктивный бронхит в прошлом. Меш-небулайзер компактный и работает от батареек. Проверьте, что ваш препарат подходит для этого типа небулайзера (смотрите инструкцию к прибору). Ингаляции физраствором при простуде не помогают и не рекомендуются.</p>
+            </div>
+            <input type="checkbox" class="check" id="c-neb" aria-label="Небулайзер собран">
+          </label>
+          <div class="myth tip"><strong>Совет</strong><span>Дозированный ингалятор со спейсером при приступе работает не хуже небулайзера, легче в дороге и не зависит от розетки. Если он назначен ребёнку, возьмите его тоже.</span></div>
         </div>
 
         <div class="group">
@@ -599,35 +753,6 @@ ul.clean.small{font-size:.86rem;gap:6px}
             </div>
             <input type="checkbox" class="check" id="c-rep" aria-label="Репеллент собран">
           </label>
-        </div>
-
-        <div class="group">
-          <div class="group-head"><span class="tag t5">Нос и дыхание</span></div>
-          <label class="item" for="c-saline">
-            <svg class="pic" viewBox="0 0 110 160" aria-hidden="true"><use href="#i-saline"/></svg>
-            <div>
-              <h3>Солевой раствор для носа</h3>
-              <p>Изотонический (0,9%) раствор натрия хлорида или морской воды: капли для малышей, спрей для старших. Увлажняет слизистую в самолёте и при кондиционере, размягчает слизь при насморке. 2–3 раза в день.</p>
-            </div>
-            <input type="checkbox" class="check" id="c-saline" aria-label="Солевой раствор собран">
-          </label>
-          <label class="item" for="c-aspir">
-            <svg class="pic" viewBox="0 0 150 120" aria-hidden="true"><use href="#i-aspir"/></svg>
-            <div>
-              <h3>Назальный аспиратор</h3>
-              <p>Для малышей, которые ещё не умеют сморкаться. Сначала 2–3 капли солевого раствора в каждый носовой ход лёжа, через минуту — аспиратор. Лучше перед кормлением и не чаще 3 раз в день: частое отсасывание раздражает слизистую.</p>
-            </div>
-            <input type="checkbox" class="check" id="c-aspir" aria-label="Аспиратор собран">
-          </label>
-          <label class="item" for="c-neb">
-            <svg class="pic" viewBox="0 0 150 160" aria-hidden="true"><use href="#i-neb"/></svg>
-            <div>
-              <h3>Меш-небулайзер и лекарства к нему</h3>
-              <p>Только если ребёнку назначены ингаляции: бронхиальная астма или обструктивный бронхит в прошлом. Меш-небулайзер компактный и работает от батареек. Проверьте, что ваш препарат подходит для этого типа небулайзера (смотрите инструкцию к прибору). Ингаляции физраствором при простуде не помогают и не рекомендуются.</p>
-            </div>
-            <input type="checkbox" class="check" id="c-neb" aria-label="Небулайзер собран">
-          </label>
-          <div class="myth tip"><strong>Совет</strong><span>Дозированный ингалятор со спейсером при приступе работает не хуже небулайзера, легче в дороге и не зависит от розетки. Если он назначен ребёнку, возьмите его тоже.</span></div>
         </div>
 
         <div class="group">
@@ -668,11 +793,12 @@ ul.clean.small{font-size:.86rem;gap:6px}
           <label for="w">Вес ребёнка</label>
           <div class="w-row">
             <button type="button" class="step" data-d="-0.5" aria-label="Уменьшить вес">−</button>
-            <input id="w" type="number" inputmode="decimal" min="3" max="40" step="0.5" value="10">
+            <input id="w" class="kw" type="number" inputmode="decimal" min="3" max="40" step="0.5" value="10">
             <span class="unit">кг</span>
             <button type="button" class="step" data-d="0.5" aria-label="Увеличить вес">+</button>
           </div>
           <input id="wr" type="range" min="3" max="40" step="0.5" value="10" aria-label="Вес ребёнка, ползунок">
+          <p class="calc-age">Возраст: <b class="ageLbl">1–2 года</b> · <a href="#child">изменить</a></p>
         </div>
         <div class="results">
           <div class="res r-ibu">
@@ -691,7 +817,7 @@ ul.clean.small{font-size:.86rem;gap:6px}
             <div class="res-top"><span class="drug">Диметинден</span><span class="form">капли 1 мг/мл, с 1 месяца</span></div>
             <div class="num"><span id="fen">7</span> капель × 3 раза</div>
             <div class="formula">2 капли × вес = суточная доза (<span id="fenDay">20</span> кап.), делим на 3 приёма</div>
-            <div class="warn">До года — только по назначению врача: возможна сонливость и паузы дыхания во сне.</div>
+            <div class="warn" id="fenWarn">До года — только по назначению врача: возможна сонливость и паузы дыхания во сне.</div>
           </div>
         </div>
       </div>
@@ -701,7 +827,7 @@ ul.clean.small{font-size:.86rem;gap:6px}
           <h3>Свечи с ибупрофеном</h3>
           <table>
             <thead><tr><th>Дозировка</th><th>Возраст</th><th>Вес</th></tr></thead>
-            <tbody><tr><td><b>60 мг</b></td><td>3 мес – 2 года</td><td>6–12 кг</td></tr></tbody>
+            <tbody><tr data-from="3" data-to="24"><td><b>60 мг</b></td><td>3 мес – 2 года</td><td>6–12 кг</td></tr></tbody>
           </table>
           <p class="supp-note">1 свеча до 3 раз в сутки (3–9 мес) или до 4 раз (9 мес – 2 года). Детям легче 6 кг — нельзя.</p>
         </div>
@@ -710,9 +836,9 @@ ul.clean.small{font-size:.86rem;gap:6px}
           <table>
             <thead><tr><th>Дозировка</th><th>Возраст</th><th>Вес</th></tr></thead>
             <tbody>
-              <tr><td><b>50 мг</b></td><td>1–3 мес</td><td>4–6 кг</td></tr>
-              <tr><td><b>100 мг</b></td><td>3 мес – 3 года</td><td>7–16 кг</td></tr>
-              <tr><td><b>250 мг</b></td><td>3–10 лет</td><td>17–30 кг</td></tr>
+              <tr data-from="1" data-to="3"><td><b>50 мг</b></td><td>1–3 мес</td><td>4–6 кг</td></tr>
+              <tr data-from="3" data-to="36"><td><b>100 мг</b></td><td>3 мес – 3 года</td><td>7–16 кг</td></tr>
+              <tr data-from="36" data-to="120"><td><b>250 мг</b></td><td>3–10 лет</td><td>17–30 кг</td></tr>
             </tbody>
           </table>
           <p class="supp-note">Между свечами — 4–6 часов, не чаще 3 раз в сутки. До 3 месяцев — только по назначению врача.</p>
@@ -722,8 +848,8 @@ ul.clean.small{font-size:.86rem;gap:6px}
           <table>
             <thead><tr><th>Возраст</th><th>Доза</th></tr></thead>
             <tbody>
-              <tr><td>6–12 мес</td><td><b>5 капель</b> 1 раз в день</td></tr>
-              <tr><td>1–2 года</td><td><b>5 капель</b> до 2 раз в день</td></tr>
+              <tr data-from="6" data-to="12"><td>6–12 мес</td><td><b>5 капель</b> 1 раз в день</td></tr>
+              <tr data-from="12" data-to="24"><td>1–2 года</td><td><b>5 капель</b> до 2 раз в день</td></tr>
             </tbody>
           </table>
           <p class="supp-note">До 6 месяцев цетиризин не применяют — выбор для малышей диметинден.</p>
@@ -771,9 +897,9 @@ ul.clean.small{font-size:.86rem;gap:6px}
               <table>
                 <thead><tr><th>Препарат</th><th>Возраст</th><th>Разовая доза</th></tr></thead>
                 <tbody>
-                  <tr><td rowspan="2"><b>Дименгидринат</b><br><span class="ex">например, Драмина, таб. 50 мг</span></td><td>3–6 лет</td><td>¼–½ таблетки</td></tr>
-                  <tr><td>7–12 лет</td><td>½–1 таблетка</td></tr>
-                  <tr><td><b>Меклозин</b><br><span class="ex">например, Бонин, таб. 25 мг</span></td><td>с 12 лет</td><td>1–2 таблетки</td></tr>
+                  <tr data-from="36" data-to="84"><td rowspan="2"><b>Дименгидринат</b><br><span class="ex">например, Драмина, таб. 50 мг</span></td><td>3–6 лет</td><td>¼–½ таблетки</td></tr>
+                  <tr data-from="84" data-to="144"><td>7–12 лет</td><td>½–1 таблетка</td></tr>
+                  <tr data-from="144" data-to="999"><td><b>Меклозин</b><br><span class="ex">например, Бонин, таб. 25 мг</span></td><td>с 12 лет</td><td>1–2 таблетки</td></tr>
                 </tbody>
               </table>
             </div>
@@ -792,13 +918,8 @@ ul.clean.small{font-size:.86rem;gap:6px}
   <!-- SUN & BUGS -->
   <section id="sun">
     <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">Шаг 4 · солнце и насекомые</span><h2>Сколько лет ребёнку?</h2><p>Выберите возраст — покажем, какой репеллент подходит и как защищаться от солнца.</p></div>
-      <div class="age-pick" role="group" aria-label="Возраст ребёнка">
-        <button type="button" data-age="0" aria-pressed="false">до 2 месяцев</button>
-        <button type="button" data-age="1" aria-pressed="false">2–6 месяцев</button>
-        <button type="button" data-age="2" aria-pressed="true">6 мес – 3 года</button>
-        <button type="button" data-age="3" aria-pressed="false">старше 3 лет</button>
-      </div>
+      <div class="sec-head"><span class="eyebrow">Шаг 4 · солнце и насекомые</span><h2>Солнце и насекомые</h2><p>Репелленты и кремы подобраны по возрасту, который вы указали в начале страницы.</p></div>
+      <p class="for-age">Показано для возраста: <b class="ageLbl">1–2 года</b> <a href="#child">изменить</a></p>
       <div class="sunbugs">
         <div class="panel">
           <div class="panel-top"><svg viewBox="0 0 160 130" aria-hidden="true"><use href="#i-mosq"/></svg><h3>Репелленты</h3></div>
@@ -824,12 +945,7 @@ ul.clean.small{font-size:.86rem;gap:6px}
       </div>
       <div class="panel spf-age" id="spf-age">
         <div class="panel-top"><svg viewBox="0 0 120 170" aria-hidden="true"><use href="#i-spf"/></svg><div><h3>Солнцезащитные кремы по возрасту</h3><p class="sub">Аптечная косметика. Возраст — по данным производителя; всегда сверяйте с упаковкой.</p></div></div>
-        <div class="age-pick" role="group" aria-label="Возраст ребёнка для выбора крема">
-          <button type="button" data-spf="0" aria-pressed="false">до 6 месяцев</button>
-          <button type="button" data-spf="6" aria-pressed="false">6–12 месяцев</button>
-          <button type="button" data-spf="12" aria-pressed="true">1–4 года</button>
-          <button type="button" data-spf="48" aria-pressed="false">старше 4 лет</button>
-        </div>
+        <p class="for-age">Для возраста: <b class="ageLbl">1–2 года</b> <a href="#child">изменить</a></p>
         <div class="myth tip" id="spfInfant" hidden><strong>Малышам</strong><span>До 6 месяцев главная защита — тень, лёгкая закрытая одежда и панама. Крем — только если укрыться от солнца нельзя: тонким слоем на открытые участки (лицо, кисти). Производитель Ла-Кри разрешает свой крем с рождения, но международные рекомендации для этого возраста всё равно ставят на первое место тень.</span></div>
         <div class="rep-list" id="spfList">
               <div class="rep"><div><div class="name">Ла-Кри, молочко SPF 30 и SPF 50 для детей</div><div class="age">с рождения · химические фильтры</div></div><span class="status ok">подходит</span></div>
@@ -908,6 +1024,26 @@ ul.clean.small{font-size:.86rem;gap:6px}
   </section>
 
   <!-- FINALE -->
+
+  <section class="install" id="install">
+    <div class="wrap">
+      <div class="install-card">
+        <img src="icon-192.png" alt="">
+        <div>
+          <span class="eyebrow">Без интернета</span>
+          <h2>Сохраните памятку на телефон</h2>
+          <p>После первого открытия памятка работает без интернета — в самолёте, в роуминге, на пляже. Добавьте её на экран «Домой», чтобы открывать как приложение.</p>
+          <div class="inst-steps">
+            <div><b>iPhone и iPad (Safari)</b>Кнопка «Поделиться» <span aria-hidden="true">⎙</span> → «На экран „Домой“» → «Добавить».</div>
+            <div><b>Android (Chrome)</b>Меню ⋮ → «Установить приложение» или «Добавить на главный экран».</div>
+          </div>
+          <button type="button" class="inst-btn" id="installBtn" hidden>Установить на телефон</button>
+          <div class="offline-ok" id="offlineOk" hidden>✓ Памятка сохранена и откроется без интернета</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="finale">
     <div class="wrap">
       <h2>Приятного отдыха! <span aria-hidden="true">☀</span></h2>
@@ -933,6 +1069,7 @@ ul.clean.small{font-size:.86rem;gap:6px}
       <li><a href="https://ema.europa.eu/en/documents/herbal-monograph/european-union-herbal-monograph-mentha-x-piperita-l-folium-revision-1_en.pdf" target="_blank" rel="noopener">EMA: монография на лист мяты перечной</a> (2020) и <a href="https://www.ema.europa.eu/en/documents/herbal-list-entry/draft-european-union-list-entry-mentha-x-piperita-l-aetheroleum-revision-1_en.pdf" target="_blank" rel="noopener">на масло мяты перечной</a> (2019)</li>
       <li><a href="https://medi.ru/instrukciya/fenistil_27976/" target="_blank" rel="noopener">Инструкция к препарату Фенистил, гель 0,1% (medi.ru)</a></li>
       <li>Возраст солнцезащитных средств — по данным производителей и аптек: <a href="https://la-kry.ru/produkcia/smart-care/molochko-solntsezashchitnoe-spf-30-0/" target="_blank" rel="noopener">Ла-Кри SPF 30</a>, <a href="https://www.votonia.ru/products/molochko-solncezashchitnoe-la-kri-dlya-detey-spf50-200-ml/" target="_blank" rel="noopener">Ла-Кри SPF 50</a>, <a href="https://www.laroche-posay.ru/anthelios-molochko-dlja-mladencev-i-detej-50" target="_blank" rel="noopener">La Roche-Posay Anthelios Dermo-Pediatrics</a>, <a href="https://www.shop-apotheke.com/baby/BE03535481/bioderma-photoderm-kid-lait-spf-50.htm" target="_blank" rel="noopener">Bioderma Photoderm Kid</a>, <a href="https://media.halvacard.ru/beauty/solntsezashchitnye-sredstva-dlya-detey-kak-vybirat-reyting-luchshikh-v-2022-godu" target="_blank" rel="noopener">Librederm Bronzeada (обзор, обн. 01.2025)</a>, <a href="https://vkusvill.ru/goods/uriage-baresan-molochko-det-spf50-100-ml-310840/" target="_blank" rel="noopener">Uriage Bariésun детское</a></li>
+      <li>Растворы для регидратации: <a href="https://www.vidal.ru/drugs/reakvatant-optim" target="_blank" rel="noopener">Реакватант Оптим (Видаль)</a>, <a href="https://medi.ru/instrukciya/gidrovit_11289/" target="_blank" rel="noopener">Гидровит (medi.ru)</a>, <a href="https://nowonline.ru/childrens-clinic/peroralnaya-regidrataciya-spisok-effektivnyh-sredstv/" target="_blank" rel="noopener">Хумана Электролит (обзор)</a>, <a href="https://regidron.com/upload/rehydron.pdf" target="_blank" rel="noopener">инструкция к Регидрону</a></li>
     </ol>
     <p class="disc">Торговые названия приведены как примеры. Памятка подготовлена врачом-педиатром Корчагиной Ю.А. и не заменяет очную консультацию врача. Иллюстрации оригинальные.</p>
   </footer>
@@ -956,85 +1093,116 @@ ul.clean.small{font-size:.86rem;gap:6px}
   update();
 
 
-  /* ---------- dose calculator ---------- */
-  var w=document.getElementById("w"), wr=document.getElementById("wr");
+  document.documentElement.classList.add("js");
+
+  /* ---------- collapsible checklist items ---------- */
+  document.querySelectorAll(".item").forEach(function(it){
+    var box=it.querySelector(":scope > div"), h=box&&box.querySelector("h3");
+    if(!h)return;
+    var btn=document.createElement("button"); btn.type="button"; btn.className="more-btn"; btn.textContent="Подробнее"; btn.setAttribute("aria-expanded","false");
+    h.insertAdjacentElement("afterend",btn);
+    btn.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();var o=it.classList.toggle("open");btn.setAttribute("aria-expanded",String(o));btn.textContent=o?"Свернуть":"Подробнее";});
+  });
+  document.querySelectorAll('a[href="#dose"],a[href="#sun"],a[href="#spf-age"]').forEach(function(l){var it=l.closest(".item");if(it)l.addEventListener("click",function(e){e.stopPropagation()})});
+
+  /* ---------- child state: age (months) + weight ---------- */
+  var AGES=[[0, "до 1 мес"], [1, "1–2 мес"], [2, "2–3 мес"], [3, "3–6 мес"], [6, "6–12 мес"], [12, "1–2 года"], [24, "2–3 года"], [36, "3–4 года"], [48, "4–7 лет"], [84, "7–12 лет"], [144, "старше 12 лет"]];
+  var st={m:12,w:10};
+  try{var sv=JSON.parse(localStorage.getItem("aptechka-kid")||"null"); if(sv&&isFinite(sv.m)&&isFinite(sv.w))st=sv; else {var ow=parseFloat(localStorage.getItem("aptechka-w")); if(ow>=3&&ow<=40)st.w=ow;}}catch(e){}
+  function ageLabel(m){var l=AGES[0][1];AGES.forEach(function(a){if(m>=a[0])l=a[1]});return l;}
   function fmt(x){return (Math.round(x*10)/10).toString().replace(".",",");}
   function bump(id,val){var el=document.getElementById(id); if(el.textContent!==val){el.textContent=val;el.classList.add("bump");setTimeout(function(){el.classList.remove("bump")},220);}}
-  function calc(v,from){
-    v=parseFloat(String(v).replace(",","."));
-    if(!isFinite(v))return;
-    v=Math.min(40,Math.max(3,v));
-    if(from!=="w")w.value=v; if(from!=="wr")wr.value=v;
-    bump("ibu",fmt(v/2)); bump("par",fmt(v*0.625));
-    var day=Math.round(2*v); bump("fenDay",String(day)); bump("fen",String(Math.round(day/3)));
-    var iw=document.getElementById("ibuWarn"), pw=document.getElementById("parWarn");
-    iw.hidden=v>=5; iw.textContent="Ибупрофен — с 3 месяцев и веса от 5 кг.";
-    pw.hidden=v>=5; pw.textContent="До 3 месяцев — только по назначению врача.";
-    try{localStorage.setItem("aptechka-w",String(v))}catch(e){}
-  }
-  w.addEventListener("change",function(){calc(w.value)});
-  w.addEventListener("input",function(){var v=parseFloat(w.value);if(v>=3&&v<=40)calc(v,"w")});
-  wr.addEventListener("input",function(){calc(wr.value,"wr")});
-  document.querySelectorAll(".step").forEach(function(b){b.addEventListener("click",function(){calc(parseFloat(w.value||10)+parseFloat(b.dataset.d))})});
-  var w0=10; try{var sw=parseFloat(localStorage.getItem("aptechka-w")); if(sw>=3&&sw<=40)w0=sw}catch(e){}
-  calc(w0);
 
-
-  /* ---------- SPF by age ---------- */
+  var REP=[["ДЭТА (DEET) 10–30%","с 2 месяцев",2],["Икаридин (пикаридин) 5–10%","с 2 месяцев",2],["Масло лимонного эвкалипта","с 3 лет",36],["Перметрин","только одежда и сетки",-1]];
   var SPF=[["Ла-Кри, молочко SPF 30 и SPF 50 для детей", 0, "с рождения", "химические фильтры"], ["La Roche-Posay Anthelios Dermo-Pediatrics SPF 50+", 6, "с 6 месяцев", "химические фильтры"], ["Bioderma Photoderm Kid SPF 50+", 12, "с 1 года", ""], ["Librederm Bronzeada, детский крем", 12, "с 1 года", ""], ["Uriage Bariésun, детское молочко SPF 50+", 48, "с 4 лет", ""]];
-  var spfList=document.getElementById("spfList"), spfInf=document.getElementById("spfInfant");
-  function setSpf(age){
-    document.querySelectorAll("[data-spf]").forEach(function(b){b.setAttribute("aria-pressed",String(+b.dataset.spf===age))});
-    spfList.innerHTML="";
-    SPF.forEach(function(p){
-      var ok=age>=p[1], el=document.createElement("div");
-      el.className="rep"+(ok?"":" off");
-      el.innerHTML='<div><div class="name">'+p[0]+'</div><div class="age">'+p[2]+(p[3]?' · '+p[3]:'')+'</div></div><span class="status '+(ok?'ok':'no')+'">'+(ok?'подходит':'рано')+'</span>';
-      spfList.appendChild(el);
+  function renderList(el,items,m,okL,noL,third){
+    el.innerHTML="";
+    items.forEach(function(p){
+      var cls=p[2]===-1?"cloth":(m>=p[2]?"ok":"no");
+      var lab=cls==="cloth"?"на одежду":(cls==="ok"?okL:noL);
+      var d=document.createElement("div"); d.className="rep"+(cls==="no"?" off":"");
+      d.innerHTML='<div><div class="name">'+p[0]+'</div><div class="age">'+p[1]+(third&&p[3]?' · '+p[3]:'')+'</div></div><span class="status '+cls+'">'+lab+'</span>';
+      el.appendChild(d);
     });
-    spfInf.hidden=age!==0;
-    try{localStorage.setItem("aptechka-spf",String(age))}catch(e){}
   }
-  document.querySelectorAll("[data-spf]").forEach(function(b){b.addEventListener("click",function(){setSpf(+b.dataset.spf)})});
-  var sp0=12; try{var sv=localStorage.getItem("aptechka-spf"); if(sv!==null&&/^(0|6|12|48)$/.test(sv))sp0=+sv}catch(e){}
-  setSpf(sp0);
 
-  /* ---------- age picker ---------- */
-  var REP=[
-    {n:"ДЭТА (DEET) 10–30%",a:"с 2 месяцев",min:1},
-    {n:"Икаридин (пикаридин) 5–10%",a:"с 2 месяцев",min:1},
-    {n:"Масло лимонного эвкалипта",a:"с 3 лет",min:3},
-    {n:"Перметрин",a:"только одежда и сетки",min:-1}
-  ];
-  var SUN=[
-    "До 6 месяцев: тень, лёгкая закрытая одежда, панама. Крем — только на открытые участки и в минимальном количестве. Сильный солнечный ожог у младенца — повод срочно к врачу.",
-    "До 6 месяцев: тень, лёгкая закрытая одежда, панама. Крем — только на открытые участки и в минимальном количестве. Сильный солнечный ожог у младенца — повод срочно к врачу.",
-    "Крем SPF 30+ с минеральными фильтрами за 15–20 минут до выхода, обновлять после купания. Панама, очки, тень в полуденные часы.",
-    "Крем SPF 30+ за 15–20 минут до выхода, обновлять после купания и после того, как вытерся полотенцем. Панама, очки, футболка для купания."
-  ];
-  var list=document.getElementById("repList"), note=document.getElementById("repNote"), adv=document.getElementById("sunAdvice");
-  function setAge(age){
-    document.querySelectorAll(".age-pick button[data-age]").forEach(function(b){b.setAttribute("aria-pressed",String(+b.dataset.age===age))});
-    list.innerHTML="";
-    REP.forEach(function(r){
-      var ok=r.min===-1?"cloth":(age>=r.min?"ok":"no");
-      var label=ok==="cloth"?"на одежду":(ok==="ok"?"можно":"нельзя");
-      var el=document.createElement("div"); el.className="rep"+(ok==="no"?" off":"");
-      el.innerHTML='<div><div class="name">'+r.n+'</div><div class="age">'+r.a+'</div></div><span class="status '+ok+'">'+label+'</span>';
-      list.appendChild(el);
-    });
-    if(age===0){note.hidden=false;note.innerHTML="<strong>Важно</strong><span>До 2 месяцев репелленты на кожу не наносят. Защита — москитная сетка на коляске и кроватке, закрытая одежда.</span>";}
-    else note.hidden=true;
-    adv.textContent=SUN[age];
-    try{localStorage.setItem("aptechka-age",String(age))}catch(e){}
+  function apply(){
+    var m=st.m, w=Math.min(40,Math.max(3,st.w)); st.w=w;
+    var lbl=ageLabel(m);
+    document.getElementById("kidSum").textContent=lbl+" · "+fmt(w)+" кг";
+    document.querySelectorAll(".ageLbl").forEach(function(e){e.textContent=lbl});
+    document.querySelectorAll(".ages button").forEach(function(b){b.setAttribute("aria-pressed",String(+b.dataset.m===m))});
+    document.querySelectorAll("input.kw").forEach(function(i){if(document.activeElement!==i)i.value=w});
+    var wr=document.getElementById("wr"); if(wr)wr.value=w;
+
+    /* calculator */
+    bump("ibu",fmt(w/2)); bump("par",fmt(w*0.625));
+    var day=Math.round(2*w); bump("fenDay",String(day)); bump("fen",String(Math.round(day/3)));
+    var iw=document.getElementById("ibuWarn"), pw=document.getElementById("parWarn"), fw=document.getElementById("fenWarn");
+    var ibuNo=m<3||w<5, parNo=m<3, fenNo=m<1;
+    iw.hidden=!ibuNo; iw.textContent="Ибупрофен — с 3 месяцев и веса от 5 кг. Ребёнку этого возраста не подходит.";
+    pw.hidden=!parNo; pw.textContent="До 3 месяцев — только по назначению врача.";
+    document.querySelector(".r-ibu").classList.toggle("na",ibuNo);
+    document.querySelector(".r-par").classList.toggle("na",parNo);
+    document.querySelector(".r-fen").classList.toggle("na",fenNo);
+    fw.hidden=m>=12&&!fenNo; fw.textContent=fenNo?"Диметинден — с 1 месяца. Ребёнку этого возраста не подходит.":"До года — только по назначению врача: возможна сонливость и паузы дыхания во сне.";
+
+    /* highlight table rows for this age */
+    document.querySelectorAll("tr[data-from]").forEach(function(r){r.classList.toggle("hit",m>=+r.dataset.from&&m<+r.dataset.to)});
+
+    /* repellents + sun */
+    renderList(document.getElementById("repList"),REP,m,"можно","нельзя",false);
+    var note=document.getElementById("repNote");
+    if(m<2){note.hidden=false;note.innerHTML="<strong>Важно</strong><span>До 2 месяцев репелленты на кожу не наносят. Защита — москитная сетка на коляске и кроватке, закрытая одежда.</span>";} else note.hidden=true;
+    document.getElementById("sunAdvice").textContent = m<6
+      ? "До 6 месяцев: тень, лёгкая закрытая одежда, панама. Крем — только на открытые участки и в минимальном количестве. Сильный солнечный ожог у младенца — повод срочно к врачу."
+      : (m<36 ? "Крем SPF 30+ за 15–20 минут до выхода, обновлять после купания. Панама, очки, тень в полуденные часы."
+              : "Крем SPF 30+ за 15–20 минут до выхода, обновлять после купания и после того, как вытерся полотенцем. Панама, очки, футболка для купания.");
+    renderList(document.getElementById("spfList"),SPF.map(function(p){return [p[0],p[2],p[1],p[3]]}),m,"подходит","рано",true);
+    document.getElementById("spfInfant").hidden=m>=6;
+    try{localStorage.setItem("aptechka-kid",JSON.stringify(st))}catch(e){}
   }
-  document.querySelectorAll(".age-pick button[data-age]").forEach(function(b){b.addEventListener("click",function(){setAge(+b.dataset.age)})});
-  var a0=2; try{var s=localStorage.getItem("aptechka-age"); if(s!==null&&/^[0-3]$/.test(s))a0=+s}catch(e){}
-  setAge(a0);
+  document.querySelectorAll(".ages button").forEach(function(b){b.addEventListener("click",function(){st.m=+b.dataset.m;apply();})});
+  document.querySelectorAll("input.kw").forEach(function(i){
+    i.addEventListener("input",function(){var v=parseFloat(String(i.value).replace(",","."));if(v>=3&&v<=40){st.w=v;apply();}});
+    i.addEventListener("change",function(){var v=parseFloat(String(i.value).replace(",","."));if(isFinite(v)){st.w=v;apply();i.value=st.w;}});
+  });
+  var wrr=document.getElementById("wr"); if(wrr)wrr.addEventListener("input",function(){st.w=parseFloat(wrr.value);apply();});
+  document.querySelectorAll(".step").forEach(function(b){b.addEventListener("click",function(){st.w=(st.w||10)+parseFloat(b.dataset.d);apply();})});
+  apply();
+
+  /* ---------- sticky nav highlight + SOS visibility ---------- */
+  var tabs=[].slice.call(document.querySelectorAll(".tabs a")), sos=document.getElementById("sos");
+  if("IntersectionObserver" in window){
+    var vis={};
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){vis[e.target.id]=e.isIntersecting?e.intersectionRatio:0});
+      var best=null,bv=0; tabs.forEach(function(t){var id=t.getAttribute("href").slice(1);if((vis[id]||0)>bv){bv=vis[id];best=t}});
+      tabs.forEach(function(t){t.classList.toggle("on",t===best)});
+      if(best){var tb=best.parentNode; var x=best.offsetLeft-tb.clientWidth/2+best.clientWidth/2; tb.scrollTo({left:x,behavior:"smooth"});}
+    },{rootMargin:"-80px 0px -45% 0px",threshold:[0,.1,.25,.5]});
+    tabs.forEach(function(t){var el=document.getElementById(t.getAttribute("href").slice(1)); if(el)io.observe(el);});
+    var fo=new IntersectionObserver(function(es){es.forEach(function(e){sos.classList.toggle("away",e.isIntersecting)})},{threshold:.05});
+    fo.observe(document.getElementById("flags"));
+  }
 
   /* ---------- red flags ---------- */
 })();
 </script>
 
+
+<script>
+(function(){
+  if(!("serviceWorker" in navigator) || location.protocol!=="https:" && location.hostname!=="localhost") return;
+  navigator.serviceWorker.register("sw.js").then(function(){
+    return navigator.serviceWorker.ready;
+  }).then(function(){
+    var ok=document.getElementById("offlineOk"); if(ok) ok.hidden=false;
+  }).catch(function(){});
+  var deferred=null, btn=document.getElementById("installBtn");
+  window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferred=e;if(btn)btn.hidden=false;});
+  if(btn) btn.addEventListener("click",function(){if(!deferred)return;deferred.prompt();deferred.userChoice.finally(function(){deferred=null;btn.hidden=true;});});
+})();
+</script>
 </body>
 </html>

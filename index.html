@@ -182,6 +182,12 @@ ul.clean li::before{content:"";position:absolute;left:4px;top:.55em;width:10px;h
 .sources ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 .sources a{color:var(--sea);text-underline-offset:3px;word-break:break-word}
 .sources .disc{margin-top:16px}
+.src-fold>summary{cursor:pointer;font-family:var(--f-mono);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:12px;list-style:none;display:flex;align-items:center;gap:8px}
+.src-fold>summary::-webkit-details-marker{display:none}
+.src-fold>summary::before{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+.src-fold[open]>summary::before{transform:rotate(45deg)}
+@media print{.src-fold>ol{display:flex}}
+
 
 
 /* ---------- dose calculator ---------- */
@@ -1100,7 +1106,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
   </section>
 
   <footer class="wrap sources" id="sources">
-    <h3>Источники</h3>
+    <details class="src-fold"><summary>Источники</summary>
     <ol>
       <li><a href="https://www.cdc.gov/yellow-book/hcp/family-travel/traveling-safely-with-infants-and-children.html" target="_blank" rel="noopener">CDC Yellow Book 2026 — Traveling Safely with Infants &amp; Children</a> (обн. 12.2025) и <a href="https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/travel-health-kits.html" target="_blank" rel="noopener">Travel Health Kits</a> (04.2025)</li>
       <li><a href="https://pravo.ppt.ru/klinicheskie-rekomendatsii/315792" target="_blank" rel="noopener">Клинические рекомендации Минздрава РФ «Вирусные кишечные инфекции (гастроэнтериты) у детей»</a> (2025)</li>
@@ -1122,6 +1128,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
       <li>Возраст солнцезащитных средств — по данным производителей и аптек: <a href="https://la-kry.ru/produkcia/smart-care/molochko-solntsezashchitnoe-spf-30-0/" target="_blank" rel="noopener">Ла-Кри SPF 30</a>, <a href="https://www.votonia.ru/products/molochko-solncezashchitnoe-la-kri-dlya-detey-spf50-200-ml/" target="_blank" rel="noopener">Ла-Кри SPF 50</a>, <a href="https://www.laroche-posay.ru/anthelios-molochko-dlja-mladencev-i-detej-50" target="_blank" rel="noopener">La Roche-Posay Anthelios Dermo-Pediatrics</a>, <a href="https://www.shop-apotheke.com/baby/BE03535481/bioderma-photoderm-kid-lait-spf-50.htm" target="_blank" rel="noopener">Bioderma Photoderm Kid</a>, <a href="https://media.halvacard.ru/beauty/solntsezashchitnye-sredstva-dlya-detey-kak-vybirat-reyting-luchshikh-v-2022-godu" target="_blank" rel="noopener">Librederm Bronzeada (обзор, обн. 01.2025)</a>, <a href="https://vkusvill.ru/goods/uriage-baresan-molochko-det-spf50-100-ml-310840/" target="_blank" rel="noopener">Uriage Bariésun детское</a></li>
       <li>Растворы для регидратации: <a href="https://www.rlsnet.ru/drugs/reakvatant-optim-91668" target="_blank" rel="noopener">РеАкватант Оптим (РЛС)</a>, <a href="https://medi.ru/instrukciya/gidrovit_11289/" target="_blank" rel="noopener">Гидровит (medi.ru)</a>, <a href="https://nowonline.ru/childrens-clinic/peroralnaya-regidrataciya-spisok-effektivnyh-sredstv/" target="_blank" rel="noopener">Хумана Электролит (обзор)</a>, <a href="https://regidron.com/upload/rehydron.pdf" target="_blank" rel="noopener">инструкция к Регидрону</a></li>
     </ol>
+    </details>
     <p class="disc">Торговые названия приведены как примеры. Памятка подготовлена врачом-педиатром Корчагиной Ю.А. и не заменяет очную консультацию врача. Иллюстрации оригинальные.</p>
   </footer>
 </main>

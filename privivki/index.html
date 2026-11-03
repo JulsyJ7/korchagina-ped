@@ -94,7 +94,7 @@ button,input,select{font:inherit;color:inherit}
 .kid{flex:none;border:0;border-radius:99px;background:var(--berry);color:#fff;font-weight:800;font-size:.84rem;padding:7px 12px;cursor:pointer;white-space:nowrap}
 :root[data-theme="dark"] .kid{background:#7E1F49}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .kid{background:#7E1F49}}
-.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:700;font-size:.88rem;padding:7px 12px;border-radius:99px;white-space:nowrap}
 .tabs a.on{background:var(--mchip);color:var(--ok-ink)}
@@ -157,7 +157,7 @@ button,input,select{font:inherit;color:inherit}
 .subcap{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;font-weight:700}
 
 /* ---------- do/don't ---------- */
-.dd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.dd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
 .dd ul{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:10px}
 .dd li{position:relative;padding-left:30px}
 .dd li::before{position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.8rem}
@@ -169,11 +169,14 @@ button,input,select{font:inherit;color:inherit}
 .pill.y{background:var(--mchip);color:var(--ok-ink)}.pill.n{background:var(--alert-bg);color:var(--alert-ink)}
 
 /* ---------- mantoux ---------- */
-.mx{margin-top:20px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:stretch}
-.mx-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.mx{margin-top:20px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
+.mx-flow{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;margin:14px 0 4px}
 .mx-flow span{background:var(--chip);border-radius:12px;padding:8px 12px;font-weight:800;font-size:.9rem}
 .mx-flow span.m{background:var(--berry);color:#fff}
-.mx-flow em{font-style:normal;font-family:var(--f-mono);font-size:.76rem;color:var(--muted)}
+.mx-flow span{white-space:nowrap;flex:none}
+.mx-flow em{flex:1;min-width:0;font-style:normal;font-family:var(--f-mono);font-size:.7rem;line-height:1.25;color:var(--muted);text-align:center;display:flex;flex-direction:column;align-items:center}
+.mx-flow em::after{content:"→";font-size:1rem;line-height:1;color:var(--berry)}
+@media (max-width:420px){.mx-flow{gap:3px}.mx-flow span{padding:7px 7px;font-size:.78rem}.mx-flow em{font-size:.6rem}}
 .mx-res{margin-top:10px;font-weight:700;min-height:1.5em}
 .mx-res b{color:var(--berry)}
 
@@ -575,14 +578,13 @@ ul.plain{margin:10px 0 0;padding-left:20px;display:grid;gap:7px;font-size:.94rem
         <div class="card">
           <h3>Прививки и пробы Манту и Диаскинтест</h3>
           <div class="mx-flow" aria-label="Порядок: любая прививка, затем не раньше чем через месяц Манту, затем после оценки через 72 часа любая прививка">
-            <span>Прививка</span><em>≥ 1 месяц →</em><span class="m">Манту</span><em>→ оценка через 72 ч →</em><span>Прививка</span>
-          </div>
+            <span>Прививка</span><em>через<br>1&nbsp;месяц<br>&nbsp;</em><span class="m">Манту</span><em>оценка<br>через<br>72&nbsp;ч</em><span>Прививка</span></div>
           <p style="color:var(--muted);font-size:.92rem;margin-top:8px">Если Манту сделали первой — прививку можно сразу после того, как врач оценит пробу. Если первой была прививка — Манту ставят не раньше чем через месяц.</p>
           <p class="mini" style="margin-top:10px"><b>Диаскинтест</b> — те же правила: не раньше чем через месяц после прививки, а после отрицательного результата прививки (кроме БЦЖ) можно сразу. В отличие от Манту, Диаскинтест не реагирует на прививку БЦЖ.</p>
         </div>
         <div class="card">
           <h3>Посчитать даты</h3>
-          <div class="field" style="margin-top:10px"><label for="mxVac">Дата последней прививки (укол)</label><input type="date" id="mxVac"></div>
+          <div class="field" style="margin-top:10px"><label for="mxVac">Дата последней прививки</label><input type="date" id="mxVac"></div>
           <div class="mx-res" id="mxVacRes"></div>
           <div class="field" style="margin-top:10px"><label for="mxM">Дата постановки Манту</label><input type="date" id="mxM"></div>
           <div class="mx-res" id="mxMRes"></div>
@@ -658,7 +660,7 @@ ul.plain{margin:10px 0 0;padding-left:20px;display:grid;gap:7px;font-size:.94rem
         <li>Не чередуйте ибупрофен и парацетамол без назначения врача.</li>
         <li>Не стало лучше после жаропонижающего или выше 39 °C больше суток — к врачу.</li>
       </ul>
-      <a class="fever-link" href="https://julsyj7.github.io/korchagina-ped/#dose" target="_blank" rel="noopener">Подробнее о температуре и дозах — в памятке «Аптечка в путешествие» →</a>
+      
     </div>
   </section>
 

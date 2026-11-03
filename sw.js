@@ -1,5 +1,5 @@
 /* Офлайн-кэш памятки. Версия меняется автоматически при каждом обновлении index.html. */
-const VERSION = "aptechka-32e0fe2795";
+const VERSION = "aptechka-f29c356dee";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {

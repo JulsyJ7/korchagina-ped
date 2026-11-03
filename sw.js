@@ -1,5 +1,5 @@
 /* Офлайн-кэш памятки. Версия меняется автоматически при каждом обновлении index.html. */
-const VERSION = "aptechka-8574f8249e";
+const VERSION = "aptechka-32e0fe2795";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {
@@ -17,6 +17,10 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
+  // Обслуживаем только свою папку: соседние памятки (например, /privivki/) живут со своим офлайн-кэшем.
+  const base = new URL("./", self.registration.scope).pathname;
+  const rest = url.pathname.slice(base.length);
+  if (url.origin === self.location.origin && (!url.pathname.startsWith(base) || rest.includes("/"))) return;
 
   // Страница: сначала сеть (чтобы родители видели свежую версию), без сети — из кэша.
   if (req.mode === "navigate") {

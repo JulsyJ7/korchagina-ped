@@ -298,6 +298,51 @@ button,input,select{font:inherit;color:inherit}
 .nx-out small{color:var(--muted);font-size:.8rem;border-top:1px dashed var(--line);padding-top:8px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nx-risk label,:root:not([data-theme="light"]) .nx-warn{background:#3E2B12;color:#FFC889!important}}
 :root[data-theme="dark"] .nx-risk label,:root[data-theme="dark"] .nx-warn{background:#3E2B12;color:#FFC889!important}
+
+/* ---------- review update ---------- */
+.fab-sos{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 9px;border-radius:99px;background:#9A1838;color:#fff;text-decoration:none;font-weight:800;font-size:.95rem;box-shadow:0 10px 24px -8px rgba(122,16,48,.7);transition:opacity .25s,transform .25s}
+.fab-dot{width:28px;height:28px;border-radius:50%;background:#fff;color:#9A1838;display:grid;place-items:center;font-weight:900;position:relative}
+.fab-dot::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #fff;animation:ring 2.2s ease-out infinite}
+@keyframes ring{from{transform:scale(1);opacity:.8}to{transform:scale(1.7);opacity:0}}
+.fab-sos.away{opacity:0;transform:translateY(20px);pointer-events:none}
+.timeline.short .stop.far{display:none}
+.cal-more{margin-top:14px;border:2px solid var(--berry);background:var(--card);color:var(--berry);border-radius:99px;padding:9px 18px;font-weight:800;cursor:pointer}
+.cal-more:hover{background:var(--berry);color:#fff}
+details.fold{padding:0}
+details.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:20px}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"";margin-left:auto;width:9px;height:9px;border-right:2.5px solid var(--muted);border-bottom:2.5px solid var(--muted);transform:rotate(45deg);transition:transform .2s}
+details.fold[open]>summary::after{transform:rotate(-135deg)}
+details.fold>ul{padding:0 20px 20px!important;margin-top:0!important}
+.fold-hint{color:var(--muted);font-size:.86rem;font-weight:600}
+ul.plain{margin:10px 0 0;padding-left:20px;display:grid;gap:7px;font-size:.94rem;list-style:disc}
+.dd ul.plain li{padding-left:0}
+.dd ul.plain li::before{content:none}
+.mini{color:var(--muted);font-size:.84rem;margin-top:10px}
+.fold-in{margin-top:12px;background:var(--mchip);border-radius:14px;padding:10px 14px}
+.fold-in>summary{cursor:pointer;font-weight:800;color:var(--ok-ink)}
+.fold-in ul{margin-top:8px}
+.nx-col{display:grid;gap:14px;min-width:0}
+.trk h3,.vf h3{margin-bottom:6px}
+.trk .trk-day{font-size:1.2rem}
+.vf ul{margin:6px 0 10px;padding-left:18px;display:grid;gap:5px;font-size:.92rem}
+.vf{background:var(--alert-bg)}
+.vf h3{color:var(--alert-ink)}
+.vf a{font-weight:800;color:var(--alert-ink);font-size:.9rem}
+.nx-ics{justify-self:start;display:inline-flex;align-items:center;gap:8px;margin-top:4px;border-radius:99px;background:var(--berry);color:#fff!important;text-decoration:none;font-weight:800;padding:9px 16px;font-size:.92rem}
+.sub-h{font-size:1.25rem;margin:36px 0 16px}
+.fever-short{margin-top:16px}
+.fever-link{display:inline-block;margin-top:12px;font-weight:800}
+.myths{display:grid;gap:10px}
+.myths details{padding:0}
+.myths summary{cursor:pointer;padding:16px 18px;font-weight:800;list-style:none;display:flex;gap:10px;align-items:center}
+.myths summary::-webkit-details-marker{display:none}
+.myths summary::before{content:"?";flex:none;width:26px;height:26px;border-radius:50%;background:var(--chip);color:var(--berry);display:grid;place-items:center;font-family:var(--f-display);font-size:.85rem}
+.myths details[open] summary::before{content:"!";background:var(--mint);color:#fff}
+.myths p{padding:0 18px 16px 54px;color:var(--muted)}
+.src-fold>summary{cursor:pointer;font-weight:800;color:var(--ink);font-size:.95rem;margin-bottom:10px}
+.src-fold ol{margin-top:8px}
+@media print{.fab-sos,.cal-more{display:none}.timeline.short .stop.far{display:grid}details>*{display:block}}
 @media (max-width:820px){#next .nx-wrap{grid-template-columns:1fr}}
 .nx-rules{margin-top:20px;background:var(--card);border-radius:18px;padding:16px 18px;border:2px dashed var(--line);font-size:.92rem}
 .nx-rules h3{margin-bottom:8px}
@@ -419,10 +464,11 @@ button,input,select{font:inherit;color:inherit}
   <div class="wrap">
     <button type="button" class="kid" id="kidSum" hidden>Ребёнок</button>
     <div class="tabs">
-      <a href="#calendar">Календарь</a><a href="#next">Следующая прививка</a><a href="#types">Виды вакцин</a><a href="#before">Подготовка</a><a href="#after">После</a><a href="#track">Реакции</a><a href="#fever">Температура</a><a href="#vaccines">Вакцины</a><a href="#flags">Тревожные признаки</a><a href="#res">Полезное</a>
+      <a href="#calendar">График</a><a href="#before">Перед прививкой</a><a href="#after">После прививки</a><a href="#vaccines">Вакцины</a>
     </div>
   </div>
 </nav>
+<a href="#flags" class="fab-sos" id="fabSos"><span class="fab-dot" aria-hidden="true">!</span>Тревожно?</a>
 
 <main>
 
@@ -443,70 +489,32 @@ button,input,select{font:inherit;color:inherit}
           <button type="button" data-cal="msk" aria-pressed="true">Москва</button>
           <button type="button" data-cal="nk" aria-pressed="false">Только национальный</button>
         </div>
-        <div class="legend"><span><em class="tag nk">Нац.</em> национальный календарь</span><span><em class="tag msk">Москва</em> региональный календарь</span><span><em class="tag risk">Риск</em> только группы риска</span></div>
+        <div class="legend"><span><em class="tag msk">Москва</em> региональный календарь</span><span><em class="tag risk">Риск</em> только группы риска</span></div>
       </div>
       <ol class="timeline" id="timeline">
-<li class="stop" data-m="0"><div class="stop-age"><b>Первые 24 часа</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-hb">Гепатит B — 1-я прививка</a><em class="tag nk">Нац.</em></li></ul></li>
-<li class="stop" data-m="0.15"><div class="stop-age"><b>3–7-й день</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-bcg">Туберкулёз — БЦЖ-М</a><em class="tag nk">Нац.</em></li></ul></li>
-<li class="stop" data-m="1"><div class="stop-age"><b>1 месяц</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-hb">Гепатит B — 2-я</a><em class="tag nk">Нац.</em></li></ul></li>
-<li class="stop" data-m="2"><div class="stop-age"><b>2 месяца</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-pcv">Пневмококк — 1-я</a><em class="tag nk">Нац.</em></li><li class="t-risk"><a href="#v-hb">Гепатит B — 3-я (только группы риска)</a><em class="tag risk">Риск</em></li><li class="t-msk"><a href="#v-rota">Ротавирус — 1-я (капли)</a><em class="tag msk">Москва</em></li></ul></li>
-<li class="stop" data-m="3"><div class="stop-age"><b>3 месяца</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-dtp">Коклюш, дифтерия, столбняк, полиомиелит, гемофильная инфекция — 1-я</a><em class="tag nk">Нац.</em></li><li class="t-msk"><a href="#v-rota">Ротавирус — 2-я</a><em class="tag msk">Москва</em></li></ul></li>
-<li class="stop" data-m="4.5"><div class="stop-age"><b>4,5 месяца</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-dtp">Коклюш, дифтерия, столбняк, полиомиелит, гемофильная инфекция — 2-я</a><em class="tag nk">Нац.</em></li><li class="t-nk"><a href="#v-pcv">Пневмококк — 2-я</a><em class="tag nk">Нац.</em></li><li class="t-msk"><a href="#v-rota">Ротавирус — 3-я</a><em class="tag msk">Москва</em></li></ul></li>
-<li class="stop" data-m="6"><div class="stop-age"><b>6 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-dtp">Коклюш, дифтерия, столбняк, полиомиелит, гемофильная инфекция — 3-я</a><em class="tag nk">Нац.</em></li><li class="t-nk"><a href="#v-hb">Гепатит B — 3-я</a><em class="tag nk">Нац.</em></li><li class="t-nk"><a href="#v-flu">Грипп — с 6 месяцев, каждый год осенью</a><em class="tag nk">Нац.</em></li></ul></li>
-<li class="stop" data-m="12"><div class="stop-age"><b>12 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-mmr">Корь, краснуха, паротит</a><em class="tag nk">Нац.</em></li><li class="t-risk"><a href="#v-hb">Гепатит B — 4-я (только группы риска)</a><em class="tag risk">Риск</em></li><li class="t-msk"><a href="#v-var">Ветряная оспа — перед детским садом; 2-я доза не раньше чем через 6 недель</a><em class="tag msk">Москва</em></li></ul></li>
-<li class="stop" data-m="15"><div class="stop-age"><b>15 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-pcv">Пневмококк — ревакцинация</a><em class="tag nk">Нац.</em></li></ul></li>
-<li class="stop" data-m="18"><div class="stop-age"><b>18 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-dtp">Коклюш, дифтерия, столбняк, полиомиелит, гемофильная инфекция — ревакцинация</a><em class="tag nk">Нац.</em></li></ul></li>
-<li class="stop" data-m="20"><div class="stop-age"><b>20 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-opv">Полиомиелит — 2-я ревакцинация (капли)</a><em class="tag nk">Нац.</em></li></ul></li>
+<li class="stop" data-m="0"><div class="stop-age"><b>Первые 24 часа</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-hb">Гепатит B — 1-я прививка</a></li></ul></li>
+<li class="stop" data-m="0.15"><div class="stop-age"><b>3–7-й день</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-bcg">Туберкулёз — БЦЖ-М</a></li></ul></li>
+<li class="stop" data-m="1"><div class="stop-age"><b>1 месяц</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-hb">Гепатит B — 2-я</a></li></ul></li>
+<li class="stop" data-m="2"><div class="stop-age"><b>2 месяца</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-pcv">Пневмококк — 1-я</a></li><li class="t-risk"><a href="#v-hb">Гепатит B — 3-я (только группы риска)</a><em class="tag risk">Риск</em></li><li class="t-msk"><a href="#v-rota">Ротавирус — 1-я (капли)</a><em class="tag msk">Москва</em></li></ul></li>
+<li class="stop" data-m="3"><div class="stop-age"><b>3 месяца</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-dtp">Коклюш, дифтерия, столбняк, полиомиелит, гемофильная инфекция — 1-я</a></li><li class="t-msk"><a href="#v-rota">Ротавирус — 2-я</a><em class="tag msk">Москва</em></li></ul></li>
+<li class="stop" data-m="4.5"><div class="stop-age"><b>4,5 месяца</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-dtp">Коклюш, дифтерия, столбняк, полиомиелит, гемофильная инфекция — 2-я</a></li><li class="t-nk"><a href="#v-pcv">Пневмококк — 2-я</a></li><li class="t-msk"><a href="#v-rota">Ротавирус — 3-я</a><em class="tag msk">Москва</em></li></ul></li>
+<li class="stop" data-m="6"><div class="stop-age"><b>6 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-dtp">Коклюш, дифтерия, столбняк, полиомиелит, гемофильная инфекция — 3-я</a></li><li class="t-nk"><a href="#v-hb">Гепатит B — 3-я</a></li><li class="t-nk"><a href="#v-flu">Грипп — с 6 месяцев, каждый год осенью</a></li></ul></li>
+<li class="stop" data-m="12"><div class="stop-age"><b>12 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-mmr">Корь, краснуха, паротит</a></li><li class="t-risk"><a href="#v-hb">Гепатит B — 4-я (только группы риска)</a><em class="tag risk">Риск</em></li><li class="t-msk"><a href="#v-var">Ветряная оспа — перед детским садом; 2-я доза не раньше чем через 6 недель</a><em class="tag msk">Москва</em></li></ul></li>
+<li class="stop" data-m="15"><div class="stop-age"><b>15 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-pcv">Пневмококк — ревакцинация</a></li></ul></li>
+<li class="stop" data-m="18"><div class="stop-age"><b>18 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-dtp">Коклюш, дифтерия, столбняк, полиомиелит, гемофильная инфекция — ревакцинация</a></li></ul></li>
+<li class="stop" data-m="20"><div class="stop-age"><b>20 месяцев</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-opv">Полиомиелит — 2-я ревакцинация (капли)</a></li></ul></li>
 <li class="stop" data-m="36"><div class="stop-age"><b>3–6 лет</b><span class="stop-date"></span></div><ul><li class="t-msk"><a href="#v-hepa">Гепатит A — 2 дозы с интервалом 6–12 месяцев, перед детским садом</a><em class="tag msk">Москва</em></li><li class="t-msk"><a href="#v-men">Менингококковая инфекция — перед детским садом</a><em class="tag msk">Москва</em></li></ul></li>
-<li class="stop" data-m="72"><div class="stop-age"><b>6 лет</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-mmr">Корь, краснуха, паротит — ревакцинация</a><em class="tag nk">Нац.</em></li><li class="t-nk"><a href="#v-opv">Полиомиелит — 3-я ревакцинация (капли)</a><em class="tag nk">Нац.</em></li></ul></li>
-<li class="stop" data-m="78"><div class="stop-age"><b>6–7 лет</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-tdap">Дифтерия, столбняк — 2-я ревакцинация; в Москве — вместе с коклюшем</a><em class="tag nk">Нац.</em></li><li class="t-nk"><a href="#v-bcg">Туберкулёз — ревакцинация, если проба отрицательная</a><em class="tag nk">Нац.</em></li></ul></li>
+<li class="stop" data-m="72"><div class="stop-age"><b>6 лет</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-mmr">Корь, краснуха, паротит — ревакцинация</a></li><li class="t-nk"><a href="#v-opv">Полиомиелит — 3-я ревакцинация (капли)</a></li></ul></li>
+<li class="stop" data-m="78"><div class="stop-age"><b>6–7 лет</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-tdap">Дифтерия, столбняк — 2-я ревакцинация; в Москве — вместе с коклюшем</a></li><li class="t-nk"><a href="#v-bcg">Туберкулёз — ревакцинация, если проба отрицательная</a></li></ul></li>
 <li class="stop" data-m="144"><div class="stop-age"><b>12–13 лет, девочки</b><span class="stop-date"></span></div><ul><li class="t-msk"><a href="#v-hpv">Вирус папилломы человека — 2 дозы (0 и 6 мес)</a><em class="tag msk">Москва</em></li></ul></li>
-<li class="stop" data-m="168"><div class="stop-age"><b>14 лет</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-adsm">Дифтерия, столбняк — 3-я ревакцинация</a><em class="tag nk">Нац.</em></li></ul></li>
+<li class="stop" data-m="168"><div class="stop-age"><b>14 лет</b><span class="stop-date"></span></div><ul><li class="t-nk"><a href="#v-adsm">Дифтерия, столбняк — 3-я ревакцинация</a></li></ul></li>
       </ol>
+      <button type="button" class="cal-more" id="calMore" hidden>Показать весь календарь</button>
       <div class="callout"><svg><use href="#i-info"/></svg><div>Пропустили срок — это не повод начинать заново: продолжают с того места, где остановились. Догоняющий график составит врач. Если сделать несколько прививок в один день, это безопасно и не перегружает иммунитет. Клещевой энцефалит прививают с 1 года перед поездкой в эндемичные районы; грипп — каждый год с 6 месяцев.</div></div>
     </div>
   </section>
 
-  <section id="next">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">Калькулятор</span>
-        <h2>Когда следующая прививка</h2>
-        <p>Выберите вакцину, отметьте, какая прививка была последней, и укажите её дату — памятка покажет, с какого дня можно делать следующую, даже если график сдвинулся. Возраст берётся из даты рождения в календаре выше.</p>
-      </div>
-      <div class="nx-wrap">
-      <div class="card nx-form">
-        <div class="field"><label for="nxV">Вакцина</label><select id="nxV"></select></div>
-        <div class="nx-risk" id="nxRiskWrap" hidden><label><input type="checkbox" id="nxR"> Ребёнок из группы риска — схема 0–1–2–12 мес</label></div>
-        <div class="field"><label for="nxK">Какая прививка была последней</label><select id="nxK"></select></div>
-        <div class="field"><label for="nxD">Дата последней прививки</label><input type="date" id="nxD"></div>
-        <div class="field" id="nxD1Wrap" hidden><label for="nxD1" id="nxD1Lab">Дата 1-й прививки</label><input type="date" id="nxD1"></div>
-        <button type="button" class="nx-reset" id="nxReset">Сбросить</button>
-      </div>
-      <div class="nx-out" id="nxOut" aria-live="polite"><b>Выберите вакцину и укажите дату последней прививки</b></div>
-      </div>
-    </div>
-  </section>
 
-  <section id="types">
-    <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">Виды вакцин</span><h2>Живые и неживые</h2><p>От вида вакцины зависит, когда ждать реакцию: на неживые — в первые 1–3 дня, на живые — чаще с 5-го по 21-й день.</p></div>
-      <div class="types">
-        <div class="card mint"><h3><i style="background:var(--mint)"></i>Живые</h3>
-          <div class="subcap">Национальный календарь</div>
-          <div class="chips"><span>Корь</span><span>Краснуха</span><span>Паротит</span><span>Туберкулёз <small>БЦЖ</small></span><span>Полиомиелит <small>капли</small></span></div>
-          <div class="subcap">Региональный календарь</div>
-          <div class="chips"><span>Ветряная оспа</span><span>Ротавирус <small>капли</small></span></div>
-        </div>
-        <div class="card"><h3><i style="background:var(--berry)"></i>Неживые</h3>
-          <div class="subcap">Национальный календарь</div>
-          <div class="chips"><span>Пневмококк</span><span>Коклюш</span><span>Дифтерия</span><span>Столбняк</span><span>Полиомиелит <small>укол</small></span><span>Гемофильная инфекция</span><span>Грипп</span><span>Гепатит B</span></div>
-          <div class="subcap">Региональный календарь и по показаниям</div>
-          <div class="chips"><span>Гепатит A</span><span>Менингококк <small>ACWY</small></span><span>ВПЧ</span><span>Клещевой энцефалит</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section id="before">
     <div class="wrap">
@@ -519,20 +527,46 @@ button,input,select{font:inherit;color:inherit}
           <li>Обезболивающий крем с лидокаином и прилокаином — за 60 минут до укола, под повязку<small>По желанию; время и дозу смотрите в инструкции к крему</small></li>
           <li>Перед прививкой в каплях (полиомиелит) — не кормить и не поить за 1 час<small>Иначе вакцина может хуже сработать</small></li>
         </ul></div>
-        <div class="card no"><h3><span class="pill n">Не нужно</span></h3><ul>
+        <details class="card no fold"><summary><span class="pill n">Не нужно</span><span class="fold-hint">что делать не нужно</span></summary><ul>
           <li>Сдавать анализы и проходить узких специалистов «для допуска»<small>Если врач не назначил их по особой причине</small></li>
           <li>Ограничивать контакты и менять питание</li>
           <li>Давать заранее антигистаминные, жаропонижающие, витамины<small>Пользы нет, а важные симптомы они могут скрыть</small></li>
           <li>Отменять лекарства, которые назначил врач<small>Большинство лекарств не влияет на прививку. Решение об отмене препаратов, подавляющих иммунитет, принимает только врач</small></li>
-        </ul></div>
+        </ul></details>
+      </div>
+
+      <div class="dd" style="margin-top:20px">
+        <div class="card bring"><h3>Что взять с собой</h3><ul class="plain">
+          <li>Полис ОМС и свидетельство о рождении ребёнка</li>
+          <li>Прививочный сертификат или выписку о прививках, если прививки делали в другой поликлинике</li>
+          <li>Для БЦЖ после 2 месяцев — результат пробы Манту</li>
+          <li>Вопросы врачу — запишите заранее, чтобы ничего не забыть</li>
+        </ul><p class="mini">Согласие на прививку подписывает родитель (законный представитель).</p></div>
+        <div class="card contra"><h3>Когда прививку откладывают</h3><ul class="plain">
+          <li><b>Временно:</b> острая болезнь или обострение хронической. После лёгкого ОРВИ или кишечной инфекции прививают, как только нормализовалась температура; после более тяжёлых болезней — обычно через 1–2 недели после выздоровления.</li>
+          <li><b>Совсем не делают эту вакцину:</b> сильная реакция или осложнение на предыдущую дозу, тяжёлая аллергия (анафилаксия) на компонент вакцины.</li>
+          <li><b>Живые вакцины не делают</b> при иммунодефиците и на фоне лечения, подавляющего иммунитет.</li>
+        </ul>
+        <details class="fold-in"><summary>Что НЕ является противопоказанием</summary><ul class="plain">
+          <li>Насморк без температуры и лёгкое недомогание</li>
+          <li>Приём антибиотиков, мази и капли с гормонами, ингаляции</li>
+          <li>Недоношенность и маленький вес — прививают по возрасту, без изменения доз</li>
+          <li>Аллергия, атопический дерматит, астма вне обострения</li>
+          <li>Перинатальная энцефалопатия и неврологические состояния без прогрессирования</li>
+          <li>Аллергия, судороги или реакции на прививки у родственников</li>
+          <li>Грудное вскармливание; беременность мамы или другого члена семьи</li>
+          <li>Положительная проба Манту, если туберкулёз исключён</li>
+        </ul></details>
+        <p class="mini">Решение о прививке в день визита принимает врач после осмотра.</p></div>
       </div>
       <div class="mx">
         <div class="card">
-          <h3>Прививки и проба Манту</h3>
+          <h3>Прививки и пробы Манту и Диаскинтест</h3>
           <div class="mx-flow" aria-label="Порядок: любая прививка, затем не раньше чем через месяц Манту, затем после оценки через 72 часа любая прививка">
             <span>Прививка</span><em>≥ 1 месяц →</em><span class="m">Манту</span><em>→ оценка через 72 ч →</em><span>Прививка</span>
           </div>
           <p style="color:var(--muted);font-size:.92rem;margin-top:8px">Если Манту сделали первой — прививку можно сразу после того, как врач оценит пробу. Если первой была прививка — Манту ставят не раньше чем через месяц.</p>
+          <p class="mini" style="margin-top:10px"><b>Диаскинтест</b> — те же правила: не раньше чем через месяц после прививки, а после отрицательного результата прививки (кроме БЦЖ) можно сразу. В отличие от Манту, Диаскинтест не реагирует на прививку БЦЖ.</p>
         </div>
         <div class="card">
           <h3>Посчитать даты</h3>
@@ -547,7 +581,32 @@ button,input,select{font:inherit;color:inherit}
 
   <section id="after">
     <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">Во время и после</span><h2>В кабинете и дома</h2></div>
+      <div class="sec-head"><span class="eyebrow">После прививки</span><h2>Мы сделали прививку</h2><p>Выберите вакцину, отметьте, какая прививка была последней, и укажите дату — памятка покажет, что сейчас может быть, когда идти к врачу и когда следующая прививка. Возраст берётся из даты рождения в графике выше.</p></div>
+      <div class="nx-wrap">
+        <div class="card nx-form">
+          <div class="field"><label for="nxV">Вакцина</label><select id="nxV"></select></div>
+          <div class="nx-risk" id="nxRiskWrap" hidden><label><input type="checkbox" id="nxR"> Ребёнок из группы риска — схема 0–1–2–12 мес</label></div>
+          <div class="field"><label for="nxK">Какая прививка была последней</label><select id="nxK"></select></div>
+          <div class="field"><label for="nxD">Дата последней прививки</label><input type="date" id="nxD"></div>
+          <div class="field" id="nxD1Wrap" hidden><label for="nxD1" id="nxD1Lab">Дата 1-й прививки</label><input type="date" id="nxD1"></div>
+          <button type="button" class="nx-reset" id="nxReset">Сбросить</button>
+        </div>
+        <div class="nx-col">
+          <div class="nx-out" id="nxOut" aria-live="polite"><b>Выберите вакцину и укажите дату последней прививки</b></div>
+          <div class="card trk" id="trkBox" hidden aria-live="polite">
+            <h3>Что сейчас может быть</h3>
+            <div class="trk-day" id="trDay"></div>
+            <div class="trk-scale"><div class="win" id="trWin"></div><div class="tail" id="trTail"></div><div class="today" id="trToday" hidden></div></div>
+            <div class="trk-ticks" id="trTicks"></div>
+            <div class="trk-key"><span><i style="background:var(--mint)"></i>обычный срок реакций</span><span><i style="background:repeating-linear-gradient(45deg,var(--mint) 0 3px,transparent 3px 6px)"></i>возможны поздние реакции</span></div>
+            <div class="trk-msg" id="trMsg"></div>
+          </div>
+          <div class="card vf" id="vfBox" hidden><h3>К врачу, если</h3><ul id="vfList"></ul><a href="#flags">Все тревожные признаки →</a></div>
+        </div>
+      </div>
+      <div class="note-ok"><svg><use href="#i-heart"/></svg>Реакции бывают не у всех. Если реакции нет, это не значит, что прививка не сработала.</div>
+
+      <h3 class="sub-h">В кабинете и дома</h3>
       <div class="steps">
         <div class="card step"><span class="num">01</span><h3>Во время укола</h3><p>Отвлекайте: пойте, разговаривайте, показывайте игрушку. Малыша можно приложить к груди.</p><p>Крепко и спокойно держите ребёнка — так вакцину введут быстро и с первого раза. Особенно важно до 3 лет.</p></div>
         <div class="card step"><span class="num">02</span><h3>30 минут рядом с кабинетом</h3><p>Аллергическая реакция немедленного типа бывает очень редко и начинается в первые минуты. Сразу скажите медсестре, если появились зуд, крапивница, рвота, свистящее или затруднённое дыхание, бледность, обморок.</p><p>Грудничка можно кормить сразу. После капель от полиомиелита — не кормить и не поить час.</p></div>
@@ -557,48 +616,23 @@ button,input,select{font:inherit;color:inherit}
         <div class="card yes"><h3><span class="pill y">Нужно</span></h3><ul>
           <li>Наблюдать за состоянием ребёнка</li>
           <li>Решать про прогулки, купание и занятия по самочувствию</li>
-          <li>При необходимости облегчить нормальную реакцию<small>Жаропонижающее при температуре и плохом самочувствии, обезболивающее при боли — см. раздел «Температура»</small></li>
+          <li>При необходимости облегчить нормальную реакцию<small>Жаропонижающее при температуре и плохом самочувствии, обезболивающее при боли — дозы ниже</small></li>
           <li>Предлагать попить чаще обычного</li>
         </ul></div>
-        <div class="card no"><h3><span class="pill n">Не нужно</span></h3><ul>
+        <details class="card no fold"><summary><span class="pill n">Не нужно</span><span class="fold-hint">что делать не нужно</span></summary><ul>
           <li>Давать жаропонижающие и антигистаминные «для профилактики»</li>
           <li>Мазать место укола мазями, ставить компрессы и сетки</li>
           <li>Менять питание, ограничивать контакты</li>
           <li>Отменять прогулки и купание, если ребёнку хорошо</li>
-        </ul></div>
+        </ul></details>
       </div>
     </div>
   </section>
 
-  <section id="track">
-    <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">Трекер реакций</span><h2>Это от прививки?</h2><p>Выберите вакцину и дату — памятка покажет, в какие дни бывают нормальные реакции и где вы сейчас.</p></div>
-      <div class="tracker">
-        <div class="card">
-          <div class="field"><label for="trDate">Дата прививки</label><input type="date" id="trDate"></div>
-          <div class="trk-opts" role="radiogroup" aria-label="Вакцина">
-            <label><input type="radio" name="trk" value="inact" checked> Неживая (укол): АКДС, пневмококк, гепатиты, менингококк, грипп</label>
-            <label><input type="radio" name="trk" value="mmr"> Корь, краснуха, паротит</label>
-            <label><input type="radio" name="trk" value="var"> Ветряная оспа</label>
-            <label><input type="radio" name="trk" value="rota"> Ротавирус (капли)</label>
-            <label><input type="radio" name="trk" value="bcg"> БЦЖ-М</label>
-          </div>
-        </div>
-        <div class="card" aria-live="polite">
-          <div class="trk-day" id="trDay">Выберите дату</div>
-          <div class="trk-scale" id="trScale"><div class="win" id="trWin"></div><div class="tail" id="trTail"></div><div class="today" id="trToday" hidden></div></div>
-          <div class="trk-ticks" id="trTicks"></div>
-          <div class="trk-key"><span><i style="background:var(--mint)"></i>обычный срок реакций</span><span><i style="background:repeating-linear-gradient(45deg,var(--mint) 0 3px,transparent 3px 6px)"></i>возможны поздние реакции</span></div>
-          <div class="trk-msg" id="trMsg"><b>Неживые вакцины</b>Реакции — в первые 1–3 дня (иногда до 5). На живые вакцины — с 5-го по 21-й день.</div>
-        </div>
-      </div>
-      <div class="note-ok"><svg><use href="#i-heart"/></svg>Реакции бывают не у всех. Если реакции нет, это не значит, что прививка не сработала.</div>
-    </div>
-  </section>
 
   <section id="fever">
     <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">Температура и боль</span><h2>Снижаем температуру</h2><p>Жаропонижающее нужно не для цифры на градуснике, а чтобы ребёнку стало легче. Давайте его, если температура выше 39 °C или ребёнку плохо: озноб, боль, вялость, отказ от питья. Если ребёнок играет и пьёт — давать лекарство «на всякий случай» не нужно.</p></div>
+      <div class="sec-head"><span class="eyebrow">Температура и боль</span><h2>Если поднялась температура</h2><p>Давайте жаропонижающее, если температура выше 39 °C или ребёнку плохо: озноб, боль, вялость, отказ от питья. Если ребёнок играет и пьёт — лекарство «на всякий случай» не нужно. Снижать до 36,6 °C не нужно.</p></div>
       <div class="card" style="margin-bottom:20px">
         <div class="wrow"><label for="kw2" style="font-weight:800">Вес ребёнка</label><input type="range" id="kw2" min="4" max="40" step="0.5" value="10"><output id="kwOut">10 кг</output></div>
       </div>
@@ -607,19 +641,12 @@ button,input,select{font:inherit;color:inherit}
         <div class="card dose" id="dPar"><h3>Парацетамол<small>суспензия 120 мг / 5 мл · есть свечи</small></h3><div class="big"><span id="par">6,3</span><small>мл</small></div><div class="formula">вес × 0,625 = доза в мл · не чаще чем через 4–6 часов, до 4 раз в сутки</div><div class="warn" id="parNo" hidden>Детям до 3 месяцев — только по назначению врача</div></div>
       </div>
       
-      <div class="fever" style="margin-top:20px">
-        <div class="card"><h3 style="margin-bottom:12px">Что делать</h3><ol class="todo">
-          <li>Снять лишнюю одежду и подгузник или надеть лёгкую одежду из дышащей ткани</li>
-          <li>Часто и понемногу поить, чтобы не было обезвоживания</li>
-          <li>Жаропонижающее — по самочувствию, а не «по цифре»</li>
-          <li>Не обтирать водкой, уксусом и холодной водой и не укутывать</li>
-        </ol></div>
-        <div class="important"><h3>Важно</h3>
-          <p>Цель — улучшить самочувствие. Снижать температуру до 36,6 °C не нужно.</p>
-          <p>Не чередуйте и не комбинируйте ибупрофен и парацетамол без назначения врача.</p>
-          <p>Если после жаропонижающего самочувствие не улучшилось или температура выше 39 °C держится больше суток — обратитесь к врачу. Повторно давать лекарство раньше времени нельзя.</p>
-        </div>
-      </div>
+      <ul class="plain fever-short">
+        <li>Снимите лишнюю одежду, часто и понемногу поите; не обтирайте водкой, уксусом и холодной водой.</li>
+        <li>Не чередуйте ибупрофен и парацетамол без назначения врача.</li>
+        <li>Не стало лучше после жаропонижающего или выше 39 °C больше суток — к врачу.</li>
+      </ul>
+      <a class="fever-link" href="https://julsyj7.github.io/korchagina-ped/#dose" target="_blank" rel="noopener">Подробнее о температуре и дозах — в памятке «Аптечка в путешествие» →</a>
     </div>
   </section>
 
@@ -891,6 +918,19 @@ button,input,select{font:inherit;color:inherit}
     </div>
   </section>
 
+  <section id="myths">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Частые сомнения</span><h2>Мифы о прививках</h2></div>
+      <div class="myths">
+        <details class="card"><summary>«Много прививок сразу перегружают иммунитет»</summary><p>Каждый день ребёнок встречает тысячи чужих антигенов — с едой, игрушками, на коже. Все вакцины календаря вместе содержат лишь малую их часть. Несколько прививок в один день безопасны и означают меньше визитов и уколов.</p></details>
+        <details class="card"><summary>«Лучше переболеть — иммунитет будет крепче»</summary><p>Иммунитет после болезни достаётся ценой риска осложнений: при кори — пневмонии и энцефалита, при коклюше у младенцев — остановки дыхания. Прививка даёт защиту без этого риска.</p></details>
+        <details class="card"><summary>«От прививки против гриппа можно заболеть гриппом»</summary><p>В вакцинах от гриппа нет живого вируса — только его части. Заразиться от них невозможно. Небольшая температура и недомогание на 1–2 дня — это реакция, а не грипп.</p></details>
+        <details class="card"><summary>«Прививки вызывают аутизм»</summary><p>Это проверяли в крупных исследованиях на сотнях тысяч детей — связи нет ни с вакциной против кори, краснухи и паротита, ни с другими прививками.</p></details>
+        <details class="card"><summary>«После прививки нельзя гулять и купаться»</summary><p>Можно, если ребёнок хорошо себя чувствует. В первые сутки лучше обойтись без бани, сауны и аквапарка.</p></details>
+      </div>
+    </div>
+  </section>
+
   <section id="flags">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Тревожные признаки</span><h2>Когда нужен врач</h2></div>
@@ -958,7 +998,7 @@ button,input,select{font:inherit;color:inherit}
 
   <section class="sources">
     <div class="wrap">
-      <h3>Источники</h3>
+      <details class="src-fold"><summary>Источники</summary>
       <ol>
         <li>Приказ Минздрава России от 06.12.2021 № 1122н «Об утверждении национального календаря профилактических прививок…» в ред. приказа от 12.12.2023 № 677н (действует с 01.09.2024). base.garant.ru/403258640</li>
         <li>Приказ Департамента здравоохранения г. Москвы от 04.03.2022 № 207 «Об утверждении регионального календаря профилактических прививок…». mos.ru</li>
@@ -969,7 +1009,12 @@ button,input,select{font:inherit;color:inherit}
         <li>Санитарные правила и нормы СанПиН 3.3686-21 «Санитарно-эпидемиологические требования по профилактике инфекционных болезней» — разобщение после ОПВ, туберкулинодиагностика.</li>
         <li>Клинические рекомендации Минздрава России «Лихорадка без очага инфекции у детей» — показания к жаропонижающим.</li>
         <li>ВОЗ. Vaccines and immunization: Q&amp;A; Американская академия педиатрии (AAP), HealthyChildren.org — уход после прививки, обезболивание.</li>
+        <li>МУ 3.3.1.1095-02 «Медицинские противопоказания к проведению профилактических прививок препаратами национального календаря прививок» (утв. 09.01.2002); Таточенко В.К. «Хроническая патология — показание к вакцинации», Практика педиатра, 1999.</li>
+        <li>UK Health Security Agency. Immunisation against infectious disease (Green Book): conditions that are not contraindications — по обучающим материалам VACCSline, 2017.</li>
+        <li>Диаскинтест® — листок-вкладыш, Генериум (pediatrhelp.ru, 21.01.2025).</li>
+        <li>Мифы о прививках: ВОЗ, Vaccines and immunization: myths and misconceptions; Offit P.A. et al. Pediatrics, 2002 (иммунная «перегрузка»); Taylor L.E. et al. Vaccine, 2014 и Hviid A. et al. Ann Intern Med, 2019 (аутизм).</li>
       </ol>
+      </details>
       <p class="disc">Памятка для пациентов. Календарь — национальный (приказ Минздрава № 1122н, ред. № 677н от 12.12.2023) и региональный календарь Москвы (приказ ДЗМ № 207 от 04.03.2022). Индивидуальный график обсудите с врачом на приёме.</p>
       <div class="foot"><span>Врач-педиатр Корчагина Ю.А.</span><span>Ноябрь 2026</span></div>
     </div>
@@ -1012,6 +1057,9 @@ var PROFILES={
  var:{name:"Ветряная оспа",from:1,to:21,tail:21,span:30,
    now:"Возможны: боль и покраснение в месте укола, температура, иногда несколько пузырьков, похожих на ветрянку. Если появилась сыпь — 14 дней после последних элементов избегайте контакта с беременными и людьми с иммунодефицитом.",
    after:"Срок реакций прошёл. Аспирин (салицилаты) нельзя давать 6 недель после прививки."},
+ opv:{name:"Полиомиелит (капли)",from:1,to:7,tail:7,span:14,
+   now:"Обычно реакций нет; изредка бывает жидкий стул. Час после капель не кормите и не поите.",
+   after:"Неделя после прививки прошла. 60 дней ребёнок не должен контактировать с детьми, не привитыми от полиомиелита, и с людьми с иммунодефицитом."},
  rota:{name:"Ротавирус (капли)",from:1,to:7,tail:7,span:14,
    now:"Возможны: жидкий стул, срыгивания или рвота, небольшая температура, хуже аппетит. Следите за тревожными признаками инвагинации кишечника (см. ниже).",
    after:"Неделя после прививки прошла — период наблюдения закончен."},
@@ -1045,6 +1093,7 @@ var PROFILES={
 
   /* ---------- калькулятор следующей прививки ---------- */
   var VER="app";
+  var VBAD={"hb": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C", "Судороги"], "bcg": ["Подмышечный лимфоузел больше 1,5 см или его размягчение", "Холодный абсцесс (безболезненная припухлость)", "Язва больше 10 мм, келоидный рубец"], "pcv": ["Температура выше 40 °C", "Фебрильные судороги", "Отёк лица, губ, затруднённое дыхание — сразу «103»"], "rota": ["Приступы плача с поджатыми ножками, бледность", "Повторная рвота, вялость", "Кровь или «малиновое желе» в стуле — это признаки инвагинации, сразу к врачу"], "dtp": ["Отёк больше 8 см или на всю ножку до сустава", "Температура выше 40 °C", "Непрерывный плач больше 3 часов", "Судороги; эпизод «обмякания» и бледности"], "ipv": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C"], "opv": ["Вялые параличи (очень редко) — сразу к врачу"], "mmr": ["Судороги на фоне температуры (обычно 6–10-й день)", "Мелкие кровоизлияния на коже, синяки без причины", "Сильная головная боль, рвота, вялость"], "var": ["Обильная сыпь, высокая температура", "Синяки без причины", "Аллергическая реакция"], "hepa": ["Аллергическая реакция немедленного типа", "Высокая температура дольше суток"], "men": ["Отёк лица, губ, затруднённое дыхание, крапивница — сразу «103»", "Судороги", "Температура выше 40 °C"], "flu": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C", "Судороги"], "tdap": ["Отёк всей руки", "Температура выше 40 °C", "Аллергическая реакция"], "adsm": ["Аллергическая реакция", "Температура выше 40 °C"], "hpv": ["Аллергическая реакция немедленного типа"], "tbe": ["Температура выше 38,5 °C дольше 3 дней", "Аллергическая реакция немедленного типа"]};
   function aD(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n)}
   function aM(d,n){var r=new Date(d.getFullYear(),d.getMonth()+n,d.getDate());if(r.getDate()!==d.getDate())r=new Date(d.getFullYear(),d.getMonth()+n+1,0);return r}
   function aY(d,n){return aM(d,12*n)}
@@ -1061,6 +1110,8 @@ var PROFILES={
        if(k==4)return b?{k:"полиомиелит в каплях (2-я ревакцинация)",t:mxD(aM(d,2),aM(b,20)),w:"через 2 мес после ревакцинации Пентаксимом, не раньше 20 мес. Следующая от коклюша, дифтерии и столбняка — в 6–7 лет"}:{need:"Укажите дату рождения в календаре выше."};return {done:""}}},
    opv:{name:"Полиомиелит в каплях (БиВак полио)",doses:["2-я ревакцинация (20 мес)","3-я ревакцинация (6 лет)"],live:1,
      r:function(k,d,b){if(k==1)return b?{k:"3-я ревакцинация",t:mxD(aM(d,6),aY(b,6)),w:"в 6 лет"}:{need:"Укажите дату рождения в календаре выше: следующую делают в 6 лет."};return {done:"Курс завершён."}}},
+   bcg:{name:"Туберкулёз (БЦЖ-М)",doses:["вакцинация"],
+     r:function(k,d){return {done:"Ревакцинация — в 6–7 лет, если проба Манту отрицательная. Другие прививки — не раньше чем через месяц после БЦЖ."}}},
    pcv:{name:"Пневмококк (Превенар 13, Пнемотекс)",doses:["1-я","2-я","ревакцинация"],
      r:function(k,d,b){if(!b)return {need:"Укажите дату рождения в календаре выше: схема зависит от возраста."};var a=ageM(b,d);if(k==1){if(a>=24)return {done:"После 2 лет достаточно одной дозы."};return {k:"2-я",t:aM(d,2),w:"не раньше чем через 2 мес"}}if(k==2){if(a>=12)return {done:"Если 2-ю сделали после года — курс завершён."};return {k:"ревакцинация",t:mxD(aM(b,15),aM(d,4)),w:"в 15 мес, не раньше 4 мес после 2-й"}}return {done:"Курс завершён."}}},
    rota:{name:"Ротавирус (Рота-V-Эйд)",doses:["1-я","2-я","3-я"],live:1,
@@ -1094,6 +1145,7 @@ var PROFILES={
   }
   function calc(){
     var o=$("nxOut"),v=NX[nxV.value],d=pd(nxD.value),b=pd(st.dob);
+    tracker(v&&d?nxV.value:null,d);
     if(!v||!d){o.className="nx-out";o.innerHTML="<b>Выберите вакцину и укажите дату последней прививки</b>";return}
     var k=+nxK.value,r=v.r(k,d,b,{risk:nxR.checked,d1:pd(nxD1.value)});
     if(r.need){o.className="nx-out";o.innerHTML="<b>Нужно уточнить</b><p>"+r.need+"</p>";return}
@@ -1104,7 +1156,12 @@ var PROFILES={
     if(v.live)notes.push("Это живая вакцина: если ребёнку недавно в другой день делали другую живую прививку, эту можно не раньше чем через месяц после неё.");
     else notes.push("Это неживая вакцина: интервал с другими прививками не нужен — можно хоть на следующий день.");
     notes.push("После БЦЖ — месяц до любой прививки.");
-    o.innerHTML="<span class='nx-k'>"+v.name.split(" (")[0]+" — "+r.k+"</span><div class='nx-date'>"+(now?"Уже можно":"с "+ds(r.t))+"</div><div class='nx-in'>"+(now?"срок наступил "+ds(r.t):inWords(n))+"</div><p>"+r.w+"</p>"+(b?"":"<p class='nx-warn'>Дата рождения не указана — возрастные ограничения не учтены.</p>")+"<small>"+notes.join(" ")+"</small>";
+    o.innerHTML="<span class='nx-k'>"+v.name.split(" (")[0]+" — "+r.k+"</span><div class='nx-date'>"+(now?"Уже можно":"с "+ds(r.t))+"</div><div class='nx-in'>"+(now?"срок наступил "+ds(r.t):inWords(n))+"</div><p>"+r.w+"</p>"+(b?"":"<p class='nx-warn'>Дата рождения не указана — возрастные ограничения не учтены.</p>")+"<small>"+notes.join(" ")+"</small>"+(now?"":ics(r.t,v.name.split(" (")[0]+" — "+r.k));
+  }
+  function ics(t,title){
+    var dd=function(x){return x.getFullYear()+("0"+(x.getMonth()+1)).slice(-2)+("0"+x.getDate()).slice(-2)};
+    var body=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//privivki//RU","BEGIN:VEVENT","UID:"+dd(t)+"-"+Math.random().toString(36).slice(2)+"@privivki","DTSTAMP:"+dd(today())+"T000000Z","DTSTART;VALUE=DATE:"+dd(t),"DTEND;VALUE=DATE:"+dd(aD(t,1)),"SUMMARY:Прививка: "+title,"DESCRIPTION:С этого дня можно делать прививку. Запишитесь к педиатру.","BEGIN:VALARM","TRIGGER:-P1D","ACTION:DISPLAY","DESCRIPTION:Завтра можно делать прививку","END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
+    return "<a class='nx-ics' download='privivka.ics' href='data:text/calendar;charset=utf-8,"+encodeURIComponent(body)+"'>📅 Добавить в календарь телефона</a>";
   }
   function nxSave(){st.nx={v:nxV.value,k:nxK.value,d:nxD.value,d1:nxD1.value,r:nxR.checked};}
   [nxV,nxR].forEach(function(e){e.addEventListener("change",function(){nxSync();nxSave();apply()})});
@@ -1131,13 +1188,17 @@ var PROFILES={
       if(end<am)s.classList.add("past");
       else if(!nextFound){s.classList.add("next");nextFound=true}
     });
+    var vis=stops.filter(function(s){return !s.hidden}),ni=vis.findIndex(function(s){return s.classList.contains("next")});
+    vis.forEach(function(s,i){s.classList.toggle("far",ni>=0&&(i<ni||i>ni+2))});
+    var canShort=ni>=0&&vis.length>3;
+    tl.classList.toggle("short",canShort&&!st.calAll);
+    var cm=$("calMore");cm.hidden=!canShort;cm.textContent=st.calAll?"Показать только ближайшие":"Показать весь календарь";
     // жаропонижающие
     var w=st.w;
     $("ibu").textContent=fmt(Math.min(w*0.5,20));$("par").textContent=fmt(Math.min(w*0.625,20));
     $("kwOut").textContent=fmt(w)+" кг";
     var small=a&&a.total<91;
     $("ibuNo").hidden=!(small||w<5);$("parNo").hidden=!small;
-    tracker();
     calc();
     save();
   }
@@ -1146,6 +1207,9 @@ var PROFILES={
   kw.addEventListener("input",function(){setW(kw.value);kw2.value=Math.min(40,Math.max(4,st.w))});
   kw2.addEventListener("input",function(){setW(kw2.value);kw.value=st.w});
   document.querySelectorAll("[data-cal]").forEach(function(b){b.addEventListener("click",function(){st.cal=b.dataset.cal;apply()})});
+  $("calMore").addEventListener("click",function(){st.calAll=!st.calAll;apply();if(!st.calAll)$("calendar").scrollIntoView()});
+  var fab=$("fabSos");
+  if("IntersectionObserver" in window){var fo=new IntersectionObserver(function(es){es.forEach(function(e){fab.classList.toggle("away",e.isIntersecting)})},{threshold:0.05});fo.observe($("flags"))}
   $("kidSum").addEventListener("click",function(){location.hash="";$("calendar").scrollIntoView();setTimeout(function(){dob.focus({preventScroll:true})},400)});
 
   // Манту
@@ -1156,21 +1220,19 @@ var PROFILES={
   }
   $("mxVac").addEventListener("change",mx);$("mxM").addEventListener("change",mx);
 
-  // трекер
-  var trDate=$("trDate");
-  trDate.max=iso(today()); trDate.value=st.tr||iso(today());
-  document.querySelectorAll('input[name=trk]').forEach(function(r){r.checked=r.value===st.trk;r.addEventListener("change",function(){st.trk=r.value;apply()})});
-  trDate.addEventListener("change",function(){st.tr=trDate.value;apply()});
-  function tracker(){
-    var p=PROFILES[st.trk],d=pd(trDate.value),span=p.span;
+  // трекер реакций — внутри блока «Мы сделали прививку»
+  var PMAP={hb:"inact",dtp:"inact",pcv:"inact",hepa:"inact",men:"inact",hpv:"inact",tbe:"inact",rota:"rota",mmr:"mmr",vari:"var",opv:"opv",bcg:"bcg"};
+  var VMAP={vari:"var"};
+  function tracker(vid,d){
+    var box=$("trkBox"),vf=$("vfBox");
+    if(!vid||!d){box.hidden=true;vf.hidden=true;return}
+    var p=PROFILES[PMAP[vid]],span=p.span;box.hidden=false;
     var pct=function(x){return Math.max(0,Math.min(100,x/span*100))+"%"};
     var win=$("trWin"),tail=$("trTail"),td=$("trToday");
     win.style.left=pct(p.from-0.5);win.style.width="calc("+pct(p.to-p.from+1)+")";
     tail.style.left=pct(p.to+0.5);tail.style.width=p.tail>p.to?pct(Math.min(span,p.tail)-p.to):"0";
     var ticks=[0,Math.round(span/4),Math.round(span/2),Math.round(span*3/4),span];
     $("trTicks").innerHTML=ticks.map(function(t){return "<span>"+t+(t===span?" дн.":"")+"</span>"}).join("");
-    var msg=$("trMsg");
-    if(!d){$("trDay").textContent="Выберите дату";td.hidden=true;return}
     var n=Math.round((today()-d)/DAY);
     $("trDay").textContent=n===0?"День прививки":n+"-й день после прививки";
     td.hidden=false;td.style.left=pct(Math.min(n,span));td.classList.toggle("flip",n>span*0.75);
@@ -1179,7 +1241,9 @@ var PROFILES={
     else if(n<=p.to)t=p.now;
     else if(n<=p.tail&&p.late)t=p.late;
     else t=p.after;
-    msg.innerHTML="<b>"+p.name+"</b>"+t;
+    $("trMsg").innerHTML="<b>"+p.name+"</b>"+t;
+    var bad=VBAD[VMAP[vid]||vid]||[];
+    vf.hidden=!bad.length;$("vfList").innerHTML=bad.map(function(x){return "<li>"+x+"</li>"}).join("");
   }
 
   // карточки вакцин

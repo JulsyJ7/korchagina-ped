@@ -358,6 +358,36 @@ ul.plain{margin:10px 0 0;padding-left:20px;display:grid;gap:7px;font-size:.94rem
 .src-fold>summary{cursor:pointer;font-weight:800;color:var(--ink);font-size:.95rem;margin-bottom:10px}
 .src-fold ol{margin-top:8px}
 @media print{.fab-sos,.cal-more{display:none}.timeline.short .stop.far{display:grid}details>*{display:block}}
+
+/* ---------- my vaccination table ---------- */
+.mc-sum{display:grid;gap:8px;margin-bottom:14px}
+.mc-sum b{font-family:var(--f-display);font-size:1.05rem}
+.mc-bar{height:10px;border-radius:99px;background:var(--chip);overflow:hidden}
+.mc-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--mint-2),var(--mint));border-radius:99px;transition:width .4s}
+.mc-due{display:flex;flex-wrap:wrap;gap:6px}
+.mc-due span{background:var(--alert-bg);color:var(--alert-ink);border-radius:99px;padding:4px 10px;font-size:.84rem;font-weight:700}
+.mc-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;box-shadow:var(--shadow);background:var(--card)}
+table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;font-size:.9rem}
+.mc th,.mc td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+.mc thead th{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;background:var(--card)}
+.mc th:first-child,.mc td:first-child{position:sticky;left:0;background:var(--card);text-align:left;z-index:1;min-width:150px;max-width:180px;padding-left:14px;box-shadow:1px 0 0 var(--line)}
+.mc td:first-child b{display:block;font-size:.9rem;line-height:1.2}
+.mc td:first-child small{color:var(--muted);font-size:.72rem}
+.mc tr.t-msk td:first-child b::after{content:" Москва";font-family:var(--f-mono);font-size:.6rem;color:var(--berry);vertical-align:2px}
+.national-only2 .t-msk{display:none}
+.mc button.dose{width:100%;min-width:62px;border:2px solid var(--line);background:var(--bg);border-radius:12px;padding:6px 4px;cursor:pointer;display:grid;gap:1px;line-height:1.15}
+.mc button.dose b{font-family:var(--f-mono);font-size:.74rem}
+.mc button.dose small{font-size:.66rem;color:var(--muted);white-space:nowrap}
+.mc button.dose.late{opacity:.5;border-style:dashed}
+.mc button.dose.done{background:var(--mint);border-color:var(--mint);color:#fff}
+.mc button.dose.done small{color:#E4FFF6}
+.mc button.dose.done b::before{content:"✓ "}
+.mc button.dose.due{border-color:var(--berry);background:var(--alert-bg)}
+.mc button.dose.due b{color:var(--alert-ink)}
+.mc tr:last-child td{border-bottom:0}
+.mc-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin-top:10px}
+.mc-legend i{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:6px;margin-right:6px;font-style:normal;font-weight:800;font-size:.7rem;vertical-align:-3px}
+.l-done{background:var(--mint);color:#fff}.l-due{background:var(--alert-bg);color:var(--alert-ink);border:2px solid var(--berry)}.l-fut{background:var(--bg);border:2px solid var(--line)}
 @media (max-width:820px){#next .nx-wrap{grid-template-columns:1fr}}
 .nx-rules{margin-top:20px;background:var(--card);border-radius:18px;padding:16px 18px;border:2px dashed var(--line);font-size:.92rem}
 .nx-rules h3{margin-bottom:8px}
@@ -479,7 +509,7 @@ ul.plain{margin:10px 0 0;padding-left:20px;display:grid;gap:7px;font-size:.94rem
   <div class="wrap">
     <button type="button" class="kid" id="kidSum" hidden>Ребёнок</button>
     <div class="tabs">
-      <a href="#calendar">График</a><a href="#before">Перед прививкой</a><a href="#after">После прививки</a><a href="#vaccines">Вакцины</a>
+      <a href="#calendar">График</a><a href="#mycal">Мои прививки</a><a href="#before">Перед прививкой</a><a href="#after">После прививки</a><a href="#vaccines">Вакцины</a>
     </div>
   </div>
 </nav>
@@ -530,6 +560,21 @@ ul.plain{margin:10px 0 0;padding-left:20px;display:grid;gap:7px;font-size:.94rem
   </section>
 
 
+
+  <section id="mycal">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Мои прививки</span>
+        <h2>Отметьте, что уже сделано</h2>
+        <p>Нажмите на дозу, чтобы отметить её сделанной. Памятка покажет, что пора сделать по возрасту и что ещё впереди. Отметки хранятся только на вашем телефоне. Схема — по календарю, выбранному выше; если график сдвигался, точную дату следующей прививки посчитайте в разделе «После прививки».</p>
+      </div>
+      <div class="mc-sum card" id="mcSum"></div>
+      <div class="mc-scroll"><table class="mc" id="mcTable"><thead><tr><th>Инфекция</th><th colspan="6">Дозы</th></tr></thead><tbody></tbody></table></div>
+      <div class="mc-legend"><span><i class="l-done">✓</i>сделано</span><span><i class="l-due">!</i>пора по возрасту</span><span><i class="l-fut"></i>впереди</span></div>
+      <button type="button" class="nx-reset" id="mcReset" style="margin-top:12px">Очистить отметки</button>
+      <p class="mini">Ротавирусную вакцину делают только до 32 недель жизни. Грипп — каждый год с 6 месяцев; клещевой энцефалит — по показаниям. Группам риска по гепатиту B — 4 дозы по схеме 0–1–2–12 мес.</p>
+    </div>
+  </section>
 
   <section id="before">
     <div class="wrap">
@@ -1199,6 +1244,44 @@ var PROFILES={
   [nxK,nxD,nxD1].forEach(function(e){e.addEventListener("change",function(){nxSync();nxSave();apply()})});
   $("nxReset").addEventListener("click",function(){nxV.value="";nxD.value="";nxD1.value="";nxR.checked=false;nxSync();nxSave();apply();nxV.focus()});
   if(st.nx){nxV.value=st.nx.v||"";nxR.checked=!!st.nx.r;nxSync();nxK.value=st.nx.k||"1";nxD.value=st.nx.d||"";nxD1.value=st.nx.d1||"";nxSync()}else nxSync();
+  /* ---------- мои прививки ---------- */
+  var MC=[
+   {id:"hb",n:"Гепатит B",d:[["V1",0,"роддом"],["V2",1,"1 мес"],["V3",6,"6 мес"]]},
+   {id:"bcg",n:"Туберкулёз",s:"БЦЖ-М",d:[["V",0.15,"3–7 дн."],["R",78,"6–7 лет"]]},
+   {id:"pcv",n:"Пневмококк",d:[["V1",2,"2 мес"],["V2",4.5,"4,5 мес"],["R",15,"15 мес"]]},
+   {id:"rota",n:"Ротавирус",s:"капли",msk:1,d:[["V1",2,"2 мес"],["V2",3,"3 мес"],["V3",4.5,"4,5 мес"]]},
+   {id:"dtp",n:"Коклюш, дифтерия, столбняк",d:[["V1",3,"3 мес"],["V2",4.5,"4,5 мес"],["V3",6,"6 мес"],["R1",18,"18 мес"],["R2",78,"6–7 лет"],["R3",168,"14 лет"]]},
+   {id:"polio",n:"Полиомиелит",d:[["V1",3,"3 мес"],["V2",4.5,"4,5 мес"],["V3",6,"6 мес"],["R1",18,"18 мес"],["R2",20,"20 мес"],["R3",72,"6 лет"]]},
+   {id:"hib",n:"Гемофильная инфекция",d:[["V1",3,"3 мес"],["V2",4.5,"4,5 мес"],["V3",6,"6 мес"],["R",18,"18 мес"]]},
+   {id:"mmr",n:"Корь, краснуха, паротит",d:[["V",12,"12 мес"],["R",72,"6 лет"]]},
+   {id:"var",n:"Ветряная оспа",msk:1,d:[["V1",12,"12 мес"],["V2",13.5,"+6 нед"]]},
+   {id:"hepa",n:"Гепатит A",msk:1,d:[["V1",36,"3–6 лет"],["V2",42,"+6 мес"]]},
+   {id:"men",n:"Менингококк",msk:1,d:[["V",36,"3–6 лет"]]},
+   {id:"hpv",n:"ВПЧ",s:"девочки",msk:1,d:[["V1",144,"12–13 лет"],["V2",150,"+6 мес"]]}
+  ];
+  st.done=st.done||{};
+  var mcBody=document.querySelector("#mcTable tbody");
+  mcBody.innerHTML=MC.map(function(r){return '<tr class="'+(r.msk?"t-msk":"")+'"><td><b>'+r.n+'</b>'+(r.s?'<small>'+r.s+'</small>':'')+'</td>'+r.d.map(function(x,i){return '<td><button type="button" class="dose" data-k="'+r.id+'-'+i+'" data-m="'+x[1]+'" aria-pressed="false"><b>'+x[0]+'</b><small>'+x[2]+'</small></button></td>'}).join("")+'<td colspan="'+(6-r.d.length)+'"></td></tr>'}).join("");
+  mcBody.addEventListener("click",function(e){var b=e.target.closest("button.dose");if(!b)return;var k=b.dataset.k;if(st.done[k])delete st.done[k];else st.done[k]=1;apply()});
+  $("mcReset").addEventListener("click",function(){st.done={};apply()});
+  function mc(){
+    var a=ageMonths(),am=a?a.m+a.days/30.4:null,d=pd(st.dob),tot=0,dn=0,due=[];
+    $("mcTable").classList.toggle("national-only2",st.cal==="nk");
+    MC.forEach(function(r){
+      if(r.msk&&st.cal==="nk")return;
+      r.d.forEach(function(x,i){
+        var b=mcBody.querySelector('[data-k="'+r.id+'-'+i+'"]'),k=r.id+"-"+i,done=!!st.done[k];tot++;if(done)dn++;
+        var late=!done&&r.id==="rota"&&am!==null&&am>7.4;
+        var isDue=!done&&!late&&am!==null&&am>=x[1]-0.01;
+        b.classList.toggle("late",late);
+        b.classList.toggle("done",done);b.classList.toggle("due",isDue);b.setAttribute("aria-pressed",done);
+        var sm=b.querySelector("small");sm.textContent=late?"срок прошёл":(!done&&d&&!isDue&&x[1]>=1)?"≈"+ds(addM(d,x[1])).slice(0,6)+String(addM(d,x[1]).getFullYear()).slice(2):x[2];
+        if(isDue)due.push(r.n+" — "+x[0]);
+      });
+    });
+    var pct=tot?Math.round(dn/tot*100):0;
+    $("mcSum").innerHTML="<b>Сделано "+dn+" из "+tot+"</b><div class='mc-bar'><i style='width:"+pct+"%'></i></div>"+(am===null?"<small style='color:var(--muted)'>Укажите дату рождения в графике выше — памятка подсветит, что пора сделать.</small>":due.length?"<small style='color:var(--muted)'>Пора по возрасту:</small><div class='mc-due'>"+due.slice(0,8).map(function(x){return "<span>"+x+"</span>"}).join("")+(due.length>8?"<span>и ещё "+(due.length-8)+"</span>":"")+"</div>":"<small style='color:var(--ok-ink);font-weight:700'>Все прививки по возрасту отмечены ✓</small>");
+  }
   function apply(){
     var a=ageMonths(), am=a?a.m+a.days/30.4:null;
     $("ageOut").textContent=ageText(a);
@@ -1231,6 +1314,7 @@ var PROFILES={
     var small=a&&a.total<91;
     $("ibuNo").hidden=!(small||w<5);$("parNo").hidden=!small;
     calc();
+    mc();
     save();
   }
   dob.addEventListener("change",function(){st.dob=dob.value;apply()});

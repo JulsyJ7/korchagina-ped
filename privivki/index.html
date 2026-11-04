@@ -572,7 +572,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
       <div class="mc-scroll"><table class="mc" id="mcTable"><thead><tr><th>Инфекция</th><th colspan="6">Дозы</th></tr></thead><tbody></tbody></table></div>
       <div class="mc-legend"><span><i class="l-done">✓</i>сделано</span><span><i class="l-due">!</i>пора по возрасту</span><span><i class="l-fut"></i>впереди</span></div>
       <button type="button" class="nx-reset" id="mcReset" style="margin-top:12px">Очистить отметки</button>
-      <p class="mini">Ротавирусную вакцину делают только до 32 недель жизни. Грипп — каждый год с 6 месяцев; клещевой энцефалит — по показаниям. Группам риска по гепатиту B — 4 дозы по схеме 0–1–2–12 мес.</p>
+      <p class="mini">Ротавирусную вакцину по догоняющей схеме можно сделать до 2 лет. Грипп — каждый год с 6 месяцев; клещевой энцефалит — по показаниям. Группам риска по гепатиту B — 4 дозы по схеме 0–1–2–12 мес.</p>
     </div>
   </section>
 
@@ -774,7 +774,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
-          <dl class="vfacts"><div><dt>Производитель</dt><dd>Фарм Эйд, Россия</dd></div><div><dt>Доза</dt><dd>2,5 мл, в рот</dd></div><div class="wide"><dt>Когда</dt><dd>Москва: 2, 3 и 4,5 мес. Курс начинают и заканчивают в первые месяцы жизни — точные сроки по инструкции.</dd></div></dl>
+          <dl class="vfacts"><div><dt>Производитель</dt><dd>Фарм Эйд, Россия</dd></div><div><dt>Доза</dt><dd>2,5 мл, в рот</dd></div><div class="wide"><dt>Когда</dt><dd>Москва: 2, 3 и 4,5 мес, 3 дозы с интервалом не меньше месяца. Если график сдвинулся, курс по догоняющей схеме можно завершить до 2 лет.</dd></div></dl>
           <div class="vcols">
             <div class="okbox"><h4>Нормальные реакции <span>до 7 дней</span></h4><ul><li>Жидкий стул, срыгивания</li><li>Небольшая температура</li><li>Хуже аппетит</li></ul></div>
             <div class="badbox"><h4>К врачу, если</h4><ul><li>Приступы плача с поджатыми ножками, бледность</li><li>Повторная рвота, вялость</li><li>Кровь или «малиновое желе» в стуле — это признаки инвагинации, сразу к врачу</li></ul></div>
@@ -1191,7 +1191,7 @@ var PROFILES={
    pcv:{name:"Пневмококк (Превенар 13)",doses:["1-я","2-я","ревакцинация"],
      r:function(k,d,b){if(!b)return {need:"Укажите дату рождения в календаре выше: схема зависит от возраста."};var a=ageM(b,d);if(k==1){if(a>=24)return {done:"После 2 лет достаточно одной дозы."};return {k:"2-я",t:aM(d,2),w:"не раньше чем через 2 мес"}}if(k==2){if(a>=12)return {done:"Если 2-ю сделали после года — курс завершён."};return {k:"ревакцинация",t:mxD(aM(b,15),aM(d,4)),w:"в 15 мес, не раньше 4 мес после 2-й"}}return {done:"Курс завершён."}}},
    rota:{name:"Ротавирус (Рота-V-Эйд)",doses:["1-я","2-я","3-я"],live:1,
-     r:function(k,d,b){if(k>=3)return {done:"Курс завершён."};var t=aM(d,1);if(b&&t>aD(b,224))return {done:"Следующая доза пришлась бы позже 32 недель жизни — курс не продолжают."};return {k:(k+1)+"-я",t:t,w:"не раньше чем через месяц; последняя — до 32 недель жизни"+(b?"":" (укажите дату рождения, чтобы проверить)")}}},
+     r:function(k,d,b){if(k>=3)return {done:"Курс завершён."};var t=aM(d,1);if(b&&t>aM(b,24))return {done:"Следующая доза пришлась бы позже 2 лет — курс не продолжают."};return {k:(k+1)+"-я",t:t,w:"не раньше чем через месяц; курс — до 2 лет"+(b?"":" (укажите дату рождения, чтобы проверить)")}}},
    mmr:{name:"Корь, краснуха, паротит (Вактривир или ЖПКВ + краснуха)",doses:["вакцинация (12 мес)","ревакцинация (6 лет)"],live:1,
      r:function(k,d,b){if(k==1)return b?{k:"ревакцинация",t:mxD(aM(d,3),aY(b,6)),w:"в 6 лет, не раньше 3 мес после 1-й"}:{need:"Укажите дату рождения в календаре выше: ревакцинация в 6 лет."};return {done:"Курс завершён."}}},
    vari:{name:"Ветряная оспа (Варилрикс)",doses:["1-я","2-я"],live:1,
@@ -1271,7 +1271,7 @@ var PROFILES={
       if(r.msk&&st.cal==="nk")return;
       r.d.forEach(function(x,i){
         var b=mcBody.querySelector('[data-k="'+r.id+'-'+i+'"]'),k=r.id+"-"+i,done=!!st.done[k];tot++;if(done)dn++;
-        var late=!done&&r.id==="rota"&&am!==null&&am>7.4;
+        var late=!done&&r.id==="rota"&&am!==null&&am>=24;
         var isDue=!done&&!late&&am!==null&&am>=x[1]-0.01;
         b.classList.toggle("late",late);
         b.classList.toggle("done",done);b.classList.toggle("due",isDue);b.setAttribute("aria-pressed",done);

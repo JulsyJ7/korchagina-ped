@@ -378,6 +378,8 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
 .mc button.dose{width:100%;min-width:62px;border:2px solid var(--line);background:var(--bg);border-radius:12px;padding:6px 4px;cursor:pointer;display:grid;gap:1px;line-height:1.15}
 .mc button.dose b{font-family:var(--f-mono);font-size:.74rem}
 .mc button.dose small{font-size:.66rem;color:var(--muted);white-space:nowrap}
+.mc button.dose em{font-style:normal;font-size:.6rem;line-height:1.2;color:var(--ok-ink);white-space:normal;max-width:120px;justify-self:center}
+.mc button.dose.done em{color:#E4FFF6}
 .mc button.dose.late{opacity:.5;border-style:dashed}
 .mc button.dose.done{background:var(--mint);border-color:var(--mint);color:#fff}
 .mc button.dose.done small{color:#E4FFF6}
@@ -572,7 +574,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
       <div class="mc-scroll"><table class="mc" id="mcTable"><thead><tr><th>Инфекция</th><th colspan="6">Дозы</th></tr></thead><tbody></tbody></table></div>
       <div class="mc-legend"><span><i class="l-done">✓</i>сделано</span><span><i class="l-due">!</i>пора по возрасту</span><span><i class="l-fut"></i>впереди</span></div>
       <button type="button" class="nx-reset" id="mcReset" style="margin-top:12px">Очистить отметки</button>
-      <p class="mini">Ротавирусную вакцину по догоняющей схеме можно сделать до 2 лет. Грипп — каждый год с 6 месяцев; клещевой энцефалит — по показаниям. Группам риска по гепатиту B — 4 дозы по схеме 0–1–2–12 мес.</p>
+      <p class="mini">Если прививку делали раньше календарного срока, например в частной клинике, — просто отметьте её. Раньше календаря разрешены по инструкциям: менингококковые МенКвадфи — с 6 недель и Менактра — с 9 месяцев, гепатит A Хаврикс — с 1 года. Ротавирусную вакцину по догоняющей схеме можно сделать до 2 лет. Грипп — каждый год осенью; детям 6–35 месяцев — 2 половинные дозы с интервалом 28 дней (Ультрикс Квадри). Клещевой энцефалит — по показаниям. Группам риска по гепатиту B — 4 дозы по схеме 0–1–2–12 мес.</p>
     </div>
   </section>
 
@@ -1255,13 +1257,13 @@ var PROFILES={
    {id:"hib",n:"Гемофильная инфекция",d:[["V1",3,"3 мес"],["V2",4.5,"4,5 мес"],["V3",6,"6 мес"],["R",18,"18 мес"]]},
    {id:"mmr",n:"Корь, краснуха, паротит",d:[["V",12,"12 мес"],["R",72,"6 лет"]]},
    {id:"var",n:"Ветряная оспа",msk:1,d:[["V1",12,"12 мес"],["V2",13.5,"+6 нед"]]},
-   {id:"hepa",n:"Гепатит A",msk:1,d:[["V1",36,"3–6 лет"],["V2",42,"+6 мес"]]},
-   {id:"men",n:"Менингококк",msk:1,d:[["V",36,"3–6 лет"]]},
+   {id:"hepa",n:"Гепатит A",msk:1,d:[["V1",36,"3–6 лет","можно с 1 года"],["V2",42,"через 6–12 мес",""]]},
+   {id:"men",n:"Менингококк",msk:1,d:[["V1",36,"3–6 лет","можно с 6 нед"],["V2",null,"если V1 до 2 лет",""]]},
    {id:"hpv",n:"ВПЧ",s:"девочки",msk:1,d:[["V1",144,"12–13 лет"],["V2",150,"+6 мес"]]}
   ];
   st.done=st.done||{};
   var mcBody=document.querySelector("#mcTable tbody");
-  mcBody.innerHTML=MC.map(function(r){return '<tr class="'+(r.msk?"t-msk":"")+'"><td><b>'+r.n+'</b>'+(r.s?'<small>'+r.s+'</small>':'')+'</td>'+r.d.map(function(x,i){return '<td><button type="button" class="dose" data-k="'+r.id+'-'+i+'" data-m="'+x[1]+'" aria-pressed="false"><b>'+x[0]+'</b><small>'+x[2]+'</small></button></td>'}).join("")+'<td colspan="'+(6-r.d.length)+'"></td></tr>'}).join("");
+  mcBody.innerHTML=MC.map(function(r){return '<tr class="'+(r.msk?"t-msk":"")+'"><td><b>'+r.n+'</b>'+(r.s?'<small>'+r.s+'</small>':'')+'</td>'+r.d.map(function(x,i){return '<td><button type="button" class="dose" data-k="'+r.id+'-'+i+'" aria-pressed="false"><b>'+x[0]+'</b><small>'+x[2]+'</small>'+(x[3]?'<em>'+x[3]+'</em>':'')+'</button></td>'}).join("")+'<td colspan="'+(6-r.d.length)+'"></td></tr>'}).join("")+'<tr id="mcFlu"><td><b>Грипп</b><small>каждый год, с 6 мес</small></td></tr>';
   mcBody.addEventListener("click",function(e){var b=e.target.closest("button.dose");if(!b)return;var k=b.dataset.k;if(st.done[k])delete st.done[k];else st.done[k]=1;apply()});
   $("mcReset").addEventListener("click",function(){st.done={};apply()});
   function mc(){
@@ -1272,13 +1274,21 @@ var PROFILES={
       r.d.forEach(function(x,i){
         var b=mcBody.querySelector('[data-k="'+r.id+'-'+i+'"]'),k=r.id+"-"+i,done=!!st.done[k];tot++;if(done)dn++;
         var late=!done&&r.id==="rota"&&am!==null&&am>=24;
-        var isDue=!done&&!late&&am!==null&&am>=x[1]-0.01;
+        var isDue=!done&&!late&&x[1]!==null&&am!==null&&am>=x[1]-0.01;
         b.classList.toggle("late",late);
         b.classList.toggle("done",done);b.classList.toggle("due",isDue);b.setAttribute("aria-pressed",done);
-        var sm=b.querySelector("small");sm.textContent=late?"срок прошёл":(!done&&d&&!isDue&&x[1]>=1)?"≈"+ds(addM(d,x[1])).slice(0,6)+String(addM(d,x[1]).getFullYear()).slice(2):x[2];
+        var sm=b.querySelector("small");sm.textContent=late?"срок прошёл":(!done&&d&&!isDue&&x[1]!==null&&x[1]>=1)?"≈"+ds(addM(d,x[1])).slice(0,6)+String(addM(d,x[1]).getFullYear()).slice(2):x[2];
         if(isDue)due.push(r.n+" — "+x[0]);
       });
     });
+    // грипп: сезоны с 6 месяцев до текущего, не больше 6 последних
+    var t0=today(),cur=t0.getMonth()>=8?t0.getFullYear():t0.getFullYear()-1,first=cur-3;
+    if(d){var six=addM(d,6);first=six.getMonth()>=8?six.getFullYear():six.getFullYear()-1;if(six>t0)first=cur+1}
+    first=Math.max(first,cur-5);
+    var fr=$("mcFlu"),h='<td><b>Грипп</b><small>каждый год, с 6 мес</small></td>',n=0;
+    for(var y=first;y<=cur;y++){var k="flu-"+y,dn1=!!st.done[k],due1=!dn1&&y===cur&&(am===null||am>=6);h+='<td><button type="button" class="dose'+(dn1?" done":"")+(due1?" due":"")+'" data-k="'+k+'" aria-pressed="'+dn1+'"><b>'+y+'/'+String(y+1).slice(2)+'</b><small>сезон</small></button></td>';n++;tot++;if(dn1)dn++;if(due1)due.push("Грипп — сезон "+y+"/"+String(y+1).slice(2))}
+    if(!n)h+='<td colspan="6"><small style="color:var(--muted)">с 6 месяцев</small></td>';else if(n<6)h+='<td colspan="'+(6-n)+'"></td>';
+    fr.innerHTML=h;
     var pct=tot?Math.round(dn/tot*100):0;
     $("mcSum").innerHTML="<b>Сделано "+dn+" из "+tot+"</b><div class='mc-bar'><i style='width:"+pct+"%'></i></div>"+(am===null?"<small style='color:var(--muted)'>Укажите дату рождения в графике выше — памятка подсветит, что пора сделать.</small>":due.length?"<small style='color:var(--muted)'>Пора по возрасту:</small><div class='mc-due'>"+due.slice(0,8).map(function(x){return "<span>"+x+"</span>"}).join("")+(due.length>8?"<span>и ещё "+(due.length-8)+"</span>":"")+"</div>":"<small style='color:var(--ok-ink);font-weight:700'>Все прививки по возрасту отмечены ✓</small>");
   }

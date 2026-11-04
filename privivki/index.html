@@ -241,6 +241,26 @@ button,input,select{font:inherit;color:inherit}
 .vcard[data-kind="live"] .vico{background:var(--mchip);color:var(--ok-ink)}
 .vtitle b{display:block;font-size:1rem;line-height:1.25}
 .vtitle small{display:block;color:var(--muted);font-size:.84rem;line-height:1.3;margin-top:2px}
+.nal{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 18px 14px;margin:0 0 22px;box-shadow:var(--shadow)}
+.nal-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px}
+.nal-head h3{margin:0;font-family:var(--f-display);font-size:1.05rem;color:var(--ink)}
+.nal-date{font-family:var(--f-mono);font-weight:700;font-size:.9rem;background:var(--chip);color:var(--berry);border-radius:99px;padding:4px 12px}
+.nal-old{margin:10px 0 0;background:var(--alert-bg);color:var(--alert-ink);border-radius:12px;padding:8px 12px;font-weight:700;font-size:.9rem}
+.nal-list{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0 24px}
+.nal-list li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.nal-list span{display:flex;flex-direction:column;min-width:0;font-weight:700}
+.nal-list span a{color:var(--ink);font-weight:700;text-decoration:none}
+.nal-list span a:hover{color:var(--berry)}
+.nal-list span small{color:var(--muted);font-size:.8rem;font-weight:500}
+.nal-list b{flex:none;text-align:right;font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+.nal-list b em{display:block;font-family:var(--f-body);font-style:normal;text-transform:none;letter-spacing:0;font-weight:600;font-size:.76rem;color:var(--muted)}
+.n-yes>b,.nb.n-yes{color:var(--ok-ink)}
+.n-ask>b,.nb.n-ask{color:#9A5B00}
+.n-no>b,.nb.n-no{color:var(--alert-ink)}
+.nal-foot{margin:12px 0 0;font-size:.86rem;color:var(--muted)}
+.vmeta i.nb{background:transparent;border:1.5px solid currentColor}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .n-ask>b,:root:not([data-theme="light"]) .nb.n-ask{color:#FFC46B}}
+:root[data-theme="dark"] .n-ask>b,:root[data-theme="dark"] .nb.n-ask{color:#FFC46B}
 .vmeta{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
 .vmeta i{font-style:normal;font-family:var(--f-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;background:var(--chip);color:var(--berry);border-radius:99px;padding:2px 8px;white-space:nowrap}
 .vmeta i.k-live{background:var(--mchip);color:var(--ok-ink)}
@@ -715,6 +735,14 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
   <section id="vaccines">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Справочник</span><h2>Вакцины, которые делают в поликлинике</h2><p>Нажмите на вакцину: доза, сроки, нормальные реакции и когда обращаться к врачу — по инструкции производителя.</p></div>
+
+      <div class="nal" id="nal" data-date="2026-10-22">
+        <div class="nal-head"><h3>Наличие вакцин в поликлинике</h3><span class="nal-date">на 22.10.2026</span></div>
+        <p class="nal-old" id="nalOld" hidden>Данные от 22.10.2026 могли устареть — наличие обязательно уточните.</p>
+        <ul class="nal-list"><li class="n-yes"><span><a href="#v-hb">Регевак В</a><small>Гепатит B</small></span><b>Есть</b></li><li class="n-ask"><span><a href="#v-bcg">БЦЖ / БЦЖ-М</a><small>Туберкулёз</small></span><b>Уточняйте</b></li><li class="n-yes"><span><a href="#v-pcv">Превенар 13</a><small>Пневмококк</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-rota">Рота-V-Эйд</a><small>Ротавирус</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-dtp">Пентаксим</a><small>Коклюш, дифтерия, столбняк, полиомиелит, Hib</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-ipv">Полиоваксин</a><small>Полиомиелит (неживая)</small></span><b>Есть</b></li><li class="n-ask"><span>Вакцина против Hib-инфекции<small>Гемофильная инфекция типа b</small></span><b>Уточняйте<em>мало доз</em></b></li><li class="n-ask"><span><a href="#v-opv">БиВак полио</a><small>Полиомиелит (живая, капли)</small></span><b>Уточняйте<em>по записи</em></b></li><li class="n-yes"><span><a href="#v-mmr">Вактривир</a><small>Корь, краснуха, паротит</small></span><b>Есть<em>только в 1 год</em></b></li><li class="n-yes"><span><a href="#v-mmr2">ЖПКВ</a><small>Корь + паротит</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-mmr2">Краснушная вакцина</a><small>Краснуха</small></span><b>Есть<em>с 2 лет</em></b></li><li class="n-yes"><span><a href="#v-mmr2">Паротитная вакцина</a><small>Паротит</small></span><b>Есть<em>с 2 лет</em></b></li><li class="n-ask"><span><a href="#v-mmr2">Коревая вакцина</a><small>Корь</small></span><b>Уточняйте<em>для очагов кори</em></b></li><li class="n-yes"><span><a href="#v-hepa">Альгавак М</a><small>Гепатит A</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-tbe">Клещ-Э-Вак</a><small>Клещевой энцефалит</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-tbe">ЭнцеВир Нео детский</a><small>Клещевой энцефалит</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-flu">Вакцина от гриппа</a><small>Грипп</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-tdap">Адасель</a><small>Коклюш, дифтерия, столбняк</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-adsm">АДС-М</a><small>Дифтерия, столбняк</small></span><b>Есть</b></li><li class="n-ask"><span><a href="#v-hpv">Гардасил</a><small>Вирус папилломы человека</small></span><b>Уточняйте<em>мало доз</em></b></li><li class="n-ask"><span>Иммуноглобулин</span><b>Уточняйте<em>мало доз</em></b></li><li class="n-yes"><span>Проба Манту (туберкулин)<small>Проба на туберкулёз</small></span><b>Есть</b></li><li class="n-yes"><span>Диаскинтест<small>Проба на туберкулёз</small></span><b>Есть</b></li></ul>
+        <p class="nal-foot">Информация актуальна на указанную дату; наличие вакцин меняется несколько раз в неделю. Перед прививкой обязательно уточните наличие у врача или по телефону горячей линии поликлиники.</p>
+      </div>
+      <script>(function(){try{var b=document.getElementById("nal"),d=new Date(b.dataset.date+"T00:00:00");if((Date.now()-d)/864e5>7)document.getElementById("nalOld").hidden=false}catch(x){}})();</script>
       <div class="vlegend"><span><svg><use href="#i-im"/></svg>в мышцу</span><span><svg><use href="#i-sc"/></svg>под кожу (в складку)</span><span><svg><use href="#i-id"/></svg>в кожу</span><span><svg><use href="#i-oral"/></svg>капли в рот</span></div>
       <div class="filters" role="group" aria-label="Фильтр по возрасту">
         <button type="button" data-f="all" aria-pressed="true">Все</button><button type="button" data-f="inf" aria-pressed="false">До года</button><button type="button" data-f="pre" aria-pressed="false">1–6 лет</button><button type="button" data-f="sch" aria-pressed="false">Школьникам</button><button type="button" data-f="live" aria-pressed="false">Живые</button>
@@ -724,7 +752,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Регевак В · вакцина гепатита B (Комбиотех)</b><small>Гепатит B</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -740,7 +768,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-id"/></svg>
           <span class="vtitle"><b>БЦЖ-М</b><small>Туберкулёз</small></span>
-          <span class="vmeta"><i class="k-live">живая</i><i>в кожу</i></span>
+          <span class="vmeta"><i class="nb n-ask">Уточняйте</i><i class="k-live">живая</i><i>в кожу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -756,7 +784,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Превенар 13</b><small>Пневмококковая инфекция (13 серотипов)</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -772,7 +800,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-oral"/></svg>
           <span class="vtitle"><b>Рота-V-Эйд</b><small>Ротавирусная инфекция</small></span>
-          <span class="vmeta"><i class="k-live">живая</i><i>в рот</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-live">живая</i><i>в рот</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -788,7 +816,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Пентаксим</b><small>Коклюш, дифтерия, столбняк, полиомиелит (ИПВ), гемофильная инфекция типа b</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -804,7 +832,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Полиоваксин</b><small>Полиомиелит (неживая, ИПВ)</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -820,7 +848,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-oral"/></svg>
           <span class="vtitle"><b>БиВак полио</b><small>Полиомиелит (живая, типы 1 и 3)</small></span>
-          <span class="vmeta"><i class="k-live">живая</i><i>в рот</i></span>
+          <span class="vmeta"><i class="nb n-ask">Уточняйте</i><i class="k-live">живая</i><i>в рот</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -836,7 +864,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-sc"/></svg>
           <span class="vtitle"><b>Вактривир</b><small>Корь, краснуха, эпидемический паротит</small></span>
-          <span class="vmeta"><i class="k-live">живая</i><i>под кожу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-live">живая</i><i>под кожу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -852,7 +880,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-sc"/></svg>
           <span class="vtitle"><b>ЖПКВ · корь, паротит, краснуха по отдельности</b><small>Дивакцина корь-паротит, паротитная, краснушная и коревая моновакцины</small></span>
-          <span class="vmeta"><i class="k-live">живая</i><i>под кожу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-live">живая</i><i>под кожу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -884,7 +912,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Альгавак М</b><small>Гепатит A</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -916,7 +944,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Ультрикс Квадри</b><small>Грипп</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -932,7 +960,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Адасель</b><small>Коклюш, дифтерия, столбняк (бесклеточная, ревакцинация)</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -948,7 +976,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>АДС-М</b><small>Дифтерия, столбняк</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -964,7 +992,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Гардасил</b><small>Вирус папилломы человека 6, 11, 16, 18</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-ask">Уточняйте</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
@@ -980,7 +1008,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:560px;fo
         <button type="button" class="vhead" aria-expanded="false">
           <svg class="vico" aria-hidden="true"><use href="#i-im"/></svg>
           <span class="vtitle"><b>Клещ-Э-Вак · ЭнцеВир Нео детский</b><small>Клещевой энцефалит</small></span>
-          <span class="vmeta"><i class="k-inact">неживая</i><i>в мышцу</i></span>
+          <span class="vmeta"><i class="nb n-yes">Есть</i><i class="k-inact">неживая</i><i>в мышцу</i></span>
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">

@@ -412,6 +412,18 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
 .mc button.dose.due b{color:var(--alert-ink)}
 .mc tr:last-child td{border-bottom:0}
 .mc-risk{margin:0 0 12px}
+.mc-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;margin:0 0 10px}
+.mc-all{border:2px solid var(--mint);background:var(--card);color:var(--ok-ink);border-radius:99px;padding:9px 16px;font:700 .9rem var(--f-body);cursor:pointer}
+.mc-all:hover{background:var(--mchip)}
+.mc-hint{font-family:var(--f-mono);font-size:.78rem;font-weight:700;color:var(--muted);margin-left:auto}
+.mc-hint[hidden]{display:none}
+.mc-sw{position:relative}
+.mc-sw::after{content:"";position:absolute;top:0;right:0;bottom:0;width:34px;border-radius:0 18px 18px 0;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(60,20,40,.16));transition:opacity .2s}
+.mc-sw.end::after,.mc-sw.fit::after{opacity:0}
+.mc-early{margin-top:14px}
+.mc-early ul.plain{margin:6px 0 0;padding-left:18px;font-size:.9rem;color:var(--ink)}
+.mc-early ul.plain li{margin:4px 0}
+.mc-early .mini{margin-top:8px}
 .mc tr.t-risk td:first-child{background:#FFF0D9;box-shadow:inset 4px 0 0 #D97A00}
 .mc tr.t-risk td:first-child b,.mc tr.t-risk td:first-child small{color:#A04F00}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mc tr.t-risk td:first-child{background:#3E2B12}:root:not([data-theme="light"]) .mc tr.t-risk td:first-child b,:root:not([data-theme="light"]) .mc tr.t-risk td:first-child small{color:#FFC889}}
@@ -626,12 +638,24 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
       </div>
       <div class="mc-sum card" id="mcSum"></div>
       <div class="nx-risk mc-risk"><label><input type="checkbox" id="mcHbRisk"> Группа риска по гепатиту B — 4 дозы по схеме 0–1–2–12 мес</label></div>
-      <div class="mc-scroll"><table class="mc" id="mcTable"><thead><tr><th>Инфекция</th><th colspan="6">Дозы</th></tr></thead><tbody></tbody></table></div>
+      <div class="mc-tools"><button type="button" class="mc-all" id="mcAll">✓ Отметить всё по календарю до сегодняшнего дня</button><span class="mc-hint" id="mcHint">листайте таблицу вбок →</span></div>
+      <div class="mc-sw" id="mcSw"><div class="mc-scroll" id="mcScroll"><table class="mc" id="mcTable"><thead><tr><th>Инфекция</th><th colspan="6">Дозы</th></tr></thead><tbody></tbody></table></div></div>
       <div class="mc-legend"><span><i class="l-done">✓</i>сделано</span><span><i class="l-due">!</i>пора по возрасту</span><span><i class="l-fut"></i>впереди</span></div>
       <div class="mc-link" id="mcLink" hidden></div>
       <div class="mc-actions"><button type="button" class="mc-print" id="mcPrintBtn">Распечатать / сохранить в PDF</button><button type="button" class="nx-reset" id="mcReset">Очистить отметки</button></div>
       <div id="mcPrint"></div>
-      <p class="mini">Если прививку делали раньше календарного срока, например в частной клинике, — просто отметьте её. Раньше календаря разрешены по инструкциям: менингококковые МенКвадфи — с 6 недель и Менактра — с 9 месяцев, гепатит A Хаврикс — с 1 года, ветряная оспа Варилрикс — с 9 месяцев. В поликлинике от ветряной оспы прививают только детей, которые поступают в детский сад. Ротавирусную вакцину по догоняющей схеме можно сделать до 2 лет. Грипп — каждый год осенью; детям 6–35 месяцев — 2 половинные дозы с интервалом 28 дней (Ультрикс Квадри). Клещевой энцефалит — по показаниям. Группам риска по гепатиту B — 4 дозы по схеме 0–1–2–12 мес.</p>
+      <details class="fold-in mc-early"><summary>Можно раньше календаря</summary>
+        <p class="mini">Если прививку делали раньше календарного срока, например в частной клинике, — просто отметьте её. По инструкциям разрешено:</p>
+        <ul class="plain">
+          <li><b>Менингококк:</b> МенКвадфи — с 6 недель, Менактра — с 9 месяцев.</li>
+          <li><b>Гепатит A:</b> Хаврикс — с 1 года.</li>
+          <li><b>Ветряная оспа:</b> Варилрикс — с 9 месяцев. В поликлинике от ветряной оспы прививают только детей, которые поступают в детский сад.</li>
+          <li><b>Ротавирус:</b> по догоняющей схеме — до 2 лет.</li>
+          <li><b>Грипп:</b> каждый год осенью, с 6 месяцев; детям 6–35 месяцев — 2 половинные дозы с интервалом 28 дней (Ультрикс Квадри).</li>
+          <li><b>Клещевой энцефалит:</b> по показаниям.</li>
+          <li><b>Гепатит B, группы риска:</b> 4 дозы по схеме 0–1–2–12 мес.</li>
+        </ul>
+      </details>
     </div>
   </section>
 
@@ -1361,6 +1385,12 @@ var PROFILES={
   }
   $("mcPrintBtn").addEventListener("click",function(){mcPrintFill();document.body.classList.add("print-mc");setTimeout(function(){try{window.print()}catch(x){}},50)});
   window.addEventListener("afterprint",function(){document.body.classList.remove("print-mc")});
+  $("mcAll").addEventListener("click",function(){var a=ageMonths();if(!a){$("dob").focus();return}var am=a.m+a.days/30.4,n=0;
+    MC.forEach(function(r){if((r.msk&&st.cal==="nk")||r.id==="var")return;r.d.forEach(function(x,i){if(x[1]!==null&&am>=x[1]-0.01&&!st.done[r.id+"-"+i]){st.done[r.id+"-"+i]=1;n++}})});
+    mcLink.hidden=false;mcLink.innerHTML=n?"<span>Отмечено <b>"+n+"</b> по календарю. Снимите отметки с тех прививок, которые не делали.</span>":"<span>Всё по возрасту уже отмечено.</span>";apply()});
+  var mcSw=$("mcSw"),mcScroll=$("mcScroll"),mcHint=$("mcHint");
+  function mcEdge(){var fit=mcScroll.scrollWidth<=mcScroll.clientWidth+2;mcSw.classList.toggle("fit",fit);mcSw.classList.toggle("end",mcScroll.scrollLeft+mcScroll.clientWidth>=mcScroll.scrollWidth-4);mcHint.hidden=fit}
+  mcScroll.addEventListener("scroll",mcEdge,{passive:true});window.addEventListener("resize",mcEdge);setTimeout(mcEdge,0);
   $("mcReset").addEventListener("click",function(){st.done={};mcLink.hidden=true;apply()});
   function mc(){
     var a=ageMonths(),am=a?a.m+a.days/30.4:null,d=pd(st.dob),tot=0,dn=0,due=[];

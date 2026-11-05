@@ -1,0 +1,29 @@
+{
+  "name": "Лихорадка у ребёнка — памятка педиатра",
+  "short_name": "Лихорадка",
+  "description": "Доза жаропонижающего по весу, что делать при температуре, когда к врачу. Врач-педиатр Корчагина Ю.А.",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F5FAFA",
+  "theme_color": "#C9444F",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

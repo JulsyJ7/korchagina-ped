@@ -135,6 +135,10 @@ button,input,select{font:inherit;color:inherit}
 .stop>ul{list-style:none;margin:0;padding:12px 16px;border-radius:0 18px 18px 0;box-shadow:var(--shadow);display:grid;gap:6px;border-left:1px dashed var(--line)}
 .stop>ul a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--muted)}
 .stop>ul a:hover{color:var(--berry)}
+.stop>ul li.t-risk{background:#FFF0D9;border-left:4px solid #D97A00;border-radius:8px;padding:5px 8px;margin:0 -8px}
+.stop>ul li.t-risk a{color:#A04F00;font-weight:700;border-bottom-color:#D97A00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stop>ul li.t-risk{background:#3E2B12}:root:not([data-theme="light"]) .stop>ul li.t-risk a{color:#FFC889}}
+:root[data-theme="dark"] .stop>ul li.t-risk{background:#3E2B12}:root[data-theme="dark"] .stop>ul li.t-risk a{color:#FFC889}
 .stop.past{opacity:.55}
 .stop.past::before{background:var(--berry);border-color:var(--berry)}
 .stop.next::before{border-color:var(--mint);background:var(--mint);box-shadow:0 0 0 6px color-mix(in srgb,var(--mint) 30%,transparent);animation:pulse 2s infinite}

@@ -234,6 +234,13 @@ footer{padding-bottom:90px}
 .chips button{border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:6px 11px;font-size:.84rem;font-weight:700;color:var(--muted);cursor:pointer}
 .chips button[aria-pressed="true"]{background:var(--chip);border-color:var(--coral);color:var(--coral)}
 .chips button[data-s="ok"][aria-pressed="true"]{background:var(--tchip);border-color:var(--teal);color:var(--ok-ink)}
+.tr-nt{display:flex;gap:8px;align-items:center;margin-top:12px;font-size:.86rem;font-weight:700;color:var(--muted);cursor:pointer}
+.tr-nt input{width:18px;height:18px;accent-color:var(--coral)}
+.tr-form.not .tstep{opacity:.4;pointer-events:none}
+.tr-ml{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.tr-ml label{font-weight:800;font-size:.88rem;width:100%}
+.tr-ml input{width:90px;height:44px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:800}
+.tr-ml small{color:var(--muted);font-size:.8rem;width:100%}
 .tr-add{margin-top:16px;width:100%;border:0;border-radius:99px;background:var(--coral);color:#fff;font-weight:800;font-size:1rem;padding:13px 18px;cursor:pointer}
 :root[data-theme="dark"] .tr-add{background:#B83A45}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-add{background:#B83A45}}
@@ -523,7 +530,12 @@ footer{padding-bottom:90px}
           <div class="chips" id="trS">
             <button type="button" data-s="drink" aria-pressed="false">мало пьёт</button><button type="button" data-s="pee" aria-pressed="false">редко писает</button><button type="button" data-s="sleepy" aria-pressed="false">вялый, сонливый</button><button type="button" data-s="chill" aria-pressed="false">озноб, холодные руки-ноги</button><button type="button" data-s="rash" aria-pressed="false">сыпь</button><button type="button" data-s="vomit" aria-pressed="false">рвота, понос</button><button type="button" data-s="ok" aria-pressed="false">играет, хорошо себя чувствует</button>
           </div>
-          <button type="button" class="tr-add" id="trAdd">Записать температуру</button>
+          <label class="tr-nt"><input type="checkbox" id="trNoT"> Температуру не мерили — записать только лекарство</label>
+          <span class="flabel" style="margin-top:14px">Давали лекарство?</span>
+          <div class="seg tr-med" id="trM" role="group" aria-label="Лекарство"><button type="button" data-m="" aria-pressed="true">нет</button><button type="button" data-m="ibu" aria-pressed="false">ибупрофен</button><button type="button" data-m="par" aria-pressed="false">парацетамол</button></div>
+          <div class="tr-ml" id="trMlBox" hidden><label for="trMl">Сколько дали</label><input type="number" id="trMl" min="0.5" max="40" step="0.5" inputmode="decimal"><span>мл</span><small id="trMlHint"></small></div>
+          <button type="button" class="tr-add" id="trAdd">Записать</button>
+          <p class="from" id="trMsg"></p>
         </div>
         <div class="card tr-chart">
           <div class="tr-top"><b id="trDays">Записей пока нет</b><span id="trMax"></span></div>
@@ -714,6 +726,7 @@ footer{padding-bottom:90px}
   /* журнал приёмов */
   var RULE={ibu:{gap:6,max:3,name:"ибупрофен"},par:{gap:4,max:4,name:"парацетамол"}};
   function hm(t){var d=new Date(t);return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)}
+  function curMl(k){return +String($(k==="ibu"?"ibuMl":"parMl").textContent).replace(",",".")}
   function renderLog(){
     var now=Date.now();
     ["ibu","par"].forEach(function(k){
@@ -729,7 +742,7 @@ footer{padding-bottom:90px}
   }
   [].forEach.call(document.querySelectorAll(".log"),function(box){
     var k=box.dataset.drug;
-    box.querySelector("button:not(.undo)").addEventListener("click",function(){st.log[k]=(st.log[k]||[]).concat(Date.now());save();renderLog();if(window.renderTr)renderTr()});
+    box.querySelector("button:not(.undo)").addEventListener("click",function(){var t=Date.now();st.log[k]=(st.log[k]||[]).concat(t);st.ml=st.ml||{};st.ml[k+t]=curMl(k);save();renderLog();if(window.renderTr)renderTr()});
     box.querySelector(".undo").addEventListener("click",function(){(st.log[k]||[]).pop();save();renderLog();if(window.renderTr)renderTr()});
   });
   setInterval(function(){renderLog();renderTr()},60000);
@@ -746,16 +759,27 @@ footer{padding-bottom:90px}
   function resetForm(){trW.value=locIso(Date.now());sel={};[].forEach.call(document.querySelectorAll("#trS button"),function(b){b.setAttribute("aria-pressed","false")})}
   [].forEach.call(document.querySelectorAll(".tstep button"),function(b){b.addEventListener("click",function(){var v=parseFloat(String(trT.value).replace(",","."))||38;trT.value=(Math.round((v+ +b.dataset.d)*10)/10).toFixed(1)})});
   [].forEach.call(document.querySelectorAll("#trS button"),function(b){b.addEventListener("click",function(){var k=b.dataset.s;sel[k]=!sel[k];b.setAttribute("aria-pressed",String(!!sel[k]))})});
+  var med="",trNoT=$("trNoT"),trMl=$("trMl");
+  function setMed(m){med=m;[].forEach.call(document.querySelectorAll("#trM button"),function(b){b.setAttribute("aria-pressed",String(b.dataset.m===m))});$("trMlBox").hidden=!m;
+    if(m){trMl.value=curMl(m);$("trMlHint").textContent="Подставлено из калькулятора ("+(m==="ibu"?"100 мг / 5 мл":"120 мг / 5 мл")+"). Исправьте, если давали другое количество или свечи/таблетки — тогда отметьте в самочувствии."}}
+  [].forEach.call(document.querySelectorAll("#trM button"),function(b){b.addEventListener("click",function(){setMed(b.dataset.m)})});
+  trNoT.addEventListener("change",function(){document.querySelector(".tr-form").classList.toggle("not",trNoT.checked)});
   $("trAdd").addEventListener("click",function(){
-    var v=parseFloat(String(trT.value).replace(",","."));if(!(v>=34&&v<=43)){trT.focus();return}
+    var msg=$("trMsg");msg.textContent="";
     var t=trW.value?new Date(trW.value).getTime():Date.now();if(!t||isNaN(t))t=Date.now();
-    st.tr.push({t:t,v:Math.round(v*10)/10,s:Object.keys(sel).filter(function(k){return sel[k]})});
-    st.tr.sort(function(a,b){return a.t-b.t});save();resetForm();renderTr();
+    if(t>Date.now()+5*6e4){msg.textContent="Время в будущем — проверьте дату и время.";return}
+    var v=parseFloat(String(trT.value).replace(",","."));
+    if(!trNoT.checked&&!(v>=34&&v<=43)){trT.focus();msg.textContent="Проверьте температуру: от 34 до 43 °C.";return}
+    if(trNoT.checked&&!med){msg.textContent="Выберите лекарство или снимите галочку «Температуру не мерили».";return}
+    if(!trNoT.checked){st.tr.push({t:t,v:Math.round(v*10)/10,s:Object.keys(sel).filter(function(k){return sel[k]})});st.tr.sort(function(a,b){return a.t-b.t})}
+    if(med){var ml=parseFloat(String(trMl.value).replace(",","."));st.log[med]=(st.log[med]||[]).concat(t).sort(function(a,b){return a-b});st.ml=st.ml||{};if(ml>0)st.ml[med+t]=ml}
+    save();resetForm();setMed("");trNoT.checked=false;document.querySelector(".tr-form").classList.remove("not");renderLog();renderTr();
+    msg.textContent="Записано ✓";setTimeout(function(){if(msg.textContent==="Записано ✓")msg.textContent=""},2500);
   });
-  $("trNew").addEventListener("click",function(){if(!st.tr.length&&!(st.log.ibu.length||st.log.par.length))return;if(!confirmSoft())return;st.tr=[];st.log={ibu:[],par:[]};save();renderLog();renderTr()});
+  $("trNew").addEventListener("click",function(){if(!st.tr.length&&!(st.log.ibu.length||st.log.par.length))return;if(!confirmSoft())return;st.tr=[];st.log={ibu:[],par:[]};st.ml={};save();renderLog();renderTr()});
   var armed=0;function confirmSoft(){var b=$("trNew");if(armed&&Date.now()-armed<4000){armed=0;b.textContent="Начать заново (новая болезнь)";return true}armed=Date.now();b.textContent="Нажмите ещё раз, чтобы стереть все записи";setTimeout(function(){if(armed){armed=0;b.textContent="Начать заново (новая болезнь)"}},4000);return false}
-  $("trList").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;var k=b.dataset.k,i=+b.dataset.i;if(k==="t")st.tr.splice(i,1);else st.log[k].splice(i,1);save();renderLog();renderTr()});
-  function meds(){var a=[];["ibu","par"].forEach(function(k){(st.log[k]||[]).forEach(function(t,i){a.push({t:t,k:k,i:i})})});return a.sort(function(x,y){return x.t-y.t})}
+  $("trList").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;var k=b.dataset.k,i=+b.dataset.i;if(k==="t")st.tr.splice(i,1);else{var tt=st.log[k][i];st.log[k].splice(i,1);if(st.ml)delete st.ml[k+tt]}save();renderLog();renderTr()});
+  function meds(){var a=[];st.ml=st.ml||{};["ibu","par"].forEach(function(k){(st.log[k]||[]).forEach(function(t,i){a.push({t:t,k:k,i:i,ml:st.ml[k+t]})})});return a.sort(function(x,y){return x.t-y.t})}
   function episodeStart(){var L=st.tr,s=null;for(var i=0;i<L.length;i++){if(L[i].v>=38){if(s===null)s=L[i].t}}return s}
   function svgChart(w,h,forPrint){
     var L=st.tr,M=meds();if(!L.length&&!M.length)return null;
@@ -806,7 +830,7 @@ footer{padding-bottom:90px}
     if(L.length){var es=episodeStart();if(es!==null){var d=Math.floor((now-es)/864e5)+1;out.push("Температура 38 °C и выше — с "+dm(es)+" ("+d+"-е сутки).")}
       var mx=L.reduce(function(a,b){return b.v>a.v?b:a});out.push("Максимум: "+f1(mx.v)+" °C ("+dm(mx.t)+"). Последнее измерение: "+f1(L[L.length-1].v)+" °C ("+dm(L[L.length-1].t)+").")}
     var M24=M.filter(function(m){return now-m.t<864e5});
-    if(M24.length)out.push("Жаропонижающее за сутки: "+M24.map(function(m){return (m.k==="ibu"?"ибупрофен "+fmt(+$("ibuMl").textContent.replace(",","."))+" мл":"парацетамол "+fmt(+$("parMl").textContent.replace(",","."))+" мл")+" в "+hm(m.t)}).join("; ")+".");
+    if(M24.length)out.push("Жаропонижающее за сутки: "+M24.map(function(m){return (m.k==="ibu"?"ибупрофен":"парацетамол")+(m.ml?" "+fmt(m.ml)+" мл":"")+" в "+hm(m.t)}).join("; ")+".");
     else if(M.length)out.push("Последнее жаропонижающее: "+(M[M.length-1].k==="ibu"?"ибупрофен":"парацетамол")+" "+dm(M[M.length-1].t)+".");
     var sy={};L.filter(function(p){return now-p.t<864e5}).forEach(function(p){(p.s||[]).forEach(function(k){sy[k]=1})});
     var sk=Object.keys(sy);if(sk.length)out.push("За сутки отмечено: "+sk.map(function(k){return SYM[k]}).join(", ")+".");
@@ -819,7 +843,7 @@ footer{padding-bottom:90px}
     var cw=Math.max(300,Math.min(700,$("trSvg").clientWidth||640)),c=svgChart(cw,cw<500?240:300,false);$("trSvg").innerHTML=c||'<div class="empty">Добавьте первое измерение — здесь появится кривая температуры</div>';
     $("trHints").innerHTML=hints().map(function(h){return '<div class="'+h[0]+'"><span>'+(h[0]==="h-ok"?"✓":"!")+'</span><span>'+h[1]+'</span></div>'}).join("");
     var items=L.map(function(p,i){return {t:p.t,h:'<span class="tt">'+dm(p.t)+'</span><span class="tv'+(p.v>=38?" hot":"")+'">'+f1(p.v)+'</span><span class="ts">'+(p.s||[]).map(function(k){return SYM[k]}).join(", ")+'</span><button type="button" data-k="t" data-i="'+i+'" aria-label="Удалить запись">×</button>'}}).concat(
-      meds().map(function(m){return {t:m.t,h:'<span class="tt">'+dm(m.t)+'</span><span class="ts med'+(m.k==="ibu"?" i":"")+'">'+(m.k==="ibu"?"ибупрофен":"парацетамол")+'</span><button type="button" data-k="'+m.k+'" data-i="'+m.i+'" aria-label="Удалить запись">×</button>'}}));
+      meds().map(function(m){return {t:m.t,h:'<span class="tt">'+dm(m.t)+'</span><span class="ts med'+(m.k==="ibu"?" i":"")+'">'+(m.k==="ibu"?"ибупрофен":"парацетамол")+(m.ml?" · "+fmt(m.ml)+" мл":"")+'</span><button type="button" data-k="'+m.k+'" data-i="'+m.i+'" aria-label="Удалить запись">×</button>'}}));
     items.sort(function(a,b){return b.t-a.t});
     $("trList").innerHTML=items.map(function(x){return "<li>"+x.h+"</li>"}).join("")||'<li class="ts">Пока пусто</li>';
     $("trCount").textContent=items.length?items.length+" шт.":"";
@@ -830,7 +854,7 @@ footer{padding-bottom:90px}
     function fallback(){var r=document.createRange();r.selectNodeContents($("docSum"));var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand("copy");ok()}catch(x){$("docCopied").textContent="Выделите текст и скопируйте вручную"}}});
   $("trPrint").addEventListener("click",function(){
     var L=st.tr,rows=L.slice().reverse().map(function(p){return "<tr><td>"+dm(p.t)+"</td><td><b>"+f1(p.v)+"</b></td><td>"+(p.s||[]).map(function(k){return SYM[k]}).join(", ")+"</td></tr>"}).join("");
-    var mrows=meds().slice().reverse().map(function(m){return "<tr><td>"+dm(m.t)+"</td><td colspan=2>"+(m.k==="ibu"?"ибупрофен":"парацетамол")+"</td></tr>"}).join("");
+    var mrows=meds().slice().reverse().map(function(m){return "<tr><td>"+dm(m.t)+"</td><td colspan=2>"+(m.k==="ibu"?"ибупрофен":"парацетамол")+(m.ml?" "+fmt(m.ml)+" мл":"")+"</td></tr>"}).join("");
     $("trPrintBox").innerHTML="<h2>Трекер лихорадки</h2><p class='pm'>Распечатано "+dm(Date.now())+"</p><pre>"+summary()+"</pre>"+(svgChart(720,280,true)||"")+
       "<table><thead><tr><th>Дата, время</th><th>°C</th><th>Самочувствие</th></tr></thead><tbody>"+(rows||"<tr><td colspan=3>—</td></tr>")+"</tbody></table>"+
       (mrows?"<table style='margin-top:8px'><thead><tr><th>Дата, время</th><th colspan=2>Жаропонижающее</th></tr></thead><tbody>"+mrows+"</tbody></table>":"")+

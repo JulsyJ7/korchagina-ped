@@ -411,6 +411,11 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
 .mc button.dose.due{border-color:var(--berry);background:var(--alert-bg)}
 .mc button.dose.due b{color:var(--alert-ink)}
 .mc tr:last-child td{border-bottom:0}
+.mc-risk{margin:0 0 12px}
+.mc tr.t-risk td:first-child{background:#FFF0D9;box-shadow:inset 4px 0 0 #D97A00}
+.mc tr.t-risk td:first-child b,.mc tr.t-risk td:first-child small{color:#A04F00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mc tr.t-risk td:first-child{background:#3E2B12}:root:not([data-theme="light"]) .mc tr.t-risk td:first-child b,:root:not([data-theme="light"]) .mc tr.t-risk td:first-child small{color:#FFC889}}
+:root[data-theme="dark"] .mc tr.t-risk td:first-child{background:#3E2B12}:root[data-theme="dark"] .mc tr.t-risk td:first-child b,:root[data-theme="dark"] .mc tr.t-risk td:first-child small{color:#FFC889}
 .mc-link{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;background:var(--mchip);color:var(--ok-ink);border-radius:16px;padding:12px 16px;font-size:.92rem}
 .mc-link b{color:var(--ink)}
 .mc-link button,.mc-print{border:0;border-radius:99px;padding:9px 16px;font:700 .9rem var(--f-body);cursor:pointer;background:var(--mint);color:#fff}
@@ -620,6 +625,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
         <p>Нажмите на дозу, чтобы отметить её сделанной. Памятка покажет, что пора сделать по возрасту и что ещё впереди. Отметки хранятся только на вашем телефоне. Схема — по календарю, выбранному выше; если график сдвигался, точную дату следующей прививки посчитайте в разделе «После прививки».</p>
       </div>
       <div class="mc-sum card" id="mcSum"></div>
+      <div class="nx-risk mc-risk"><label><input type="checkbox" id="mcHbRisk"> Группа риска по гепатиту B — 4 дозы по схеме 0–1–2–12 мес</label></div>
       <div class="mc-scroll"><table class="mc" id="mcTable"><thead><tr><th>Инфекция</th><th colspan="6">Дозы</th></tr></thead><tbody></tbody></table></div>
       <div class="mc-legend"><span><i class="l-done">✓</i>сделано</span><span><i class="l-due">!</i>пора по возрасту</span><span><i class="l-fut"></i>впереди</span></div>
       <div class="mc-link" id="mcLink" hidden></div>
@@ -1323,8 +1329,14 @@ var PROFILES={
   ];
   st.done=st.done||{};
   var mcBody=document.querySelector("#mcTable tbody");
+  var HBN=MC[0].d,HBR=[["V1",0,"роддом"],["V2",1,"1 мес"],["V3",2,"2 мес"],["V4",12,"12 мес"]];
+  function mcRender(){MC[0].d=st.hbRisk?HBR:HBN;MC[0].s=st.hbRisk?"группа риска":"";
   mcBody.innerHTML=MC.map(function(r){return '<tr class="'+(r.msk?"t-msk":"")+'"><td><b>'+r.n+'</b>'+(r.s?'<small>'+r.s+'</small>':'')+'</td>'+r.d.map(function(x,i){return '<td><button type="button" class="dose" data-k="'+r.id+'-'+i+'" aria-pressed="false"><b>'+x[0]+'</b><small>'+x[2]+'</small>'+(x[3]?'<em>'+x[3]+'</em>':'')+'</button></td>'}).join("")+'<td colspan="'+(6-r.d.length)+'"></td></tr>'}).join("")+'<tr id="mcFlu"><td><b>Грипп</b><small>каждый год, с 6 мес</small></td></tr>';
-  var MAPNX={hb:["hb",1,2,3],bcg:["bcg",1],pcv:["pcv",1,2,3],rota:["rota",1,2,3],dtp:["dtp",1,2,3,4],hib:["dtp",1,2,3,4],
+  var hr=mcBody.querySelector('[data-k="hb-0"]');if(hr)hr.closest("tr").classList.toggle("t-risk",!!st.hbRisk)}
+  mcRender();
+  var mcHbRisk=$("mcHbRisk");mcHbRisk.checked=!!st.hbRisk;
+  mcHbRisk.addEventListener("change",function(){st.hbRisk=mcHbRisk.checked;if(!st.hbRisk)delete st.done["hb-3"];mcLink.hidden=true;mcRender();apply()});
+  var MAPNX={hb:function(i){return ["hb",i+1]},bcg:["bcg",1],pcv:["pcv",1,2,3],rota:["rota",1,2,3],dtp:["dtp",1,2,3,4],hib:["dtp",1,2,3,4],
     polio:function(i){return i<4?["dtp",i+1]:["opv",i-3]},mmr:["mmr",1,2],var:["vari",1,2],hepa:["hepa",1,2],men:["men",1,2],hpv:["hpv",1,2]};
   function nxFor(id,i){var m=MAPNX[id];if(!m)return null;if(typeof m=="function")return m(i);return m[i+1]?[m[0],m[i+1]]:null}
   var mcLink=$("mcLink");
@@ -1333,7 +1345,7 @@ var PROFILES={
       var p=k.split("-"),id=p[0],i=+p[1],row=MC.filter(function(r){return r.id===id})[0],nx=nxFor(id,i);
       if(row&&nx){mcLink.hidden=false;mcLink.innerHTML="<span>Отмечено: <b>"+row.n+" — "+row.d[i][0]+"</b></span><button type='button' data-v='"+nx[0]+"' data-k='"+nx[1]+"'>Посчитать дату следующей →</button>"}else mcLink.hidden=true}
     apply()});
-  mcLink.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;nxV.value=b.dataset.v;nxR.checked=false;nxSync();nxK.value=b.dataset.k;nxD.value="";nxSync();nxSave();apply();mcLink.hidden=true;
+  mcLink.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;nxV.value=b.dataset.v;nxR.checked=(b.dataset.v==="hb"&&!!st.hbRisk);nxSync();nxK.value=b.dataset.k;nxD.value="";nxSync();nxSave();apply();mcLink.hidden=true;
     $("after").scrollIntoView({behavior:"smooth"});setTimeout(function(){try{nxD.focus({preventScroll:true});nxD.showPicker&&nxD.showPicker()}catch(x){}},600)});
   function esc(t){return String(t).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
   function mcPrintFill(){

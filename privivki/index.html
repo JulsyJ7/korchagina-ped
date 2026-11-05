@@ -434,6 +434,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
 .mc-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center}
 .mc-actions .nx-reset{margin:0}
 .mc-print{background:var(--berry)}
+.mc-png{background:var(--mint)}
 #mcPrint{display:none}
 .nal-btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:var(--card);border:2px solid var(--mint);color:var(--ok-ink);border-radius:99px;padding:9px 16px;font-weight:700;text-decoration:none;font-size:.92rem}
 .nal-btn:hover{background:var(--mchip)}
@@ -642,7 +643,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
       <div class="mc-sw" id="mcSw"><div class="mc-scroll" id="mcScroll"><table class="mc" id="mcTable"><thead><tr><th>Инфекция</th><th colspan="6">Дозы</th></tr></thead><tbody></tbody></table></div></div>
       <div class="mc-legend"><span><i class="l-done">✓</i>сделано</span><span><i class="l-due">!</i>пора по возрасту</span><span><i class="l-fut"></i>впереди</span></div>
       <div class="mc-link" id="mcLink" hidden></div>
-      <div class="mc-actions"><button type="button" class="mc-print" id="mcPrintBtn">Распечатать / сохранить в PDF</button><button type="button" class="nx-reset" id="mcReset">Очистить отметки</button></div>
+      <div class="mc-actions"><button type="button" class="mc-print" id="mcPrintBtn">Распечатать / сохранить в PDF</button><button type="button" class="mc-print mc-png" id="mcPngBtn">Сохранить картинкой</button><button type="button" class="nx-reset" id="mcReset">Очистить отметки</button></div>
       <div id="mcPrint"></div>
       <details class="fold-in mc-early"><summary>Можно раньше календаря</summary>
         <p class="mini">Если прививку делали раньше календарного срока, например в частной клинике, — просто отметьте её. По инструкциям разрешено:</p>
@@ -1383,7 +1384,38 @@ var PROFILES={
       "<table><thead><tr><th>Инфекция</th><th>Отмечено сделанным</th><th>Пора по возрасту</th><th>Впереди</th></tr></thead><tbody>"+rows+"</tbody></table>"+
       "<p class='pm-foot'>Отметки сделаны родителями в памятке «Прививки» и не заменяют прививочный сертификат и медицинскую документацию. Покажите этот лист педиатру на приёме. · Врач-педиатр Корчагина Ю.А.</p>";
   }
-  $("mcPrintBtn").addEventListener("click",function(){mcPrintFill();document.body.classList.add("print-mc");setTimeout(function(){try{window.print()}catch(x){}},50)});
+  /* ---------- сохранить картинкой (работает и там, где печать недоступна) ---------- */
+  function domToPng(el,fname,done){
+    var W=1080,PAD=48,F='"Manrope","Segoe UI",system-ui,sans-serif',parts=[].slice.call(el.children);
+    var cv=document.createElement("canvas"),ctx=cv.getContext("2d");
+    function wrap(t,font,maxW){ctx.font=font;var out=[];String(t).split("\n").forEach(function(par){var ws=par.split(/\s+/),line="";ws.forEach(function(w){var tst=line?line+" "+w:w;if(ctx.measureText(tst).width>maxW&&line){out.push(line);line=w}else line=tst});out.push(line)});return out}
+    var ops=[],y=PAD,imgs=[];
+    parts.forEach(function(n){var tag=n.tagName;
+      if(tag==="H2"){var L=wrap(n.textContent,"800 40px "+F,W-2*PAD);ops.push({t:"txt",L:L,font:"800 40px "+F,lh:48,y:y,col:"#2A1A1D"});y+=L.length*48+8}
+      else if(tag==="P"||tag==="PRE"){var fs=tag==="PRE"?24:20,L2=wrap(n.textContent,"500 "+fs+"px "+F,W-2*PAD-(tag==="PRE"?28:0));ops.push({t:"txt",L:L2,font:"500 "+fs+"px "+F,lh:fs*1.45,y:y+(tag==="PRE"?14:0),x:tag==="PRE"?PAD+14:PAD,col:tag==="PRE"?"#2A1A1D":"#555",box:tag==="PRE"?L2.length*fs*1.45+28:0});y+=L2.length*fs*1.45+(tag==="PRE"?40:14)}
+      else if(tag==="svg"||tag==="SVG"){var vb=(n.getAttribute("viewBox")||"0 0 720 280").split(/\s+/).map(Number),h=Math.round((W-2*PAD)*vb[3]/vb[2]);var im=new Image();var src=new XMLSerializer().serializeToString(n);if(src.indexOf("xmlns=")<0)src=src.replace("<svg",'<svg xmlns="http://www.w3.org/2000/svg"');im.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(src);imgs.push(im);ops.push({t:"img",im:im,y:y,h:h});y+=h+16}
+      else if(tag==="TABLE"){var rows=[].slice.call(n.querySelectorAll("tr")).map(function(tr){return [].slice.call(tr.children).map(function(td){return {t:td.textContent.trim(),h:td.tagName==="TH",span:+td.getAttribute("colspan")||1,cls:td.className}})});
+        var nc=Math.max.apply(null,rows.map(function(r){return r.reduce(function(a,c){return a+c.span},0)})),cw=(W-2*PAD)/nc;
+        rows.forEach(function(r){var col=0,cells=r.map(function(c){var w=cw*c.span,L=wrap(c.t,(c.h?"800 ":"500 ")+"19px "+F,w-16);var o={x:PAD+col*cw,w:w,L:L,h:c.h,cls:c.cls};col+=c.span;return o}),rh=Math.max.apply(null,cells.map(function(c){return c.L.length}))*26+14;ops.push({t:"row",cells:cells,y:y,h:rh});y+=rh});y+=16}
+    });
+    cv.width=W;cv.height=y+PAD;ctx.fillStyle="#fff";ctx.fillRect(0,0,W,cv.height);ctx.textBaseline="top";
+    function draw(){
+      ops.forEach(function(o){
+        if(o.t==="txt"){if(o.box){ctx.fillStyle="#F5F1F1";ctx.fillRect(PAD,o.y-14,W-2*PAD,o.box)}ctx.font=o.font;ctx.fillStyle=o.col;o.L.forEach(function(l,i){ctx.fillText(l,o.x||PAD,o.y+i*o.lh)})}
+        else if(o.t==="img"){try{ctx.drawImage(o.im,PAD,o.y,W-2*PAD,o.h)}catch(e){}}
+        else if(o.t==="row"){o.cells.forEach(function(c){if(c.h){ctx.fillStyle="#EEE";ctx.fillRect(c.x,o.y,c.w,o.h)}ctx.strokeStyle="#999";ctx.lineWidth=1;ctx.strokeRect(c.x+.5,o.y+.5,c.w,o.h);ctx.font=(c.h?"800 ":"500 ")+"19px "+F;ctx.fillStyle=/due/.test(c.cls)?"#9A1838":"#222";c.L.forEach(function(l,i){ctx.fillText(l,c.x+8,o.y+8+i*26)})})}
+      });
+      cv.toBlob(function(b){if(!b){done&&done(false);return}
+        var file=null;try{file=new File([b],fname,{type:"image/png"})}catch(e){}
+        if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file]}).then(function(){done&&done(true)},function(){done&&done(true)});return}
+        var u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=fname;document.body.appendChild(a);a.click();a.remove();
+        setTimeout(function(){URL.revokeObjectURL(u)},60000);done&&done(true)},"image/png");
+    }
+    var left=imgs.length;if(!left)draw();else imgs.forEach(function(im){if(im.complete&&im.naturalWidth){if(!--left)draw()}else{im.onload=im.onerror=function(){if(!--left)draw()}}});
+  }
+  function isStandalone(){try{return !!(navigator.standalone||matchMedia("(display-mode: standalone)").matches)}catch(e){return false}}
+  $("mcPngBtn").addEventListener("click",function(){mcPrintFill();domToPng($("mcPrint"),"privivki.png")});
+  $("mcPrintBtn").addEventListener("click",function(){mcPrintFill();if(isStandalone()||typeof window.print!=="function"){domToPng($("mcPrint"),"privivki.png");return}document.body.classList.add("print-mc");setTimeout(function(){try{window.print()}catch(x){domToPng($("mcPrint"),"privivki.png")}},50)});
   window.addEventListener("afterprint",function(){document.body.classList.remove("print-mc")});
   $("mcAll").addEventListener("click",function(){var a=ageMonths();if(!a){$("dob").focus();return}var am=a.m+a.days/30.4,n=0;
     MC.forEach(function(r){if((r.msk&&st.cal==="nk")||r.id==="var")return;r.d.forEach(function(x,i){if(x[1]!==null&&am>=x[1]-0.01&&!st.done[r.id+"-"+i]){st.done[r.id+"-"+i]=1;n++}})});

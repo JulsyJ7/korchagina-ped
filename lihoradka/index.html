@@ -290,7 +290,10 @@ footer{padding-bottom:90px}
 .tr-print,.tr-copy{border:2px solid transparent;border-radius:99px;background:var(--teal);color:#fff;font-weight:800;font-size:.92rem;padding:10px 18px;cursor:pointer}
 :root[data-theme="dark"] .tr-print,:root[data-theme="dark"] .tr-copy{background:#16707A}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-print,:root:not([data-theme="light"]) .tr-copy{background:#16707A}}
-.tr-actions>button{flex:1 1 260px;min-height:48px;border-width:2px!important;border-style:solid!important;font-size:.92rem;padding:10px 18px;box-sizing:border-box}
+.tr-actions>button{flex:1 1 200px;min-height:48px;border-width:2px!important;border-style:solid!important;font-size:.92rem;padding:10px 18px;box-sizing:border-box}
+.tr-png{background:var(--coral)}
+:root[data-theme="dark"] .tr-png{background:#B83A45}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-png{background:#B83A45}}
 .tr-new{border:2px solid var(--line);background:transparent;border-radius:99px;font-weight:800;cursor:pointer;color:var(--muted)}
 #trPrintBox{display:none}
 .chk{margin:10px 0 0;padding-left:22px;display:grid;gap:8px;font-size:.94rem}
@@ -562,7 +565,7 @@ footer{padding-bottom:90px}
       </div>
       <div id="trHints" class="tr-hints"></div>
       <details class="card fold tr-listf" id="trListF"><summary><b>Все записи</b><span class="fold-hint" id="trCount"></span></summary><ul id="trList" class="tr-list"></ul></details>
-      <div class="tr-actions"><button type="button" class="tr-print" id="trPrint">Показать врачу: печать или PDF</button><button type="button" class="tr-new" id="trNew">Начать заново (новая болезнь)</button></div>
+      <div class="tr-actions"><button type="button" class="tr-print" id="trPrint">Печать или PDF</button><button type="button" class="tr-print tr-png" id="trPng">Сохранить картинкой</button><button type="button" class="tr-new" id="trNew">Начать заново (новая болезнь)</button></div>
       <div id="trPrintBox"></div>
     </div>
   </section>
@@ -881,14 +884,46 @@ footer{padding-bottom:90px}
   $("docCopy").addEventListener("click",function(){var t=$("docSum").textContent,ok=function(){$("docCopied").textContent="Скопировано — можно вставить в сообщение врачу"};
     try{navigator.clipboard.writeText(t).then(ok,function(){fallback()})}catch(e){fallback()}
     function fallback(){var r=document.createRange();r.selectNodeContents($("docSum"));var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand("copy");ok()}catch(x){$("docCopied").textContent="Выделите текст и скопируйте вручную"}}});
-  $("trPrint").addEventListener("click",function(){
+  function trFill(){
     var L=st.tr,rows=L.slice().reverse().map(function(p){return "<tr><td>"+dm(p.t)+"</td><td><b>"+f1(p.v)+"</b></td><td>"+(p.s||[]).map(function(k){return SYM[k]}).join(", ")+"</td></tr>"}).join("");
     var mrows=meds().slice().reverse().map(function(m){return "<tr><td>"+dm(m.t)+"</td><td colspan=2>"+(m.k==="ibu"?"ибупрофен":"парацетамол")+(m.ml?" "+fmt(m.ml)+" мл":"")+"</td></tr>"}).join("");
     $("trPrintBox").innerHTML="<h2>Трекер лихорадки"+(ROOT.kids.length>1||st.name?": "+kname(st,ROOT.cur):"")+"</h2><p class='pm'>Распечатано "+dm(Date.now())+"</p><pre>"+summary()+"</pre>"+(svgChart(720,280,true)||"")+
       "<table><thead><tr><th>Дата, время</th><th>°C</th><th>Самочувствие</th></tr></thead><tbody>"+(rows||"<tr><td colspan=3>—</td></tr>")+"</tbody></table>"+
       (mrows?"<table style='margin-top:8px'><thead><tr><th>Дата, время</th><th colspan=2>Жаропонижающее</th></tr></thead><tbody>"+mrows+"</tbody></table>":"")+
       "<p class='ft'>Записи сделаны родителями в памятке «Лихорадка у ребёнка». · Врач-педиатр Корчагина Ю.А.</p>";
-    document.body.classList.add("print-tr");setTimeout(function(){try{window.print()}catch(x){}},50)});
+  }
+  /* ---------- сохранить картинкой (работает и там, где печать недоступна) ---------- */
+  function domToPng(el,fname,done){
+    var W=1080,PAD=48,F='"Manrope","Segoe UI",system-ui,sans-serif',parts=[].slice.call(el.children);
+    var cv=document.createElement("canvas"),ctx=cv.getContext("2d");
+    function wrap(t,font,maxW){ctx.font=font;var out=[];String(t).split("\n").forEach(function(par){var ws=par.split(/\s+/),line="";ws.forEach(function(w){var tst=line?line+" "+w:w;if(ctx.measureText(tst).width>maxW&&line){out.push(line);line=w}else line=tst});out.push(line)});return out}
+    var ops=[],y=PAD,imgs=[];
+    parts.forEach(function(n){var tag=n.tagName;
+      if(tag==="H2"){var L=wrap(n.textContent,"800 40px "+F,W-2*PAD);ops.push({t:"txt",L:L,font:"800 40px "+F,lh:48,y:y,col:"#2A1A1D"});y+=L.length*48+8}
+      else if(tag==="P"||tag==="PRE"){var fs=tag==="PRE"?24:20,L2=wrap(n.textContent,"500 "+fs+"px "+F,W-2*PAD-(tag==="PRE"?28:0));ops.push({t:"txt",L:L2,font:"500 "+fs+"px "+F,lh:fs*1.45,y:y+(tag==="PRE"?14:0),x:tag==="PRE"?PAD+14:PAD,col:tag==="PRE"?"#2A1A1D":"#555",box:tag==="PRE"?L2.length*fs*1.45+28:0});y+=L2.length*fs*1.45+(tag==="PRE"?40:14)}
+      else if(tag==="svg"||tag==="SVG"){var vb=(n.getAttribute("viewBox")||"0 0 720 280").split(/\s+/).map(Number),h=Math.round((W-2*PAD)*vb[3]/vb[2]);var im=new Image();var src=new XMLSerializer().serializeToString(n);if(src.indexOf("xmlns=")<0)src=src.replace("<svg",'<svg xmlns="http://www.w3.org/2000/svg"');im.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(src);imgs.push(im);ops.push({t:"img",im:im,y:y,h:h});y+=h+16}
+      else if(tag==="TABLE"){var rows=[].slice.call(n.querySelectorAll("tr")).map(function(tr){return [].slice.call(tr.children).map(function(td){return {t:td.textContent.trim(),h:td.tagName==="TH",span:+td.getAttribute("colspan")||1,cls:td.className}})});
+        var nc=Math.max.apply(null,rows.map(function(r){return r.reduce(function(a,c){return a+c.span},0)})),cw=(W-2*PAD)/nc;
+        rows.forEach(function(r){var col=0,cells=r.map(function(c){var w=cw*c.span,L=wrap(c.t,(c.h?"800 ":"500 ")+"19px "+F,w-16);var o={x:PAD+col*cw,w:w,L:L,h:c.h,cls:c.cls};col+=c.span;return o}),rh=Math.max.apply(null,cells.map(function(c){return c.L.length}))*26+14;ops.push({t:"row",cells:cells,y:y,h:rh});y+=rh});y+=16}
+    });
+    cv.width=W;cv.height=y+PAD;ctx.fillStyle="#fff";ctx.fillRect(0,0,W,cv.height);ctx.textBaseline="top";
+    function draw(){
+      ops.forEach(function(o){
+        if(o.t==="txt"){if(o.box){ctx.fillStyle="#F5F1F1";ctx.fillRect(PAD,o.y-14,W-2*PAD,o.box)}ctx.font=o.font;ctx.fillStyle=o.col;o.L.forEach(function(l,i){ctx.fillText(l,o.x||PAD,o.y+i*o.lh)})}
+        else if(o.t==="img"){try{ctx.drawImage(o.im,PAD,o.y,W-2*PAD,o.h)}catch(e){}}
+        else if(o.t==="row"){o.cells.forEach(function(c){if(c.h){ctx.fillStyle="#EEE";ctx.fillRect(c.x,o.y,c.w,o.h)}ctx.strokeStyle="#999";ctx.lineWidth=1;ctx.strokeRect(c.x+.5,o.y+.5,c.w,o.h);ctx.font=(c.h?"800 ":"500 ")+"19px "+F;ctx.fillStyle=/due/.test(c.cls)?"#9A1838":"#222";c.L.forEach(function(l,i){ctx.fillText(l,c.x+8,o.y+8+i*26)})})}
+      });
+      cv.toBlob(function(b){if(!b){done&&done(false);return}
+        var file=null;try{file=new File([b],fname,{type:"image/png"})}catch(e){}
+        if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file]}).then(function(){done&&done(true)},function(){done&&done(true)});return}
+        var u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=fname;document.body.appendChild(a);a.click();a.remove();
+        setTimeout(function(){URL.revokeObjectURL(u)},60000);done&&done(true)},"image/png");
+    }
+    var left=imgs.length;if(!left)draw();else imgs.forEach(function(im){if(im.complete&&im.naturalWidth){if(!--left)draw()}else{im.onload=im.onerror=function(){if(!--left)draw()}}});
+  }
+  function isStandalone(){try{return !!(navigator.standalone||matchMedia("(display-mode: standalone)").matches)}catch(e){return false}}
+  $("trPng").addEventListener("click",function(){trFill();domToPng($("trPrintBox"),"lihoradka.png")});
+  $("trPrint").addEventListener("click",function(){trFill();if(isStandalone()||typeof window.print!=="function"){domToPng($("trPrintBox"),"lihoradka.png");return}document.body.classList.add("print-tr");setTimeout(function(){try{window.print()}catch(x){domToPng($("trPrintBox"),"lihoradka.png")}},50)});
   window.addEventListener("afterprint",function(){document.body.classList.remove("print-tr")});
   resetForm();
 

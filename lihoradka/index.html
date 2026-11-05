@@ -155,6 +155,17 @@ details.fold>ul{padding:0 20px 20px!important;margin-top:0!important}
 .agein label{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--muted)}
 .agein input{width:76px;height:46px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:800;color:var(--ink);-moz-appearance:textfield}
 .agein input:focus{border-color:var(--coral);outline:none}
+.kids{padding:12px 14px;margin-bottom:14px}
+.kids-row{display:flex;flex-wrap:wrap;gap:8px}
+.kids-row button{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:7px 14px;font-weight:800;font-size:.9rem;cursor:pointer;color:var(--muted)}
+.kids-row button[aria-pressed="true"]{background:var(--coral);border-color:var(--coral);color:#fff}
+:root[data-theme="dark"] .kids-row button[aria-pressed="true"]{background:#B83A45;border-color:#B83A45}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .kids-row button[aria-pressed="true"]{background:#B83A45;border-color:#B83A45}}
+.kids-row .kadd{border-style:dashed;color:var(--coral)}
+.kids-edit{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:10px}
+.kids-edit label{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.88rem}
+.kids-edit input{height:40px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:700;color:var(--ink);width:180px}
+.kdel{border:0;background:none;color:var(--muted);text-decoration:underline;font-size:.84rem;cursor:pointer;padding:4px 0}
 .from{display:block;color:var(--muted);font-size:.8rem;margin-top:6px}
 .doses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
 .dose{display:flex;flex-direction:column;gap:8px}
@@ -462,6 +473,7 @@ footer{padding-bottom:90px}
   <section id="dose">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Калькулятор</span><h2>Сколько давать: доза по весу</h2><p>Доза жаропонижающего считается по весу, а не по возрасту. Укажите вес — памятка посчитает разовую дозу в миллилитрах для детских суспензий, свечей и таблеток.</p></div>
+      <div class="kids card"><div class="kids-row" data-kids></div><div class="kids-edit"><label>Имя <input type="text" class="kname" maxlength="20" placeholder="например, Маша"></label><button type="button" class="kdel">Удалить ребёнка</button></div></div>
       <div class="card kidbar">
         <div class="field"><label for="kwR">Вес ребёнка</label>
           <div class="wrow"><input type="range" id="kwR" min="3" max="50" step="0.5" value="10" aria-label="Вес ребёнка, ползунок"><input type="number" id="kwN" min="3" max="50" step="0.5" value="10" inputmode="decimal" aria-label="Вес ребёнка, кг"><small>кг</small></div>
@@ -524,6 +536,7 @@ footer{padding-bottom:90px}
   <section id="track">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Трекер лихорадки</span><h2>Записывайте температуру — увидите кривую</h2><p>Отмечайте температуру и самочувствие, а лекарства — кнопкой «Дали сейчас» в калькуляторе. Памятка нарисует график, посчитает, сколько дней держится температура, и подскажет, когда пора к врачу. Записи хранятся только на вашем телефоне.</p></div>
+      <div class="kids card"><div class="kids-row" data-kids></div><p class="from" style="margin-top:6px">У каждого ребёнка свой вес, возраст, лекарства и записи температуры.</p></div>
       <div class="trk">
         <div class="card tr-form">
           <div class="tr-row">
@@ -686,8 +699,13 @@ footer{padding-bottom:90px}
   "use strict";
   var KEY="fever-app-v1";
   function $(id){return document.getElementById(id)}
-  var st={};try{st=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){st={}}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+  var ROOT={};try{ROOT=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){ROOT={}}
+  if(!ROOT.kids){var old=ROOT;ROOT={kids:[old],cur:0};old.name=old.name||""}
+  if(!ROOT.kids.length)ROOT.kids=[{}];
+  if(!(ROOT.cur>=0&&ROOT.cur<ROOT.kids.length))ROOT.cur=0;
+  var st=ROOT.kids[ROOT.cur];
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(ROOT))}catch(e){}}
+  function kname(k,i){return (k.name||"").trim()||("Ребёнок "+(i+1))}
   function fmt(x){return (Math.round(x*10)/10).toString().replace(".",",")}
   function fl(x,s){return Math.floor(x/s+1e-9)*s}
   /* вес по умолчанию: свой → из «Прививок» → из «Аптечки» */
@@ -706,7 +724,8 @@ footer{padding-bottom:90px}
   function showAge(){var m=ageMo();if(m===null){agY.value="";agM.value="";$("agHint").textContent="Укажите возраст — от него зависят предупреждения"}else{agY.value=Math.floor(m/12);agM.value=m%12;$("agHint").textContent=""}}
   function readAge(){var y=parseInt(agY.value,10),mo=parseInt(agM.value,10);if(isNaN(y)&&isNaN(mo))return;y=Math.min(17,Math.max(0,y||0));mo=Math.min(11,Math.max(0,mo||0));st.b=Date.now()-(y*12+mo+.5)*30.44*864e5;delete st.a;$("agHint").textContent="";save();calc()}
   agY.addEventListener("change",readAge);agM.addEventListener("change",readAge);
-  st.log=st.log||{ibu:[],par:[]};
+  function norm(k){k.log=k.log||{ibu:[],par:[]};k.log.ibu=k.log.ibu||[];k.log.par=k.log.par||[];k.tr=k.tr||[];k.ml=k.ml||{};if(typeof k.w!=="number")k.w=10;return k}
+  ROOT.kids.forEach(norm);
   var kwR=$("kwR"),kwN=$("kwN");
   function setW(w,from){w=Math.min(50,Math.max(3,Math.round(w*2)/2));st.w=w;if(from!=="r")kwR.value=w;if(from!=="n")kwN.value=w;calc();save()}
   kwR.addEventListener("input",function(){setW(+kwR.value,"r")});
@@ -730,7 +749,7 @@ footer{padding-bottom:90px}
     $("xIbuTab").textContent=(am!==null&&am<72)?"с 6 лет и 20 кг; пока — суспензия":w>=40?"1–2 таблетки (200–400 мг)":w>=20?"1 таблетка (200 мг)":"с 20 кг; пока — суспензия";
     $("xSupp").textContent=a===0?"только по назначению врача":supp(w);
     $("xParTab").textContent=w>=33?"1 таблетка (500 мг)":w>=16?"½ таблетки (250 мг)":"с 16 кг; пока — суспензия или свечи";
-    var ks=$("kidSum");ks.hidden=false;ks.textContent=fmt(w)+" кг"+(am===null?"":" · "+ageTxt(am));
+    var ks=$("kidSum");ks.hidden=false;ks.textContent=(ROOT.kids.length>1?kname(st,ROOT.cur)+" · ":"")+fmt(w)+" кг"+(am===null?"":" · "+ageTxt(am));
     renderLog();
   }
   /* журнал приёмов */
@@ -759,7 +778,7 @@ footer{padding-bottom:90px}
   var rzT;window.addEventListener("resize",function(){clearTimeout(rzT);rzT=setTimeout(renderTr,200)});
   $("kidSum").addEventListener("click",function(){$("dose").scrollIntoView({behavior:"smooth"})});
   /* ---------- трекер лихорадки ---------- */
-  st.tr=st.tr||[];
+
   var SYM={drink:"мало пьёт",pee:"редко писает",sleepy:"вялый",chill:"озноб",rash:"сыпь",vomit:"рвота/понос",ok:"хорошо себя чувствует"};
   var trT=$("trT"),trW=$("trW"),sel={};
   function pad(n){return ("0"+n).slice(-2)}
@@ -836,7 +855,7 @@ footer{padding-bottom:90px}
   }
   function summary(){
     var L=st.tr,M=meds(),now=Date.now(),out=[];
-    out.push("Вес: "+fmt(st.w)+" кг; возраст: "+(ageMo()===null?"не указан":ageTxt(ageMo()))+".");
+    out.push((ROOT.kids.length>1||st.name?kname(st,ROOT.cur)+". ":"")+"Вес: "+fmt(st.w)+" кг; возраст: "+(ageMo()===null?"не указан":ageTxt(ageMo()))+".");
     if(L.length){var es=episodeStart();if(es!==null){var d=Math.floor((now-es)/864e5)+1;out.push("Температура 38 °C и выше — с "+dm(es)+" ("+d+"-е сутки).")}
       var mx=L.reduce(function(a,b){return b.v>a.v?b:a});out.push("Максимум: "+f1(mx.v)+" °C ("+dm(mx.t)+"). Последнее измерение: "+f1(L[L.length-1].v)+" °C ("+dm(L[L.length-1].t)+").")}
     var M24=M.filter(function(m){return now-m.t<864e5});
@@ -865,7 +884,7 @@ footer{padding-bottom:90px}
   $("trPrint").addEventListener("click",function(){
     var L=st.tr,rows=L.slice().reverse().map(function(p){return "<tr><td>"+dm(p.t)+"</td><td><b>"+f1(p.v)+"</b></td><td>"+(p.s||[]).map(function(k){return SYM[k]}).join(", ")+"</td></tr>"}).join("");
     var mrows=meds().slice().reverse().map(function(m){return "<tr><td>"+dm(m.t)+"</td><td colspan=2>"+(m.k==="ibu"?"ибупрофен":"парацетамол")+(m.ml?" "+fmt(m.ml)+" мл":"")+"</td></tr>"}).join("");
-    $("trPrintBox").innerHTML="<h2>Трекер лихорадки</h2><p class='pm'>Распечатано "+dm(Date.now())+"</p><pre>"+summary()+"</pre>"+(svgChart(720,280,true)||"")+
+    $("trPrintBox").innerHTML="<h2>Трекер лихорадки"+(ROOT.kids.length>1||st.name?": "+kname(st,ROOT.cur):"")+"</h2><p class='pm'>Распечатано "+dm(Date.now())+"</p><pre>"+summary()+"</pre>"+(svgChart(720,280,true)||"")+
       "<table><thead><tr><th>Дата, время</th><th>°C</th><th>Самочувствие</th></tr></thead><tbody>"+(rows||"<tr><td colspan=3>—</td></tr>")+"</tbody></table>"+
       (mrows?"<table style='margin-top:8px'><thead><tr><th>Дата, время</th><th colspan=2>Жаропонижающее</th></tr></thead><tbody>"+mrows+"</tbody></table>":"")+
       "<p class='ft'>Записи сделаны родителями в памятке «Лихорадка у ребёнка». · Врач-педиатр Корчагина Ю.А.</p>";
@@ -873,7 +892,23 @@ footer{padding-bottom:90px}
   window.addEventListener("afterprint",function(){document.body.classList.remove("print-tr")});
   resetForm();
 
-  kwR.value=st.w;kwN.value=st.w;showAge();calc();renderTr();
+  function renderKids(){
+    var h=ROOT.kids.map(function(k,i){return '<button type="button" data-ki="'+i+'" aria-pressed="'+(i===ROOT.cur)+'">'+kname(k,i).replace(/[<>&"]/g,"")+'</button>'}).join("")+(ROOT.kids.length<6?'<button type="button" class="kadd" data-ki="add">+ ребёнок</button>':"");
+    [].forEach.call(document.querySelectorAll("[data-kids]"),function(el){el.innerHTML=h});
+    [].forEach.call(document.querySelectorAll(".kname"),function(el){if(document.activeElement!==el)el.value=st.name||""});
+    [].forEach.call(document.querySelectorAll(".kdel"),function(el){el.hidden=ROOT.kids.length<2;el.textContent="Удалить ребёнка";delete el.dataset.arm});
+  }
+  function switchKid(i){ROOT.cur=i;st=ROOT.kids[i];save();loadKid()}
+  function loadKid(){kwR.value=st.w;kwN.value=st.w;$("kwFrom").textContent="";showAge();resetForm();if(typeof setMed==="function")setMed("");renderKids();calc();renderTr()}
+  document.addEventListener("click",function(e){var b=e.target.closest("[data-kids] button");if(!b)return;
+    if(b.dataset.ki==="add"){var k=norm({});ROOT.kids.push(k);switchKid(ROOT.kids.length-1);var n=document.querySelector(".kname");if(n){n.focus()}}
+    else switchKid(+b.dataset.ki)});
+  [].forEach.call(document.querySelectorAll(".kname"),function(el){el.addEventListener("input",function(){st.name=el.value.slice(0,20);save();
+    [].forEach.call(document.querySelectorAll('[data-kids] button[data-ki="'+ROOT.cur+'"]'),function(b){b.textContent=kname(st,ROOT.cur)});calc()})});
+  [].forEach.call(document.querySelectorAll(".kdel"),function(el){el.addEventListener("click",function(){if(ROOT.kids.length<2)return;
+    if(!el.dataset.arm){el.dataset.arm=1;el.textContent="Нажмите ещё раз: удалить «"+kname(st,ROOT.cur)+"» и все записи";setTimeout(function(){if(el.dataset.arm){delete el.dataset.arm;el.textContent="Удалить ребёнка"}},4000);return}
+    ROOT.kids.splice(ROOT.cur,1);switchKid(Math.max(0,ROOT.cur-1))})});
+  kwR.value=st.w;kwN.value=st.w;showAge();renderKids();calc();renderTr();
   /* активная вкладка и кнопка «Тревожно?» */
   var tabs=[].slice.call(document.querySelectorAll(".tabs a")),secs=tabs.map(function(a){return $(a.getAttribute("href").slice(1))});
   if("IntersectionObserver" in window){

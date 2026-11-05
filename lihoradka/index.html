@@ -473,7 +473,7 @@ footer{padding-bottom:90px}
   <section id="dose">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Калькулятор</span><h2>Сколько давать: доза по весу</h2><p>Доза жаропонижающего считается по весу, а не по возрасту. Укажите вес — памятка посчитает разовую дозу в миллилитрах для детских суспензий, свечей и таблеток.</p></div>
-      <div class="kids card"><div class="kids-row" data-kids></div><div class="kids-edit"><label>Имя <input type="text" class="kname" maxlength="20" placeholder="например, Маша"></label><button type="button" class="kdel">Удалить ребёнка</button></div></div>
+      <div class="kids card"><div class="kids-row" data-kids></div><div class="kids-edit"><label>Имя <input type="text" class="kname" maxlength="20" placeholder="например, Маша"></label><button type="button" class="kdel">Удалить</button></div></div>
       <div class="card kidbar">
         <div class="field"><label for="kwR">Вес ребёнка</label>
           <div class="wrow"><input type="range" id="kwR" min="3" max="50" step="0.5" value="10" aria-label="Вес ребёнка, ползунок"><input type="number" id="kwN" min="3" max="50" step="0.5" value="10" inputmode="decimal" aria-label="Вес ребёнка, кг"><small>кг</small></div>
@@ -896,7 +896,7 @@ footer{padding-bottom:90px}
     var h=ROOT.kids.map(function(k,i){return '<button type="button" data-ki="'+i+'" aria-pressed="'+(i===ROOT.cur)+'">'+kname(k,i).replace(/[<>&"]/g,"")+'</button>'}).join("")+(ROOT.kids.length<6?'<button type="button" class="kadd" data-ki="add">+ ребёнок</button>':"");
     [].forEach.call(document.querySelectorAll("[data-kids]"),function(el){el.innerHTML=h});
     [].forEach.call(document.querySelectorAll(".kname"),function(el){if(document.activeElement!==el)el.value=st.name||""});
-    [].forEach.call(document.querySelectorAll(".kdel"),function(el){el.hidden=ROOT.kids.length<2;el.textContent="Удалить ребёнка";delete el.dataset.arm});
+    [].forEach.call(document.querySelectorAll(".kdel"),function(el){el.hidden=ROOT.kids.length<2;el.textContent="Удалить";delete el.dataset.arm});
   }
   function switchKid(i){ROOT.cur=i;st=ROOT.kids[i];save();loadKid()}
   function loadKid(){kwR.value=st.w;kwN.value=st.w;$("kwFrom").textContent="";showAge();resetForm();if(typeof setMed==="function")setMed("");renderKids();calc();renderTr()}
@@ -906,7 +906,7 @@ footer{padding-bottom:90px}
   [].forEach.call(document.querySelectorAll(".kname"),function(el){el.addEventListener("input",function(){st.name=el.value.slice(0,20);save();
     [].forEach.call(document.querySelectorAll('[data-kids] button[data-ki="'+ROOT.cur+'"]'),function(b){b.textContent=kname(st,ROOT.cur)});calc()})});
   [].forEach.call(document.querySelectorAll(".kdel"),function(el){el.addEventListener("click",function(){if(ROOT.kids.length<2)return;
-    if(!el.dataset.arm){el.dataset.arm=1;el.textContent="Нажмите ещё раз: удалить «"+kname(st,ROOT.cur)+"» и все записи";setTimeout(function(){if(el.dataset.arm){delete el.dataset.arm;el.textContent="Удалить ребёнка"}},4000);return}
+    if(!el.dataset.arm){el.dataset.arm=1;el.textContent="Нажмите ещё раз: удалить все записи «"+kname(st,ROOT.cur)+"»";setTimeout(function(){if(el.dataset.arm){delete el.dataset.arm;el.textContent="Удалить"}},4000);return}
     ROOT.kids.splice(ROOT.cur,1);switchKid(Math.max(0,ROOT.cur-1))})});
   kwR.value=st.w;kwN.value=st.w;showAge();renderKids();calc();renderTr();
   /* активная вкладка и кнопка «Тревожно?» */

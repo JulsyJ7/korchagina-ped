@@ -118,7 +118,8 @@ button,input,select{font:inherit;color:inherit}
 .def .big{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,7vw,3.6rem);color:var(--coral);line-height:1}
 .def .big small{font-size:.4em;color:var(--muted);display:block;margin-top:6px;font-family:var(--f-body);font-weight:700}
 .def p+p{margin-top:10px}
-.meas h3{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.meas h3{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:8px}
+.meas h3 i{white-space:nowrap}
 .meas h3 i{font-style:normal;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;background:var(--tchip);color:var(--ok-ink);border-radius:99px;padding:3px 9px}
 .meas p{color:var(--muted);font-size:.93rem}
 .meas .x{background:var(--chip)}
@@ -216,6 +217,85 @@ ul.plain{margin:10px 0 0;padding-left:20px;display:grid;gap:7px;font-size:.94rem
 .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:18px;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 footer{padding-bottom:90px}
 
+.mut{color:var(--muted)}
+.tm .card p b{color:var(--ink)}
+.merc{margin-top:16px}
+.merc ol{margin:0;padding:0 20px 20px 40px;display:grid;gap:8px;font-size:.94rem}
+/* трекер */
+.trk{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:20px;align-items:start}
+.tr-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px}
+.tr-form .field input{display:block;width:100%;height:50px;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:0 10px;font-size:16px;-webkit-appearance:none;appearance:none;min-width:0}
+.tstep{display:flex;align-items:stretch;gap:6px}
+.tstep input{text-align:center;font-family:var(--f-display);font-weight:700;font-size:1.15rem!important;-moz-appearance:textfield}
+.tstep input::-webkit-outer-spin-button,.tstep input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.tstep button{flex:none;width:42px;border:0;border-radius:12px;background:var(--chip);color:var(--coral);font-weight:900;font-size:1.3rem;cursor:pointer}
+.flabel small{font-weight:600;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:6px 11px;font-size:.84rem;font-weight:700;color:var(--muted);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--chip);border-color:var(--coral);color:var(--coral)}
+.chips button[data-s="ok"][aria-pressed="true"]{background:var(--tchip);border-color:var(--teal);color:var(--ok-ink)}
+.tr-add{margin-top:16px;width:100%;border:0;border-radius:99px;background:var(--coral);color:#fff;font-weight:800;font-size:1rem;padding:13px 18px;cursor:pointer}
+:root[data-theme="dark"] .tr-add{background:#B83A45}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-add{background:#B83A45}}
+.tr-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;margin-bottom:8px}
+.tr-top b{font-family:var(--f-display);font-size:1.02rem}
+.tr-top span{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:700}
+.tr-svg svg{display:block;width:100%;height:auto}
+.tr-svg .empty{color:var(--muted);font-size:.92rem;padding:40px 0;text-align:center}
+.tr-leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted);margin-top:8px}
+.tr-leg span{display:inline-flex;align-items:center;gap:6px}
+.tr-leg i{font-style:normal;display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;font-size:.6rem;font-weight:900;color:#fff}
+.tr-leg .lt{background:var(--coral);height:4px;width:18px;border-radius:2px}
+.tr-leg .li{background:#E2656B}.tr-leg .lp{background:#1C8C96}
+.tr-leg .lz{background:color-mix(in srgb,var(--coral) 18%,transparent);border-radius:4px;width:18px}
+.tr-hints{display:grid;gap:10px;margin-top:16px}
+.tr-hints div{display:flex;gap:10px;align-items:flex-start;border-radius:14px;padding:11px 14px;font-size:.92rem;font-weight:700}
+.tr-hints .h-red{background:var(--alert-bg);color:var(--alert-ink)}
+.tr-hints .h-warm{background:var(--warm-bg);color:var(--warm-ink)}
+.tr-hints .h-ok{background:var(--tchip);color:var(--ok-ink)}
+.tr-hints b{font-weight:900}
+.tr-listf{margin-top:16px}
+.tr-list{list-style:none;margin:0;padding:0 20px 16px;display:grid;gap:6px}
+.tr-list li{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding:7px 0;font-size:.9rem}
+.tr-list .tv{font-family:var(--f-display);font-weight:700;min-width:4.2ch}
+.tr-list .tv.hot{color:var(--coral)}
+.tr-list .tt{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);min-width:9ch}
+.tr-list .ts{flex:1;color:var(--muted);font-size:.84rem}
+.tr-list .med{color:var(--teal);font-weight:800}
+.tr-list .med.i{color:var(--coral)}
+.tr-list button{border:0;background:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:2px 6px}
+.tr-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.tr-print,.tr-copy{border:0;border-radius:99px;background:var(--teal);color:#fff;font-weight:800;font-size:.92rem;padding:10px 18px;cursor:pointer}
+:root[data-theme="dark"] .tr-print,:root[data-theme="dark"] .tr-copy{background:#16707A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-print,:root:not([data-theme="light"]) .tr-copy{background:#16707A}}
+.tr-new{border:2px solid var(--line);background:transparent;border-radius:99px;font-weight:800;font-size:.9rem;padding:8px 16px;cursor:pointer;color:var(--muted)}
+#trPrintBox{display:none}
+.chk{margin:10px 0 0;padding-left:22px;display:grid;gap:8px;font-size:.94rem}
+.docsum{white-space:pre-wrap;font-family:var(--f-body);font-size:.9rem;background:var(--bg);border-radius:14px;padding:12px 14px;margin:10px 0 12px;line-height:1.5}
+.myths{display:grid;gap:10px}
+.myths details{padding:0}
+.myths summary{cursor:pointer;padding:16px 18px;font-weight:800;list-style:none;display:flex;gap:10px;align-items:center}
+.myths summary::-webkit-details-marker{display:none}
+.myths summary::before{content:"?";flex:none;width:26px;height:26px;border-radius:50%;background:var(--chip);color:var(--coral);display:grid;place-items:center;font-family:var(--f-display);font-size:.85rem}
+.myths details[open] summary::before{content:"!";background:var(--teal);color:#fff}
+.myths p{padding:0 18px 16px 54px;color:var(--muted)}
+@media (max-width:820px){.trk{grid-template-columns:1fr}}
+@media (max-width:420px){.tr-row{grid-template-columns:1fr}}
+@media print{
+ body.print-tr .hero,body.print-tr .topnav,body.print-tr .fab-sos,body.print-tr main>section,body.print-tr main>footer,body.print-tr .howto{display:none!important}
+ body.print-tr main>#track{display:block!important;padding:0}
+ body.print-tr #track .wrap>*{display:none!important}
+ body.print-tr #track #trPrintBox{display:block!important;color:#000;font-size:10.5pt}
+ #trPrintBox h2{font-size:16pt;margin:0 0 4px}
+ #trPrintBox .pm{margin:0 0 8px}
+ #trPrintBox svg{width:100%;height:auto;margin:6px 0 10px}
+ #trPrintBox table{width:100%;border-collapse:collapse}
+ #trPrintBox th,#trPrintBox td{border:1px solid #999;padding:4px 6px;text-align:left;font-size:9.5pt;vertical-align:top}
+ #trPrintBox th{background:#eee;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ #trPrintBox pre{white-space:pre-wrap;font-family:inherit;font-size:10pt;border:1px solid #bbb;border-radius:6px;padding:8px;margin:8px 0}
+ #trPrintBox .ft{font-size:8.5pt;color:#444;margin-top:8px}
+}
+
 @media (max-width:820px){
   .hero .wrap{grid-template-columns:1fr}
   .hero-art{max-width:300px}
@@ -298,7 +378,7 @@ footer{padding-bottom:90px}
   <div class="wrap">
     <button type="button" class="kid" id="kidSum" hidden>Ребёнок</button>
     <div class="tabs">
-      <a href="#what">Что это</a><a href="#todo">Что делать</a><a href="#dose">Доза по весу</a><a href="#wait">Если не снижается</a><a href="#flags">Когда к врачу</a>
+      <a href="#what">Что это</a><a href="#todo">Что делать</a><a href="#dose">Доза по весу</a><a href="#wait">Если не снижается</a><a href="#track">Трекер</a><a href="#flags">Когда к врачу</a><a href="#doc">Звонок врачу</a><a href="#myths">Мифы</a>
     </div>
   </div>
 </nav>
@@ -321,12 +401,25 @@ footer{padding-bottom:90px}
           <div><b>Ребёнку меньше 3 месяцев и температура 38 °C и выше?</b><br>Не лечите сами — сразу звоните врачу или вызывайте скорую <b>103</b>. Жаропонижающее до 3 месяцев — только по назначению врача.</div>
         </div>
       </div>
-      <h3 style="margin:28px 0 14px">Как измерять</h3>
-      <div class="grid3 meas">
-        <div class="card"><h3>В подмышке <i>любой возраст</i></h3><p>Электронный термометр — самый простой и надёжный способ. Малышам до 4 недель — только так. Подождите сигнала и ещё минуту.</p></div>
-        <div class="card"><h3>В ухе <i>с 4 недель</i></h3><p>Инфракрасный ушной термометр — быстро, удобно ночью. Слегка оттяните ушную раковину назад, чтобы выпрямить слуховой проход.</p></div>
-        <div class="card x"><h3>Не подходит <i>ненадёжно</i></h3><p>Полоски и наклейки на лоб, «на ощупь» губами. Во рту и в прямой кишке детям до 5 лет обычно мерить не нужно.</p></div>
+      <h3 style="margin:28px 0 6px" id="thermo">Какой термометр выбрать</h3>
+      <p class="mut" style="margin-bottom:14px">Лучше всего — обычный электронный. Остальные удобны, но ошибаются чаще.</p>
+      <div class="grid3 meas tm">
+        <div class="card"><h3>Электронный <i>основной</i></h3><p><b>В подмышке, любой возраст.</b> Малышам до 4 недель — только так. Подмышка сухая, ручку прижать к телу, держать до сигнала и ещё минуту.</p></div>
+        <div class="card"><h3>Ушной инфракрасный <i>с 6 мес точнее</i></h3><p>Быстро и удобно ночью. Можно с 4 недель, но у малышей до 6 месяцев узкий слуховой проход — ошибки чаще. Ушко оттяните назад и вверх; после улицы подождите 15 минут.</p></div>
+        <div class="card"><h3>Бесконтактный, на лоб <i>для проверки</i></h3><p>Удобно проверить спящего ребёнка. На результат влияют пот, сквозняк, только что с улицы. Если показал 38 °C и выше — перемерьте электронным в подмышке.</p></div>
+        <div class="card x"><h3>Полоски на лоб, соска-термометр <i>неточно</i></h3><p>Показывают «примерно» и часто ошибаются. Для решения, давать ли жаропонижающее, не годятся. «На ощупь» губами — тоже.</p></div>
+        <div class="card x"><h3>Ртутный <i>не рекомендуем</i></h3><p>Стеклянный легко разбить, пары ртути ядовиты. Если он ещё есть дома — замените электронным.</p></div>
+        <div class="card x"><h3>Во рту и в попе <i>обычно не нужно</i></h3><p>Во рту — только с 4–5 лет, если ребёнок умеет держать термометр под языком. В прямой кишке дома детям до 5 лет мерить обычно не нужно.</p></div>
       </div>
+      <details class="card fold merc"><summary><b>Если разбился ртутный термометр</b><span class="fold-hint">что делать</span></summary>
+        <ol>
+          <li>Выведите из комнаты детей и животных, закройте дверь в другие комнаты. Откройте окно, но без сквозняка.</li>
+          <li>Наденьте резиновые перчатки. Соберите осколки и шарики ртути от краёв к центру — влажной ватой, скотчем, бумагой или медицинской грушей — в банку с плотной крышкой.</li>
+          <li><b>Не пылесосьте и не подметайте веником</b> — пылесос нагревается и разносит пары, веник дробит ртуть.</li>
+          <li>Ковёр сверните от краёв к центру, упакуйте в пакет и вынесите на улицу.</li>
+          <li>Банку не выбрасывайте в мусор и не сливайте в канализацию. Позвоните <b>112</b> — подскажут, куда её сдать.</li>
+        </ol>
+      </details>
     </div>
   </section>
 
@@ -417,6 +510,35 @@ footer{padding-bottom:90px}
     </div>
   </section>
 
+  <section id="track">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Трекер лихорадки</span><h2>Записывайте температуру — увидите кривую</h2><p>Отмечайте температуру и самочувствие, а лекарства — кнопкой «Дали сейчас» в калькуляторе. Памятка нарисует график, посчитает, сколько дней держится температура, и подскажет, когда пора к врачу. Записи хранятся только на вашем телефоне.</p></div>
+      <div class="trk">
+        <div class="card tr-form">
+          <div class="tr-row">
+            <div class="field"><label for="trT">Температура, °C</label><div class="tstep"><button type="button" data-d="-0.1" aria-label="меньше на 0,1">−</button><input type="number" id="trT" min="34" max="43" step="0.1" value="38.0" inputmode="decimal"><button type="button" data-d="0.1" aria-label="больше на 0,1">+</button></div></div>
+            <div class="field"><label for="trW">Когда</label><input type="datetime-local" id="trW"></div>
+          </div>
+          <span class="flabel" style="margin-top:12px">Самочувствие <small>(необязательно)</small></span>
+          <div class="chips" id="trS">
+            <button type="button" data-s="drink" aria-pressed="false">мало пьёт</button><button type="button" data-s="pee" aria-pressed="false">редко писает</button><button type="button" data-s="sleepy" aria-pressed="false">вялый, сонливый</button><button type="button" data-s="chill" aria-pressed="false">озноб, холодные руки-ноги</button><button type="button" data-s="rash" aria-pressed="false">сыпь</button><button type="button" data-s="vomit" aria-pressed="false">рвота, понос</button><button type="button" data-s="ok" aria-pressed="false">играет, хорошо себя чувствует</button>
+          </div>
+          <button type="button" class="tr-add" id="trAdd">Записать температуру</button>
+        </div>
+        <div class="card tr-chart">
+          <div class="tr-top"><b id="trDays">Записей пока нет</b><span id="trMax"></span></div>
+          <div id="trSvg" class="tr-svg"></div>
+          <div class="tr-leg"><span><i class="lt"></i>температура</span><span><i class="li">И</i>ибупрофен</span><span><i class="lp">П</i>парацетамол</span><span><i class="lz"></i>38 °C и выше</span></div>
+        </div>
+      </div>
+      <div id="trHints" class="tr-hints"></div>
+      <details class="card fold tr-listf" id="trListF"><summary><b>Все записи</b><span class="fold-hint" id="trCount"></span></summary><ul id="trList" class="tr-list"></ul></details>
+      <div class="tr-actions"><button type="button" class="tr-print" id="trPrint">Показать врачу: распечатать / сохранить PDF</button><button type="button" class="tr-new" id="trNew">Начать заново (новая болезнь)</button></div>
+      <div id="trPrintBox"></div>
+    </div>
+  </section>
+
+
   <section id="flags">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Не ждите</span><h2>Когда звонить врачу и в скорую</h2></div>
@@ -462,6 +584,40 @@ footer{padding-bottom:90px}
     </div>
   </section>
 
+  <section id="doc">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Звонок врачу</span><h2>Что сказать врачу или диспетчеру 103</h2><p>Врачу важно не только «какая температура», но и как ребёнок себя ведёт. Если вели трекер — сводка уже собрана ниже.</p></div>
+      <div class="grid2">
+        <div class="card"><h3>Подготовьте ответы</h3><ol class="chk">
+          <li>Возраст и вес ребёнка</li>
+          <li>Сколько дней температура и какая была самая высокая</li>
+          <li>Какое лекарство, сколько и во сколько давали последний раз</li>
+          <li>Помогает ли жаропонижающее и насколько снижается температура</li>
+          <li>Сколько пьёт и когда последний раз писал(а)</li>
+          <li>Есть ли кашель, насморк, рвота, понос, сыпь, боль (где)</li>
+          <li>Как ведёт себя: играет между подъёмами или вялый всё время</li>
+          <li>Хронические болезни, аллергия на лекарства; были ли недавно прививки</li>
+        </ol></div>
+        <div class="card sumc"><h3>Сводка из трекера</h3><pre id="docSum" class="docsum">Заполните вес в калькуляторе и добавьте записи в трекер — сводка появится здесь.</pre><button type="button" class="tr-copy" id="docCopy">Скопировать сводку</button><span class="from" id="docCopied"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="myths">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Частые сомнения</span><h2>Мифы о температуре</h2></div>
+      <div class="myths">
+        <details class="card"><summary>«Температуру нужно сбивать уже с 38 °C»</summary><p>Жаропонижающее нужно, когда ребёнку плохо, — обычно при 38,5–39 °C и выше. Если ребёнок играет и пьёт, 38 °C сбивать не обязательно: температура помогает бороться с инфекцией. Исключение — дети с хроническими болезнями, им — как скажет врач.</p></details>
+        <details class="card"><summary>«Надо укутать, чтобы ребёнок пропотел»</summary><p>Укутывание мешает телу отдавать тепло, и температура может подняться ещё выше. Одежда должна быть лёгкой. Укрыть стоит только при ознобе — пока он не пройдёт.</p></details>
+        <details class="card"><summary>«Высокая температура — значит, нужен антибиотик»</summary><p>Вирусы тоже вызывают 39–40 °C. Антибиотики на вирусы не действуют и температуру не снижают. Нужен ли антибиотик, решает врач после осмотра, а не по цифре на градуснике.</p></details>
+        <details class="card"><summary>«Это зубы режутся»</summary><p>При прорезывании зубов температура может чуть подняться — до 37,5–37,8 °C. 38 °C и выше от зубов не бывает: ищите другую причину и наблюдайте за ребёнком.</p></details>
+        <details class="card"><summary>«Жаропонижающее защитит от судорог»</summary><p>Не защитит — это проверяли в исследованиях. Судороги на фоне температуры зависят от склонности ребёнка, а не от того, сбили ли температуру. Давать лекарство «на всякий случай» не нужно.</p></details>
+        <details class="card"><summary>«От высокой температуры пострадает мозг»</summary><p>Температура при инфекции почти никогда не поднимается выше 41–42 °C и сама по себе мозг не повреждает. Опасна не цифра, а тяжёлая инфекция — поэтому следите за признаками из раздела <a href="#flags">«Когда к врачу»</a>.</p></details>
+        <details class="card"><summary>«Обтереть водкой или уксусом — быстрее собьёт»</summary><p>Спирт и уксус всасываются через кожу и могут отравить ребёнка. Если обтирать — только водой комнатной температуры и только если ребёнку от этого приятно.</p></details>
+      </div>
+    </div>
+  </section>
+
 
   <section class="install" id="install">
     <div class="wrap">
@@ -486,7 +642,7 @@ footer{padding-bottom:90px}
     <div class="wrap">
       <h2>Лечим ребёнка, <span>а не градусник</span></h2>
       <p>Если сомневаетесь — позвоните врачу. Вы знаете своего ребёнка лучше всех.</p>
-      <div class="rel"><a href="https://julsyj7.github.io/korchagina-ped/privivki/">Памятка «Прививки»</a><a href="https://julsyj7.github.io/korchagina-ped/">Аптечка в путешествие</a></div>
+      
     </div>
   </section>
 
@@ -562,23 +718,128 @@ footer{padding-bottom:90px}
     var now=Date.now();
     ["ibu","par"].forEach(function(k){
       var box=document.querySelector('.log[data-drug="'+k+'"]'),out=box.querySelector("output"),undo=box.querySelector(".undo");
-      var L=(st.log[k]||[]).filter(function(t){return now-t<864e5});st.log[k]=L;
+      st.log[k]=(st.log[k]||[]).filter(function(t){return now-t<7*864e5});var L=st.log[k].filter(function(t){return now-t<864e5});
       undo.hidden=!L.length;
       if(!L.length){out.textContent="";out.className="";return}
       var last=L[L.length-1],next=last+RULE[k].gap*36e5,day=L.length;
-      if(day>=RULE[k].max){out.className="no";out.textContent="Дали в "+hm(last)+". За сутки уже "+day+" раза — больше нельзя до "+hm(L[0]+864e5)}
+      if(day>=RULE[k].max){out.className="no";out.textContent="Дали в "+hm(last)+". За сутки уже "+day+" раза — больше нельзя до "+hm(L[L.length-RULE[k].max]+864e5)}
       else if(now<next){out.className="";out.textContent="Дали в "+hm(last)+". Следующий раз — не раньше "+hm(next)}
       else{out.className="";out.textContent="Последний раз в "+hm(last)+". Можно снова, если нужно"}
     });
   }
   [].forEach.call(document.querySelectorAll(".log"),function(box){
     var k=box.dataset.drug;
-    box.querySelector("button:not(.undo)").addEventListener("click",function(){st.log[k]=(st.log[k]||[]).concat(Date.now());save();renderLog()});
-    box.querySelector(".undo").addEventListener("click",function(){(st.log[k]||[]).pop();save();renderLog()});
+    box.querySelector("button:not(.undo)").addEventListener("click",function(){st.log[k]=(st.log[k]||[]).concat(Date.now());save();renderLog();if(window.renderTr)renderTr()});
+    box.querySelector(".undo").addEventListener("click",function(){(st.log[k]||[]).pop();save();renderLog();if(window.renderTr)renderTr()});
   });
-  setInterval(renderLog,60000);
+  setInterval(function(){renderLog();renderTr()},60000);
+  var rzT;window.addEventListener("resize",function(){clearTimeout(rzT);rzT=setTimeout(renderTr,200)});
   $("kidSum").addEventListener("click",function(){$("dose").scrollIntoView({behavior:"smooth"})});
-  kwR.value=st.w;kwN.value=st.w;calc();
+  /* ---------- трекер лихорадки ---------- */
+  st.tr=st.tr||[];
+  var SYM={drink:"мало пьёт",pee:"редко писает",sleepy:"вялый",chill:"озноб",rash:"сыпь",vomit:"рвота/понос",ok:"хорошо себя чувствует"};
+  var trT=$("trT"),trW=$("trW"),sel={};
+  function pad(n){return ("0"+n).slice(-2)}
+  function locIso(t){var d=new Date(t);return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+"T"+pad(d.getHours())+":"+pad(d.getMinutes())}
+  function dm(t){var d=new Date(t);return pad(d.getDate())+"."+pad(d.getMonth()+1)+" "+pad(d.getHours())+":"+pad(d.getMinutes())}
+  function f1(v){return v.toFixed(1).replace(".",",")}
+  function resetForm(){trW.value=locIso(Date.now());sel={};[].forEach.call(document.querySelectorAll("#trS button"),function(b){b.setAttribute("aria-pressed","false")})}
+  [].forEach.call(document.querySelectorAll(".tstep button"),function(b){b.addEventListener("click",function(){var v=parseFloat(String(trT.value).replace(",","."))||38;trT.value=(Math.round((v+ +b.dataset.d)*10)/10).toFixed(1)})});
+  [].forEach.call(document.querySelectorAll("#trS button"),function(b){b.addEventListener("click",function(){var k=b.dataset.s;sel[k]=!sel[k];b.setAttribute("aria-pressed",String(!!sel[k]))})});
+  $("trAdd").addEventListener("click",function(){
+    var v=parseFloat(String(trT.value).replace(",","."));if(!(v>=34&&v<=43)){trT.focus();return}
+    var t=trW.value?new Date(trW.value).getTime():Date.now();if(!t||isNaN(t))t=Date.now();
+    st.tr.push({t:t,v:Math.round(v*10)/10,s:Object.keys(sel).filter(function(k){return sel[k]})});
+    st.tr.sort(function(a,b){return a.t-b.t});save();resetForm();renderTr();
+  });
+  $("trNew").addEventListener("click",function(){if(!st.tr.length&&!(st.log.ibu.length||st.log.par.length))return;if(!confirmSoft())return;st.tr=[];st.log={ibu:[],par:[]};save();renderLog();renderTr()});
+  var armed=0;function confirmSoft(){var b=$("trNew");if(armed&&Date.now()-armed<4000){armed=0;b.textContent="Начать заново (новая болезнь)";return true}armed=Date.now();b.textContent="Нажмите ещё раз, чтобы стереть все записи";setTimeout(function(){if(armed){armed=0;b.textContent="Начать заново (новая болезнь)"}},4000);return false}
+  $("trList").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;var k=b.dataset.k,i=+b.dataset.i;if(k==="t")st.tr.splice(i,1);else st.log[k].splice(i,1);save();renderLog();renderTr()});
+  function meds(){var a=[];["ibu","par"].forEach(function(k){(st.log[k]||[]).forEach(function(t,i){a.push({t:t,k:k,i:i})})});return a.sort(function(x,y){return x.t-y.t})}
+  function episodeStart(){var L=st.tr,s=null;for(var i=0;i<L.length;i++){if(L[i].v>=38){if(s===null)s=L[i].t}}return s}
+  function svgChart(w,h,forPrint){
+    var L=st.tr,M=meds();if(!L.length&&!M.length)return null;
+    var ts=L.map(function(x){return x.t}).concat(M.map(function(x){return x.t}));
+    var t1=Math.max.apply(null,ts.concat([Date.now()])),t0=Math.min.apply(null,ts);
+    t0=Math.max(t0,t1-5*864e5);if(t1-t0<6*36e5)t0=t1-6*36e5;
+    var pl=34,pr=10,pt=10,pb=38,W=w-pl-pr,H=h-pt-pb,y0=35.5,y1=41;
+    function X(t){return pl+(t-t0)/(t1-t0)*W}function Y(v){return pt+(y1-Math.min(y1,Math.max(y0,v)))/(y1-y0)*H}
+    var c=forPrint?{ln:"#C9444F",tx:"#555",gr:"#ddd",z:"rgba(201,68,79,.12)",z2:"rgba(201,68,79,.2)"}:{ln:"var(--coral)",tx:"var(--muted)",gr:"var(--line)",z:"color-mix(in srgb,var(--coral) 10%,transparent)",z2:"color-mix(in srgb,var(--coral) 18%,transparent)"};
+    var s='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="График температуры">';
+    s+='<rect x="'+pl+'" y="'+Y(41)+'" width="'+W+'" height="'+(Y(39)-Y(41))+'" fill="'+c.z2+'"/><rect x="'+pl+'" y="'+Y(39)+'" width="'+W+'" height="'+(Y(38)-Y(39))+'" fill="'+c.z+'"/>';
+    [36,37,38,39,40,41].forEach(function(v){s+='<line x1="'+pl+'" x2="'+(pl+W)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="'+c.gr+'" stroke-width="1"'+(v===38?' stroke-dasharray="4 3"':'')+'/><text x="'+(pl-6)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="'+c.tx+'">'+v+'</text>'});
+    var day=new Date(t0);day.setHours(0,0,0,0);
+    for(var d=day.getTime()+864e5;d<t1;d+=864e5){var x=X(d);s+='<line x1="'+x+'" x2="'+x+'" y1="'+pt+'" y2="'+(pt+H)+'" stroke="'+c.gr+'" stroke-width="1"/><text x="'+(x+3)+'" y="'+(pt+H+14)+'" font-size="10.5" fill="'+c.tx+'">'+pad(new Date(d).getDate())+'.'+pad(new Date(d).getMonth()+1)+'</text>'}
+    var P=L.filter(function(p){return p.t>=t0});
+    if(P.length>1)s+='<polyline fill="none" stroke="'+c.ln+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="'+P.map(function(p){return X(p.t).toFixed(1)+","+Y(p.v).toFixed(1)}).join(" ")+'"/>';
+    P.forEach(function(p){s+='<circle cx="'+X(p.t).toFixed(1)+'" cy="'+Y(p.v).toFixed(1)+'" r="4.5" fill="'+(p.v>=38?c.ln:"#1C8C96")+'" stroke="#fff" stroke-width="1.5"/>'});
+    if(P.length){var lp=P[P.length-1];s+='<text x="'+Math.min(pl+W-2,X(lp.t)+6)+'" y="'+(Y(lp.v)-8)+'" font-size="12" font-weight="800" text-anchor="'+(X(lp.t)>pl+W-40?"end":"start")+'" fill="'+c.ln+'">'+f1(lp.v)+'</text>'}
+    M.filter(function(m){return m.t>=t0}).forEach(function(m){var x=X(m.t),col=m.k==="ibu"?"#E2656B":"#1C8C96";s+='<line x1="'+x+'" x2="'+x+'" y1="'+pt+'" y2="'+(pt+H)+'" stroke="'+col+'" stroke-width="1.2" stroke-dasharray="2 3" opacity=".7"/><circle cx="'+x+'" cy="'+(pt+H+26)+'" r="8" fill="'+col+'"/><text x="'+x+'" y="'+(pt+H+30)+'" font-size="10" font-weight="900" text-anchor="middle" fill="#fff">'+(m.k==="ibu"?"И":"П")+'</text>'});
+    return s+'</svg>';
+  }
+  function hints(){
+    var L=st.tr,H=[],now=Date.now();if(!L.length)return H;
+    var last=L[L.length-1],es=episodeStart(),a=st.a;
+    if(a===0&&L.some(function(p){return p.v>=38&&now-p.t<3*864e5}))H.push(["h-red","Ребёнку меньше 3 месяцев и температура 38 °C и выше — <b>сразу к врачу или 103</b>."]);
+    if(a===1&&L.some(function(p){return p.v>=39&&now-p.t<3*864e5}))H.push(["h-warm","Ребёнку 3–6 месяцев и было 39 °C и выше — <b>покажите врачу в ближайшие 12–24 часа</b>."]);
+    if(last.v>=40&&now-last.t<6*36e5)H.push(["h-red","Последнее измерение — 40 °C и выше. Если не снижается жаропонижающим — <b>вызывайте 103</b>."]);
+    if(es!==null){var hot=L.filter(function(p){return p.v>=38&&p.t>=es});var span=hot[hot.length-1].t-es;if(span>=72*36e5)H.push(["h-warm","Температура 38 °C и выше держится <b>больше 3 суток</b> — нужен осмотр врача."])}
+    var seenHot=false,normStart=null,wave=false;
+    L.forEach(function(p){if(p.v>=38){if(seenHot&&normStart!==null&&p.t-normStart>=24*36e5)wave=true;seenHot=true;normStart=null}else if(p.v<37.5&&seenHot&&normStart===null)normStart=p.t});
+    if(wave)H.push(["h-warm","Температура <b>поднялась снова</b> после суток нормальной — покажите ребёнка врачу."]);
+    var M=meds().filter(function(m){return now-m.t<12*36e5});
+    if(M.length){var m=M[M.length-1],before=L.filter(function(p){return p.t<=m.t&&m.t-p.t<2*36e5}).pop(),after=L.filter(function(p){return p.t-m.t>=60*6e4&&p.t-m.t<=150*6e4});
+      if(before&&after.length){var bestDrop=before.v-Math.min.apply(null,after.map(function(p){return p.v}));
+        if(bestDrop<0.5&&after[after.length-1].v>=38){var other=M.some(function(x){return x.k!==m.k&&x.t>m.t-6*36e5&&x.t<m.t});
+          H.push(other?["h-red","Два разных жаропонижающих, а температура не снижается — <b>вызывайте 103</b>."]:["h-warm","Через 1–1,5 часа после "+(m.k==="ibu"?"ибупрофена":"парацетамола")+" температура не снизилась на 0,5 °C. Если ребёнку плохо — можно дать <b>"+(m.k==="ibu"?"парацетамол":"ибупрофен")+"</b> (шаг 2)."])}
+        else if(bestDrop>=0.5)H.push(["h-ok","Жаропонижающее подействовало: температура снизилась на "+f1(bestDrop)+" °C."])}
+      else if(!after.length&&now-m.t>=60*6e4&&now-m.t<=150*6e4)H.push(["h-ok","Прошло больше часа после лекарства — перемерьте температуру и запишите."])}
+    var recent=L.filter(function(p){return now-p.t<12*36e5}),has=function(k){return recent.some(function(p){return p.s&&p.s.indexOf(k)>=0})};
+    if(has("rash"))H.push(["h-red","Отмечена сыпь — прижмите к пятнам прозрачный стакан. Если сыпь <b>не бледнеет — сразу 103</b>; если бледнеет — покажите врачу."]);
+    if(has("drink")&&has("pee"))H.push(["h-warm","Мало пьёт и редко писает — риск обезвоживания. <b>Поите понемногу каждые 5–10 минут</b> и покажите врачу; если совсем не пьёт — 103."]);
+    if(has("sleepy"))H.push(["h-warm","Ребёнок вялый. Если и после снижения температуры остаётся вялым, трудно разбудить — <b>вызывайте врача, а при затруднении — 103</b>."]);
+    return H;
+  }
+  function summary(){
+    var L=st.tr,M=meds(),now=Date.now(),out=[];
+    out.push("Вес: "+fmt(st.w)+" кг; возраст: "+["до 3 месяцев","3–6 месяцев","старше 6 месяцев"][st.a]+".");
+    if(L.length){var es=episodeStart();if(es!==null){var d=Math.floor((now-es)/864e5)+1;out.push("Температура 38 °C и выше — с "+dm(es)+" ("+d+"-е сутки).")}
+      var mx=L.reduce(function(a,b){return b.v>a.v?b:a});out.push("Максимум: "+f1(mx.v)+" °C ("+dm(mx.t)+"). Последнее измерение: "+f1(L[L.length-1].v)+" °C ("+dm(L[L.length-1].t)+").")}
+    var M24=M.filter(function(m){return now-m.t<864e5});
+    if(M24.length)out.push("Жаропонижающее за сутки: "+M24.map(function(m){return (m.k==="ibu"?"ибупрофен "+fmt(+$("ibuMl").textContent.replace(",","."))+" мл":"парацетамол "+fmt(+$("parMl").textContent.replace(",","."))+" мл")+" в "+hm(m.t)}).join("; ")+".");
+    else if(M.length)out.push("Последнее жаропонижающее: "+(M[M.length-1].k==="ibu"?"ибупрофен":"парацетамол")+" "+dm(M[M.length-1].t)+".");
+    var sy={};L.filter(function(p){return now-p.t<864e5}).forEach(function(p){(p.s||[]).forEach(function(k){sy[k]=1})});
+    var sk=Object.keys(sy);if(sk.length)out.push("За сутки отмечено: "+sk.map(function(k){return SYM[k]}).join(", ")+".");
+    return out.join("\n");
+  }
+  window.renderTr=renderTr;function renderTr(){
+    var L=st.tr,es=episodeStart(),now=Date.now();
+    $("trDays").textContent=!L.length?"Записей пока нет":es===null?"Температура ниже 38 °C":(Math.floor((now-es)/864e5)+1)+"-е сутки температуры";
+    $("trMax").textContent=L.length?"макс. "+f1(L.reduce(function(a,b){return Math.max(a,b.v)},0))+" °C":"";
+    var cw=Math.max(300,Math.min(700,$("trSvg").clientWidth||640)),c=svgChart(cw,cw<500?240:300,false);$("trSvg").innerHTML=c||'<div class="empty">Добавьте первое измерение — здесь появится кривая температуры</div>';
+    $("trHints").innerHTML=hints().map(function(h){return '<div class="'+h[0]+'"><span>'+(h[0]==="h-ok"?"✓":"!")+'</span><span>'+h[1]+'</span></div>'}).join("");
+    var items=L.map(function(p,i){return {t:p.t,h:'<span class="tt">'+dm(p.t)+'</span><span class="tv'+(p.v>=38?" hot":"")+'">'+f1(p.v)+'</span><span class="ts">'+(p.s||[]).map(function(k){return SYM[k]}).join(", ")+'</span><button type="button" data-k="t" data-i="'+i+'" aria-label="Удалить запись">×</button>'}}).concat(
+      meds().map(function(m){return {t:m.t,h:'<span class="tt">'+dm(m.t)+'</span><span class="ts med'+(m.k==="ibu"?" i":"")+'">'+(m.k==="ibu"?"ибупрофен":"парацетамол")+'</span><button type="button" data-k="'+m.k+'" data-i="'+m.i+'" aria-label="Удалить запись">×</button>'}}));
+    items.sort(function(a,b){return b.t-a.t});
+    $("trList").innerHTML=items.map(function(x){return "<li>"+x.h+"</li>"}).join("")||'<li class="ts">Пока пусто</li>';
+    $("trCount").textContent=items.length?items.length+" шт.":"";
+    $("docSum").textContent=L.length||meds().length?summary():"Заполните вес в калькуляторе и добавьте записи в трекер — сводка появится здесь.";
+  }
+  $("docCopy").addEventListener("click",function(){var t=$("docSum").textContent,ok=function(){$("docCopied").textContent="Скопировано — можно вставить в сообщение врачу"};
+    try{navigator.clipboard.writeText(t).then(ok,function(){fallback()})}catch(e){fallback()}
+    function fallback(){var r=document.createRange();r.selectNodeContents($("docSum"));var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand("copy");ok()}catch(x){$("docCopied").textContent="Выделите текст и скопируйте вручную"}}});
+  $("trPrint").addEventListener("click",function(){
+    var L=st.tr,rows=L.slice().reverse().map(function(p){return "<tr><td>"+dm(p.t)+"</td><td><b>"+f1(p.v)+"</b></td><td>"+(p.s||[]).map(function(k){return SYM[k]}).join(", ")+"</td></tr>"}).join("");
+    var mrows=meds().slice().reverse().map(function(m){return "<tr><td>"+dm(m.t)+"</td><td colspan=2>"+(m.k==="ibu"?"ибупрофен":"парацетамол")+"</td></tr>"}).join("");
+    $("trPrintBox").innerHTML="<h2>Трекер лихорадки</h2><p class='pm'>Распечатано "+dm(Date.now())+"</p><pre>"+summary()+"</pre>"+(svgChart(720,280,true)||"")+
+      "<table><thead><tr><th>Дата, время</th><th>°C</th><th>Самочувствие</th></tr></thead><tbody>"+(rows||"<tr><td colspan=3>—</td></tr>")+"</tbody></table>"+
+      (mrows?"<table style='margin-top:8px'><thead><tr><th>Дата, время</th><th colspan=2>Жаропонижающее</th></tr></thead><tbody>"+mrows+"</tbody></table>":"")+
+      "<p class='ft'>Записи сделаны родителями в памятке «Лихорадка у ребёнка». · Врач-педиатр Корчагина Ю.А.</p>";
+    document.body.classList.add("print-tr");setTimeout(function(){try{window.print()}catch(x){}},50)});
+  window.addEventListener("afterprint",function(){document.body.classList.remove("print-tr")});
+  resetForm();
+
+  kwR.value=st.w;kwN.value=st.w;calc();renderTr();
   /* активная вкладка и кнопка «Тревожно?» */
   var tabs=[].slice.call(document.querySelectorAll(".tabs a")),secs=tabs.map(function(a){return $(a.getAttribute("href").slice(1))});
   if("IntersectionObserver" in window){

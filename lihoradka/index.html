@@ -151,6 +151,10 @@ details.fold>ul{padding:0 20px 20px!important;margin-top:0!important}
 .seg{display:inline-flex;flex-wrap:wrap;background:var(--chip);border-radius:20px;padding:4px;gap:4px}
 .seg button{border:0;background:transparent;border-radius:99px;padding:8px 13px;font-weight:800;font-size:.86rem;cursor:pointer;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--card);color:var(--coral);box-shadow:0 2px 8px -3px rgba(201,68,79,.4)}
+.agein{display:flex;gap:10px;flex-wrap:wrap}
+.agein label{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--muted)}
+.agein input{width:76px;height:46px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:800;color:var(--ink);-moz-appearance:textfield}
+.agein input:focus{border-color:var(--coral);outline:none}
 .from{display:block;color:var(--muted);font-size:.8rem;margin-top:6px}
 .doses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
 .dose{display:flex;flex-direction:column;gap:8px}
@@ -464,9 +468,8 @@ footer{padding-bottom:90px}
           <span class="from" id="kwFrom"></span>
         </div>
         <div><span class="flabel">Возраст</span>
-          <div class="seg" role="group" aria-label="Возраст ребёнка" id="ageSeg">
-            <button type="button" data-a="0" aria-pressed="false">до 3 мес</button><button type="button" data-a="1" aria-pressed="false">3–6 мес</button><button type="button" data-a="2" aria-pressed="true">старше 6 мес</button>
-          </div>
+          <div class="agein"><label><input type="number" id="agY" min="0" max="17" step="1" inputmode="numeric" placeholder="0"><span>лет</span></label><label><input type="number" id="agM" min="0" max="11" step="1" inputmode="numeric" placeholder="0"><span>мес</span></label></div>
+          <span class="from" id="agHint"></span>
         </div>
       </div>
       <div class="caution red sm" id="under3" hidden><svg aria-hidden="true"><use href="#i-info"/></svg><div><b>До 3 месяцев жаропонижающее даёт только врач.</b> При температуре 38 °C и выше — сразу врач или <b>103</b>. Исключение — однократная доза парацетамола при температуре после прививки, если так сказал врач.</div></div>
@@ -691,22 +694,28 @@ footer{padding-bottom:90px}
   var src="";
   if(typeof st.w!=="number"){
     ["vac-app-v1","vac-sale-v1","aptechka-kid"].some(function(k){try{var o=JSON.parse(localStorage.getItem(k)||"null");var w=o&&(+o.w||+o.weight);if(w>=3&&w<=80){st.w=w;src=k.indexOf("vac")===0?"Вес взят из памятки «Прививки»":"Вес взят из памятки «Аптечка»";
-      if(o.dob&&typeof st.a!=="number"){var d=new Date(o.dob+"T00:00:00"),t=new Date(),m=(t.getFullYear()-d.getFullYear())*12+t.getMonth()-d.getMonth()-(t.getDate()<d.getDate()?1:0);if(m>=0)st.a=m<3?0:m<6?1:2}
+      if(o.dob&&typeof st.b!=="number"){var d=new Date(o.dob+"T00:00:00").getTime();if(d&&d<Date.now())st.b=d}
       return true}}catch(e){}return false});
   }
   if(typeof st.w!=="number")st.w=10;
-  if(typeof st.a!=="number")st.a=2;
+  if(typeof st.b!=="number"&&typeof st.a==="number")st.b=Date.now()-[1,4,24][st.a]*30.44*864e5;
+  function ageMo(){return typeof st.b==="number"?Math.max(0,Math.floor((Date.now()-st.b)/(30.44*864e5))):null}
+  function ageCat(){var m=ageMo();return m===null?2:m<3?0:m<6?1:2}
+  function ageTxt(m){if(m===null)return "";var y=Math.floor(m/12),r=m%12,yw=y%10===1&&y%100!==11?"год":(y%10>=2&&y%10<=4&&(y%100<10||y%100>=20))?"года":"лет";return (y?y+" "+yw:"")+(y&&r?" ":"")+(r||!y?r+" мес":"")}
+  var agY=$("agY"),agM=$("agM");
+  function showAge(){var m=ageMo();if(m===null){agY.value="";agM.value="";$("agHint").textContent="Укажите возраст — от него зависят предупреждения"}else{agY.value=Math.floor(m/12);agM.value=m%12;$("agHint").textContent=""}}
+  function readAge(){var y=parseInt(agY.value,10),mo=parseInt(agM.value,10);if(isNaN(y)&&isNaN(mo))return;y=Math.min(17,Math.max(0,y||0));mo=Math.min(11,Math.max(0,mo||0));st.b=Date.now()-(y*12+mo+.5)*30.44*864e5;delete st.a;$("agHint").textContent="";save();calc()}
+  agY.addEventListener("change",readAge);agM.addEventListener("change",readAge);
   st.log=st.log||{ibu:[],par:[]};
   var kwR=$("kwR"),kwN=$("kwN");
   function setW(w,from){w=Math.min(50,Math.max(3,Math.round(w*2)/2));st.w=w;if(from!=="r")kwR.value=w;if(from!=="n")kwN.value=w;calc();save()}
   kwR.addEventListener("input",function(){setW(+kwR.value,"r")});
   kwN.addEventListener("change",function(){var v=parseFloat(String(kwN.value).replace(",","."));if(v)setW(v,"n")});
-  [].forEach.call(document.querySelectorAll("#ageSeg button"),function(b){b.addEventListener("click",function(){st.a=+b.dataset.a;calc();save()})});
+
   if(src)$("kwFrom").textContent=src+" — проверьте, что он актуален";
   function supp(w){if(w<4)return "только по назначению врача";if(w<7)return "1 свеча 50 мг";if(w<11)return "1 свеча 100 мг";if(w<17)return "1–2 свечи по 100 мг (по 10–15 мг/кг)";if(w<31)return "1 свеча 250 мг";if(w<=35)return "2 свечи по 250 мг";return "по инструкции для взрослых и подростков"}
   function calc(){
-    var w=st.w,a=st.a;
-    [].forEach.call(document.querySelectorAll("#ageSeg button"),function(b){b.setAttribute("aria-pressed",String(+b.dataset.a===a))});
+    var w=st.w,a=ageCat(),am=ageMo();
     $("under3").hidden=a!==0;
     var ibuMl=Math.min(20,fl(w/2,.5)),parMl=Math.min(20,fl(w*.625,.5));
     if(ibuMl*20<w*5)ibuMl=Math.round(w/2*4)/4;
@@ -718,10 +727,10 @@ footer{padding-bottom:90px}
     document.querySelector(".dose.ibu").style.opacity=(a===0||w<5)?".55":"";
     document.querySelector(".dose.par").style.opacity=a===0?".55":"";
     var i2=Math.min(10,fl(w/4,.25));$("xIbu200").textContent=(a===0||w<5)?"не применяют":String(i2).replace(".",",")+" мл ("+Math.round(i2*40)+" мг) · правило: вес ÷ 4";
-    $("xIbuTab").textContent=w>=40?"1–2 таблетки (200–400 мг)":w>=20?"1 таблетка (200 мг), с 6 лет":"с 20 кг; пока — суспензия";
+    $("xIbuTab").textContent=(am!==null&&am<72)?"с 6 лет и 20 кг; пока — суспензия":w>=40?"1–2 таблетки (200–400 мг)":w>=20?"1 таблетка (200 мг)":"с 20 кг; пока — суспензия";
     $("xSupp").textContent=a===0?"только по назначению врача":supp(w);
     $("xParTab").textContent=w>=33?"1 таблетка (500 мг)":w>=16?"½ таблетки (250 мг)":"с 16 кг; пока — суспензия или свечи";
-    var ks=$("kidSum");ks.hidden=false;ks.textContent=fmt(w)+" кг · "+["до 3 мес","3–6 мес","от 6 мес"][a];
+    var ks=$("kidSum");ks.hidden=false;ks.textContent=fmt(w)+" кг"+(am===null?"":" · "+ageTxt(am));
     renderLog();
   }
   /* журнал приёмов */
@@ -804,7 +813,7 @@ footer{padding-bottom:90px}
   }
   function hints(){
     var L=st.tr,H=[],now=Date.now();if(!L.length)return H;
-    var last=L[L.length-1],es=episodeStart(),a=st.a;
+    var last=L[L.length-1],es=episodeStart(),a=ageCat();
     if(a===0&&L.some(function(p){return p.v>=38&&now-p.t<3*864e5}))H.push(["h-red","Ребёнку меньше 3 месяцев и температура 38 °C и выше — <b>сразу к врачу или 103</b>."]);
     if(a===1&&L.some(function(p){return p.v>=39&&now-p.t<3*864e5}))H.push(["h-warm","Ребёнку 3–6 месяцев и было 39 °C и выше — <b>покажите врачу в ближайшие 12–24 часа</b>."]);
     if(last.v>=40&&now-last.t<6*36e5)H.push(["h-red","Последнее измерение — 40 °C и выше. Если не снижается жаропонижающим — <b>вызывайте 103</b>."]);
@@ -827,7 +836,7 @@ footer{padding-bottom:90px}
   }
   function summary(){
     var L=st.tr,M=meds(),now=Date.now(),out=[];
-    out.push("Вес: "+fmt(st.w)+" кг; возраст: "+["до 3 месяцев","3–6 месяцев","старше 6 месяцев"][st.a]+".");
+    out.push("Вес: "+fmt(st.w)+" кг; возраст: "+(ageMo()===null?"не указан":ageTxt(ageMo()))+".");
     if(L.length){var es=episodeStart();if(es!==null){var d=Math.floor((now-es)/864e5)+1;out.push("Температура 38 °C и выше — с "+dm(es)+" ("+d+"-е сутки).")}
       var mx=L.reduce(function(a,b){return b.v>a.v?b:a});out.push("Максимум: "+f1(mx.v)+" °C ("+dm(mx.t)+"). Последнее измерение: "+f1(L[L.length-1].v)+" °C ("+dm(L[L.length-1].t)+").")}
     var M24=M.filter(function(m){return now-m.t<864e5});
@@ -864,7 +873,7 @@ footer{padding-bottom:90px}
   window.addEventListener("afterprint",function(){document.body.classList.remove("print-tr")});
   resetForm();
 
-  kwR.value=st.w;kwN.value=st.w;calc();renderTr();
+  kwR.value=st.w;kwN.value=st.w;showAge();calc();renderTr();
   /* активная вкладка и кнопка «Тревожно?» */
   var tabs=[].slice.call(document.querySelectorAll(".tabs a")),secs=tabs.map(function(a){return $(a.getAttribute("href").slice(1))});
   if("IntersectionObserver" in window){

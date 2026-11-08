@@ -146,6 +146,8 @@ ul.clean li::before{content:"";position:absolute;left:4px;top:.55em;width:10px;h
 .status{font-family:var(--f-mono);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px;white-space:nowrap}
 .ok{background:var(--leaf);color:#06281C}.no{background:var(--coral);color:#fff}.cloth{background:var(--sun);color:#3A2A00}
 .rep.off{opacity:.55}
+.rep-sub{margin-top:12px}
+h3 small.opt{font-family:var(--f-mono);font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:6px;white-space:nowrap}
 .steps{counter-reset:s;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
 .steps li{counter-increment:s;display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:start}
 .steps li::before{content:counter(s);width:30px;height:30px;border-radius:50%;background:var(--sun);color:#3A2A00;font-family:var(--f-display);font-weight:800;display:grid;place-items:center;font-size:.85rem}
@@ -679,7 +681,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
             <svg class="pic" viewBox="0 0 120 140" aria-hidden="true"><use href="#i-ors"/></svg>
             <div>
               <h3>Раствор для оральной регидратации</h3>
-              <p>Порошки в пакетиках со сниженной осмолярностью (около 240 мОсм/л) — при рвоте и диарее. Например: Реакватант Оптим, Гидровит, Хумана Электролит. Обычный Регидрон детям до 12 лет не подходит: по его инструкции им нужны растворы с меньшей осмолярностью. Разводить строго по инструкции.</p>
+              <p>Порошки в пакетиках со сниженной осмолярностью (около 240 мОсм/л) — при рвоте и диарее. Например: РеАкватант Оптим, Гидровит, Хумана Электролит. Обычный Регидрон детям не подходит: по его инструкции детям нужны растворы с меньшей концентрацией натрия и осмолярностью. Разводить строго по инструкции.</p>
             </div>
             <input type="checkbox" class="check" id="c-ors" aria-label="Раствор для регидратации собран">
           </label>
@@ -687,7 +689,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
             <svg class="pic" viewBox="0 0 110 150" aria-hidden="true"><use href="#i-drops"/></svg>
             <div>
               <h3>Капли от аллергии</h3>
-              <p>При крапивнице и зуде. С 6 месяцев — цетиризин (например, Зиртек). С 1 месяца — диметинден (например, Фенистил). <a href="#dose">Рассчитать дозу ↓</a></p>
+              <p>При крапивнице и зуде. Цетиризин (например, Зиртек, Цетиризин Гексал) — с 1 года; с 6 месяцев — только по назначению врача. С 1 месяца — диметинден (например, Фенистил). <a href="#dose">Рассчитать дозу ↓</a></p>
             </div>
             <input type="checkbox" class="check" id="c-allergy" aria-label="Средство от аллергии собрано">
           </label>
@@ -746,18 +748,18 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
           <label class="item" for="c-aspir">
             <svg class="pic" viewBox="0 0 150 120" aria-hidden="true"><use href="#i-aspir"/></svg>
             <div>
-              <h3>Назальный аспиратор</h3>
+              <h3>Назальный аспиратор <small class="opt">по желанию</small></h3>
               <p>Для малышей, которые ещё не умеют сморкаться. Сначала 2–3 капли солевого раствора в каждый носовой ход лёжа, через минуту — аспиратор. Лучше перед кормлением и не чаще 3 раз в день: частое отсасывание раздражает слизистую.</p>
             </div>
-            <input type="checkbox" class="check" id="c-aspir" aria-label="Аспиратор собран">
+            <input type="checkbox" class="check" data-opt="1" id="c-aspir" aria-label="Аспиратор собран">
           </label>
           <label class="item" for="c-neb">
             <svg class="pic" viewBox="0 0 150 160" aria-hidden="true"><use href="#i-neb"/></svg>
             <div>
-              <h3>Меш-небулайзер и лекарства к нему</h3>
+              <h3>Меш-небулайзер и лекарства к нему <small class="opt">если назначен</small></h3>
               <p>Только если ребёнку назначены ингаляции: бронхиальная астма или обструктивный бронхит в прошлом. Меш-небулайзер компактный и работает от батареек. Проверьте, что ваш препарат подходит для этого типа небулайзера (смотрите инструкцию к прибору). Ингаляции физраствором при простуде не помогают и не рекомендуются.</p>
             </div>
-            <input type="checkbox" class="check" id="c-neb" aria-label="Небулайзер собран">
+            <input type="checkbox" class="check" data-opt="1" id="c-neb" aria-label="Небулайзер собран">
           </label>
           <div class="myth tip"><strong>Совет</strong><span>Дозированный ингалятор со спейсером при приступе работает не хуже небулайзера, легче в дороге и не зависит от розетки. Если он назначен ребёнку, возьмите его тоже.</span></div>
         </div>
@@ -829,8 +831,8 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
             <li>Грудное вскармливание — самое безопасное питание в поездке: не нужны вода, бутылочки и стерилизация.</li>
             <li>Смесь возьмите привычную, с запасом на всю поездку и ещё несколько дней. Без необходимости в дороге марку не меняйте.</li>
             <li>Воду для смеси вскипятите и остудите примерно до 70 °C — около 30 минут. Разведите строго по инструкции на банке, остудите до тёплой и проверьте на запястье.</li>
-            <li>Негде вскипятить — бутилированная вода комнатной температуры; такую смесь давайте сразу, остатки выливайте.</li>
-            <li>Недоеденную смесь не храните дольше 2 часов.</li>
+            <li>Негде вскипятить: малышам до 3 месяцев лучше взять готовую жидкую смесь — она стерильна. Старшим можно развести на бутилированной воде комнатной температуры и дать сразу.</li>
+            <li>Готовую смесь используйте в течение 2 часов, а с начала кормления — в течение часа. Остатки после кормления сразу выливайте.</li>
           </ul>
         </div>
         <div class="panel">
@@ -864,6 +866,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
             <button type="button" class="step" data-d="0.5" aria-label="Увеличить вес">+</button>
           </div>
           <input id="wr" type="range" min="3" max="40" step="0.5" value="10" aria-label="Вес ребёнка, ползунок">
+          <p class="calc-age" id="wHint" hidden></p>
           <p class="calc-age">Возраст: <b class="ageLbl">1–2 года</b> · <a href="#child">изменить</a></p>
         </div>
         <div class="results">
@@ -875,14 +878,14 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
           </div>
           <div class="res r-par">
             <div class="res-top"><span class="drug">Парацетамол</span><span class="form">суспензия 120 мг / 5 мл</span></div>
-            <div class="num"><span id="par">6,3</span> мл</div>
+            <div class="num"><span id="par">6</span> мл</div>
             <div class="formula">вес × 0,6 ≈ мл · не чаще 4 раз в сутки, через 4–6 ч</div>
             <div class="warn" id="parWarn" hidden></div>
           </div>
           <div class="res r-fen">
             <div class="res-top"><span class="drug">Диметинден</span><span class="form">капли 1 мг/мл, с 1 месяца</span></div>
             <div class="num"><span id="fen">7</span> капель × 3 раза</div>
-            <div class="formula">2 капли × вес = суточная доза (<span id="fenDay">20</span> кап.), делим на 3 приёма</div>
+            <div class="formula">2 капли × вес = суточная доза (<span id="fenDay">20</span> кап.), делим на 3 приёма с округлением вниз; до 12 лет — не больше 20 капель за раз</div>
             <div class="warn" id="fenWarn">До года — только по назначению врача: возможна сонливость и паузы дыхания во сне.</div>
           </div>
         </div>
@@ -903,7 +906,8 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
             <thead><tr><th>Дозировка</th><th>Возраст</th><th>Вес</th></tr></thead>
             <tbody>
               <tr data-from="1" data-to="3"><td><b>50 мг</b></td><td>1–3 мес</td><td>4–6 кг</td></tr>
-              <tr data-from="3" data-to="36"><td><b>100 мг</b></td><td>3 мес – 3 года</td><td>7–16 кг</td></tr>
+              <tr data-from="3" data-to="12"><td><b>100 мг</b> × 1</td><td>3–12 мес</td><td>7–10 кг</td></tr>
+              <tr data-from="12" data-to="36"><td><b>100 мг</b> × 1–2</td><td>1–3 года</td><td>11–16 кг</td></tr>
               <tr data-from="36" data-to="120"><td><b>250 мг</b></td><td>3–10 лет</td><td>17–30 кг</td></tr>
             </tbody>
           </table>
@@ -914,11 +918,14 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
           <table>
             <thead><tr><th>Возраст</th><th>Доза</th></tr></thead>
             <tbody>
-              <tr data-from="6" data-to="12"><td>6–12 мес</td><td><b>5 капель</b> 1 раз в день</td></tr>
-              <tr data-from="12" data-to="24"><td>1–2 года</td><td><b>5 капель</b> до 2 раз в день</td></tr>
+              <tr data-from="6" data-to="12"><td>6–12 мес</td><td>только по назначению врача</td></tr>
+              <tr data-from="12" data-to="24"><td>1–2 года</td><td><b>5 капель</b> 2 раза в день</td></tr>
+              <tr data-from="24" data-to="72"><td>2–6 лет</td><td><b>10 капель</b> вечером или по <b>5 капель</b> 2 раза в день</td></tr>
+              <tr data-from="72" data-to="144"><td>6–12 лет</td><td><b>10 капель</b> 2 раза в день или <b>20 капель</b> вечером</td></tr>
+              <tr data-from="144" data-to="999"><td>с 12 лет</td><td><b>20 капель</b> 1 раз в день</td></tr>
             </tbody>
           </table>
-          <p class="supp-note">До 6 месяцев цетиризин не применяют — выбор для малышей диметинден.</p>
+          <p class="supp-note">Капли 10 мг/мл. До 6 месяцев цетиризин не применяют — для малышей есть диметинден (до года — по назначению врача).</p>
         </div>
       </div>
     </div>
@@ -996,6 +1003,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
             <div class="rep"><div><div class="name">Перметрин</div><div class="age">только одежда и сетки</div></div><span class="status cloth">на одежду</span></div>
           </div>
           <div class="myth" id="repNote" hidden></div>
+          <p class="sub rep-sub">Детские средства в России часто на IR3535 — для любого репеллента возраст смотрите на этикетке и не применяйте раньше указанного. Аэрозоли детям — только на одежду.</p>
         </div>
         <div class="panel">
           <div class="panel-top"><svg viewBox="0 0 120 170" aria-hidden="true"><use href="#i-spf"/></svg><h3>Солнце</h3></div>
@@ -1004,7 +1012,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
           <ol class="steps">
             <li><span>Сначала солнцезащитный крем, потом репеллент. Средства «2 в 1» не рекомендуются.</span></li>
             <li><span>На лицо — сначала себе на ладонь, потом ребёнку. Мимо глаз и рта.</span></li>
-            <li><span>Не наносить на руки малышам и на ранки.</span></li>
+            <li><span>Репеллент — не на кисти рук малышам (они тянут руки в рот) и не на ранки.</span></li>
             <li><span>Вернулись в помещение — смыть водой с мылом.</span></li>
           </ol>
         </div>
@@ -1033,8 +1041,8 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
         <h2>Без назначения врача не давать</h2>
         <div class="chips">
           <span class="chip-x"><svg aria-hidden="true"><use href="#i-x"/></svg>Антибиотики «от кишечной инфекции»</span>
-          <span class="chip-x"><svg aria-hidden="true"><use href="#i-x"/></svg>Лоперамид — противопоказан до 2 лет</span>
-          <span class="chip-x"><svg aria-hidden="true"><use href="#i-x"/></svg>Препараты висмута — до 12 лет</span>
+          <span class="chip-x"><svg aria-hidden="true"><use href="#i-x"/></svg>Лоперамид — по инструкции в России детям до 6 лет нельзя</span>
+          <span class="chip-x"><svg aria-hidden="true"><use href="#i-x"/></svg>Висмута субсалицилат — детям до 12 лет</span>
           <span class="chip-x"><svg aria-hidden="true"><use href="#i-x"/></svg>Пластыри со скополамином от укачивания</span>
           <span class="chip-x"><svg aria-hidden="true"><use href="#i-x"/></svg>Сосудосуживающие капли «для ушей»</span>
         </div>
@@ -1067,7 +1075,8 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
             <li>Длинные рукава и брюки на закате; одежду и сетки можно обработать перметрином.</li>
             <li>Грудное вскармливание — лучшая защита малыша от кишечных инфекций. Смесь возьмите с собой.</li>
             <li>Для питья и смеси — кипячёная или очищенная вода; ею же мыть бутылочки и соски.</li>
-            <li>Не трогать и не кормить с рук бездомных и диких животных — собак, кошек, обезьян, белок, мышей, летучих мышей. Они кусаются и могут переносить бешенство и другие инфекции; после любого укуса или царапины — в тот же день к врачу.</li>
+            <li>Не трогать и не кормить с рук бездомных и диких животных. Собаки, кошки, обезьяны, летучие мыши могут переносить бешенство; любые животные кусаются и переносят другие инфекции. После любого укуса или царапины — в тот же день к врачу.</li>
+            <li>Где бывают клещи — осматривайте ребёнка после каждой прогулки. Присосавшегося клеща лучше удалить в травмпункте; если нельзя — пинцетом, захватив как можно ближе к коже, вращая, без рывков. Место укуса обработайте антисептиком, клеща живым положите в баночку с влажной ваткой и сдайте на исследование, обратитесь к врачу. Едете туда, где есть клещевой энцефалит, — заранее обсудите прививку с педиатром: курс из двух доз занимает не меньше месяца.</li>
           </ul>
         </div>
       </div>
@@ -1080,8 +1089,8 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
       <div class="sec-head"><span class="eyebrow">Красные флаги</span><h2>Срочно к врачу, если…</h2><p>Эти признаки нельзя пережидать в отеле или в дороге. Экстренный номер в России и многих странах — 112; за границей заранее узнайте местный номер и телефон ассистанса в страховке.</p></div>
       <div class="flags">
         <div class="flag"><div class="flag-top"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><h3>Температура после поездки в зону малярии</h3></div><span class="more">Даже спустя недели после возвращения. Срочно к врачу и обязательно скажите, в какой стране были.</span></div>
-        <div class="flag"><div class="flag-top"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><h3>Укус или царапина животного</h3></div><span class="more">Сразу промыть рану водой с мылом и в тот же день к врачу: нужно решить вопрос о прививках от бешенства и столбняка.</span></div>
-        <div class="flag"><div class="flag-top"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><h3>Признаки обезвоживания</h3></div><span class="more">Вялость, сухие губы и язык, нет слёз, ребёнок редко мочится. Подробнее — в памятке «Рвота и диарея».</span></div>
+        <div class="flag"><div class="flag-top"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><h3>Укус или царапина животного</h3></div><span class="more">Сразу промывать рану водой с мылом не меньше 15 минут и в тот же день к врачу: нужно решить вопрос о прививках от бешенства и столбняка.</span></div>
+        <div class="flag"><div class="flag-top"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><h3>Признаки обезвоживания</h3></div><span class="more">Вялость, сухие губы и язык, нет слёз, ребёнок редко мочится. Если ребёнок не может пить или рвёт после каждого глотка — к врачу.</span></div>
         <div class="flag"><div class="flag-top"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><h3>Кровь в стуле или высокая температура с диареей</h3></div><span class="more">Температура 38,5 °C и выше вместе с диареей, кровь в стуле, рвота, при которой ребёнок не может пить.</span></div>
         <div class="flag"><div class="flag-top"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><h3>Сильный солнечный ожог у малыша</h3></div><span class="more">Для младенца это неотложное состояние — к врачу, не ждите.</span></div>
         <div class="flag"><div class="flag-top"><span class="pulse"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bang"/></svg></span><h3>Температура не снижается, неожиданная сыпь</h3></div><span class="more">Жаропонижающее не помогает или появилась сыпь — обратитесь за медицинской помощью, не лечите сами.</span></div>
@@ -1122,7 +1131,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
     <ol>
       <li><a href="https://www.cdc.gov/yellow-book/hcp/family-travel/traveling-safely-with-infants-and-children.html" target="_blank" rel="noopener">CDC Yellow Book 2026 — Traveling Safely with Infants &amp; Children</a> (обн. 12.2025) и <a href="https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/travel-health-kits.html" target="_blank" rel="noopener">Travel Health Kits</a> (04.2025)</li>
       <li><a href="https://pravo.ppt.ru/klinicheskie-rekomendatsii/315792" target="_blank" rel="noopener">Клинические рекомендации Минздрава РФ «Вирусные кишечные инфекции (гастроэнтериты) у детей»</a> (2025)</li>
-      <li><a href="https://medi.ru/instrukciya/cetrin-capli_15476/" target="_blank" rel="noopener">Инструкция к препарату цетиризин, капли (medi.ru)</a></li>
+      <li><a href="https://www.rlsnet.ru/drugs/cetirizin-geksal-25937" target="_blank" rel="noopener">Инструкция к препарату Цетиризин Гексал, капли 10 мг/мл, РЛС</a> (согл. 10.10.2014, обн. 18.03.2024); <a href="https://www.rlsnet.ru/drugs/zodak-20198" target="_blank" rel="noopener">Зодак, РЛС</a> (согл. 12.12.2025): с 6 до 12 месяцев — только по назначению врача</li>
       <li><a href="https://360.ru/news/mosobl/pediatr-niki-detstva-dal-sovety-po-sostavleniju-aptechki-dlja-puteshestvij/" target="_blank" rel="noopener">К. Гусарова, педиатр НИКИ детства, 360.ru</a> (05.2026)</li>
       <li><a href="https://kidshealth.org/CHW/en/parents/repellent-use-safety.html" target="_blank" rel="noopener">AAP / KidsHealth — Insect Repellent Use &amp; Safety</a> (07.2023)</li>
       <li>CDC Yellow Book 2026 — Travel Health Kits (рецепты, упаковка); 360.ru, НИКИ детства (хранение до +25 °C)</li>
@@ -1131,14 +1140,17 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
       <li><a href="https://medi.ru/klinicheskie-rekomendatsii/ostraya-respiratornaya-virusnaya-infektsiya-orvi-u-detej_14126/" target="_blank" rel="noopener">Клинические рекомендации «ОРВИ у детей», Союз педиатров России</a></li>
       <li><a href="https://khpi.kidshealth.org/en/parent/1326.html" target="_blank" rel="noopener">KidsHealth (Nemours): How to Use a Bulb Syringe</a></li>
       <li><a href="https://www.cochrane.org/de/evidence/CD000052_holding-chambers-spacers-versus-nebulisers-delivery-beta-agonist-relievers-treatment-asthma-attack" target="_blank" rel="noopener">Cochrane: спейсеры против небулайзеров при приступе астмы</a> (Cates et al., 2013)</li>
+      <li><a href="https://webarchive.library.unt.edu/web/20201221140401/https://www.cdc.gov/nutrition/InfantandToddlerNutrition/formula-feeding/infant-formula-preparation-and-storage.html" target="_blank" rel="noopener">CDC: Infant Formula Preparation and Storage</a> (архив 12.2020)</li>
       <li><a href="https://stg.nutritioncluster.net/sites/nutritioncluster.com/files/2022-04/Powder-Milk-infant-formula-instructions-Russian-A4-print-v2.pdf" target="_blank" rel="noopener">ЮНИСЕФ: как безопасно приготовить детскую смесь</a> (2022)</li>
       <li>Манто И., Панкова А. Памятка по выбору эмолентов. Февраль 2026 (телеграм-каналы «Ирина Манто | аллергология для врачей» и «Апельсины можно»)</li>
-      <li><a href="https://www.cdc.gov/rabies/" target="_blank" rel="noopener">CDC: бешенство — риск от разных животных, в т. ч. грызунов</a></li>
+      <li><a href="https://www.cdc.gov/rabies/" target="_blank" rel="noopener">CDC: бешенство — риск от разных животных</a>; CDC Yellow Book 2026 — промывание раны после укуса</li>
+      <li><a href="https://www.rlsnet.ru/drugs/imodium-ekspress-78914" target="_blank" rel="noopener">Инструкция к препарату Имодиум Экспресс (лоперамид), РЛС</a> (изм. 28.09.2023); <a href="https://www.rlsnet.ru/drugs/cefekon-d-20045" target="_blank" rel="noopener">Цефекон Д, РЛС</a></li>
+      <li><a href="https://04.rospotrebnadzor.ru/index.php/component/content/article/44-epid-otdel/11210-22082019.pdf" target="_blank" rel="noopener">Роспотребнадзор: как выбирать и применять репелленты</a> (22.08.2019); <a href="https://www.pnp.ru/social/v-rospotrebnadzore-napomnili-o-deystviyakh-pri-ukuse-kleshhey.html" target="_blank" rel="noopener">Роспотребнадзор: что делать при укусе клеща</a> (19.05.2021)</li>
       <li><a href="https://www.rlsnet.ru/drugs/dramina-9984" target="_blank" rel="noopener">Инструкция к препарату Драмина (дименгидринат), РЛС</a> (инструкция 2021); <a href="https://www.rlsnet.ru/drugs/bonin-6375" target="_blank" rel="noopener">инструкция к препарату Бонин (меклозин), РЛС</a></li>
       <li><a href="https://ema.europa.eu/en/documents/herbal-monograph/european-union-herbal-monograph-mentha-x-piperita-l-folium-revision-1_en.pdf" target="_blank" rel="noopener">EMA: монография на лист мяты перечной</a> (2020) и <a href="https://www.ema.europa.eu/en/documents/herbal-list-entry/draft-european-union-list-entry-mentha-x-piperita-l-aetheroleum-revision-1_en.pdf" target="_blank" rel="noopener">на масло мяты перечной</a> (2019)</li>
-      <li><a href="https://medi.ru/instrukciya/fenistil_27976/" target="_blank" rel="noopener">Инструкция к препарату Фенистил, гель 0,1% (medi.ru)</a></li>
-      <li>Возраст солнцезащитных средств — по данным производителей и аптек: <a href="https://la-kry.ru/produkcia/smart-care/molochko-solntsezashchitnoe-spf-30-0/" target="_blank" rel="noopener">Ла-Кри SPF 30</a>, <a href="https://www.votonia.ru/products/molochko-solncezashchitnoe-la-kri-dlya-detey-spf50-200-ml/" target="_blank" rel="noopener">Ла-Кри SPF 50</a>, <a href="https://www.laroche-posay.ru/anthelios-molochko-dlja-mladencev-i-detej-50" target="_blank" rel="noopener">La Roche-Posay Anthelios Dermo-Pediatrics</a>, <a href="https://www.shop-apotheke.com/baby/BE03535481/bioderma-photoderm-kid-lait-spf-50.htm" target="_blank" rel="noopener">Bioderma Photoderm Kid</a>, <a href="https://media.halvacard.ru/beauty/solntsezashchitnye-sredstva-dlya-detey-kak-vybirat-reyting-luchshikh-v-2022-godu" target="_blank" rel="noopener">Librederm Bronzeada (обзор, обн. 01.2025)</a>, <a href="https://vkusvill.ru/goods/uriage-baresan-molochko-det-spf50-100-ml-310840/" target="_blank" rel="noopener">Uriage Bariésun детское</a></li>
-      <li>Растворы для регидратации: <a href="https://www.rlsnet.ru/drugs/reakvatant-optim-91668" target="_blank" rel="noopener">РеАкватант Оптим (РЛС)</a>, <a href="https://medi.ru/instrukciya/gidrovit_11289/" target="_blank" rel="noopener">Гидровит (medi.ru)</a>, <a href="https://nowonline.ru/childrens-clinic/peroralnaya-regidrataciya-spisok-effektivnyh-sredstv/" target="_blank" rel="noopener">Хумана Электролит (обзор)</a>, <a href="https://regidron.com/upload/rehydron.pdf" target="_blank" rel="noopener">инструкция к Регидрону</a></li>
+      <li><a href="https://www.rlsnet.ru/drugs/fenistil-6042" target="_blank" rel="noopener">Инструкция к препарату Фенистил (диметинден), РЛС</a> (согл. 23.12.2024)</li>
+      <li>Возраст солнцезащитных средств — по данным производителей и аптек: <a href="https://la-kry.ru/produkcia/smart-care/molochko-solntsezashchitnoe-spf-30-0/" target="_blank" rel="noopener">Ла-Кри SPF 30</a>, <a href="https://www.votonia.ru/products/molochko-solncezashchitnoe-la-kri-dlya-detey-spf50-200-ml/" target="_blank" rel="noopener">Ла-Кри SPF 50</a>, <a href="https://www.laroche-posay.ru/anthelios-molochko-dlja-mladencev-i-detej-50" target="_blank" rel="noopener">La Roche-Posay Anthelios Dermo-Pediatrics</a>, <a href="https://www.shop-apotheke.com/baby/BE03535481/bioderma-photoderm-kid-lait-spf-50.htm" target="_blank" rel="noopener">Bioderma Photoderm Kid</a>, Librederm Bronzeada (возраст — по упаковке), <a href="https://vkusvill.ru/goods/uriage-baresan-molochko-det-spf50-100-ml-310840/" target="_blank" rel="noopener">Uriage Bariésun детское</a></li>
+      <li>Растворы для регидратации: <a href="https://www.rlsnet.ru/drugs/reakvatant-optim-91668" target="_blank" rel="noopener">РеАкватант Оптим (РЛС)</a>, <a href="https://www.rlsnet.ru/drugs/reakvatant-90698" target="_blank" rel="noopener">РеАкватант (РЛС, изм. 18.07.2024)</a>, <a href="https://medi.ru/instrukciya/gidrovit_11289/" target="_blank" rel="noopener">Гидровит (medi.ru)</a>, <a href="https://medi.ru/info/7917/" target="_blank" rel="noopener">Хумана Электролит — осмолярность (medi.ru, 2011)</a>, <a href="https://regidron.com/upload/rehydron.pdf" target="_blank" rel="noopener">инструкция к Регидрону</a></li>
     </ol>
     </details>
     <p class="disc">Торговые названия приведены как примеры. Памятка подготовлена врачом-педиатром Корчагиной Ю.А. и не заменяет очную консультацию врача. Иллюстрации оригинальные.</p>
@@ -1152,10 +1164,10 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
   var KEY="aptechka-checks-v1", boxes=[].slice.call(document.querySelectorAll(".check"));
   var saved={}; try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
   function update(){
-    var done=0; boxes.forEach(function(c){c.closest(".item").classList.toggle("done",c.checked); if(c.checked)done++;});
-    document.getElementById("count").textContent=done+" из "+boxes.length;
-    document.getElementById("bar").style.width=(done/boxes.length*100)+"%";
-    document.getElementById("progressNote").textContent=done===boxes.length?"Аптечка собрана. Можно в путь!":"Отмечайте пункты в списке ниже";
+    var done=0, req=0; boxes.forEach(function(c){c.closest(".item").classList.toggle("done",c.checked); if(!c.dataset.opt){req++; if(c.checked)done++;}});
+    document.getElementById("count").textContent=done+" из "+req;
+    document.getElementById("bar").style.width=(done/req*100)+"%";
+    document.getElementById("progressNote").textContent=done===req?"Аптечка собрана. Можно в путь!":"Отмечайте пункты в списке ниже";
     var st={}; boxes.forEach(function(c){st[c.id]=c.checked}); try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}
   }
   boxes.forEach(function(c){ if(saved[c.id])c.checked=true; c.addEventListener("change",update); });
@@ -1184,12 +1196,12 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
   function bump(id,val){var el=document.getElementById(id); if(el.textContent!==val){el.textContent=val;el.classList.add("bump");setTimeout(function(){el.classList.remove("bump")},220);}}
 
   var REP=[["ДЭТА (DEET) 10–30%","с 2 месяцев",2],["Икаридин (пикаридин) 5–10%","с 2 месяцев",2],["Масло лимонного эвкалипта","с 3 лет",36],["Перметрин","только одежда и сетки",-1]];
-  var SPF=[["Ла-Кри, молочко SPF 30 и SPF 50 для детей", 0, "с рождения", "химические фильтры"], ["La Roche-Posay Anthelios Dermo-Pediatrics SPF 50+", 6, "с 6 месяцев", "химические фильтры"], ["Bioderma Photoderm Kid SPF 50+", 12, "с 1 года", ""], ["Librederm Bronzeada, детский крем", 12, "с 1 года", ""], ["Uriage Bariésun, детское молочко SPF 50+", 48, "с 4 лет", ""]];
+  var SPF=[["Ла-Кри, молочко SPF 30 и SPF 50 для детей", 0, "с рождения", "химические фильтры", 6], ["La Roche-Posay Anthelios Dermo-Pediatrics SPF 50+", 6, "с 6 месяцев", "химические фильтры"], ["Bioderma Photoderm Kid SPF 50+", 12, "с 1 года", ""], ["Librederm Bronzeada, детский крем", 12, "с 1 года", ""], ["Uriage Bariésun, детское молочко SPF 50+", 48, "с 4 лет", ""]];
   function renderList(el,items,m,okL,noL,third){
     el.innerHTML="";
     items.forEach(function(p){
-      var cls=p[2]===-1?"cloth":(m>=p[2]?"ok":"no");
-      var lab=cls==="cloth"?"на одежду":(cls==="ok"?okL:noL);
+      var cls=p[2]===-1?"cloth":(m>=p[2]?"ok":"no"), lim=cls==="ok"&&p[4]&&m<p[4];
+      var lab=lim?"с оговорками":cls==="cloth"?"на одежду":(cls==="ok"?okL:noL); if(lim)cls="cloth";
       var d=document.createElement("div"); d.className="rep"+(cls==="no"?" off":"");
       d.innerHTML='<div><div class="name">'+p[0]+'</div><div class="age">'+p[1]+(third&&p[3]?' · '+p[3]:'')+'</div></div><span class="status '+cls+'">'+lab+'</span>';
       el.appendChild(d);
@@ -1208,7 +1220,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
 
     /* calculator */
     var fl5=function(x){return Math.floor(x*2+1e-9)/2};bump("ibu",fmt(Math.min(20,fl5(w/2)))); bump("par",fmt(Math.min(20,fl5(w*0.625))));
-    var day=Math.round(2*w); bump("fenDay",String(day)); bump("fen",String(Math.round(day/3)));
+    var day=Math.floor(2*w+1e-9); bump("fenDay",String(day)); bump("fen",String(Math.min(m<144?20:40,Math.floor(day/3))));
     var iw=document.getElementById("ibuWarn"), pw=document.getElementById("parWarn"), fw=document.getElementById("fenWarn");
     var ibuNo=m<3||w<5, parNo=m<3, fenNo=m<1;
     var teen=m>=144||w>=40;
@@ -1230,14 +1242,14 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
       ? "До 6 месяцев: тень, лёгкая закрытая одежда, панама. Крем — только на открытые участки и в минимальном количестве. Сильный солнечный ожог у младенца — повод срочно к врачу."
       : (m<36 ? "Крем SPF 30+ за 15–20 минут до выхода, обновлять после купания. Панама, очки, тень в полуденные часы."
               : "Крем SPF 30+ за 15–20 минут до выхода, обновлять после купания и после того, как вытерся полотенцем. Панама, очки, футболка для купания.");
-    renderList(document.getElementById("spfList"),SPF.map(function(p){return [p[0],p[2],p[1],p[3]]}),m,"подходит","рано",true);
+    renderList(document.getElementById("spfList"),SPF.map(function(p){return [p[0],p[2],p[1],p[3],p[4]]}),m,"подходит","рано",true);
     document.getElementById("spfInfant").hidden=m>=6;
     try{localStorage.setItem("aptechka-kid",JSON.stringify(st))}catch(e){}
   }
   document.querySelectorAll(".ages button").forEach(function(b){b.addEventListener("click",function(){st.m=+b.dataset.m;apply();})});
   document.querySelectorAll("input.kw").forEach(function(i){
     i.addEventListener("input",function(){var v=parseFloat(String(i.value).replace(",","."));if(v>=3&&v<=40){st.w=v;apply();}});
-    i.addEventListener("change",function(){var v=parseFloat(String(i.value).replace(",","."));if(isFinite(v)){st.w=v;apply();i.value=st.w;}});
+    i.addEventListener("change",function(){var v=parseFloat(String(i.value).replace(",","."));if(isFinite(v)){st.w=v;apply();i.value=st.w;var h=document.getElementById("wHint");if(h){h.hidden=v>=3&&v<=40;h.textContent=v<3?"Калькулятор считает от 3 кг — малышам легче дозу назначает врач.":"Калькулятор считает до 40 кг — при большем весе дозу смотрите в инструкции к таблеткам.";}}});
   });
   var wrr=document.getElementById("wr"); if(wrr)wrr.addEventListener("input",function(){st.w=parseFloat(wrr.value);apply();});
   document.querySelectorAll(".step").forEach(function(b){b.addEventListener("click",function(){st.w=(st.w||10)+parseFloat(b.dataset.d);apply();})});

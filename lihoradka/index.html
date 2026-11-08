@@ -715,13 +715,6 @@ footer{padding-bottom:90px}
   function kname(k,i){return (k.name||"").trim()||("Ребёнок "+(i+1))}
   function fmt(x){return (Math.round(x*10)/10).toString().replace(".",",")}
   function fl(x,s){return Math.floor(x/s+1e-9)*s}
-  /* вес по умолчанию: свой → из «Прививок» → из «Аптечки» */
-  var src="";
-  if(typeof st.w!=="number"){
-    ["vac-app-v1","vac-sale-v1","aptechka-kid"].some(function(k){try{var o=JSON.parse(localStorage.getItem(k)||"null");var w=o&&(+o.w||+o.weight);if(w>=3&&w<=80){st.w=w;src=k.indexOf("vac")===0?"Вес взят из памятки «Прививки»":"Вес взят из памятки «Аптечка»";
-      if(o.dob&&typeof st.b!=="number"){var d=new Date(o.dob+"T00:00:00").getTime();if(d&&d<Date.now())st.b=d}
-      return true}}catch(e){}return false});
-  }
   if(typeof st.w!=="number")st.w=10;
   if(typeof st.b!=="number"&&typeof st.a==="number")st.b=Date.now()-[1,4,24][st.a]*30.44*864e5;
   function ageMo(){return typeof st.b==="number"?Math.max(0,Math.floor((Date.now()-st.b)/(30.44*864e5))):null}
@@ -738,7 +731,6 @@ footer{padding-bottom:90px}
   kwR.addEventListener("input",function(){setW(+kwR.value,"r")});
   kwN.addEventListener("change",function(){var v=parseFloat(String(kwN.value).replace(",","."));if(v)setW(v,"n")});
 
-  if(src)$("kwFrom").textContent=src+" — проверьте, что он актуален";
   function supp(w){if(w<4)return "только по назначению врача";if(w<7)return "1 свеча 50 мг";if(w<11)return "1 свеча 100 мг";if(w<17)return "1–2 свечи по 100 мг (по 10–15 мг/кг)";if(w<31)return "1 свеча 250 мг";if(w<=35)return "2 свечи по 250 мг";return "по инструкции для взрослых и подростков"}
   function calc(){
     var w=st.w,a=ageCat(),am=ageMo();

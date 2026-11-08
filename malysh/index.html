@@ -373,6 +373,10 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
 .fcalc label{font-weight:800;font-size:.9rem}
 .fcalc input{height:44px}
 .fcalc output{font-size:.92rem;line-height:1.4}
+.fcalc.blocked{grid-template-columns:1fr;background:var(--alert-bg)}
+.fcalc.blocked label,.fcalc.blocked input{display:none}
+.falarm{display:block;color:var(--alert-ink);font-size:.95rem;line-height:1.45}
+.fcalc .falarm b{color:inherit;font-family:inherit;font-size:inherit}
 .fcalc output small{color:var(--muted);font-size:.86em}
 .fcalc output b{font-family:var(--f-display);color:var(--coral);font-size:1.05rem}
 @media (max-width:520px){.fcalc{grid-template-columns:auto minmax(0,1fr)}.fcalc output{grid-column:1/-1}}
@@ -945,8 +949,16 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
   var fW=$("fW");
   if(st.fW)fW.value=st.fW;
   function feedFromW(){var n=num(wN);if(n){if(n>=1000)n/=1000;if(n>=2&&n<=7&&!st.fWman){fW.value=fmt(n).replace(",",".");feed()}}}
+  function wAlarm(){
+    var b=num(wB),n=num(wN),d=dayOfLife();if(b&&b<20)b*=1000;if(n&&n<20)n*=1000;
+    if(!b||!n||b<1000||n<1000)return null;
+    if((b-n)/b*100>10)return "Малыш потерял больше 10&nbsp;% веса при рождении.";
+    if(d!==null&&d>21&&n<b)return "Ребёнку больше 3 недель, а вес при рождении не восстановлен.";
+    return null}
   function feed(){
-    var w=num(fW),o=$("fOut"),d=dayOfLife(),bw=num(wB);if(bw&&bw<20)bw*=1000;
+    var w=num(fW),o=$("fOut"),d=dayOfLife(),bw=num(wB),al=wAlarm(),fc=fW.closest(".fcalc");if(bw&&bw<20)bw*=1000;
+    fc.classList.toggle("blocked",!!al);fW.disabled=!!al;
+    if(al){o.innerHTML='<span class="falarm"><b>Срочно покажите малыша врачу — сегодня.</b> '+al+' Объём смеси в этой ситуации подбирает только врач: не увеличивайте и не уменьшайте его самостоятельно, но продолжайте кормить.</span>';return}
     if(!w||w<2||w>7){o.textContent="Введите вес от 2 до 7 кг";return}
     var h;
     if(d!==null&&d<=7){if(!bw)bw=w*1000;var k=bw<3200?70:80,v=k*d,one=Math.round(v/7/5)*5;

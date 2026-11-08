@@ -1,5 +1,5 @@
 /* Офлайн-кэш памятки. Версия меняется автоматически при каждом обновлении index.html. */
-const VERSION = "malysh-5b911ac1ad";
+const VERSION = "malysh-734b72742e";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./favicon-32.png"];
 
 self.addEventListener("install", (e) => {

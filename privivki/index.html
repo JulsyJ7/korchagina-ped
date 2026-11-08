@@ -776,13 +776,13 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
 
   <section id="fever">
     <div class="wrap">
-      <div class="sec-head"><span class="eyebrow">Температура и боль</span><h2>Если поднялась температура</h2><p>Давайте жаропонижающее, если температура выше 39 °C или ребёнку плохо: озноб, боль, вялость, отказ от питья. Если ребёнок играет и пьёт — лекарство «на всякий случай» не нужно. Снижать до 36,6 °C не нужно.</p></div>
+      <div class="sec-head"><span class="eyebrow">Температура и боль</span><h2>Если поднялась температура</h2><p>Давайте жаропонижающее, если ребёнку плохо или температура 38,5–39 °C и выше: озноб, боль, вялость, отказ от питья. Если ребёнок играет и пьёт — лекарство «на всякий случай» не нужно. Снижать до 36,6 °C не нужно.</p></div>
       <div class="card" style="margin-bottom:20px">
         <div class="wrow"><label for="kw2" style="font-weight:800">Вес ребёнка</label><input type="range" id="kw2" min="4" max="40" step="0.5" value="10"><output id="kwOut">10 кг</output></div>
       </div>
       <div class="fever">
         <div class="card dose" id="dIbu"><h3>Ибупрофен<small>суспензия 100 мг / 5 мл</small></h3><div class="big"><span id="ibu">5</span><small>мл</small></div><div class="formula">вес × 0,5 = доза в мл · не чаще чем через 6–8 часов, до 3 раз в сутки</div><div class="warn" id="ibuNo" hidden>Детям до 3 месяцев и весом до 5 кг — только по назначению врача</div></div>
-        <div class="card dose" id="dPar"><h3>Парацетамол<small>суспензия 120 мг / 5 мл · есть свечи</small></h3><div class="big"><span id="par">6,3</span><small>мл</small></div><div class="formula">вес × 0,625 = доза в мл · не чаще чем через 4–6 часов, до 4 раз в сутки</div><div class="warn" id="parNo" hidden>Детям до 3 месяцев — только по назначению врача</div></div>
+        <div class="card dose" id="dPar"><h3>Парацетамол<small>суспензия 120 мг / 5 мл · есть свечи</small></h3><div class="big"><span id="par">6,3</span><small>мл</small></div><div class="formula">вес × 0,6 ≈ доза в мл · не чаще чем через 4–6 часов, до 4 раз в сутки</div><div class="warn" id="parNo" hidden>Детям до 3 месяцев — только по назначению врача</div></div>
       </div>
       
       <ul class="plain fever-short">
@@ -1477,10 +1477,13 @@ var PROFILES={
     var cm=$("calMore");cm.hidden=!canShort;cm.textContent=st.calAll?"Показать только ближайшие":"Показать весь календарь";
     // жаропонижающие
     var w=st.w;
-    $("ibu").textContent=fmt(Math.min(w*0.5,20));$("par").textContent=fmt(Math.min(w*0.625,20));
+    var fl5=function(x){return Math.floor(x*2+1e-9)/2},unk=!a&&w<6;
+    $("ibu").textContent=unk?"—":fmt(Math.min(fl5(w*0.5),20));$("par").textContent=unk?"—":fmt(Math.min(fl5(w*0.625),20));
     $("kwOut").textContent=fmt(w)+" кг";
     var small=a&&a.total<91;
-    $("ibuNo").hidden=!(small||w<5);$("parNo").hidden=!small;
+    var teen=(a&&a.total>=4383)||w>=40;
+    $("ibuNo").hidden=!(small||w<5||unk||teen);$("ibuNo").textContent=unk?"Укажите дату рождения — до 3 месяцев жаропонижающее только по назначению врача":(small||w<5)?"Детям до 3 месяцев и весом до 5 кг — только по назначению врача":"Детям старше 12 лет и от 40 кг суспензию не назначают — удобнее таблетки 200 мг по инструкции";
+    $("parNo").hidden=!(small||unk||w>=40);$("parNo").textContent=unk?"Укажите дату рождения — до 3 месяцев жаропонижающее только по назначению врача":small?"Детям до 3 месяцев — только по назначению врача":"При весе от 40 кг удобнее таблетки 500 мг по инструкции";
     calc();
     mc();
     save();

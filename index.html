@@ -876,7 +876,7 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
           <div class="res r-par">
             <div class="res-top"><span class="drug">Парацетамол</span><span class="form">суспензия 120 мг / 5 мл</span></div>
             <div class="num"><span id="par">6,3</span> мл</div>
-            <div class="formula">вес × 0,625 = мл · не чаще 4 раз в сутки, через 4–6 ч</div>
+            <div class="formula">вес × 0,6 ≈ мл · не чаще 4 раз в сутки, через 4–6 ч</div>
             <div class="warn" id="parWarn" hidden></div>
           </div>
           <div class="res r-fen">
@@ -1207,12 +1207,13 @@ tr.hit td:first-child{box-shadow:inset 3px 0 0 var(--sun)}
     var wr=document.getElementById("wr"); if(wr)wr.value=w;
 
     /* calculator */
-    bump("ibu",fmt(w/2)); bump("par",fmt(w*0.625));
+    var fl5=function(x){return Math.floor(x*2+1e-9)/2};bump("ibu",fmt(Math.min(20,fl5(w/2)))); bump("par",fmt(Math.min(20,fl5(w*0.625))));
     var day=Math.round(2*w); bump("fenDay",String(day)); bump("fen",String(Math.round(day/3)));
     var iw=document.getElementById("ibuWarn"), pw=document.getElementById("parWarn"), fw=document.getElementById("fenWarn");
     var ibuNo=m<3||w<5, parNo=m<3, fenNo=m<1;
-    iw.hidden=!ibuNo; iw.textContent="Ибупрофен — с 3 месяцев и веса от 5 кг. Ребёнку этого возраста не подходит.";
-    pw.hidden=!parNo; pw.textContent="До 3 месяцев — только по назначению врача.";
+    var teen=m>=144||w>=40;
+    iw.hidden=!(ibuNo||teen); iw.textContent=ibuNo?"Ибупрофен — с 3 месяцев и веса от 5 кг. Ребёнку этого возраста не подходит.":"Детям старше 12 лет и от 40 кг суспензию не назначают — удобнее таблетки 200 мг по инструкции.";
+    pw.hidden=!(parNo||w>=40); pw.textContent=parNo?"До 3 месяцев — только по назначению врача.":"При весе от 40 кг удобнее таблетки 500 мг по инструкции.";
     document.querySelector(".r-ibu").classList.toggle("na",ibuNo);
     document.querySelector(".r-par").classList.toggle("na",parNo);
     document.querySelector(".r-fen").classList.toggle("na",fenNo);

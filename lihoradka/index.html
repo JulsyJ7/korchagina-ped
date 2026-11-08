@@ -186,6 +186,7 @@ details.fold>ul{padding:0 20px 20px!important;margin-top:0!important}
 .extra th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .extra tr.hit td{background:var(--tchip);font-weight:800}
 .log{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:4px}
+.log button:disabled{opacity:.45;cursor:not-allowed}
 .log button{border:2px solid currentColor;background:transparent;border-radius:99px;padding:7px 14px;font-weight:800;font-size:.86rem;cursor:pointer}
 .dose.ibu .log button{color:var(--coral)}
 .dose.par .log button{color:var(--teal)}
@@ -430,7 +431,7 @@ footer{padding-bottom:90px}
       <h3 style="margin:28px 0 6px" id="thermo">Какой термометр выбрать</h3>
       <p class="mut" style="margin-bottom:14px">Лучше всего — обычный электронный. Остальные удобны, но ошибаются чаще.</p>
       <div class="grid3 meas tm">
-        <div class="card"><h3>Электронный <i>основной</i></h3><p><b>В подмышке, любой возраст.</b> Малышам до 4 недель — только так. Подмышка сухая, ручку прижать к телу, держать до сигнала и ещё минуту.</p></div>
+        <div class="card"><h3>Электронный <i>основной</i></h3><p><b>В подмышке, любой возраст.</b> Малышам до 4 недель — только так. Подмышка сухая, ручку прижать к телу, держать до сигнала.</p></div>
         <div class="card"><h3>Ушной инфракрасный <i>с 6 мес точнее</i></h3><p>Быстро и удобно ночью. Можно с 4 недель, но у малышей до 6 месяцев узкий слуховой проход — ошибки чаще. Ушко оттяните назад и вверх; после улицы подождите 15 минут.</p></div>
         <div class="card"><h3>Бесконтактный, на лоб <i>для проверки</i></h3><p>Удобно проверить спящего ребёнка. На результат влияют пот, сквозняк, только что с улицы. Если показал 38 °C и выше — перемерьте электронным в подмышке.</p></div>
         <div class="card x"><h3>Полоски на лоб, соска-термометр <i>неточно</i></h3><p>Показывают «примерно» и часто ошибаются. Для решения, давать ли жаропонижающее, не годятся. «На ощупь» губами — тоже.</p></div>
@@ -483,7 +484,7 @@ footer{padding-bottom:90px}
           <span class="from" id="kwFrom"></span>
         </div>
         <div><span class="flabel">Возраст</span>
-          <div class="agein"><label><input type="number" id="agY" min="0" max="17" step="1" inputmode="numeric" placeholder="0"><span>лет</span></label><label><input type="number" id="agM" min="0" max="11" step="1" inputmode="numeric" placeholder="0"><span>мес</span></label></div>
+          <div class="agein"><label><input type="number" id="agY" min="0" max="17" step="1" inputmode="numeric" placeholder="—"><span>лет</span></label><label><input type="number" id="agM" min="0" max="11" step="1" inputmode="numeric" placeholder="—"><span>мес</span></label></div>
           <span class="from" id="agHint"></span>
         </div>
       </div>
@@ -493,6 +494,7 @@ footer{padding-bottom:90px}
           <h3>Ибупрофен<small>Нурофен для детей и аналоги · суспензия 100 мг / 5 мл</small></h3>
           <div><span class="bigd" id="ibuMl">5</span><span class="bigd"><small>мл</small></span> <span class="mg" id="ibuMg">100 мг</span></div>
           <div class="rule">Простое правило: вес пополам = столько мл</div>
+          <p class="meta" style="font-size:.84rem">Доза по весу (10 мг/кг) может быть больше, чем в таблице на упаковке, — это допустимо по клиническим рекомендациям.</p>
           <p class="meta"><b>Не чаще чем через 6–8 часов</b>, не больше 3 раз в сутки. С 3 месяцев и веса от 5 кг.</p>
           <p class="warn" id="ibuWarn" hidden></p>
           <div class="log" data-drug="ibu"><button type="button">Дали сейчас</button><output></output><button type="button" class="undo" hidden>отменить</button></div>
@@ -500,7 +502,7 @@ footer{padding-bottom:90px}
         <div class="card dose par">
           <h3>Парацетамол<small>Парацетамол детский, Панадол детский · суспензия 120 мг / 5 мл</small></h3>
           <div><span class="bigd" id="parMl">6</span><span class="bigd"><small>мл</small></span> <span class="mg" id="parMg">144 мг</span></div>
-          <div class="rule">Простое правило: вес × 0,6 = столько мл</div>
+          <div class="rule">Простое правило: вес × 0,6 ≈ столько мл</div>
           <p class="meta"><b>Не чаще чем через 4–6 часов</b>, не больше 4 раз в сутки. С 3 месяцев.</p>
           <p class="warn" id="parWarn" hidden></p>
           <div class="log" data-drug="par"><button type="button">Дали сейчас</button><output></output><button type="button" class="undo" hidden>отменить</button></div>
@@ -530,7 +532,7 @@ footer{padding-bottom:90px}
       <div class="steps">
         <div class="card step"><span class="num">1</span><h3>Дали жаропонижающее</h3><p>Ибупрофен или парацетамол по весу. Засеките время — кнопка «Дали сейчас» запомнит его и подскажет, когда можно следующую дозу.</p></div>
         <div class="card step"><span class="num">2</span><h3>Через 1–1,5 часа не легче</h3><p>Если температура не снизилась хотя бы на 0,5 °C и ребёнку по-прежнему плохо — можно дать другое жаропонижающее: после ибупрофена — парацетамол, после парацетамола — ибупрофен.</p><p>То же лекарство повторно раньше срока давать нельзя.</p></div>
-        <div class="card step end"><span class="num">3</span><h3>И снова нет эффекта</h3><p>Если ещё через 1–1,5 часа температура не снижается и ребёнку плохо — вызывайте скорую: <b>103</b> (с мобильного) или 112.</p></div>
+        <div class="card step end"><span class="num">3</span><h3>И всё ещё плохо</h3><p>Если и после второго препарата ребёнку плохо — звоните врачу или вызывайте скорую: <b>103</b> (с мобильного) или 112.</p></div>
       </div>
       <div class="calm"><svg aria-hidden="true"><use href="#i-leaf"/></svg><div><b>И самое главное — спокойствие.</b><p>Большинство лихорадок у детей вызывают вирусы, и они проходят за 2–3 дня. Ребёнок чувствует ваше волнение — спокойный родитель помогает лучше любого лекарства.</p></div></div>
     </div>
@@ -587,12 +589,13 @@ footer{padding-bottom:90px}
           <li>Сильная головная боль или боль в животе</li>
           <li>Нарушение координации движений</li>
           <li>Полный отказ от питья или не может пить</li>
-          <li>Температура выше 40 °C, которая не снижается обычными жаропонижающими</li>
+          <li>Температура выше 40 °C, и ребёнку плохо, несмотря на жаропонижающее</li>
           <li>Кровотечение из любого места: нос, рот, кишечник</li>
           <li>Необычно тяжёлое, по вашим ощущениям, состояние ребёнка</li>
         </ul></div>
         <div class="card soon"><h3>Врач в ближайшие 12–24 часа</h3><p>Позвоните в поликлинику или вызовите врача на дом, если:</p><ul>
-          <li class="age">Ребёнку 3–6 месяцев и температура 39 °C и выше</li>
+          <li class="age">Ребёнку 3–6 месяцев и температура 39 °C и выше — покажите врачу сегодня</li>
+          <li>Температура выше 39 °C с ознобом</li>
           <li>Температура выше 38 °C держится больше 3 суток</li>
           <li>Температура поднялась снова после нескольких дней нормальной</li>
           <li>Ребёнку становится хуже день ото дня</li>
@@ -642,7 +645,7 @@ footer{padding-bottom:90px}
         <details class="card"><summary>«Температуру нужно сбивать уже с 38 °C»</summary><p>Жаропонижающее нужно, когда ребёнку плохо, — обычно при 38,5–39 °C и выше. Если ребёнок играет и пьёт, 38 °C сбивать не обязательно: температура помогает бороться с инфекцией. Исключение — дети с хроническими болезнями, им — как скажет врач.</p></details>
         <details class="card"><summary>«Надо укутать, чтобы ребёнок пропотел»</summary><p>Укутывание мешает телу отдавать тепло, и температура может подняться ещё выше. Одежда должна быть лёгкой. Укрыть стоит только при ознобе — пока он не пройдёт.</p></details>
         <details class="card"><summary>«Высокая температура — значит, нужен антибиотик»</summary><p>Вирусы тоже вызывают 39–40 °C. Антибиотики на вирусы не действуют и температуру не снижают. Нужен ли антибиотик, решает врач после осмотра, а не по цифре на градуснике.</p></details>
-        <details class="card"><summary>«Это зубы режутся»</summary><p>При прорезывании зубов температура может чуть подняться — до 37,5–37,8 °C. 38 °C и выше от зубов не бывает: ищите другую причину и наблюдайте за ребёнком.</p></details>
+        <details class="card"><summary>«Это зубы режутся»</summary><p>При прорезывании зубов температура может немного подняться, но до лихорадки — 38 °C и выше — не доходит: ищите другую причину и наблюдайте за ребёнком.</p></details>
         <details class="card"><summary>«Жаропонижающее защитит от судорог»</summary><p>Не защитит — это проверяли в исследованиях. Судороги на фоне температуры зависят от склонности ребёнка, а не от того, сбили ли температуру. Давать лекарство «на всякий случай» не нужно.</p></details>
         <details class="card"><summary>«От высокой температуры пострадает мозг»</summary><p>Температура при инфекции редко поднимается выше 40,5–41 °C и сама по себе мозг не повреждает: повредить его может только температура выше 42 °C. Доказательств, что лихорадка вызывает долгосрочные неврологические последствия, нет. Опасна не цифра, а тяжёлая инфекция — поэтому следите за признаками из раздела <a href="#flags">«Когда к врачу»</a>.</p></details>
         <details class="card"><summary>«Обтереть водкой или уксусом — быстрее собьёт»</summary><p>Спирт и уксус всасываются через кожу и могут отравить ребёнка. Если обтирать — только водой комнатной температуры и только если ребёнку от этого приятно.</p></details>
@@ -683,10 +686,12 @@ footer{padding-bottom:90px}
       <details class="src src-fold"><summary>Источники</summary>
       <ol>
         <li>NICE. Fever in under 5s: assessment and initial management (NG143). Опубликовано 07.11.2019, обновлено 26.11.2021 — измерение температуры, «светофор» признаков, жаропонижающие, уход дома.</li>
-        <li>Союз педиатров России. Клинические рекомендации «Лихорадка без очага инфекции у детей» — пороги жаропонижающих (38,5–39 °C), дозы ибупрофена 10 мг/кг и парацетамола 15 мг/кг, обтирание водой комнатной температуры, запрет метамизола и нимесулида, цель — снижение до 38 °C.</li>
-        <li>Нурофен для детей, суспензия 100 мг/5 мл — описание РЛС (обновлено 07.09.2026): с 3 месяцев и 5 кг, интервал 6–8 ч, не более 30 мг/кг в сутки, к врачу — через 3 дня (3–6 мес — через 24 ч).</li>
+        <li>Союз педиатров России. Клинические рекомендации «Лихорадка без очага инфекции у детей» — пороги жаропонижающих (38,5–39 °C), дозы ибупрофена 10 мг/кг и парацетамола 15 мг/кг, обтирание водой комнатной температуры, запрет метамизола и нимесулида, цель — снижение до 38 °C; тревожный признак — температура выше 39 °C с ознобом. Версия документа без указанной даты утверждения.</li>
+        <li>Нурофен для детей, суспензия 100 мг/5 мл — описание РЛС (обновлено 07.09.2026): с 3 месяцев и 5 кг, интервал 6–8 ч, не более 30 мг/кг в сутки, к врачу — через 3 дня (3–6 мес — через 24 ч); суспензия — для детей от 3 месяцев до 12 лет. Разовая доза в таблице инструкции бывает меньше 10 мг/кг по весу.</li>
+        <li>Нурофен, таблетки 200 мг — описание РЛС (обновлено 07.09.2026): детям с 6 лет и 20 кг — по 1 таблетке, 2 таблетки (400 мг) — с 12 лет.</li>
+        <li>Парацетамол, таблетки 500 мг — описания РЛС (Парацетамол Реневал, обновлено 09.04.2026; Парацетамол-УБФ, обновлено 08.04.2026): детям до 6 лет противопоказан (Реневал), до 8 лет (УБФ).</li>
         <li>Парацетамол детский, суспензия 120 мг/5 мл (Фармстандарт), инструкция ЛС-000094 — 10–15 мг/кг, интервал не менее 4 ч, не более 4 раз и 60 мг/кг в сутки; без врача — не более 3 дней.</li>
-        <li>Цефекон Д, суппозитории ректальные 50, 100, 250 мг — описание РЛС (обновлено 08.04.2026): дозы по массе тела, 10–15 мг/кг, интервал 4–6 ч, не более 60 мг/кг в сутки.</li>
+        <li>Цефекон Д, суппозитории ректальные 50, 100, 250 мг — описание РЛС (обновлено 08.04.2026): дозы по массе тела, 10–15 мг/кг 2–3 раза в сутки, интервал 4–6 ч, не более 60 мг/кг в сутки.</li>
         <li>American Academy of Pediatrics. Sullivan J.E., Farrar H.C. Fever and antipyretic use in children. Pediatrics. 2011;127(3):580–587 — лихорадка не вызывает долгосрочных неврологических осложнений, цель лечения — комфорт ребёнка, жаропонижающие не предотвращают фебрильные судороги.</li>
         <li>American Academy of Pediatrics, HealthyChildren.org. How to Take a Child's Temperature (обновлено 17.04.2024) — виды термометров.</li>
         <li>Seattle Children's Hospital (Schmitt Pediatric Guidelines). Fever — Myths Versus Facts (ред. 30.12.2022) — повреждение мозга возможно только при температуре выше 42 °C; при инфекции она редко выше 40,6–41,1 °C.</li>
@@ -719,35 +724,46 @@ footer{padding-bottom:90px}
   if(typeof st.b!=="number"&&typeof st.a==="number")st.b=Date.now()-[1,4,24][st.a]*30.44*864e5;
   function ageMo(){return typeof st.b==="number"?Math.max(0,Math.floor((Date.now()-st.b)/(30.44*864e5))):null}
   function ageCat(){var m=ageMo();return m===null?2:m<3?0:m<6?1:2}
+  function ageUnk(){return ageMo()===null}
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   function ageTxt(m){if(m===null)return "";var y=Math.floor(m/12),r=m%12,yw=y%10===1&&y%100!==11?"год":(y%10>=2&&y%10<=4&&(y%100<10||y%100>=20))?"года":"лет";return (y?y+" "+yw:"")+(y&&r?" ":"")+(r||!y?r+" мес":"")}
   var agY=$("agY"),agM=$("agM");
   function showAge(){var m=ageMo();if(m===null){agY.value="";agM.value="";$("agHint").textContent="Укажите возраст — от него зависят предупреждения"}else{agY.value=Math.floor(m/12);agM.value=m%12;$("agHint").textContent=""}}
-  function readAge(){var y=parseInt(agY.value,10),mo=parseInt(agM.value,10);if(isNaN(y)&&isNaN(mo))return;y=Math.min(17,Math.max(0,y||0));mo=Math.min(11,Math.max(0,mo||0));st.b=Date.now()-(y*12+mo+.5)*30.44*864e5;delete st.a;$("agHint").textContent="";save();calc()}
+  function readAge(){var y=parseInt(agY.value,10),mo=parseInt(agM.value,10);
+    if(isNaN(y)&&isNaN(mo)){delete st.b;delete st.a;save();showAge();calc();return}
+    y=Math.max(0,y||0);mo=Math.max(0,mo||0);y+=Math.floor(mo/12);mo=mo%12;y=Math.min(17,y);
+    var norm=mo!==(parseInt(agM.value,10)||0);st.b=Date.now()-(y*12+mo+.5)*30.44*864e5;delete st.a;$("agHint").textContent="";save();if(norm||parseInt(agY.value,10)>17)showAge();calc()}
   agY.addEventListener("change",readAge);agM.addEventListener("change",readAge);
   function norm(k){k.log=k.log||{ibu:[],par:[]};k.log.ibu=k.log.ibu||[];k.log.par=k.log.par||[];k.tr=k.tr||[];k.ml=k.ml||{};if(typeof k.w!=="number")k.w=10;return k}
   ROOT.kids.forEach(norm);
   var kwR=$("kwR"),kwN=$("kwN");
-  function setW(w,from){w=Math.min(50,Math.max(3,Math.round(w*2)/2));st.w=w;if(from!=="r")kwR.value=w;if(from!=="n")kwN.value=w;calc();save()}
+  function setW(w,from){var raw=w;w=Math.min(50,Math.max(3,Math.round(w*2)/2));st.w=w;if(from!=="r")kwR.value=w;kwN.value=w;
+    $("kwFrom").textContent=raw>50?"Калькулятор считает до 50 кг — подросткам дозу уточните у врача или по инструкции":raw<3?"Минимальный вес для расчёта — 3 кг":"";calc();save()}
   kwR.addEventListener("input",function(){setW(+kwR.value,"r")});
-  kwN.addEventListener("change",function(){var v=parseFloat(String(kwN.value).replace(",","."));if(v)setW(v,"n")});
+  kwN.addEventListener("change",function(){var v=parseFloat(String(kwN.value).replace(",","."));if(v>0)setW(v,"n");else{kwN.value=st.w;$("kwFrom").textContent="Введите вес ребёнка в килограммах"}});
 
-  function supp(w){if(w<4)return "только по назначению врача";if(w<7)return "1 свеча 50 мг";if(w<11)return "1 свеча 100 мг";if(w<17)return "1–2 свечи по 100 мг (по 10–15 мг/кг)";if(w<31)return "1 свеча 250 мг";if(w<=35)return "2 свечи по 250 мг";return "по инструкции для взрослых и подростков"}
+  function supp(w){if(w<4)return "только по назначению врача";if(w<7)return "1 свеча 50 мг";if(w<13.5)return "1 свеча 100 мг";if(w<17)return "2 свечи по 100 мг";if(w<31)return "1 свеча 250 мг";if(w<=35)return "2 свечи по 250 мг";return "по инструкции для взрослых и подростков"}
   function calc(){
-    var w=st.w,a=ageCat(),am=ageMo();
-    $("under3").hidden=a!==0;
+    var w=st.w,a=ageCat(),am=ageMo(),unkSmall=am===null&&w<6;
+    $("under3").hidden=!(a===0||unkSmall);
     var ibuMl=Math.min(20,fl(w/2,.5)),parMl=Math.min(20,fl(w*.625,.5));
     if(ibuMl*20<w*5)ibuMl=Math.round(w/2*4)/4;
+    if(unkSmall){$("ibuMl").textContent="—";$("parMl").textContent="—";$("ibuMg").textContent="укажите возраст";$("parMg").textContent="укажите возраст"}else{
     $("ibuMl").textContent=fmt(ibuMl);$("ibuMg").textContent=Math.round(ibuMl*20)+" мг · "+fmt(ibuMl*20/w)+" мг/кг";
-    $("parMl").textContent=fmt(parMl);$("parMg").textContent=Math.round(parMl*24)+" мг · "+fmt(parMl*24/w)+" мг/кг";
+    $("parMl").textContent=fmt(parMl);$("parMg").textContent=Math.round(parMl*24)+" мг · "+fmt(parMl*24/w)+" мг/кг";}
     var iw=$("ibuWarn"),pw=$("parWarn");
-    if(a===0||w<5){iw.hidden=false;iw.textContent=a===0?"До 3 месяцев ибупрофен не применяют.":"Ибупрофен — для детей весом от 5 кг."}else iw.hidden=true;
-    if(a===0){pw.hidden=false;pw.textContent="До 3 месяцев — только по назначению врача."}else pw.hidden=true;
-    document.querySelector(".dose.ibu").style.opacity=(a===0||w<5)?".55":"";
-    document.querySelector(".dose.par").style.opacity=a===0?".55":"";
-    var i2=Math.min(10,fl(w/4,.25));$("xIbu200").textContent=(a===0||w<5)?"не применяют":String(i2).replace(".",",")+" мл ("+Math.round(i2*40)+" мг) · правило: вес ÷ 4";
-    $("xIbuTab").textContent=(am!==null&&am<72)?"с 6 лет и 20 кг; пока — суспензия":w>=40?"1–2 таблетки (200–400 мг)":w>=20?"1 таблетка (200 мг)":"с 20 кг; пока — суспензия";
-    $("xSupp").textContent=a===0?"только по назначению врача":supp(w);
-    $("xParTab").textContent=w>=33?"1 таблетка (500 мг)":w>=16?"½ таблетки (250 мг)":"с 16 кг; пока — суспензия или свечи";
+    var ibuNo=a===0||w<5||unkSmall,parNo=a===0||unkSmall;
+    if(ibuNo){iw.hidden=false;iw.textContent=unkSmall?"Укажите возраст ребёнка — от него зависит, можно ли давать лекарство.":a===0?"До 3 месяцев ибупрофен не применяют.":"Ибупрофен — для детей весом от 5 кг."}
+    else if(w>=40||(am!==null&&am>=144)){iw.hidden=false;iw.textContent="Детям старше 12 лет и от 40 кг суспензию не назначают — давайте таблетки 200 мг: см. «Другие формы» ниже."}else iw.hidden=true;
+    if(parNo){pw.hidden=false;pw.textContent=unkSmall?"Укажите возраст ребёнка — от него зависит, можно ли давать лекарство.":"До 3 месяцев — только по назначению врача."}
+    else if(w>=40){pw.hidden=false;pw.textContent="При весе от 40 кг удобнее таблетки 500 мг — см. «Другие формы» ниже."}else pw.hidden=true;
+    document.querySelector(".dose.ibu").style.opacity=ibuNo?".55":"";
+    document.querySelector(".dose.par").style.opacity=parNo?".55":"";
+    document.querySelector('.log[data-drug="ibu"] button:not(.undo)').disabled=ibuNo;document.querySelector('.log[data-drug="par"] button:not(.undo)').disabled=parNo;
+    var i2=Math.min(10,fl(w/4,.25));$("xIbu200").textContent=ibuNo?"не применяют":String(i2).replace(".",",")+" мл ("+Math.round(i2*40)+" мг) · правило: вес ÷ 4";
+    $("xIbuTab").textContent=(am!==null&&am<72)?"с 6 лет и 20 кг; пока — суспензия":w<20?"с 20 кг; пока — суспензия":(am!==null&&am>=144&&w>=40)?"1–2 таблетки (200–400 мг)":"1 таблетка (200 мг)"+(am===null?", с 6 лет":"");
+    $("xSupp").textContent=(a===0||unkSmall)?"только по назначению врача":supp(w)+(w>=4&&w<=35?"; не чаще чем через 4–6 ч, не больше 3 раз в сутки":"");
+    $("xParTab").textContent=(am!==null&&am<72)?"с 6 лет; пока — суспензия или свечи":w>=34?"1 таблетка (500 мг)"+(am===null?", с 6 лет":""):w>=17?"½ таблетки (250 мг)"+(am===null?", с 6 лет":""):"с 17 кг; пока — суспензия или свечи";
     var ks=$("kidSum");ks.hidden=false;ks.textContent=(ROOT.kids.length>1?kname(st,ROOT.cur)+" · ":"")+fmt(w)+" кг"+(am===null?"":" · "+ageTxt(am));
     renderLog();
   }
@@ -770,7 +786,12 @@ footer{padding-bottom:90px}
   }
   [].forEach.call(document.querySelectorAll(".log"),function(box){
     var k=box.dataset.drug;
-    box.querySelector("button:not(.undo)").addEventListener("click",function(){var t=Date.now();st.log[k]=(st.log[k]||[]).concat(t);st.ml=st.ml||{};st.ml[k+t]=curMl(k);save();renderLog();if(window.renderTr)renderTr()});
+    var btn=box.querySelector("button:not(.undo)"),armT=0;
+    btn.addEventListener("click",function(){var t=Date.now(),L=(st.log[k]||[]),last=L.length?L[L.length-1]:0,out=box.querySelector("output");
+      if(last&&t-last<60000){out.className="";out.textContent="Уже записано в "+hm(last);return}
+      var day=L.filter(function(x){return t-x<864e5}).length;
+      if(last&&(t-last<RULE[k].gap*36e5||day>=RULE[k].max)&&!(armT&&t-armT<5000)){armT=t;out.className="no";out.textContent=(day>=RULE[k].max?"Суточный максимум уже набран.":"Рано: следующий раз не раньше "+hm(last+RULE[k].gap*36e5)+".")+" Нажмите ещё раз, только если лекарство уже дали.";return}
+      armT=0;st.log[k]=L.concat(t);st.ml=st.ml||{};st.ml[k+t]=curMl(k);save();renderLog();if(window.renderTr)renderTr()});
     box.querySelector(".undo").addEventListener("click",function(){(st.log[k]||[]).pop();save();renderLog();if(window.renderTr)renderTr()});
   });
   setInterval(function(){renderLog();renderTr()},60000);
@@ -808,7 +829,9 @@ footer{padding-bottom:90px}
   var armed=0;function confirmSoft(){var b=$("trNew");if(armed&&Date.now()-armed<4000){armed=0;b.textContent="Начать заново (новая болезнь)";return true}armed=Date.now();b.textContent="Нажмите ещё раз, чтобы стереть все записи";setTimeout(function(){if(armed){armed=0;b.textContent="Начать заново (новая болезнь)"}},4000);return false}
   $("trList").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;var k=b.dataset.k,i=+b.dataset.i;if(k==="t")st.tr.splice(i,1);else{var tt=st.log[k][i];st.log[k].splice(i,1);if(st.ml)delete st.ml[k+tt]}save();renderLog();renderTr()});
   function meds(){var a=[];st.ml=st.ml||{};["ibu","par"].forEach(function(k){(st.log[k]||[]).forEach(function(t,i){a.push({t:t,k:k,i:i,ml:st.ml[k+t]})})});return a.sort(function(x,y){return x.t-y.t})}
-  function episodeStart(){var L=st.tr,s=null;for(var i=0;i<L.length;i++){if(L[i].v>=38){if(s===null)s=L[i].t}}return s}
+  function episode(){var H=st.tr.filter(function(p){return p.v>=38});if(!H.length)return null;var e=H[H.length-1].t,s=e;
+    for(var i=H.length-2;i>=0;i--){if(s-H[i].t<48*36e5)s=H[i].t;else break}return {s:s,e:e,active:Date.now()-e<24*36e5}}
+  function episodeStart(){var ep=episode();return ep&&ep.active?ep.s:null}
   function svgChart(w,h,forPrint){
     var L=st.tr,M=meds();if(!L.length&&!M.length)return null;
     var ts=L.map(function(x){return x.t}).concat(M.map(function(x){return x.t}));
@@ -833,19 +856,22 @@ footer{padding-bottom:90px}
     var L=st.tr,H=[],now=Date.now();if(!L.length)return H;
     var last=L[L.length-1],es=episodeStart(),a=ageCat();
     if(a===0&&L.some(function(p){return p.v>=38&&now-p.t<3*864e5}))H.push(["h-red","Ребёнку меньше 3 месяцев и температура 38 °C и выше — <b>сразу к врачу или 103</b>."]);
-    if(a===1&&L.some(function(p){return p.v>=39&&now-p.t<3*864e5}))H.push(["h-warm","Ребёнку 3–6 месяцев и было 39 °C и выше — <b>покажите врачу в ближайшие 12–24 часа</b>."]);
-    if(last.v>=40&&now-last.t<6*36e5)H.push(["h-red","Последнее измерение — 40 °C и выше. Если не снижается жаропонижающим — <b>вызывайте 103</b>."]);
-    if(es!==null){var hot=L.filter(function(p){return p.v>=38&&p.t>=es});var span=hot[hot.length-1].t-es;if(span>=72*36e5)H.push(["h-warm","Температура 38 °C и выше держится <b>больше 3 суток</b> — нужен осмотр врача."])}
-    var seenHot=false,normStart=null,wave=false;
-    L.forEach(function(p){if(p.v>=38){if(seenHot&&normStart!==null&&p.t-normStart>=24*36e5)wave=true;seenHot=true;normStart=null}else if(p.v<37.5&&seenHot&&normStart===null)normStart=p.t});
-    if(wave)H.push(["h-warm","Температура <b>поднялась снова</b> после суток нормальной — покажите ребёнка врачу."]);
+    if(a===1&&L.some(function(p){return p.v>=39&&now-p.t<3*864e5}))H.push(["h-warm","Ребёнку 3–6 месяцев и было 39 °C и выше — <b>покажите врачу сегодня</b>."]);
+    if(ageUnk()&&st.w<6&&L.some(function(p){return p.v>=38&&now-p.t<3*864e5}))H.push(["h-red","Укажите возраст ребёнка. Если ему меньше 3 месяцев и температура 38 °C и выше — <b>сразу к врачу или 103</b>."]);
+    if(last.v>40&&now-last.t<6*36e5)H.push(["h-red","Последнее измерение — выше 40 °C. Если ребёнку плохо, несмотря на жаропонижающее, — <b>звоните врачу или 103</b>."]);
+    var ep=episode();if(ep&&ep.active){var span=ep.e-ep.s;if(span>=72*36e5)H.push(["h-warm","Температура 38 °C и выше держится <b>больше 3 суток</b> — нужен осмотр врача."])}
+    var MT=meds().map(function(m){return m.t}),afterMed=function(t){return MT.some(function(x){return t>=x&&t-x<6*36e5})};
+    var seenHot=false,norms=[],wave=false;
+    L.forEach(function(p){if(p.v>=38){if(seenHot&&norms.length>=2&&p.t-norms[0]>=48*36e5&&now-p.t<24*36e5)wave=true;seenHot=true;norms=[]}else if(p.v<37.5&&seenHot&&!afterMed(p.t))norms.push(p.t)});
+    if(wave)H.push(["h-warm","Температура <b>поднялась снова</b> после двух суток нормальной — покажите ребёнка врачу."]);
     var M=meds().filter(function(m){return now-m.t<12*36e5});
-    if(M.length){var m=M[M.length-1],before=L.filter(function(p){return p.t<=m.t&&m.t-p.t<2*36e5}).pop(),after=L.filter(function(p){return p.t-m.t>=60*6e4&&p.t-m.t<=150*6e4});
+    function effect(m){var b=L.filter(function(p){return p.t<=m.t&&m.t-p.t<2*36e5}).pop(),a=L.filter(function(p){return p.t-m.t>=60*6e4&&p.t-m.t<=180*6e4});if(!b||!a.length)return null;return {drop:b.v-Math.min.apply(null,a.map(function(p){return p.v})),lastV:a[a.length-1].v}}
+    if(M.length){var m=M[M.length-1],before=L.filter(function(p){return p.t<=m.t&&m.t-p.t<2*36e5}).pop(),after=L.filter(function(p){return p.t-m.t>=60*6e4&&p.t-m.t<=180*6e4});
       if(before&&after.length){var bestDrop=before.v-Math.min.apply(null,after.map(function(p){return p.v}));
-        if(bestDrop<0.5&&after[after.length-1].v>=38){var other=M.some(function(x){return x.k!==m.k&&x.t>m.t-6*36e5&&x.t<m.t});
-          H.push(other?["h-red","Два разных жаропонижающих, а температура не снижается — <b>вызывайте 103</b>."]:["h-warm","Через 1–1,5 часа после "+(m.k==="ibu"?"ибупрофена":"парацетамола")+" температура не снизилась на 0,5 °C. Если ребёнку плохо — можно дать <b>"+(m.k==="ibu"?"парацетамол":"ибупрофен")+"</b> (шаг 2)."])}
+        if(bestDrop<0.5&&after[after.length-1].v>=38){var other=M.some(function(x){if(!(x.k!==m.k&&x.t>m.t-6*36e5&&x.t<m.t))return false;var ef=effect(x);return !!ef&&ef.drop<0.5&&ef.lastV>=38});
+          H.push(other?["h-red","Дали оба жаропонижающих, а температура не снижается. Если ребёнку плохо — <b>звоните врачу или 103</b>."]:["h-warm","Через 1–1,5 часа после "+(m.k==="ibu"?"ибупрофена":"парацетамола")+" температура не снизилась на 0,5 °C. Если ребёнку плохо — можно дать <b>"+(m.k==="ibu"?"парацетамол":"ибупрофен")+"</b> (шаг 2)."])}
         else if(bestDrop>=0.5)H.push(["h-ok","Жаропонижающее подействовало: температура снизилась на "+f1(bestDrop)+" °C."])}
-      else if(!after.length&&now-m.t>=60*6e4&&now-m.t<=150*6e4)H.push(["h-ok","Прошло больше часа после лекарства — перемерьте температуру и запишите."])}
+      else if(!after.length&&now-m.t>=60*6e4&&now-m.t<=180*6e4)H.push(["h-ok","Прошло больше часа после лекарства — перемерьте температуру и запишите."])}
     var recent=L.filter(function(p){return now-p.t<12*36e5}),has=function(k){return recent.some(function(p){return p.s&&p.s.indexOf(k)>=0})};
     if(has("rash"))H.push(["h-red","Отмечена сыпь — прижмите к пятнам прозрачный стакан. Если сыпь <b>не бледнеет — сразу 103</b>; если бледнеет — покажите врачу."]);
     if(has("drink")&&has("pee"))H.push(["h-warm","Мало пьёт и редко писает — риск обезвоживания. <b>Поите понемногу каждые 5–10 минут</b> и покажите врачу; если совсем не пьёт — 103."]);
@@ -855,7 +881,7 @@ footer{padding-bottom:90px}
   function summary(){
     var L=st.tr,M=meds(),now=Date.now(),out=[];
     out.push((ROOT.kids.length>1||st.name?kname(st,ROOT.cur)+". ":"")+"Вес: "+fmt(st.w)+" кг; возраст: "+(ageMo()===null?"не указан":ageTxt(ageMo()))+".");
-    if(L.length){var es=episodeStart();if(es!==null){var d=Math.floor((now-es)/864e5)+1;out.push("Температура 38 °C и выше — с "+dm(es)+" ("+d+"-е сутки).")}
+    if(L.length){var ep=episode();if(ep&&ep.active){var d=Math.floor((now-ep.s)/864e5)+1;out.push("Температура 38 °C и выше — с "+dm(ep.s)+" ("+d+"-е сутки).")}else if(ep)out.push("Последний раз 38 °C и выше — "+dm(ep.e)+".")
       var mx=L.reduce(function(a,b){return b.v>a.v?b:a});out.push("Максимум: "+f1(mx.v)+" °C ("+dm(mx.t)+"). Последнее измерение: "+f1(L[L.length-1].v)+" °C ("+dm(L[L.length-1].t)+").")}
     var M24=M.filter(function(m){return now-m.t<864e5});
     if(M24.length)out.push("Жаропонижающее за сутки: "+M24.map(function(m){return (m.k==="ibu"?"ибупрофен":"парацетамол")+(m.ml?" "+fmt(m.ml)+" мл":"")+" в "+hm(m.t)}).join("; ")+".");
@@ -866,7 +892,7 @@ footer{padding-bottom:90px}
   }
   window.renderTr=renderTr;function renderTr(){
     var L=st.tr,es=episodeStart(),now=Date.now();
-    $("trDays").textContent=!L.length?"Записей пока нет":es===null?"Температура ниже 38 °C":(Math.floor((now-es)/864e5)+1)+"-е сутки температуры";
+    var ep2=episode();$("trDays").textContent=!L.length?"Записей пока нет":!ep2?"Температура ниже 38 °C":!ep2.active?"Больше суток без 38 °C":(Math.floor((now-ep2.s)/864e5)+1)+"-е сутки температуры";
     $("trMax").textContent=L.length?"макс. "+f1(L.reduce(function(a,b){return Math.max(a,b.v)},0))+" °C":"";
     var cw=Math.max(300,Math.min(700,$("trSvg").clientWidth||640)),c=svgChart(cw,cw<500?240:300,false);$("trSvg").innerHTML=c||'<div class="empty">Добавьте первое измерение — здесь появится кривая температуры</div>';
     $("trHints").innerHTML=hints().map(function(h){return '<div class="'+h[0]+'"><span>'+(h[0]==="h-ok"?"✓":"!")+'</span><span>'+h[1]+'</span></div>'}).join("");
@@ -883,7 +909,7 @@ footer{padding-bottom:90px}
   function trFill(){
     var L=st.tr,rows=L.slice().reverse().map(function(p){return "<tr><td>"+dm(p.t)+"</td><td><b>"+f1(p.v)+"</b></td><td>"+(p.s||[]).map(function(k){return SYM[k]}).join(", ")+"</td></tr>"}).join("");
     var mrows=meds().slice().reverse().map(function(m){return "<tr><td>"+dm(m.t)+"</td><td colspan=2>"+(m.k==="ibu"?"ибупрофен":"парацетамол")+(m.ml?" "+fmt(m.ml)+" мл":"")+"</td></tr>"}).join("");
-    $("trPrintBox").innerHTML="<h2>Трекер лихорадки"+(ROOT.kids.length>1||st.name?": "+kname(st,ROOT.cur):"")+"</h2><p class='pm'>Распечатано "+dm(Date.now())+"</p><pre>"+summary()+"</pre>"+(svgChart(720,280,true)||"")+
+    $("trPrintBox").innerHTML="<h2>Трекер лихорадки"+(ROOT.kids.length>1||st.name?": "+esc(kname(st,ROOT.cur)):"")+"</h2><p class='pm'>Распечатано "+dm(Date.now())+"</p><pre>"+esc(summary())+"</pre>"+(svgChart(720,280,true)||"")+
       "<table><thead><tr><th>Дата, время</th><th>°C</th><th>Самочувствие</th></tr></thead><tbody>"+(rows||"<tr><td colspan=3>—</td></tr>")+"</tbody></table>"+
       (mrows?"<table style='margin-top:8px'><thead><tr><th>Дата, время</th><th colspan=2>Жаропонижающее</th></tr></thead><tbody>"+mrows+"</tbody></table>":"")+
       "<p class='ft'>Записи сделаны родителями в памятке «Лихорадка у ребёнка». · Врач-педиатр Корчагина Ю.А.</p>";

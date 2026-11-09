@@ -451,6 +451,37 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
 .ill-h{background:radial-gradient(circle at 35% 50%,#F3B8A0 0 26px,transparent 27px),radial-gradient(circle at 65% 50%,#F3B8A0 0 26px,transparent 27px),#F8E0D2}
 .ill-u{background:radial-gradient(ellipse 40% 22% at 50% 52%,#F0A25C,rgba(240,162,92,.25) 60%,transparent 70%),#FFFFFF}
 .ill-s{background:linear-gradient(90deg,#2B2A26 0 33%,#5C7A3A 33% 66%,#E8B93A 66%)}
+
+.ntab.mtab td:first-child{white-space:normal;font-weight:600}
+.mtab td:last-child{font-weight:700}
+.milk .plain{margin-top:14px}
+.qcard .from{margin:6px 0 10px;font-size:.9rem;color:var(--muted)}
+.qmy{display:block;font-weight:800;font-size:.9rem;margin:14px 0 6px}
+#qMy{width:100%;min-height:96px;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);font:inherit;font-size:16px;padding:10px 12px;resize:vertical}
+#qMy:focus{outline:none;border-color:var(--coral-2)}
+.caution.alarm{background:var(--alert-bg);color:var(--alert-ink)}
+.caution.alarm b{color:inherit}
+.tnum .trow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;align-items:start;border-radius:12px;padding:10px 12px;margin-top:10px;font-size:.93rem}
+.tnum .trow b{font-family:var(--f-display);font-size:1.02rem}
+.tnum .trow.bad{background:var(--alert-bg);color:var(--alert-ink)}
+.tnum .trow.ok{background:var(--tchip);color:var(--ok-ink)}
+.tnum .from,#temp .from{margin-top:12px;font-size:.88rem;color:var(--muted)}
+@media (max-width:420px){.tnum .trow{grid-template-columns:1fr;gap:2px}}
+.fr-act{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.fr-act .from{flex-basis:100%;font-size:.88rem;color:var(--muted)}
+.btn-sec{border:2px solid var(--coral);background:var(--card);color:var(--coral);border-radius:99px;padding:10px 18px;font:inherit;font-weight:800;font-size:.92rem;cursor:pointer;min-height:44px}
+.btn-sec:hover{background:var(--chip)}
+#frBox{display:none}
+@media print{
+ body.print-fr .hero,body.print-fr .topnav,body.print-fr .fab-sos,body.print-fr main>section,body.print-fr main>footer,body.print-fr .howto{display:none!important}
+ body.print-fr main>#flags{display:block!important;padding:0}
+ body.print-fr #flags .wrap>*{display:none!important}
+ body.print-fr #flags #frBox{display:block!important;color:#000;font-size:11pt}
+ #frBox h2{font-size:18pt;margin:0 0 6px}
+ #frBox p{margin:0 0 5px}
+ #frBox p.h{font-weight:800;font-size:13pt;margin-top:12px}
+ #frBox p.ft{font-size:9pt;color:#444;margin-top:12px}
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -508,7 +539,7 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
   <div class="wrap">
     <button type="button" class="kid" id="kidSum" hidden>Малыш</button>
     <div class="tabs">
-      <a href="#care">Уход</a><a href="#feed">Кормление</a><a href="#bottle">Бутылочки и соски</a><a href="#check">Вес и подгузники</a><a href="#sleep">Сон и комната</a><a href="#normal">Это норма</a><a href="#kit">Аптечка</a><a href="#month">В 1 месяц</a><a href="#flags">Тревожно</a>
+      <a href="#care">Уход</a><a href="#feed">Кормление</a><a href="#bottle">Бутылочки и соски</a><a href="#check">Вес и подгузники</a><a href="#sleep">Сон и комната</a><a href="#safe">Безопасность</a><a href="#normal">Это норма</a><a href="#myths">Мифы</a><a href="#kit">Аптечка</a><a href="#month">В 1 месяц</a><a href="#mom">Маме</a><a href="#temp">Температура</a><a href="#flags">Тревожно</a>
     </div>
   </div>
 </nav>
@@ -615,6 +646,21 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
           <li>Кипятите или мойте в посудомойке до 6 месяцев; меняйте при трещинах и изменении цвета.</li>
         </ul></div>
       </div>
+    
+      <div class="card milk" style="margin-top:20px"><h3>Сцеженное грудное молоко</h3>
+        <table class="ntab mtab"><thead><tr><th>Где хранить</th><th>Сколько</th></tr></thead><tbody>
+          <tr><td>При комнатной температуре (до 25 °C)</td><td>до 4 часов</td></tr>
+          <tr><td>В холодильнике</td><td>до 4 дней</td></tr>
+          <tr><td>В морозилке</td><td>лучше до 6 месяцев, допустимо до 12</td></tr>
+          <tr><td>Разморожено в холодильнике</td><td>использовать за 24 часа</td></tr>
+          <tr><td>Подогрето или осталось после кормления</td><td>использовать за 2 часа, остальное вылить</td></tr>
+        </tbody></table>
+        <ul class="plain">
+          <li>Подписывайте на ёмкости дату сцеживания. Сначала используйте самое старое молоко.</li>
+          <li>Храните в глубине холодильника или морозилки, а не на дверце — там температура скачет.</li>
+          <li>Размораживайте в холодильнике за ночь или в тёплой воде. Не размораживайте и не грейте в микроволновке.</li>
+          <li>Размороженное молоко повторно не замораживайте.</li>
+        </ul></div>
     </div>
   </section>
 
@@ -682,6 +728,37 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
         <div class="card"><h3>Температура <i>18–24 °C</i></h3><p>Для сна лучше прохладнее. Тепло ли малышу, проверяйте по груди или затылку, а не по рукам и ногам: они обычно прохладные. Горячая и влажная кожа — снимите слой.</p></div>
         <div class="card"><h3>Влажность <i>40–60 %</i></h3><p>Сухой воздух сушит слизистую носа. Зимой, когда топят батареи, поможет увлажнитель — регулярно мойте его по инструкции.</p></div>
         <div class="card"><h3>Проветривание <i>несколько раз в день</i></h3><p>Пока проветриваете — ребёнок в другой комнате. Никакого табачного дыма и вейпов в доме и в машине.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="safe">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Безопасность</span><h2>Безопасность дома и в дороге</h2><p>Несчастные случаи с малышами происходят за секунды — чаще всего там, где родители не ждут.</p></div>
+      <div class="grid2">
+        <div class="card"><h3>Автокресло</h3><ul class="plain">
+          <li>Из роддома и в любой поездке — только в автокресле для новорождённых.</li>
+          <li>Ставьте его <b>лицом против хода движения</b>, лучше на заднее сиденье.</li>
+          <li>Никогда — на переднее сиденье с включённой подушкой безопасности.</li>
+          <li>Не держите малыша на руках в машине: при резком торможении взрослый его не удержит.</li>
+          <li>Уснул в автокресле — дома переложите в кроватку на спину.</li>
+        </ul></div>
+        <div class="card"><h3>Падения</h3><ul class="plain">
+          <li>Не оставляйте малыша одного на пеленальном столике, диване или взрослой кровати — даже на секунду и даже если он «ещё не переворачивается».</li>
+          <li>Нужно отойти — возьмите малыша с собой или положите в кроватку.</li>
+          <li>Не ставьте переноску и автокресло с ребёнком на стол или другую высокую поверхность.</li>
+        </ul></div>
+        <div class="card"><h3>Вода и ожоги</h3><ul class="plain">
+          <li>Ни на секунду не оставляйте малыша одного в ванночке: дети тонут быстро и беззвучно.</li>
+          <li>Проверяйте воду локтем или термометром перед тем, как опустить малыша.</li>
+          <li>Если можно настроить водонагреватель — не выше 49 °C.</li>
+          <li>Не держите малыша на руках, когда пьёте горячий чай или кофе, и не передавайте горячее над ним.</li>
+        </ul></div>
+        <div class="card"><h3>Дым, животные, тряска</h3><ul class="plain">
+          <li>Не курите дома, в машине и рядом с малышом — это касается и вейпов.</li>
+          <li>Не оставляйте малыша наедине с собакой или кошкой и не пускайте животных в кроватку.</li>
+          <li><b>Никогда не трясите малыша</b> — даже в шутку и даже если он долго плачет. Тряска может повредить мозг.</li>
+        </ul></div>
       </div>
     </div>
   </section>
@@ -761,6 +838,20 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
     </div>
   </section>
 
+  <section id="myths">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Мифы</span><h2>Мифы первого месяца</h2><p>Советы, которые родители часто слышат от родных и знакомых. Нажмите, чтобы узнать, как на самом деле.</p></div>
+      <div class="myths">
+        <details class="card"><summary>«Пеленайте туго, чтобы ножки были ровными»</summary><p>Ножки «колесом» и согнутые в коленях — нормальное положение для новорождённого, с возрастом они выпрямляются сами. Тугое пеленание с выпрямленными и сведёнными ножками, наоборот, повышает риск дисплазии тазобедренных суставов. Если пеленаете — свободно: ножки должны сгибаться и разводиться в стороны.</p></details>
+        <details class="card"><summary>«Малыша нужно допаивать водой»</summary><p>В грудном молоке и правильно разведённой смеси достаточно воды — даже в жару. Вода занимает место молока в маленьком желудке, и малыш недоедает. Если кажется, что ребёнку жарко или он хочет пить, — чаще прикладывайте к груди или предложите смесь.</p></details>
+        <details class="card"><summary>«После прививки БЦЖ нельзя купать»</summary><p>Купать можно. Место прививки не трите мочалкой, не обрабатывайте йодом, зелёнкой и другими растворами, не заклеивайте пластырем. Через 4–6 недель на месте прививки появится уплотнение, потом гнойничок и корочка — это нормальная реакция, она заживает 2–3 месяца и оставляет маленький рубчик.</p></details>
+        <details class="card"><summary>«Пупок нужно мазать зелёнкой»</summary><p>Пупочная ранка лучше всего заживает сухой и чистой. Зелёнка не ускоряет заживление и мешает заметить покраснение — признак воспаления. Нужна ли дополнительная обработка, скажет врач.</p></details>
+        <details class="card"><summary>«Пустышку можно обмакнуть в сахар или мёд, чтобы малыш взял»</summary><p>Нельзя. Сладкое приучает к сахару и вредит будущим зубам, а мёд детям до года опасен: в нём могут быть споры возбудителя ботулизма.</p></details>
+        <details class="card"><summary>«От колик помогают укропная вода и капли от газиков»</summary><p>Исследования не показали, что укропная вода, травяные чаи или капли с симетиконом уменьшают плач. Плач нарастает к 6 неделям и обычно сам стихает к 3–4 месяцам. Помогают укачивание, ношение на руках, монотонный звук. Если плач необычный, малыш плохо ест или не прибавляет в весе — покажите врачу.</p></details>
+      </div>
+    </div>
+  </section>
+
   <section id="kit">
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Аптечка</span><h2>Аптечка новорождённого</h2><p>Отмечайте, что уже есть дома. Лекарства в первый месяц — только по назначению врача.</p></div>
@@ -799,6 +890,54 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
         <div class="card step"><span class="num">3</span><h3>Результат скрининга</h3><p>Результат приходит примерно к 10-м суткам. Звонят, <b>только если есть отклонения</b>: если с вами не связались — всё в порядке.</p><p>Позвонили и пригласили на повторный анализ — не паникуйте: первый результат часто оказывается ложноположительным. Главное — сдать повторный анализ без задержки.</p></div>
         <div class="card step"><span class="num">4</span><h3>В 1 месяц — первый осмотр</h3><p>Педиатр, невролог, детский хирург, офтальмолог, детский стоматолог. УЗИ органов брюшной полости, почек, тазобедренных суставов, сердца и головного мозга (нейросонография); аудиологический скрининг, если не сделали в роддоме. Вторая прививка от гепатита B.</p></div>
       </div>
+    
+      <div class="card qcard" style="margin-top:20px"><h3>Вопросы к врачу</h3><p class="from">Отмечайте, о чём хотите спросить на патронаже или приёме, и дописывайте свои вопросы. Список сохраняется на телефоне.</p>
+        <ul class="kitl" id="qL">
+          <li><label><input type="checkbox" data-q="w"> Хорошо ли малыш прибавляет в весе?</label></li>
+          <li><label><input type="checkbox" data-q="milk"> Хватает ли молока? Правильно ли я развожу смесь?</label></li>
+          <li><label><input type="checkbox" data-q="cord"> Как заживает пупок, нужна ли обработка?</label></li>
+          <li><label><input type="checkbox" data-q="stool"> Нормальный ли стул и сколько раз в день он должен быть?</label></li>
+          <li><label><input type="checkbox" data-q="jaund"> Желтуха — нужно ли что-то делать?</label></li>
+          <li><label><input type="checkbox" data-q="walk"> Когда начинать гулять и сколько?</label></li>
+          <li><label><input type="checkbox" data-q="vitd"> Как давать витамин D?</label></li>
+          <li><label><input type="checkbox" data-q="next"> Какие обследования и прививки впереди?</label></li>
+        </ul>
+        <label class="qmy" for="qMy">Мои вопросы</label>
+        <textarea id="qMy" rows="4" maxlength="1500" placeholder="Например: малыш часто икает после еды — это нормально?"></textarea>
+      </div>
+    </div>
+  </section>
+
+    <section id="mom">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Маме</span><h2>Маме тоже нужна забота</h2><p>После родов меняется всё: гормоны, сон, привычный ритм. Чувствовать себя растерянной — нормально.</p></div>
+      <div class="grid3 meas mom">
+        <div class="card"><h3>Это бывает у многих <i>1–2 недели</i></h3><p>Примерно с 3-го дня после родов многие мамы плачут без причины, раздражаются, чувствуют себя одиноко и уязвимо. Это послеродовая хандра — обычно она проходит за 1–2 недели.</p></div>
+        <div class="card"><h3>Обратитесь к врачу <i>дольше 2 недель</i></h3><p>Если грусть, тревога или опустошённость не проходят дольше 2 недель, ничего не радует, вы не можете уснуть, даже когда малыш спит, или чувствуете себя плохой мамой — расскажите акушеру-гинекологу, терапевту или педиатру на патронаже. Послеродовая депрессия бывает у 10–15 из 100 мам, и она лечится.</p></div>
+        <div class="card"><h3>Что помогает <i>каждый день</i></h3><p>Спите, когда спит малыш. Соглашайтесь на помощь: близкие могут купать, гулять, готовить, а при искусственном вскармливании — кормить. Ешьте и пейте вовремя. Говорите о своих чувствах — с партнёром, подругой, врачом.</p></div>
+      </div>
+      <div class="caution sm alarm" style="margin-top:16px"><svg aria-hidden="true"><use href="#i-info"/></svg><div><b>Если появляются мысли причинить вред себе или малышу — звоните 112 прямо сейчас.</b> Это не слабость и не ваша вина, а состояние, которому нужна срочная помощь.</div></div>
+    </div>
+  </section>
+
+  <section id="temp">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Температура</span><h2>Как мерить температуру</h2><p>У новорождённого температуру меряют электронным термометром в подмышке.</p></div>
+      <div class="grid2">
+        <div class="card"><h3>Как мерить</h3><ol class="steps-ol">
+          <li>Насухо вытрите подмышку.</li>
+          <li>Вставьте кончик электронного термометра в самую глубину подмышки и прижмите ручку малыша к телу.</li>
+          <li>Держите столько, сколько указано в инструкции к термометру, обычно до сигнала.</li>
+          <li>Если малыш был тепло укутан или только что плакал, раскутайте его и перемерьте через 15–20 минут.</li>
+        </ol>
+        <p class="from">Полоски на лоб и проверка «губами по лбу» ненадёжны. Если вам кажется, что малыш горячий, — обязательно измерьте.</p></div>
+        <div class="card tnum"><h3>Что значат цифры</h3>
+          <div class="trow bad"><b>38 °C и выше</b><span>Сразу вызывайте скорую 103. У малыша до 3 месяцев это всегда повод для срочного осмотра. Жаропонижающее до 3 месяцев — только по назначению врача.</span></div>
+          <div class="trow bad"><b>ниже 36 °C</b><span>Тоже повод вызвать 103 — особенно если малыш вялый или плохо сосёт.</span></div>
+          <div class="trow ok"><b>36–37,9 °C</b><span>Если малыш ведёт себя как обычно, повода для тревоги нет.</span></div>
+          <p class="from">Помните: у малышей первых месяцев тяжёлая инфекция может протекать и без температуры. Ориентируйтесь на поведение ребёнка.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -830,6 +969,9 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
           <li>Вам кажется, что с ребёнком что-то не так — это тоже повод позвонить</li>
         </ul></div>
       </div>
+    
+      <div class="fr-act"><button type="button" class="btn-sec" id="frPrint">Печать или PDF</button><button type="button" class="btn-sec" id="frPng">Сохранить картинкой</button><span class="from">Распечатайте и повесьте на холодильник или сохраните в телефон.</span></div>
+      <div id="frBox" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -879,6 +1021,15 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
         <li>Национальная программа «Недостаточность витамина D у детей и подростков РФ»; доза 500 МЕ/сут для доношенных детей первых месяцев — цит. по: Хульчаев Т.А. и соавт. Детская медицина Северо-Запада, 2021, т. 9, № 1.</li>
         <li>Приказ Минздрава России от 07.03.2018 № 92н (первичная медико-санитарная помощь детям) и приказ Минздрава России от 17.04.2025 № 222н «Об утверждении Порядка оказания медицинской помощи по профилю „неонатология“» — патронаж новорождённых; сроки визитов — по регламенту Департамента здравоохранения Москвы.</li>
         <li>Якубовский Г.И., ГБУ РО «ОКПЦ». Памятка «Неонатальный скрининг» — 36 заболеваний с 2023 г., кровь на 2-е сутки у доношенных, повторное обследование при отклонениях.</li>
+        <li>NICE. Fever in under 5s (NG143), 2019 — у детей до 4 недель температуру измеряют электронным термометром в подмышке; лобные термометры ненадёжны; 38 °C и выше у детей до 3 месяцев — группа высокого риска.</li>
+        <li>CDC. Proper Storage and Preparation of Breast Milk (обн. 14.08.2026) — сроки хранения сцеженного молока, размораживание, запрет микроволновки и повторной заморозки.</li>
+        <li>AAP, HealthyChildren.org. Car Seats for Children: Where We Stand (обн. 22.12.2021) — автокресло против хода движения, не на переднем сиденье с подушкой безопасности, не на руках.</li>
+        <li>KidsHealth (Nemours). Water Safety: Bathrooms (рец. 05.2019) — не оставлять ребёнка одного в ванной, водонагреватель не выше 49 °C, проверять воду.</li>
+        <li>HSE (Ирландия). Feeling down after the birth (рец. 27.05.2026) — послеродовая хандра с 3-го дня, проходит за 1–2 недели; если дольше 2 недель — к врачу; депрессия у 10–15 из 100.</li>
+        <li>International Hip Dysplasia Institute. Hip-Healthy Swaddling (обн. 22.10.2025) — тугое пеленание с выпрямленными ножками повышает риск дисплазии.</li>
+        <li>UNICEF. No water, breastfeed only — детям на грудном вскармливании не нужна вода, в том числе в жару.</li>
+        <li>Инструкция к вакцине БЦЖ-М, РЛС (изм. 16.06.2020) — местная реакция через 4–6 недель, заживление 2–3 месяца, не обрабатывать и не заклеивать место введения.</li>
+        <li>Biagioli E. и соавт. Pain-relieving agents for infantile colic. Cochrane Database Syst Rev, 2016 — нет доказательств пользы симетикона и других средств при коликах.</li>
         <li>Приказ Минздрава России от 10.08.2017 № 514н — профилактический осмотр в 1 месяц.</li>
         <li>ВОЗ. Recommendations on maternal and newborn care for a positive postnatal experience (2022) — сухой уход за пуповиной, время первого купания.</li>
       </ol>
@@ -989,6 +1140,45 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
   kitTxt();upd();
   setInterval(function(){if(st.c&&st.c.d!==today())upd()},60000);
 
+
+
+  /* вопросы к врачу */
+  st.q=st.q||{};
+  [].forEach.call(document.querySelectorAll("#qL input"),function(x){x.checked=!!st.q[x.dataset.q];x.addEventListener("change",function(){if(x.checked)st.q[x.dataset.q]=1;else delete st.q[x.dataset.q];save()})});
+  var qMy=$("qMy");if(st.qMy)qMy.value=st.qMy;qMy.addEventListener("input",function(){st.qMy=qMy.value.slice(0,1500);save()});
+
+  /* лист «Когда срочно к врачу» — печать и картинка */
+  function frFill(){
+    var b=$("frBox"),h=[];
+    function P(t,c){var p=document.createElement("p");if(c)p.className=c;p.textContent=t;return p}
+    b.innerHTML="";var h2=document.createElement("h2");h2.textContent="Когда срочно к врачу — малыш первого месяца";b.appendChild(h2);
+    [].forEach.call(document.querySelectorAll("#flags .flags .card"),function(c){
+      b.appendChild(P(c.querySelector("h3").textContent.replace(/^103\s*/,"103 — ").trim(),"h"));
+      [].forEach.call(c.querySelectorAll("li"),function(li){b.appendChild(P("• "+li.textContent.trim()))});
+    });
+    b.appendChild(P("Тяжёлая инфекция у малыша может протекать без температуры — ориентируйтесь на поведение. Температуру мерьте электронным термометром в подмышке.","ft"));
+    b.appendChild(P("«Наш малыш» · врач-педиатр Корчагина Ю.А.","ft"));
+  }
+  function domToPng(el,fname){
+    var W=1080,PAD=56,F='"Manrope","Segoe UI",system-ui,sans-serif',parts=[].slice.call(el.children);
+    var cv=document.createElement("canvas"),ctx=cv.getContext("2d");
+    function wrap(t,font,maxW){ctx.font=font;var out=[],ws=String(t).split(/\s+/),line="";ws.forEach(function(w){var tst=line?line+" "+w:w;if(ctx.measureText(tst).width>maxW&&line){out.push(line);line=w}else line=tst});out.push(line);return out}
+    var ops=[],y=PAD;
+    parts.forEach(function(n){
+      if(n.tagName==="H2"){var L=wrap(n.textContent,"800 42px "+F,W-2*PAD);ops.push({L:L,font:"800 42px "+F,lh:52,y:y,col:"#1F3550"});y+=L.length*52+14}
+      else{var c=n.className,fs=c==="h"?28:(c==="ft"?19:22),fw=c==="h"?"800 ":"500 ",col=c==="h"?(/103/.test(n.textContent)?"#B42330":"#8A5A00"):(c==="ft"?"#666":"#222");
+        if(c==="h")y+=14;var L2=wrap(n.textContent,fw+fs+"px "+F,W-2*PAD-(c?0:20));ops.push({L:L2,font:fw+fs+"px "+F,lh:fs*1.4,y:y,x:c?PAD:PAD+10,col:col});y+=L2.length*fs*1.4+(c==="h"?10:6)}
+    });
+    cv.width=W;cv.height=y+PAD;ctx.fillStyle="#fff";ctx.fillRect(0,0,W,cv.height);ctx.fillStyle="#2F6AA3";ctx.fillRect(0,0,W,12);ctx.textBaseline="top";
+    ops.forEach(function(o){ctx.font=o.font;ctx.fillStyle=o.col;o.L.forEach(function(l,i){ctx.fillText(l,o.x||PAD,o.y+i*o.lh)})});
+    cv.toBlob(function(b){if(!b)return;var file=null;try{file=new File([b],fname,{type:"image/png"})}catch(e){}
+      if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file]}).catch(function(){});return}
+      var u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=fname;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},60000)},"image/png");
+  }
+  function isStandalone(){try{return !!(navigator.standalone||matchMedia("(display-mode: standalone)").matches)}catch(e){return false}}
+  $("frPng").addEventListener("click",function(){frFill();domToPng($("frBox"),"malysh-kogda-k-vrachu.png")});
+  $("frPrint").addEventListener("click",function(){frFill();if(isStandalone()||typeof window.print!=="function"){domToPng($("frBox"),"malysh-kogda-k-vrachu.png");return}document.body.classList.add("print-fr");setTimeout(function(){try{window.print()}catch(x){domToPng($("frBox"),"malysh-kogda-k-vrachu.png")}},50)});
+  window.addEventListener("afterprint",function(){document.body.classList.remove("print-fr")});
 
   /* карточки транзиторных состояний */
   [].forEach.call(document.querySelectorAll(".ts"),function(c){

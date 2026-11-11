@@ -15,7 +15,7 @@
 <meta property="og:image:alt" content="Прикорм: как вводить новую еду малышу от 4 до 12 месяцев">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<meta name="theme-color" content="#3B7D4F">
+<meta name="theme-color" content="#12684A">
 <meta name="description" content="Памятка для родителей от врача-педиатра Корчагиной Ю.А.: как и когда вводить прикорм, сколько давать по месяцам, аллергены и безопасность, дневник продуктов.">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -33,25 +33,25 @@
 <style>
 /* «Прикорм»: зелень + морковь. */
 :root{
-  --coral:#3B7D4F; --coral-2:#7DB88D; --teal:#C25E1A; --teal-2:#36A98A; --sun:#FFC56B; --peach:#F29A4A;
-  --bg:#F7FAF5; --card:#FFFFFF; --ink:#1B2433; --muted:#566273; --line:#DDE8DA;
-  --chip:#E5F2E6; --tchip:#DDF2EA; --alert-bg:#FFE5E7; --alert-ink:#9A1830; --ok-ink:#11624F;
+  --coral:#12684A; --coral-2:#5DB892; --teal:#A65F00; --teal-2:#36A98A; --sun:#FFC56B; --peach:#F2C230;
+  --bg:#F3F8F5; --card:#FFFFFF; --ink:#1B2433; --muted:#566273; --line:#D3E5DB;
+  --chip:#DFF0E7; --tchip:#DCF2E6; --alert-bg:#FFE5E7; --alert-ink:#9A1830; --ok-ink:#0B5A40;
   --warm-bg:#FFF2E2; --warm-ink:#7A3F00;
-  --shadow:0 12px 30px -16px rgba(59,125,79,.35);
+  --shadow:0 12px 30px -16px rgba(18,104,74,.35);
   --f-display:"Unbounded","Manrope",system-ui,sans-serif;
   --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --coral:#9AD3A8; --coral-2:#2D5A3A; --teal:#FFB27A; --teal-2:#2BA9B3; --sun:#FFC56B;
-  --bg:#121812; --card:#1B241C; --ink:#EEF2F8; --muted:#A9B4C4; --line:#2F3D31;
-  --chip:#1F3524; --tchip:#163A30; --alert-bg:#3E161C; --alert-ink:#FFB3BC; --ok-ink:#8FE6C8;
+  --coral:#7AD8AE; --coral-2:#1A5A40; --teal:#FFD966; --teal-2:#2BA9B3; --sun:#FFC56B;
+  --bg:#0D1612; --card:#15201B; --ink:#EEF2F8; --muted:#A9B4C4; --line:#283A31;
+  --chip:#143728; --tchip:#123A2C; --alert-bg:#3E161C; --alert-ink:#FFB3BC; --ok-ink:#8FE6C8;
   --warm-bg:#3B2A14; --warm-ink:#FFD09A;
   --shadow:0 12px 30px -16px rgba(0,0,0,.7); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --coral:#9AD3A8; --coral-2:#2D5A3A; --teal:#FFB27A; --teal-2:#2BA9B3; --sun:#FFC56B;
-  --bg:#121812; --card:#1B241C; --ink:#EEF2F8; --muted:#A9B4C4; --line:#2F3D31;
-  --chip:#1F3524; --tchip:#163A30; --alert-bg:#3E161C; --alert-ink:#FFB3BC; --ok-ink:#8FE6C8;
+  --coral:#7AD8AE; --coral-2:#1A5A40; --teal:#FFD966; --teal-2:#2BA9B3; --sun:#FFC56B;
+  --bg:#0D1612; --card:#15201B; --ink:#EEF2F8; --muted:#A9B4C4; --line:#283A31;
+  --chip:#143728; --tchip:#123A2C; --alert-bg:#3E161C; --alert-ink:#FFB3BC; --ok-ink:#8FE6C8;
   --warm-bg:#3B2A14; --warm-ink:#FFD09A;
   --shadow:0 12px 30px -16px rgba(0,0,0,.7); color-scheme:dark}
 
@@ -74,12 +74,12 @@ button,input,select{font:inherit;color:inherit}
 .card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px;min-width:0}
 
 /* ---------- HERO ---------- */
-.hero{background:radial-gradient(120% 90% at 85% 10%,#F7C08A 0%,rgba(247,185,154,0) 50%),linear-gradient(160deg,#24593A 0%,#3B7D4F 50%,#5E9E6E 100%);color:#fff;position:relative;overflow:hidden}
+.hero{background:radial-gradient(120% 90% at 85% 10%,#F5D86A 0%,rgba(247,185,154,0) 50%),linear-gradient(160deg,#0A4430 0%,#12684A 50%,#2E8B66 100%);color:#fff;position:relative;overflow:hidden}
 .hero .wrap{padding-block:40px 30px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:center}
 .byline{display:flex;flex-wrap:wrap;gap:8px 16px;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;opacity:.95}
-.byline b{color:#FFD9C4}
+.byline b{color:#FFF1B8}
 .hero h1{font-size:clamp(2.1rem,5.8vw,3.9rem);font-weight:800;margin:18px 0 14px;letter-spacing:-.01em}
-.hero h1 span{color:#FFD9C4;display:block;font-size:.55em;margin-top:8px}
+.hero h1 span{color:#FFF1B8;display:block;font-size:.55em;margin-top:8px}
 .hero .lead{font-size:1.08rem;max-width:46ch;opacity:.95}
 .hero-art{position:relative;aspect-ratio:10/9;max-width:420px;width:100%;justify-self:center}
 .flo{position:absolute;display:block;height:auto;filter:drop-shadow(0 16px 18px rgba(10,30,60,.35));animation:bob 6s ease-in-out infinite}
@@ -94,7 +94,7 @@ button,input,select{font:inherit;color:inherit}
 /* ---------- nav ---------- */
 .topnav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .topnav .wrap{display:flex;align-items:center;gap:10px;padding-block:8px}
-.kid{flex:none;border:0;border-radius:99px;background:#3B7D4F;color:#fff;font-weight:800;font-size:.84rem;padding:7px 12px;cursor:pointer;white-space:nowrap}
+.kid{flex:none;border:0;border-radius:99px;background:#12684A;color:#fff;font-weight:800;font-size:.84rem;padding:7px 12px;cursor:pointer;white-space:nowrap}
 
 
 .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
@@ -151,7 +151,7 @@ details.fold>ul{padding:0 20px 20px!important;margin-top:0!important}
 .wrow small{color:var(--muted);font-weight:700}
 .seg{display:inline-flex;flex-wrap:wrap;background:var(--chip);border-radius:20px;padding:4px;gap:4px}
 .seg button{border:0;background:transparent;border-radius:99px;padding:8px 13px;font-weight:800;font-size:.86rem;cursor:pointer;color:var(--muted)}
-.seg button[aria-pressed="true"]{background:var(--card);color:var(--coral);box-shadow:0 2px 8px -3px rgba(59,125,79,.4)}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--coral);box-shadow:0 2px 8px -3px rgba(18,104,74,.4)}
 .agein{display:flex;gap:10px;flex-wrap:wrap}
 .agein label{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--muted)}
 .agein input{width:76px;height:46px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:800;color:var(--ink);-moz-appearance:textfield}
@@ -160,8 +160,8 @@ details.fold>ul{padding:0 20px 20px!important;margin-top:0!important}
 .kids-row{display:flex;flex-wrap:wrap;gap:8px}
 .kids-row button{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:7px 14px;font-weight:800;font-size:.9rem;cursor:pointer;color:var(--muted)}
 .kids-row button[aria-pressed="true"]{background:var(--coral);border-color:var(--coral);color:#fff}
-:root[data-theme="dark"] .kids-row button[aria-pressed="true"]{background:#3B7D4F;border-color:#3B7D4F}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .kids-row button[aria-pressed="true"]{background:#3B7D4F;border-color:#3B7D4F}}
+:root[data-theme="dark"] .kids-row button[aria-pressed="true"]{background:#12684A;border-color:#12684A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .kids-row button[aria-pressed="true"]{background:#12684A;border-color:#12684A}}
 .kids-row .kadd{border-style:dashed;color:var(--coral)}
 .kids-edit{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:10px}
 .kids-edit label{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.88rem}
@@ -262,9 +262,9 @@ footer{padding-bottom:90px}
 .tr-ml label{font-weight:800;font-size:.88rem;width:100%}
 .tr-ml input{width:90px;height:44px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:800}
 .tr-ml small{color:var(--muted);font-size:.8rem;width:100%}
-.tr-add{margin-top:16px;width:100%;border:0;border-radius:99px;background:#3B7D4F;color:#fff;font-weight:800;font-size:1rem;padding:13px 18px;cursor:pointer}
-:root[data-theme="dark"] .tr-add{background:#3B7D4F}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-add{background:#3B7D4F}}
+.tr-add{margin-top:16px;width:100%;border:0;border-radius:99px;background:#12684A;color:#fff;font-weight:800;font-size:1rem;padding:13px 18px;cursor:pointer}
+:root[data-theme="dark"] .tr-add{background:#12684A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-add{background:#12684A}}
 .tr-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;margin-bottom:8px}
 .tr-top b{font-family:var(--f-display);font-size:1.02rem}
 .tr-top span{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:700}
@@ -298,8 +298,8 @@ footer{padding-bottom:90px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-print,:root:not([data-theme="light"]) .tr-copy{background:#16707A}}
 .tr-actions>button{flex:1 1 200px;min-height:48px;border-width:2px!important;border-style:solid!important;font-size:.92rem;padding:10px 18px;box-sizing:border-box}
 .tr-png{background:var(--coral)}
-:root[data-theme="dark"] .tr-png{background:#3B7D4F}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-png{background:#3B7D4F}}
+:root[data-theme="dark"] .tr-png{background:#12684A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tr-png{background:#12684A}}
 .tr-new{border:2px solid var(--line);background:transparent;border-radius:99px;font-weight:800;cursor:pointer;color:var(--muted)}
 #trPrintBox{display:none}
 .chk{margin:10px 0 0;padding-left:22px;display:grid;gap:8px;font-size:.94rem}
@@ -386,8 +386,8 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
 .cnt b{font-family:var(--f-display);font-size:1.3rem}
 .cnt button{width:36px;height:36px;border-radius:50%;border:0;background:var(--card);color:var(--coral);font-size:1.2rem;font-weight:800;cursor:pointer;box-shadow:0 2px 6px -3px rgba(0,0,0,.3)}
 .cnt button[data-s="1"]{background:var(--coral);color:#fff}
-:root[data-theme="dark"] .cnt button[data-s="1"]{background:#3B7D4F}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cnt button[data-s="1"]{background:#3B7D4F}}
+:root[data-theme="dark"] .cnt button[data-s="1"]{background:#12684A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cnt button[data-s="1"]{background:#12684A}}
 #cHint.warn{color:var(--warm-ink);font-weight:700}
 .kitl{margin:0;padding:0;list-style:none;display:grid;gap:4px}
 .kitl label{display:grid;grid-template-columns:24px minmax(0,1fr);gap:4px 12px;align-items:start;padding:9px 6px;border-radius:12px;cursor:pointer;font-weight:700;font-size:.95rem}
@@ -436,7 +436,7 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
 .ts-sub{margin:28px 0 12px;font-size:1.2rem}
 /* иллюстрации-заглушки до фото */
 .ill-w{background:linear-gradient(135deg,#DCEBFA,#BFD8F2)}
-.ill-w::after{content:"−10 %";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-size:2.6rem;color:#3B7D4F;opacity:.75}
+.ill-w::after{content:"−10 %";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-size:2.6rem;color:#12684A;opacity:.75}
 .ill-j{background:radial-gradient(60% 70% at 50% 45%,#F7D774,#F3C9A6 70%)}
 .ill-e{background:radial-gradient(circle at 20% 30%,#fff 0 3px,#E86A6A 4px 16px,transparent 17px),radial-gradient(circle at 65% 25%,#fff 0 3px,#E86A6A 4px 13px,transparent 14px),radial-gradient(circle at 45% 70%,#fff 0 3px,#E86A6A 4px 18px,transparent 19px),radial-gradient(circle at 82% 66%,#fff 0 2px,#E86A6A 3px 11px,transparent 12px),#F6D9C6}
 .ill-m{background:radial-gradient(circle at 30% 40%,#fff 0 3px,transparent 4px),radial-gradient(circle at 45% 55%,#fff 0 2.5px,transparent 3.5px),radial-gradient(circle at 58% 38%,#fff 0 3px,transparent 4px),radial-gradient(circle at 70% 58%,#fff 0 2px,transparent 3px),radial-gradient(circle at 38% 68%,#fff 0 2.5px,transparent 3.5px),#F1CDB4}
@@ -477,6 +477,9 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
  #frBox p.ft{font-size:9pt;color:#444;margin-top:12px}
 }
 </style><style>
+.flo.a{left:-2%;top:8%;width:56%;rotate:3deg}
+.flo.b{left:26%;top:46%;width:58%}
+.flo.c{right:2%;top:0;width:24%}
 .ptab{width:100%;border-collapse:collapse;font-size:.9rem;min-width:560px}
 .ptab th,.ptab td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
 .ptab th:first-child,.ptab td:first-child{text-align:left;white-space:normal;font-weight:700;font-size:.84rem}
@@ -557,7 +560,7 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
 <style>
 .install{padding-block:40px 0}
 .install-card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;border:2px dashed color-mix(in srgb,var(--coral) 40%,transparent)}
-.install-card img{width:72px;height:72px;border-radius:18px;box-shadow:0 8px 18px -8px rgba(59,125,79,.6)}
+.install-card img{width:72px;height:72px;border-radius:18px;box-shadow:0 8px 18px -8px rgba(18,104,74,.6)}
 .install-card h2{font-size:1.4rem}
 .install-card p{color:var(--muted);margin-top:6px}
 .inst-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
@@ -572,8 +575,9 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C9EBCB"/><stop offset="1" stop-color="#5E9E6E"/></linearGradient>
+    <linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BFEBD6"/><stop offset="1" stop-color="#2E8B66"/></linearGradient>
     <linearGradient id="gOrange" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD0A0"/><stop offset="1" stop-color="#F08A2E"/></linearGradient>
+    <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE0E8"/><stop offset="1" stop-color="#F28DAA"/></linearGradient>
     <linearGradient id="gCream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F3EEE4"/></linearGradient>
   </defs>
   <symbol id="a-carrot" viewBox="0 0 120 200">
@@ -584,13 +588,16 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
   <symbol id="a-bowl" viewBox="0 0 200 140">
     <path d="M44 62c6-30 106-30 112 0z" fill="url(#gOrange)" stroke="#fff" stroke-width="4"/>
     <circle cx="80" cy="44" r="5" fill="#fff" opacity=".7"/>
-    <path d="M14 62h172c0 40-36 66-86 66S14 102 14 62z" fill="url(#gGreen)" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M14 62h172c0 40-36 66-86 66S14 102 14 62z" fill="url(#gPink)" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
     <path d="M70 128h60" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
   </symbol>
-  <symbol id="a-spoon" viewBox="0 0 70 200">
-    <ellipse cx="35" cy="40" rx="25" ry="34" fill="url(#gCream)" stroke="#fff" stroke-width="4"/>
-    <ellipse cx="35" cy="42" rx="15" ry="22" fill="url(#gOrange)" opacity=".9"/>
-    <rect x="26" y="72" width="18" height="120" rx="9" fill="url(#gGreen)" stroke="#fff" stroke-width="4"/>
+  <symbol id="a-spoon" viewBox="0 0 220 120">
+    <path d="M12 20C52 30 92 48 128 70" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+    <path d="M12 20C52 30 92 48 128 70" fill="none" stroke="url(#gGreen)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M120 68c10-22 28-31 46-30 20-1 38 9 46 30z" fill="url(#gOrange)" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="150" cy="50" r="4.5" fill="#fff" opacity=".75"/>
+    <path d="M116 66h96c-4 22-24 36-48 36s-44-14-48-36z" fill="url(#gCream)" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M130 80c10 9 30 12 46 6" fill="none" stroke="#E6DED0" stroke-width="3" stroke-linecap="round"/>
   </symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5"/></g></symbol>
 </svg>
@@ -603,7 +610,7 @@ ul.plain,.card ul.plain{margin:10px 0 0;padding:0;list-style:none;display:grid;g
       <p class="lead">Когда начинать и как понять, что малыш готов. С чего начать и сколько давать по месяцам. Аллергены, безопасность, прикорм кусочками — и дневник продуктов, который всегда под рукой.</p>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <svg class="flo a" viewBox="0 0 70 200"><use href="#a-spoon"/></svg>
+      <svg class="flo a" viewBox="0 0 220 120"><use href="#a-spoon"/></svg>
       <svg class="flo b" viewBox="0 0 200 140"><use href="#a-bowl"/></svg>
       <svg class="flo c" viewBox="0 0 120 200"><use href="#a-carrot"/></svg>
     </div>

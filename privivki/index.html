@@ -771,16 +771,16 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
           <p style="margin-top:8px"><b>Проба Манту</b> — детям с 1 года до 7 лет включительно, раз в год. Показывает, есть ли у организма чувствительность к туберкулину — после прививки БЦЖ или при заражении. Отличить одно от другого сама проба не может — это оценивает врач.</p>
           <p style="margin-top:8px"><b>Диаскинтест</b> — с 8 до 17 лет включительно, раз в год. Нужен, чтобы выявить заражение туберкулёзом — болезнь или скрытую инфекцию с высоким риском заболеть. Если результат положительный, ребёнка направляют к фтизиатру.</p>
           <p style="margin-top:12px;font-weight:700">Как совмещать с прививками</p>
-          <div class="mx-flow" aria-label="Порядок: любая прививка, затем не раньше чем через месяц Манту, затем после оценки через 72 часа любая прививка">
-            <span>Прививка</span><em>через<br>1&nbsp;месяц<br>&nbsp;</em><span class="m">Манту</span><em>оценка<br>через<br>72&nbsp;ч</em><span>Прививка</span></div>
-          <p style="color:var(--muted);font-size:.92rem;margin-top:8px">Если Манту сделали первой — прививку можно сразу после того, как врач оценит пробу. Если первой была прививка — Манту ставят не раньше чем через месяц.</p>
+          <div class="mx-flow" aria-label="Порядок: любая прививка, затем не раньше чем через месяц проба Манту, затем после оценки через 72 часа любая прививка">
+            <span>Прививка</span><em>через<br>1&nbsp;месяц<br>&nbsp;</em><span class="m">Проба<br>Манту</span><em>оценка<br>через<br>72&nbsp;ч</em><span>Прививка</span></div>
+          <p style="color:var(--muted);font-size:.92rem;margin-top:8px">Если пробу Манту сделали первой — прививку можно сразу после того, как врач оценит пробу. Если первой была прививка — пробу Манту ставят не раньше чем через месяц.</p>
           <p class="mini" style="margin-top:10px"><b>Диаскинтест</b> — те же правила: не раньше чем через месяц после прививки, а после отрицательного результата прививки (кроме БЦЖ) можно сразу.</p>
         </div>
         <div class="card">
           <h3>Посчитать даты</h3>
           <div class="field" style="margin-top:10px"><label for="mxVac">Дата последней прививки</label><input type="date" id="mxVac"></div>
           <div class="mx-res" id="mxVacRes"></div>
-          <div class="field" style="margin-top:10px"><label for="mxM">Дата постановки Манту</label><input type="date" id="mxM"></div>
+          <div class="field" style="margin-top:10px"><label for="mxM">Дата постановки пробы Манту</label><input type="date" id="mxM"></div>
           <div class="mx-res" id="mxMRes"></div>
         </div>
       </div>
@@ -1595,7 +1595,7 @@ var PROFILES={
   // Манту
   function mx(){
     var v=pd($("mxVac").value),m=pd($("mxM").value);
-    $("mxVacRes").innerHTML=v?"Манту — не раньше <b>"+ds(addM(v,1))+"</b>":"";
+    $("mxVacRes").innerHTML=v?"Пробу Манту — не раньше <b>"+ds(addM(v,1))+"</b>":"";
     $("mxMRes").innerHTML=m?"Оценка пробы — <b>"+ds(new Date(m.getTime()+3*DAY))+"</b>; прививку можно после оценки":"";
   }
   $("mxVac").addEventListener("change",mx);$("mxM").addEventListener("change",mx);

@@ -100,7 +100,7 @@ button,input,select{font:inherit;color:inherit}
 .tabs a.on{background:var(--mchip);color:var(--ok-ink)}
 
 /* ---------- child panel ---------- */
-.kidpanel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end}
+.kidpanel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:end}
 .field label{display:block;font-weight:800;font-size:.9rem;margin-bottom:6px}
 .field input,.field select{display:block;width:100%;max-width:100%;height:50px;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:0 12px;font-size:16px;line-height:46px;-webkit-appearance:none;appearance:none;margin:0}
 .field input[type=date]{min-width:0;text-align:left}
@@ -261,6 +261,10 @@ button,input,select{font:inherit;color:inherit}
 .n-yes>b,.nb.n-yes{color:var(--ok-ink)}
 .n-ask>b,.nb.n-ask,.n-rec>b,.nb.n-rec{color:#9A5B00}
 .n-no>b,.nb.n-no{color:var(--alert-ink)}
+.nal>summary{list-style:none;cursor:pointer}.nal>summary::-webkit-details-marker{display:none}
+.nal-tog{margin-left:auto;font-weight:700;font-size:.88rem;color:var(--berry);background:var(--chip);border-radius:99px;padding:5px 12px}
+.nal-tog::after{content:"Показать ▾"}.nal[open] .nal-tog::after{content:"Свернуть ▴"}
+.nal:not([open]){padding-bottom:18px}
 .nal-foot{margin:12px 0 0;font-size:.86rem;color:var(--muted)}
 .vmeta i.nb{background:transparent;border:1.5px solid currentColor}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .n-ask>b,:root:not([data-theme="light"]) .nb.n-ask,:root:not([data-theme="light"]) .n-rec>b,:root:not([data-theme="light"]) .nb.n-rec{color:#FFC46B}}
@@ -475,7 +479,6 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
   .hero .wrap{grid-template-columns:1fr}
   .hero-art{max-width:340px}
   .kidpanel{grid-template-columns:1fr 1fr}
-  .kidpanel .field.out{grid-column:1/-1}
   .steps{grid-template-columns:1fr}
   .tracker,.mx{grid-template-columns:1fr}
 }
@@ -649,7 +652,6 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
       </div>
       <div class="card kidpanel">
         <div class="field"><label for="dob">Дата рождения</label><input type="date" id="dob"><small>Хранится только на вашем устройстве</small></div>
-        <div class="field"><label for="kw">Вес, кг</label><input type="number" id="kw" min="3" max="80" step="0.5" value="10" inputmode="decimal"><small>Нужен для расчёта жаропонижающих</small></div>
         <div class="field out"><label>Возраст</label><div class="agebig" id="ageOut">—</div><small id="ageHint">Укажите дату рождения</small></div>
       </div>
       <div class="calbar">
@@ -680,7 +682,7 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
           <li><b>Ветряная оспа:</b> Варилрикс — с 9 месяцев. В поликлинике от ветряной оспы прививают только детей, которые поступают в детский сад.</li>
           <li><b>Ротавирус:</b> по догоняющей схеме — до 2 лет.</li>
           <li><b>Грипп:</b> каждый сезон осенью, с 6 месяцев (Ультрикс Квадри): до 3 лет — 2 дозы по 0,25 мл с интервалом 28 дней, с 3 лет — 0,5 мл однократно.</li>
-          <li><b>Клещевой энцефалит:</b> по показаниям, Клещ-Э-Вак — с 1 года; лучше начинать в конце февраля – начале марта.</li>
+          <li><b>Клещевой энцефалит:</b> по показаниям, Клещ-Э-Вак — с 1 года; прививать можно круглый год, удобнее начинать осенью или зимой.</li>
           <li><b>Гепатит B, группы риска:</b> 4 дозы по схеме 0–1–2–12 мес.</li>
         </ul>
       </details>
@@ -774,7 +776,7 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
           <div class="mx-flow" aria-label="Порядок: любая прививка, затем не раньше чем через месяц проба Манту, затем после оценки через 72 часа любая прививка">
             <span>Прививка</span><em>через<br>1&nbsp;месяц<br>&nbsp;</em><span class="m">Проба<br>Манту</span><em>оценка<br>через<br>72&nbsp;ч</em><span>Прививка</span></div>
           <p style="color:var(--muted);font-size:.92rem;margin-top:8px">Если пробу Манту сделали первой — прививку можно сразу после того, как врач оценит пробу. Если первой была прививка — пробу Манту ставят не раньше чем через месяц.</p>
-          <p class="mini" style="margin-top:10px"><b>Диаскинтест</b> — те же правила: не раньше чем через месяц после прививки, а после отрицательного результата прививки (кроме БЦЖ) можно сразу.</p>
+          <p class="mini" style="margin-top:10px"><b>Диаскинтест</b> — те же правила: не раньше чем через месяц после прививки. Если результат отрицательный, прививки (кроме БЦЖ) можно делать сразу.</p>
         </div>
         <div class="card">
           <h3>Посчитать даты</h3>
@@ -867,13 +869,13 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
     <div class="wrap">
       <div class="sec-head"><span class="eyebrow">Справочник</span><h2>Вакцины, которые делают в поликлинике</h2><p>Нажмите на вакцину: доза, сроки, нормальные реакции и когда обращаться к врачу — по инструкции производителя.</p></div>
 
-      <div class="nal" id="nal" data-date="2026-11-10">
-        <div class="nal-head"><h3>Наличие вакцин в поликлинике</h3><span class="nal-date">на 10.11.2026</span><span class="nal-ago" id="nalAgo"></span></div>
-        <p class="nal-old" id="nalOld" hidden>Данные от 10.11.2026 могли устареть — наличие обязательно уточните.</p>
+      <details class="nal" id="nal" data-date="2026-11-10">
+        <summary><div class="nal-head"><h3>Наличие вакцин на 10.11</h3><span class="nal-tog"></span><span class="nal-ago" id="nalAgo"></span></div>
+        <p class="nal-old" id="nalOld" hidden>Данные от 10.11.2026 могли устареть — наличие обязательно уточните.</p></summary>
         <ul class="nal-list"><li class="n-yes"><span><a href="#v-hb">Регевак В</a><small>Гепатит B</small></span><b>Есть</b></li><li class="n-ask"><span><a href="#v-bcg">БЦЖ / БЦЖ-М</a><small>Туберкулёз</small></span><b>Уточняйте<em>в прививочном кабинете</em></b></li><li class="n-yes"><span><a href="#v-pcv">Превенар 13</a><small>Пневмококк</small></span><b>Есть</b></li><li class="n-ask"><span>Пневмовакс 23<small>Пневмококк</small></span><b>Уточняйте<em>мало доз</em></b></li><li class="n-yes"><span><a href="#v-rota">Рота-V-Эйд</a><small>Ротавирус</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-dtp">Пентаксим</a><small>Коклюш, дифтерия, столбняк, полиомиелит, Hib</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-ipv">Полиоваксин</a><small>Полиомиелит (неживая)</small></span><b>Есть</b></li><li class="n-rec"><span><a href="#v-opv">ОПВ (БиВак полио)</a><small>Полиомиелит (живая, капли)</small></span><b>По записи<em>в прививочном кабинете</em></b></li><li class="n-yes"><span><a href="#v-mmr">Вактривир</a><small>Корь, краснуха, паротит</small></span><b>Есть<em>только в 1 год</em></b></li><li class="n-yes"><span><a href="#v-mmr2">ЖПКВ</a><small>Корь + паротит</small></span><b>Есть<em>с 2 лет</em></b></li><li class="n-yes"><span><a href="#v-mmr2">Краснушная вакцина</a><small>Краснуха</small></span><b>Есть<em>с 2 лет</em></b></li><li class="n-yes"><span><a href="#v-mmr2">Паротитная вакцина</a><small>Паротит</small></span><b>Есть<em>с 2 лет</em></b></li><li class="n-ask"><span><a href="#v-mmr2">Коревая вакцина</a><small>Корь</small></span><b>Уточняйте</b></li><li class="n-ask"><span><a href="#v-hepa">Альгавак М</a><small>Гепатит A</small></span><b>Уточняйте<em>мало доз</em></b></li><li class="n-yes"><span><a href="#v-men">МенКвадфи</a><small>Менингококк A, C, W, Y</small></span><b>Есть<em>с 3 до 6 лет; 2-я доза — в том числе после Менактры</em></b></li><li class="n-yes"><span><a href="#v-tbe">Клещ-Э-Вак</a><small>Клещевой энцефалит</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-tbe">ЭнцеВир Нео детский</a><small>Клещевой энцефалит</small></span><b>Есть<em>с 3 лет</em></b></li><li class="n-yes"><span><a href="#v-flu">Ультрикс Квадри</a><small>Грипп</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-tdap">Адасель</a><small>Коклюш, дифтерия, столбняк</small></span><b>Есть</b></li><li class="n-yes"><span><a href="#v-adsm">АДС-М</a><small>Дифтерия, столбняк</small></span><b>Есть</b></li><li class="n-ask"><span><a href="#v-hpv">Гардасил</a><small>Вирус папилломы человека</small></span><b>Уточняйте<em>мало доз</em></b></li><li class="n-no"><span>Проба Манту (туберкулин)<small>Проба на туберкулёз</small></span><b>Временно нет</b></li><li class="n-yes"><span>Диаскинтест<small>Проба на туберкулёз</small></span><b>Есть</b></li></ul>
         <p class="nal-foot">Информация актуальна на указанную дату; наличие вакцин меняется несколько раз в неделю. Перед прививкой обязательно уточните наличие у врача или по телефону горячей линии поликлиники.</p>
-      </div>
-      <script>(function(){try{var b=document.getElementById("nal"),d=new Date(b.dataset.date+"T00:00:00");var t=new Date();t.setHours(0,0,0,0);var n=Math.round((t-d)/864e5),m=n%10,h=n%100,w=(m==1&&h!=11)?"день":(m>=2&&m<=4&&(h<10||h>=20))?"дня":"дней";var txt=n<=0?"обновлено сегодня":n==1?"обновлено вчера":"обновлено "+n+" "+w+" назад";document.getElementById("nalAgo").textContent=txt;var bt=document.getElementById("nalBtnAgo");if(bt)bt.textContent=txt;if(n>5)document.getElementById("nalOld").hidden=false}catch(x){}})();</script>
+      </details>
+      <script>(function(){try{var b=document.getElementById("nal"),d=new Date(b.dataset.date+"T00:00:00");var t=new Date();t.setHours(0,0,0,0);var n=Math.round((t-d)/864e5),m=n%10,h=n%100,w=(m==1&&h!=11)?"день":(m>=2&&m<=4&&(h<10||h>=20))?"дня":"дней";var txt=n<=0?"обновлено сегодня":n==1?"обновлено вчера":"обновлено "+n+" "+w+" назад";document.getElementById("nalAgo").textContent=txt;var bt=document.getElementById("nalBtnAgo");if(bt)bt.textContent=txt;if(n>5)document.getElementById("nalOld").hidden=false;function op(){if(location.hash==="#nal")b.open=true}op();addEventListener("hashchange",op);document.querySelectorAll('a[href="#nal"]').forEach(function(x){x.addEventListener("click",function(){b.open=true})})}catch(x){}})();</script>
       <div class="vlegend"><span><svg><use href="#i-im"/></svg>в мышцу</span><span><svg><use href="#i-sc"/></svg>под кожу (в складку)</span><span><svg><use href="#i-id"/></svg>в кожу</span><span><svg><use href="#i-oral"/></svg>капли в рот</span></div>
       <div class="filters" role="group" aria-label="Фильтр по возрасту">
         <button type="button" data-f="all" aria-pressed="true">Все</button><button type="button" data-f="kid" aria-pressed="false" id="fKid" hidden>Для моего ребёнка</button><button type="button" data-f="inf" aria-pressed="false">До года</button><button type="button" data-f="pre" aria-pressed="false">1–6 лет</button><button type="button" data-f="sch" aria-pressed="false">Школьникам</button><button type="button" data-f="live" aria-pressed="false">Живые</button>
@@ -1004,7 +1006,7 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
             <div class="okbox"><h4>Нормальные реакции <span>5–18-й день</span></h4><ul><li>Покраснение в месте укола в первые 2 суток</li><li>С 5-го по 18-й день: температура до 38,5 °C, насморк, кашель, покраснение глаз, сыпь на 1–3 дня</li><li>Редко до 42-го дня: припухлость за ушами на 2–3 дня</li></ul></div>
             <div class="badbox"><h4>К врачу, если</h4><ul><li>Судороги на фоне температуры (обычно 6–10-й день)</li><li>Мелкие кровоизлияния на коже, синяки без причины</li><li>Сильная головная боль, рвота, вялость</li></ul></div>
           </div>
-          <p class="vnote">Ребёнок после прививки не заразен для окружающих.</p>
+          <p class="vnote">Ребёнок после прививки не заразен для окружающих. Пробу Манту или Диаскинтест после прививки ставят не раньше чем через 4 недели.</p>
         </div>
       </article>
       <article class="vcard" id="v-mmr2" data-grp="pre" data-kind="live">
@@ -1143,10 +1145,10 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
         </button>
         <div class="vbody">
-          <dl class="vfacts"><div><dt>Производитель</dt><dd>ФНЦИРИП им. Чумакова / Микроген, Россия</dd></div><div><dt>Доза</dt><dd>0,25 мл до 16 лет; 0,5 мл — с 16 лет (Клещ-Э-Вак)</dd></div><div class="wide"><dt>Когда</dt><dd>Клещ-Э-Вак — с 1 года: до 16 лет по 0,25 мл, с 16 лет — 0,5 мл; ЭнцеВир Нео детский — с 3 до 17 лет. 2 дозы с интервалом не меньше 28 дней; экстренно — через 2 недели. В природный очаг — не раньше чем через 2 недели после 2-й дозы. 1-я ревакцинация — через 12 месяцев после 2-й дозы (если срок пропущен — как можно скорее), дальше — каждые 3 года. Начинать лучше в начале таяния снега — в конце февраля – начале марта.</dd></div></dl>
+          <dl class="vfacts"><div><dt>Производитель</dt><dd>ФНЦИРИП им. Чумакова / Микроген, Россия</dd></div><div><dt>Доза</dt><dd>0,25 мл до 16 лет; 0,5 мл — с 16 лет (Клещ-Э-Вак)</dd></div><div class="wide"><dt>Когда</dt><dd>Клещ-Э-Вак — с 1 года: до 16 лет по 0,25 мл, с 16 лет — 0,5 мл. 2 дозы с интервалом 1–7 месяцев, удобнее всего 5–7 месяцев (осень – весна); прививать можно круглый год, в том числе в сезон клещей. Экстренно — 2-я доза через 2 недели. В природный очаг — не раньше чем через 2 недели после 2-й дозы. 1-я ревакцинация — через 12 месяцев после 2-й дозы (можно через 9, чтобы успеть до сезона клещей), дальше — каждые 3 года. Если график сбился, курс не начинают заново. ЭнцеВир Нео детский — с 3 до 17 лет, у него своя схема — её уточнит врач. Вакцины от клещевого энцефалита взаимозаменяемы.</dd></div></dl>
           <div class="vcols">
-            <div class="okbox"><h4>Нормальные реакции <span>до 3 дней</span></h4><ul><li>Покраснение, отёк, боль в месте укола — в первые 2 дня</li><li>Температура, чаще до 37,5 °C, недомогание, головная боль</li><li>Чаще после первой дозы</li></ul></div>
-            <div class="badbox"><h4>К врачу, если</h4><ul><li>Температура выше 38,5 °C дольше 3 дней</li><li>Аллергическая реакция немедленного типа</li></ul></div>
+            <div class="okbox"><h4>Нормальные реакции <span>до 3 дней</span></h4><ul><li>Покраснение, отёк, боль в месте укола — в первые 2 дня, проходят за 1–3 дня</li><li>Температура (чаще до 37,5 °C, иногда до 38,5 °C), недомогание, головная боль — в первые 3 дня</li><li>Чаще после первой дозы</li></ul></div>
+            <div class="badbox"><h4>К врачу, если</h4><ul><li>Температура выше 38,5 °C</li><li>Аллергическая реакция немедленного типа</li></ul></div>
           </div>
           
         </div>
@@ -1241,17 +1243,17 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
         <li>Приказ Минздрава России от 06.12.2021 № 1122н «Об утверждении национального календаря профилактических прививок…» в ред. приказа от 12.12.2023 № 677н (действует с 01.09.2024). base.garant.ru/403258640</li>
         <li>Приказ Департамента здравоохранения г. Москвы от 04.03.2022 № 207 «Об утверждении регионального календаря профилактических прививок…». mos.ru</li>
         <li>Варилрикс, вакцина против ветряной оспы живая аттенуированная — листок-вкладыш (GSK), ГРЛС, получен 08.11.2026: с 9 месяцев, 2 дозы с интервалом не меньше 6 недель (никогда не меньше 4 недель); экстренно — в течение 72 часов после контакта; салицилаты — не раньше чем через 6 недель; туберкулиновая проба — до прививки или одновременно, после — через 6 недель.</li>
-        <li>Инструкции по медицинскому применению вакцин — Энциклопедия лекарств РЛС (rlsnet.ru) и Государственный реестр лекарственных средств: Менактра (согл. 25.12.2024), Альгавак М (ред. 18.09.2024), Гардасил, Клещ-Э-Вак (18.02.2020, medi.ru), Вактривир (29.10.2019, medi.ru), БЦЖ-М, Регевак В, Превенар 13, Пентаксим, Полиоваксин, БиВак полио, Рота-V-Эйд, Адасель, АДС-М, Ультрикс Квадри — сверено в ноябре 2026.</li>
+        <li>Инструкции по медицинскому применению вакцин — Энциклопедия лекарств РЛС (rlsnet.ru) и Государственный реестр лекарственных средств: Менактра (согл. 25.12.2024), Альгавак М (ред. 18.09.2024), Гардасил, БЦЖ-М, Регевак В, Превенар 13, Пентаксим, Полиоваксин, БиВак полио, Рота-V-Эйд, Адасель, АДС-М, Ультрикс Квадри — сверено в ноябре 2026.</li>
         <li>ЭнцеВир Нео детский — РЛС (изм. инструкции 28.01.2020); вакцины Микроген: паротитно-коревая (25.01.2017), против краснухи (28.01.2017), паротитная (21.01.2017), коревая (24.01.2017) — инструкции, medi.ru.</li>
         <li>Рота-V-Эйд, вакцина для профилактики ротавирусной инфекции, пентавалентная, живая — листок-вкладыш (ООО «ФАРМ ЭЙД ЛТД», действующая редакция, получена 08.11.2026): с 6 недель, 3 дозы по 2,5 мл с интервалом не менее 4 недель, детям старше 24 месяцев не применяют; противопоказана при инвагинации в анамнезе и пороках ЖКТ, предрасполагающих к ней.</li>
         <li>Информационное письмо ГБУЗ «ЦМП ДЗМ» (ЦВСТМО) от 17.12.2024 — с января 2025 года в Москве расширены допустимые сроки вакцинации против ротавирусной инфекции: курс можно провести до 2 лет.</li>
-        <li>МенКвадфи — листок-вкладыш, Санофи / Нанолек, 29.09.2025, pediatrhelp.ru.</li>
+        <li>Листки-вкладыши (информация для пациента), Государственный реестр лекарственных средств (ГРЛС): Вактривир (изм. 17.06.2025), Клещ-Э-Вак (изм. 23.12.2025), МенКвадфи (изм. 06.08.2026), Диаскинтест® (изм. 16.01.2026).</li>
         <li>Санитарные правила и нормы СанПиН 3.3686-21 «Санитарно-эпидемиологические требования по профилактике инфекционных болезней» — разобщение после ОПВ, туберкулинодиагностика.</li>
         <li>Клинические рекомендации Минздрава России «Лихорадка без очага инфекции у детей» — показания к жаропонижающим.</li>
         <li>ВОЗ. Vaccines and immunization: Q&amp;A; Американская академия педиатрии (AAP), HealthyChildren.org — уход после прививки, обезболивание.</li>
         <li>МУ 3.3.1.1095-02 «Медицинские противопоказания к проведению профилактических прививок препаратами национального календаря прививок» (утв. 09.01.2002); Таточенко В.К. «Хроническая патология — показание к вакцинации», Практика педиатра, 1999.</li>
         <li>UK Health Security Agency. Immunisation against infectious disease (Green Book): conditions that are not contraindications — по обучающим материалам VACCSline, 2017.</li>
-        <li>Диаскинтест® (аллерген туберкулёзный рекомбинантный) — инструкция по применению, ЛСР-006435/08 от 28.06.2019 (medi.ru): антигены CFP10-ESAT6 отсутствуют в вакцинном штамме БЦЖ; показания — диагностика туберкулёза, оценка активности процесса, выявление лиц с высоким риском развития активного туберкулёза.</li>
+        <li>Диаскинтест® (аллерген туберкулёзный рекомбинантный) — листок-вкладыш, ГРЛС (изм. 16.01.2026): пробу планируют до прививок или не раньше чем через 1 месяц после прививки; при отрицательном результате прививки (кроме БЦЖ) — сразу после оценки пробы; показания — диагностика туберкулёзной инфекции, выявление лиц с высоким риском развития активного туберкулёза.</li>
         <li>Роспотребнадзор (Управление по Республике Алтай). Памятка по туберкулинодиагностике, 22.03.2024 — «проба Манту — это не прививка»; положительная проба бывает после БЦЖ или при инфицировании; проба Манту ежегодно с 12 мес до 7 лет, Диаскинтест — с 8 до 17 лет.</li>
         <li>Мифы о прививках: ВОЗ, Vaccines and immunization: myths and misconceptions; Offit P.A. et al. Pediatrics, 2002 (иммунная «перегрузка»); Taylor L.E. et al. Vaccine, 2014 и Hviid A. et al. Ann Intern Med, 2019 (аутизм).</li>
       </ol>
@@ -1328,13 +1330,13 @@ var PROFILES={
   function ageMonths(){var d=pd(st.dob);if(!d)return null;var t=today();var m=(t.getFullYear()-d.getFullYear())*12+t.getMonth()-d.getMonth();if(t.getDate()<d.getDate())m--;var days=Math.round((t-addM(d,m))/DAY);return {m:m,days:days,total:(t-d)/DAY}}
   function ageText(a){if(!a)return "—";if(a.total<31)return Math.round(a.total)+" "+plural(Math.round(a.total),"день","дня","дней");if(a.m<12)return a.m+" "+plural(a.m,"месяц","месяца","месяцев")+(a.days>3?" "+a.days+" дн.":"");var y=Math.floor(a.m/12),r=a.m%12;return y+" "+plural(y,"год","года","лет")+(r?" "+r+" мес.":"")}
 
-  var dob=$("dob"),kw=$("kw"),kw2=$("kw2");
+  var dob=$("dob"),kw2=$("kw2");
   dob.max=iso(today());
-  if(st.dob)dob.value=st.dob; kw.value=st.w; kw2.value=Math.min(40,Math.max(4,st.w));
+  if(st.dob)dob.value=st.dob; kw2.value=Math.min(40,Math.max(4,st.w));
 
   /* ---------- калькулятор следующей прививки ---------- */
   var VER="app";
-  var VBAD={"hb": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C", "Судороги"], "bcg": ["Подмышечный лимфоузел больше 1,5 см или его размягчение", "Холодный абсцесс (безболезненная припухлость)", "Язва больше 10 мм, келоидный рубец"], "pcv": ["Температура выше 40 °C", "Фебрильные судороги", "Отёк лица, губ, затруднённое дыхание — сразу «103»"], "rota": ["Сильная боль в животе, приступы плача с поджатыми ножками, бледность", "Повторная рвота, вздутие живота, высокая температура", "Кровь или «малиновое желе» в стуле — это признаки инвагинации, сразу к врачу", "Хрипы, кашель, затруднённое дыхание, отёк лица — сразу «103»"], "dtp": ["Отёк больше 8 см или на всю ножку до сустава", "Температура выше 40 °C", "Непрерывный плач больше 3 часов", "Судороги; эпизод «обмякания» и бледности"], "ipv": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C"], "opv": ["Вялые параличи (очень редко) — сразу к врачу"], "mmr": ["Судороги на фоне температуры (обычно 6–10-й день)", "Мелкие кровоизлияния на коже, синяки без причины", "Сильная головная боль, рвота, вялость"], "mmr2": ["Судороги на фоне температуры (обычно 6–10-й день)", "Мелкие кровоизлияния на коже, синяки без причины", "Сильная головная боль, рвота, вялость"], "var": ["Обильная сыпь, высокая температура", "Синяки без причины", "Аллергическая реакция"], "hepa": ["Аллергическая реакция немедленного типа", "Высокая температура дольше суток"], "men": ["Отёк лица, губ, затруднённое дыхание, крапивница — сразу «103»", "Судороги", "Температура выше 40 °C"], "flu": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C", "Судороги"], "tdap": ["Отёк всей руки", "Температура выше 40 °C", "Аллергическая реакция"], "adsm": ["Аллергическая реакция", "Температура выше 40 °C"], "hpv": ["Аллергическая реакция немедленного типа"], "tbe": ["Температура выше 38,5 °C дольше 3 дней", "Аллергическая реакция немедленного типа"]};
+  var VBAD={"hb": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C", "Судороги"], "bcg": ["Подмышечный лимфоузел больше 1,5 см или его размягчение", "Холодный абсцесс (безболезненная припухлость)", "Язва больше 10 мм, келоидный рубец"], "pcv": ["Температура выше 40 °C", "Фебрильные судороги", "Отёк лица, губ, затруднённое дыхание — сразу «103»"], "rota": ["Сильная боль в животе, приступы плача с поджатыми ножками, бледность", "Повторная рвота, вздутие живота, высокая температура", "Кровь или «малиновое желе» в стуле — это признаки инвагинации, сразу к врачу", "Хрипы, кашель, затруднённое дыхание, отёк лица — сразу «103»"], "dtp": ["Отёк больше 8 см или на всю ножку до сустава", "Температура выше 40 °C", "Непрерывный плач больше 3 часов", "Судороги; эпизод «обмякания» и бледности"], "ipv": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C"], "opv": ["Вялые параличи (очень редко) — сразу к врачу"], "mmr": ["Судороги на фоне температуры (обычно 6–10-й день)", "Мелкие кровоизлияния на коже, синяки без причины", "Сильная головная боль, рвота, вялость"], "mmr2": ["Судороги на фоне температуры (обычно 6–10-й день)", "Мелкие кровоизлияния на коже, синяки без причины", "Сильная головная боль, рвота, вялость"], "var": ["Обильная сыпь, высокая температура", "Синяки без причины", "Аллергическая реакция"], "hepa": ["Аллергическая реакция немедленного типа", "Высокая температура дольше суток"], "men": ["Отёк лица, губ, затруднённое дыхание, крапивница — сразу «103»", "Судороги", "Температура выше 40 °C"], "flu": ["Аллергическая реакция немедленного типа", "Температура выше 40 °C", "Судороги"], "tdap": ["Отёк всей руки", "Температура выше 40 °C", "Аллергическая реакция"], "adsm": ["Аллергическая реакция", "Температура выше 40 °C"], "hpv": ["Аллергическая реакция немедленного типа"], "tbe": ["Температура выше 38,5 °C", "Аллергическая реакция немедленного типа"]};
   function aD(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n)}
   function aM(d,n){var r=new Date(d.getFullYear(),d.getMonth()+n,d.getDate());if(r.getDate()!==d.getDate())r=new Date(d.getFullYear(),d.getMonth()+n+1,0);return r}
   function aY(d,n){return aM(d,12*n)}
@@ -1368,15 +1370,15 @@ var PROFILES={
        if(k==1){if(a<24)return {k:"2-я",t:aM(d,3),w:"1-ю сделали до 2 лет — нужна 2-я, не раньше чем через 3 мес"};return {done:"После 2 лет достаточно одной дозы. Ревакцинация — не раньше 4 лет, если риск сохраняется."}}return {done:"Курс завершён."}}},
    menQ:{name:"Менингококк — МенКвадфи",doses:["1-я","2-я","3-я","ревакцинация"],
      r:function(k,d,b){if(!b)return {need:"Укажите дату рождения в разделе «Мой график»: схема зависит от возраста."};var a=ageM(b,d);
-       if(k==1){if(a<6)return {k:"2-я",t:aM(d,2),w:"начали до 6 месяцев: 3 дозы с интервалом не меньше 2 мес, затем ревакцинация после года"};if(a<12)return {k:"ревакцинация",t:mxD(aM(b,12),aM(d,2)),w:"1-ю сделали в 6–12 мес: ревакцинация с 12 мес, не раньше чем через 2 мес"};return {done:"С 12 месяцев достаточно одной дозы. При высоком риске заражения — повторно не раньше чем через 3 года."}}
-       if(k==2)return {k:"3-я",t:aM(d,2),w:"не раньше чем через 2 мес после 2-й"};
+       if(k==1){if(a<6)return {k:"2-я",t:aM(d,2),w:"начали до 6 месяцев: 2 или 3 дозы с интервалом не меньше 2 мес — число доз определяет врач; затем ревакцинация с 12 мес"};if(a<12)return {k:"ревакцинация",t:mxD(aM(b,12),aM(d,2)),w:"1-ю сделали в 6–12 мес: ревакцинация с 12 мес, не раньше чем через 2 мес"};return {done:"С 12 месяцев достаточно одной дозы. Нужна ли ревакцинация позже, решит врач."}}
+       if(k==2)return {k:"3-я или ревакцинация",t:aM(d,2),w:"не раньше чем через 2 мес; нужна ли 3-я доза до года, решает врач, ревакцинация — с 12 мес"};
        if(k==3)return {k:"ревакцинация",t:mxD(aM(b,12),aM(d,2)),w:"на втором году жизни, не раньше чем через 2 мес после 3-й"};return {done:"Курс завершён."}}},
    hpv:{name:"Вирус папилломы человека (Гардасил)",doses:["1-я","2-я","3-я"],extra:function(k){return k==2?"Дата 1-й прививки от ВПЧ":""},
      r:function(k,d,b,x){if(!b)return {need:"Укажите дату рождения в разделе «Мой график»: схема зависит от возраста."};
        if(k==1){var y=ageM(b,d)<168;return y?{k:"2-я",t:aM(d,6),w:"начали до 14 лет — 2 дозы через 6 мес"}:{k:"2-я",t:aM(d,2),w:"начали с 14 лет — схема 0–2–6 мес"}}
        if(k==2){if(!x.d1)return {need:"Укажите дату 1-й прививки: число доз зависит от возраста на момент 1-й."};if(ageM(b,x.d1)<168)return {done:"Начали до 14 лет — курс из 2 доз завершён (если между ними было не меньше 6 мес)."};return {k:"3-я",t:mxD(aM(x.d1,6),aM(d,1)),w:"через 6 мес после 1-й"}}return {done:"Курс завершён."}}},
    tbe:{name:"Клещевой энцефалит (Клещ-Э-Вак, ЭнцеВир Нео)",doses:["1-я","2-я","ревакцинация (через год)","ревакцинация (каждые 3 года)"],
-     r:function(k,d,b){if(b&&ageM(b,d)<12)return {need:"Клещ-Э-Вак — с 1 года, ЭнцеВир Нео детский — с 3 лет. Проверьте дату прививки."};if(k==1)return {k:"2-я",t:aD(d,28),w:"не раньше чем через 28 дней; экстренно — через 2 недели"};if(k==2)return {k:"ревакцинация",t:aM(d,12),w:"через 12 мес после 2-й; если срок пропущен — как можно скорее"};return {k:"ревакцинация",t:aY(d,3),w:"каждые 3 года"}}}
+     r:function(k,d,b){if(b&&ageM(b,d)<12)return {need:"Клещ-Э-Вак — с 1 года, ЭнцеВир Нео детский — с 3 лет. Проверьте дату прививки."};if(k==1)return {k:"2-я",t:aM(d,1),w:"через 1–7 мес (удобнее 5–7); экстренно — через 2 недели"};if(k==2)return {k:"ревакцинация",t:aM(d,12),w:"через 12 мес после 2-й; можно через 9 мес, чтобы успеть до сезона клещей"};return {k:"ревакцинация",t:aY(d,3),w:"каждые 3 года"}}}
   };
   var nxV=$("nxV"),nxK=$("nxK"),nxD=$("nxD"),nxD1=$("nxD1"),nxR=$("nxR");
   nxV.innerHTML='<option value="">— выберите —</option>'+Object.keys(NX).map(function(k){return '<option value="'+k+'">'+NX[k].name+'</option>'}).join("");
@@ -1541,7 +1543,7 @@ var PROFILES={
     $("ageOut").textContent=ageText(a);
     $("ageHint").textContent=a?"Ближайшие прививки подсвечены":"Укажите дату рождения";
     var chip=$("kidSum");
-    if(a){chip.hidden=false;chip.textContent=ageText(a).replace(/ \d+ дн\./,"")+" · "+fmt(st.w)+" кг"}else{chip.hidden=false;chip.textContent=fmt(st.w)+" кг"}
+    if(a){chip.hidden=false;chip.textContent=ageText(a).replace(/ \d+ дн\./,"")}else{chip.hidden=true}
     // календарь
     var tl=$("timeline");tl.classList.toggle("national-only",st.cal==="nk");
     document.querySelectorAll("[data-cal]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.cal===st.cal)});
@@ -1577,14 +1579,13 @@ var PROFILES={
   }
   dob.addEventListener("change",function(){st.dob=dob.value;apply()});
   function setW(v){v=parseFloat(String(v).replace(",","."));if(!(v>0))return;st.w=Math.min(80,Math.max(2,v));apply()}
-  kw.addEventListener("input",function(){setW(kw.value);kw2.value=Math.min(40,Math.max(4,st.w))});
-  kw2.addEventListener("input",function(){setW(kw2.value);kw.value=st.w});
+  kw2.addEventListener("input",function(){setW(kw2.value)});
   document.querySelectorAll("[data-cal]").forEach(function(b){b.addEventListener("click",function(){st.cal=b.dataset.cal;apply()})});
   function view(v){st.view=v;[].forEach.call(document.querySelectorAll("[data-view]"),function(b){b.setAttribute("aria-pressed",String(b.dataset.view===v))});$("vMarks").hidden=v!=="marks";$("vCal").hidden=v!=="cal";if(v==="marks")setTimeout(mcEdge,0);save()}
   [].forEach.call(document.querySelectorAll("[data-view]"),function(b){b.addEventListener("click",function(){view(b.dataset.view)})});
   view(st.view==="cal"?"cal":"marks");
   var accClosed=[];
-  window.addEventListener("beforeprint",function(){if(document.body.classList.contains("print-mc"))return;accClosed=[].filter.call(document.querySelectorAll("details.acc"),function(x){return !x.open});accClosed.forEach(function(x){x.open=true})});
+  window.addEventListener("beforeprint",function(){if(document.body.classList.contains("print-mc"))return;accClosed=[].filter.call(document.querySelectorAll("details.acc,details.nal"),function(x){return !x.open});accClosed.forEach(function(x){x.open=true})});
   window.addEventListener("afterprint",function(){accClosed.forEach(function(x){x.open=false});accClosed=[]});
   [].forEach.call(document.querySelectorAll('.sit-b[href="#before"],.sit-b[href="#after"]'),function(a){a.addEventListener("click",function(){var h=a.getAttribute("href"),sec=$(h.slice(1)),f=sec.querySelector("details.acc");if(f&&h==="#before")f.open=true;if(h==="#after")setTimeout(function(){try{nxV.focus({preventScroll:true})}catch(x){}},500)})});
   $("calMore").addEventListener("click",function(){st.calAll=!st.calAll;apply();if(!st.calAll)$("mycal").scrollIntoView()});

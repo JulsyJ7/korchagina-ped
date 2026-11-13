@@ -103,7 +103,13 @@ button,input,select{font:inherit;color:inherit}
 .tabs a.on{background:var(--mchip);color:var(--ok-ink)}
 
 /* ---------- child panel ---------- */
-.kidpanel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:end}
+.kidpanel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.kids{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+.kids button{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:8px 14px;font:700 .92rem var(--f-body);cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kids button[aria-pressed="true"]{background:var(--berry-fill);border-color:var(--berry-fill);color:var(--on-fill)}
+.kids .kid-add{border-style:dashed;color:var(--berry)}
+.kids .kid-del{margin-left:auto;border-color:transparent;background:none;color:var(--muted);font-size:.84rem;padding:8px 6px;text-decoration:underline}
+.kids .kid-del.sure{color:var(--alert-ink);font-weight:800}
 .field label{display:block;font-weight:800;font-size:.9rem;margin-bottom:6px}
 .field input,.field select{display:block;width:100%;max-width:100%;height:50px;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:0 12px;font-size:16px;line-height:46px;-webkit-appearance:none;appearance:none;margin:0}
 .field input[type=date]{min-width:0;text-align:left}
@@ -482,6 +488,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
   .hero .wrap{grid-template-columns:1fr}
   .hero-art{max-width:340px}
   .kidpanel{grid-template-columns:1fr 1fr}
+  .kidpanel .field.out{grid-column:1/-1}
   .steps{grid-template-columns:1fr}
   .tracker,.mx{grid-template-columns:1fr}
 }
@@ -493,7 +500,7 @@ table.mc{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;fo
   .stop-age{border-radius:18px 18px 0 0;flex-direction:row;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
   .stop>ul{border-radius:0 0 18px 18px;border-left:0;border-top:1px dashed var(--line)}
   .vcols{grid-template-columns:1fr}
-  .kidpanel{grid-template-columns:1fr}
+  .kidpanel{grid-template-columns:1fr 1fr;gap:12px}
 }
 @media print{.topnav,.filters,.trk-opts,.wave{display:none}.js .vcard:not(.open) .vbody{display:grid}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 
@@ -651,9 +658,11 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
       <div class="sec-head">
         <span class="eyebrow">Мой график</span>
         <h2>Прививки моего ребёнка</h2><a class="nal-btn" href="#nal">Наличие вакцин в поликлинике <small>на 10.11 · <span id="nalBtnAgo"></span></small> →</a>
-        <p>Укажите дату рождения и отметьте, что уже сделано, — памятка покажет, что пора сделать и что впереди. Данные хранятся только на вашем устройстве.</p>
+        <p>Укажите дату рождения и отметьте, что уже сделано, — памятка покажет, что пора сделать и что впереди. Если детей несколько, добавьте каждого — у каждого свой график. Данные хранятся только на вашем устройстве.</p>
       </div>
+      <div class="kids" id="kids" role="group" aria-label="Дети"></div>
       <div class="card kidpanel">
+        <div class="field"><label for="kname">Имя</label><input type="text" id="kname" maxlength="20" autocomplete="off" placeholder="Например, Маша"><small>Если детей несколько</small></div>
         <div class="field"><label for="dob">Дата рождения</label><input type="date" id="dob"><small>Хранится только на вашем устройстве</small></div>
         <div class="field out"><label>Возраст</label><div class="agebig" id="ageOut">—</div><small id="ageHint">Укажите дату рождения</small></div>
       </div>
@@ -1326,7 +1335,16 @@ var PROFILES={
   var KEY="vac-app-v1", DAY=864e5;
   var st={dob:"",w:10,cal:"msk",trk:"inact",tr:"",doses:{}};
   try{var s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)for(var k in s)st[k]=s[k];}catch(e){}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+  var KF=["name","dob","sex","hbRisk","done","nx","w"],canStore=true;
+  try{localStorage.setItem(KEY+"-t","1");localStorage.removeItem(KEY+"-t")}catch(e){canStore=false}
+  if(!st.kids||!st.kids.length){st.kids=[{}];KF.forEach(function(f){if(st[f]!==undefined)st.kids[0][f]=st[f]});st.cur=0}
+  if(!(st.cur>=0&&st.cur<st.kids.length))st.cur=0;
+  KF.forEach(function(f){delete st[f];if(st.kids[st.cur][f]!==undefined)st[f]=st.kids[st.cur][f]});
+  if(!(st.w>0))st.w=10;if(!st.dob)st.dob="";
+  function syncKid(){var k={};KF.forEach(function(f){if(st[f]!==undefined)k[f]=st[f]});st.kids[st.cur]=k}
+  function save(){syncKid();try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+  function kidName(k,i){return (k.name||"").trim()||("Ребёнок "+(i+1))}
+  function goKid(i){syncKid();st.cur=i;try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}try{history.replaceState(null,"","#mycal")}catch(e){}location.reload()}
   function $(id){return document.getElementById(id)}
   function fmt(n){return (Math.round(n*10)/10).toString().replace(".",",")}
   function pd(v){if(!v)return null;var p=v.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
@@ -1421,7 +1439,7 @@ var PROFILES={
   }
   function ics(t,title){
     var dd=function(x){return x.getFullYear()+("0"+(x.getMonth()+1)).slice(-2)+("0"+x.getDate()).slice(-2)};
-    var body=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//privivki//RU","BEGIN:VEVENT","UID:"+dd(t)+"-"+Math.random().toString(36).slice(2)+"@privivki","DTSTAMP:"+dd(today())+"T000000Z","DTSTART;VALUE=DATE:"+dd(t),"DTEND;VALUE=DATE:"+dd(aD(t,1)),"SUMMARY:Прививка: "+title,"DESCRIPTION:С этого дня можно делать прививку. Запишитесь к педиатру.","BEGIN:VALARM","TRIGGER:-P1D","ACTION:DISPLAY","DESCRIPTION:Завтра можно делать прививку","END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
+    var body=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//privivki//RU","BEGIN:VEVENT","UID:"+dd(t)+"-"+Math.random().toString(36).slice(2)+"@privivki","DTSTAMP:"+dd(today())+"T000000Z","DTSTART;VALUE=DATE:"+dd(t),"DTEND;VALUE=DATE:"+dd(aD(t,1)),"SUMMARY:Прививка: "+((st.name||"").trim()?st.name.trim()+" — ":"")+title,"DESCRIPTION:С этого дня можно делать прививку. Запишитесь к педиатру.","BEGIN:VALARM","TRIGGER:-P1D","ACTION:DISPLAY","DESCRIPTION:Завтра можно делать прививку","END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
     return "<a class='nx-ics' download='privivka.ics' href='data:text/calendar;charset=utf-8,"+encodeURIComponent(body)+"'>📅 Добавить в календарь телефона</a>";
   }
   function nxSave(){st.nx={v:nxV.value,k:nxK.value,d:nxD.value,d1:nxD1.value,r:nxR.checked};}
@@ -1473,7 +1491,7 @@ var PROFILES={
       rows+="<tr><td><b>"+esc(r.n)+"</b></td><td>"+(dn.join(", ")||"—")+"</td><td class='pm-due'>"+(due.join(", ")||"")+"</td><td>"+(fut.join(", ")||"")+"</td></tr>"});
     var fl=Object.keys(st.done).filter(function(k){return k.indexOf("flu-")===0}).map(function(k){var y=+k.slice(4);return y+"/"+String(y+1).slice(2)}).sort();
     rows+="<tr><td><b>Грипп</b></td><td>"+(fl.length?"сезоны "+fl.join(", "):"—")+"</td><td></td><td>каждый год осенью</td></tr>";
-    $("mcPrint").innerHTML="<h2>Прививки ребёнка — отметки родителей</h2><p class='pm-meta'>"+(d?"Дата рождения: "+ds(d)+" · возраст: "+ageText(a)+" · ":"")+"календарь: "+(st.cal==="nk"?"национальный":"Москва")+" · распечатано "+ds(today())+"</p>"+
+    $("mcPrint").innerHTML="<h2>Прививки ребёнка — отметки родителей</h2><p class='pm-meta'>"+((st.name||"").trim()?"Ребёнок: "+esc(st.name.trim())+" · ":"")+(d?"Дата рождения: "+ds(d)+" · возраст: "+ageText(a)+" · ":"")+"календарь: "+(st.cal==="nk"?"национальный":"Москва")+" · распечатано "+ds(today())+"</p>"+
       "<table><thead><tr><th>Инфекция</th><th>Отмечено сделанным</th><th>Пора по возрасту</th><th>Впереди</th></tr></thead><tbody>"+rows+"</tbody></table>"+
       "<p class='pm-foot'>Отметки сделаны родителями в памятке «Прививки» и не заменяют прививочный сертификат и медицинскую документацию. Покажите этот лист педиатру на приёме. · Врач-педиатр Корчагина Ю.А.</p>";
   }
@@ -1545,7 +1563,7 @@ var PROFILES={
     if(!n)h+='<td colspan="6"><small style="color:var(--muted)">с 6 месяцев</small></td>';else if(n<6)h+='<td colspan="'+(6-n)+'"></td>';
     fr.innerHTML=h;
     var pct=tot?Math.round(dn/tot*100):0;
-    var nxtH="";if(nxt&&d){var nd=addM(d,nxt.m),nn=Math.round((nd-today())/DAY);nxtH="<div class='now-next'><small>Следующая по календарю:</small><b>"+nxt.t+"</b><span>≈ "+ds(nd)+" · "+inWords(nn)+"</span></div>"}
+    var nxtH="";if(nxt&&d){var nd=addM(d,nxt.m),nn=Math.round((nd-today())/DAY);nxtH="<div class='now-next'><small>Следующая по календарю:</small><b>"+nxt.t+"</b><span>≈ "+ds(nd)+" · "+inWords(nn)+"</span>"+(nn>0?ics(nd,nxt.t):"")+"</div>"}
     $("mcSum").innerHTML="<h3 class='now-h'>Сейчас</h3><b>Сделано "+dn+" из "+tot+"</b><div class='mc-bar'><i style='width:"+pct+"%'></i></div>"+(am===null?"<small style='color:var(--muted)'>Укажите дату рождения выше — памятка подсветит, что пора сделать.</small>":(due.length?"<small style='color:var(--muted)'>Пора сделать по возрасту:</small><div class='mc-due'>"+due.slice(0,8).map(function(x){return "<span>"+x+"</span>"}).join("")+(due.length>8?"<span>и ещё "+(due.length-8)+"</span>":"")+"</div>":"<small style='color:var(--ok-ink);font-weight:700'>Все прививки по возрасту отмечены ✓</small>")+nxtH);
   }
   function apply(){
@@ -1553,7 +1571,7 @@ var PROFILES={
     $("ageOut").textContent=ageText(a);
     $("ageHint").textContent=a?"Ближайшие прививки подсвечены":"Укажите дату рождения";
     var chip=$("kidSum");
-    if(a){chip.hidden=false;chip.textContent=ageText(a).replace(/ \d+ дн\./,"")}else{chip.hidden=true}
+    var nm=(st.name||"").trim();if(a){chip.hidden=false;chip.textContent=(nm?nm+" · ":"")+ageText(a).replace(/ \d+ дн\./,"")}else{chip.hidden=true}
     // календарь
     var tl=$("timeline");tl.classList.toggle("national-only",st.cal==="nk");
     document.querySelectorAll("[data-cal]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.cal===st.cal)});
@@ -1588,6 +1606,15 @@ var PROFILES={
     save();
   }
   dob.addEventListener("change",function(){st.dob=dob.value;apply()});
+  var kname=$("kname"),kidsEl=$("kids"),delSure=false;kname.value=st.name||"";
+  function renderKids(){if(!canStore){kidsEl.hidden=true;return}var h="";st.kids.forEach(function(k,i){var kk=i===st.cur?{name:st.name}:k;h+="<button type='button' data-kid='"+i+"' aria-pressed='"+(i===st.cur)+"'>"+esc(kidName(kk,i))+"</button>"});
+    h+="<button type='button' class='kid-add' data-kid='add'>+ Добавить ребёнка</button>";if(st.kids.length>1)h+="<button type='button' class='kid-del"+(delSure?" sure":"")+"' data-kid='del'>"+(delSure?"Точно удалить «"+esc(kidName({name:st.name},st.cur))+"»?":"Удалить ребёнка")+"</button>";kidsEl.innerHTML=h}
+  kidsEl.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var v=b.dataset.kid;
+    if(v==="add"){syncKid();st.kids.push({w:10});goKid(st.kids.length-1);return}
+    if(v==="del"){if(!delSure){delSure=true;renderKids();return}st.kids.splice(st.cur,1);st.cur=0;try{localStorage.setItem(KEY,JSON.stringify(st))}catch(x){}try{history.replaceState(null,"","#mycal")}catch(x){}location.reload();return}
+    var i=+v;if(i!==st.cur)goKid(i)});
+  kname.addEventListener("input",function(){st.name=kname.value;delSure=false;save();renderKids();apply()});
+  renderKids();
   function setW(v){v=parseFloat(String(v).replace(",","."));if(!(v>0))return;st.w=Math.min(80,Math.max(2,v));apply()}
   kw2.addEventListener("input",function(){setW(kw2.value)});
   document.querySelectorAll("[data-cal]").forEach(function(b){b.addEventListener("click",function(){st.cal=b.dataset.cal;apply()})});

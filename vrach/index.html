@@ -145,6 +145,11 @@ details.src li{margin:3px 0}
 .q .lab{font-weight:700;font-size:.92rem}
 .q .seg button{font-size:.84rem;padding:7px 10px}
 .score{position:sticky;bottom:8px;margin-top:10px}
+.dgrp{display:grid;gap:5px;margin-bottom:8px}
+.dchips{display:flex;flex-wrap:wrap;gap:6px}
+.dchips button{border:1.5px solid var(--line);background:var(--field);border-radius:99px;padding:7px 12px;font-weight:700;font-size:.88rem;cursor:pointer;color:var(--ink)}
+.dchips button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+#drugOut{border-top:1px solid var(--line);padding-top:12px}
 
 footer{padding:36px 0 48px;color:var(--muted);font-size:.85rem}
 footer .refs{margin-top:10px}
@@ -184,7 +189,7 @@ footer li{margin:4px 0}
 
 <nav class="nav" aria-label="Разделы">
   <div class="wrap">
-    <a href="#pt" class="pt">Пациент</a><a href="#grow">Развитие</a><a href="#ben">Питание и ИМТ</a><a href="#bp">Давление</a><a href="#gfr">СКФ</a><a href="#fluid">Жидкость</a><a href="#feed">Питание до года</a><a href="#scores">Шкалы</a>
+    <a href="#pt" class="pt">Пациент</a><a href="#doses">Дозы</a><a href="#grow">Развитие</a><a href="#ben">Питание и ИМТ</a><a href="#bp">Давление</a><a href="#gfr">СКФ</a><a href="#fluid">Жидкость</a><a href="#feed">Питание до года</a><a href="#scores">Шкалы</a>
   </div>
 </nav>
 
@@ -206,6 +211,16 @@ footer li{margin:4px 0}
       </div>
       <div class="age" id="ageOut">Укажите пол и дату рождения.</div>
       <div class="row" style="margin-top:12px"><button type="button" class="btn" id="reset">Новый пациент</button></div>
+    </div>
+  </div>
+</section>
+
+<section id="doses">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">По весу и возрасту</span><h2>Дозы препаратов</h2><p>Доза на приём и в сутки с учётом максимальных доз, объём суспензии или число таблеток.</p></div>
+    <div class="card calc">
+      <div id="drugPick"></div>
+      <div id="drugOut"></div>
     </div>
   </div>
 </section>
@@ -380,6 +395,8 @@ footer li{margin:4px 0}
       <li>Holliday MA, Segar WE. Pediatrics. 1957;19:823–32. NICE NG29 «Intravenous fluid therapy in children and young people in hospital» (2015, обновлено 2020).</li>
       <li>КР «Вирусные кишечные инфекции (гастроэнтериты) у детей», 2025, ID 925_1 (шкала CDS). WHO. The treatment of diarrhoea: a manual for physicians and other senior health workers, 2005 (планы A, B, C).</li>
       <li>КР «Острый тонзиллит и фарингит (острый тонзиллофарингит)», 2024, ID 306.</li>
+      <li>Инструкции к препаратам (ГРЛС/РЛС): Детский Панадол, Нурофен для детей, Флемоксин Солютаб, Аугментин (7:1), Флемоклав Солютаб, Сумамед форте, Клацид, Супракс, Пульмикорт, Вентолин Небулы, Ферромальт, Тотема, Тардиферон, Сорбифер Дурулес, Аквадетрим, Вигантол — даты в разделе «Дозы».</li>
+      <li>КР «Отит средний острый» (2024, ID 314); КР «Железодефицитная анемия» (2024, ID 669); КР «Недостаточность витамина D. Рахит» (2026, ID 1059_1).</li>
       <li>Westley CR et al. Am J Dis Child. 1978;132:484–7; КР «Острый обструктивный ларингит [круп] и эпиглоттит».</li>
     </ol>
   </div>
@@ -647,7 +664,9 @@ window.VD={"who":{"wfa":{"1":[[0,0.3487,3.3464,0.14602],[1,0.3127,3.3174,0.14693
     var w=num("wt"),h=num("ht");if(w&&h)t+="<br>ИМТ: <b>"+f1(w/Math.pow(h/100,2),1)+"</b> кг/м² · ППТ (Мостеллер): <b>"+f1(Math.sqrt(w*h/3600),2)+"</b> м²";
     o.innerHTML=t;
   }
-  function all(){renderAge();var G=growth();renderGrowth(G);renderBen(G);renderBP();renderGFR();renderFluid();renderFeed();scores()}
+  var LST=[];
+  function all(){renderAge();var G=growth();renderGrowth(G);renderBen(G);renderBP();renderGFR();renderFluid();renderFeed();scores();LST.forEach(function(f){f()})}
+  window.VCALC={$:$,f1:f1,num:num,ageInfo:ageInfo,pl:pl,pref:pref,onChange:function(f){LST.push(f)}};
 
   function segInit(id,key,cb){
     var el=$(id);
@@ -671,6 +690,244 @@ window.VD={"who":{"wfa":{"1":[[0,0.3487,3.3464,0.14602],[1,0.3127,3.3174,0.14693
   });
   all();
 })();
+</script>
+<script>
+/* «Калькуляторы педиатра» — дозы препаратов. Подключается после основного скрипта; использует window.VCALC (возраст, вес, утилиты). */
+(function(){
+  "use strict";
+  var C=window.VCALC,$=C.$,f1=C.f1;
+  var pref=C.pref;
+
+  /* ---------- справочник ---------- */
+  // mg — мг действующего вещества в 1 единице (1 мл / 1 табл / 1 капля / 1 ампула)
+  var DR=[
+  {id:"par",g:"Жаропонижающие",n:"Парацетамол",kind:"single",mgkg:15,range:"10–15 мг/кг на приём",maxDayKg:60,maxSingle:1000,maxDay:4000,maxDoses:4,minAgeM:3,
+   forms:[{n:"суспензия 120 мг/5 мл (Детский Панадол)",mg:24,u:"мл"}],
+   note:"Не чаще чем через 4 часа, не больше 4 раз в сутки. С 2 до 3 мес — только однократно при лихорадке после прививки или по назначению врача.",
+   src:"Детский Панадол, суспензия — инструкция (31.07.2020): 10–15 мг/кг, не более 60 мг/кг/сут. КР «Отит средний острый» (2024, ID 314). Максимум 1 г на приём и 4 г/сут — доза взрослых."},
+  {id:"ibu",g:"Жаропонижающие",n:"Ибупрофен",kind:"single",mgkg:10,range:"5–10 мг/кг на приём",maxDayKg:30,maxSingle:400,maxDay:1200,maxDoses:3,minAgeM:3,minW:5,
+   forms:[{n:"суспензия 100 мг/5 мл (Нурофен для детей)",mg:20,u:"мл"},{n:"суспензия 200 мг/5 мл",mg:40,u:"мл"}],
+   note:"Интервал 6–8 часов. Противопоказан до 3 мес и при массе меньше 5 кг.",
+   src:"Нурофен для детей, суспензия 100 мг/5 мл — инструкция (П N014745/01): не более 30 мг/кг/сут, с 3 мес и 5 кг. КР «Отит средний острый» (2024): 8–10 мг/кг на приём. Максимум 400 мг на приём и 1200 мг/сут — безрецептурная доза взрослых."},
+
+  {id:"amx",g:"Антибиотики",n:"Амоксициллин",kind:"course",n2:[2,3],
+   regs:[{id:"std",n:"стандартная",mgkg:50,range:"45–60 мг/кг/сут",capDay:1500,capSingle:500},{id:"high",n:"высокая",mgkg:90,range:"80–90 мг/кг/сут",capDay:3000,capSingle:1000}],
+   instrMaxKg:60,
+   forms:[{n:"суспензия 250 мг/5 мл",mg:50,u:"мл"},{n:"суспензия 125 мг/5 мл",mg:25,u:"мл"},{n:"Флемоксин Солютаб 125 мг",mg:125,u:"табл"},{n:"Флемоксин Солютаб 250 мг",mg:250,u:"табл"},{n:"Флемоксин Солютаб 500 мг",mg:500,u:"табл"},{n:"Флемоксин Солютаб 1000 мг",mg:1000,u:"табл"}],
+   note:"Высокую дозу — при риске пенициллинорезистентного пневмококка. Детям ≥ 40 кг — дозы взрослых: 500–1000 мг 3 раза в сутки. Курс при остром среднем отите 7–10 дней, при БГСА-тонзиллофарингите — 10 дней.",
+   src:"КР «Отит средний острый» (2024, ID 314): 45–60 мг/кг/сут, высокая — 80–90 мг/кг/сут в 2–3 приёма; ≥ 40 кг — 500–1000 мг × 3. КР «Острый тонзиллит и фарингит» (2024, ID 306): 50 мг/кг/сут, 10 дней. Флемоксин Солютаб — инструкция (30.05.2017): у детей 30–60 мг/кг/сут."},
+  {id:"amc",g:"Антибиотики",n:"Амоксициллин + клавуланат",kind:"course",n2:[2,3],clav:true,
+   regs:[{id:"std",n:"стандартная",mgkg:45,range:"40–45 мг/кг/сут по амоксициллину",capDay:1750,capSingle:875},{id:"high",n:"высокая",mgkg:90,range:"80–90 мг/кг/сут по амоксициллину",capDay:null,capSingle:null}],
+   forms:[{n:"7:1 суспензия 400/57 мг в 5 мл (Аугментин)",mg:80,u:"мл",r:7,instr:45,nr:2},{n:"7:1 суспензия 200/28,5 мг в 5 мл (Аугментин)",mg:40,u:"мл",r:7,instr:45,nr:2},{n:"7:1 таблетка 875/125 мг",mg:875,u:"табл",r:7,nr:2},{n:"4:1 Флемоклав Солютаб 125/31,25 мг",mg:125,u:"табл",r:4,instr:60,clavMax:15,nr:3},{n:"4:1 Флемоклав Солютаб 250/62,5 мг",mg:250,u:"табл",r:4,instr:60,clavMax:15,nr:3},{n:"4:1 Флемоклав Солютаб 500/125 мг",mg:500,u:"табл",r:4,instr:60,clavMax:15,nr:3}],
+   note:"Доза — по амоксициллину. Клавулановой кислоты — не больше 10 мг/кг/сут (КР). Суспензию 7:1 не назначают до 3 мес. Детям ≥ 40 кг — 875/125 мг 2 раза в сутки.",
+   src:"КР «Отит средний острый» (2024): 40–45 мг/кг/сут в 2–3 приёма. КР «Острый тонзиллит и фарингит» (2024): 40–50 мг/кг/сут, клавуланата не более 10 мг/кг/сут, ≥ 12 лет или ≥ 40 кг — 875/125 мг × 2. Аугментин 7:1, суспензия — инструкция (29.12.2019): 25–45 мг/кг/сут в 2 приёма, максимум 45 мг/кг/сут. Флемоклав Солютаб 4:1 — инструкция (09.08.2023): 20–30 мг/кг/сут, при тяжёлых инфекциях вдвое, максимум 60 мг/кг амоксициллина и 15 мг/кг клавуланата."},
+  {id:"azi",g:"Антибиотики",n:"Азитромицин",kind:"course",n2:[1],
+   regs:[{id:"std",n:"10 мг/кг × 3 дня",mgkg:10,range:"10 мг/кг 1 раз в сутки, 3 дня",capDay:500,capSingle:500},{id:"strep",n:"20 мг/кг × 3 дня",mgkg:20,range:"20 мг/кг 1 раз в сутки, 3 дня — БГСА-тонзиллофарингит",capDay:500,capSingle:500}],
+   forms:[{n:"суспензия 100 мг/5 мл (Сумамед)",mg:20,u:"мл"},{n:"суспензия 200 мг/5 мл (Сумамед форте)",mg:40,u:"мл"},{n:"таблетки 125 мг",mg:125,u:"табл"},{n:"таблетки 500 мг",mg:500,u:"табл"}],
+   note:"Макролиды — при аллергии на бета-лактамы. Схема 20 мг/кг — из КР по тонзиллофарингиту; в инструкции Сумамеда форте её нет.",
+   src:"Сумамед форте — инструкция (2012): 10 мг/кг 1 раз в сутки 3 дня, при массе ≥ 45 кг — 500 мг. КР «Острый тонзиллит и фарингит» (2024): 20 мг/кг/сут, 3 дня."},
+  {id:"cla",g:"Антибиотики",n:"Кларитромицин",kind:"course",n2:[2],
+   regs:[{id:"std",n:"стандартная",mgkg:15,range:"15 мг/кг/сут в 2 приёма",capDay:1000,capSingle:500}],
+   forms:[{n:"суспензия 125 мг/5 мл (Клацид)",mg:25,u:"мл"},{n:"суспензия 250 мг/5 мл (Клацид)",mg:50,u:"мл"},{n:"таблетки 250 мг",mg:250,u:"табл"},{n:"таблетки 500 мг",mg:500,u:"табл"}],
+   note:"Курс 5–10 дней, при БГСА-тонзиллофарингите — 10 дней.",
+   src:"Клацид, гранулы 125 мг/5 мл — инструкция (31.03.2023): 7,5 мг/кг 2 раза в сутки, максимум 500 мг 2 раза в сутки. КР «Отит средний острый» и «Острый тонзиллит и фарингит» (2024): 15 мг/кг/сут в 2 приёма."},
+  {id:"cfx",g:"Антибиотики",n:"Цефиксим",kind:"course",n2:[1,2],minAgeM:6,
+   regs:[{id:"std",n:"стандартная",mgkg:8,range:"8 мг/кг/сут в 1–2 приёма",capDay:400,capSingle:400}],
+   forms:[{n:"суспензия 100 мг/5 мл (Супракс)",mg:20,u:"мл"},{n:"Супракс Солютаб 400 мг",mg:400,u:"табл"}],
+   note:"С 6 месяцев. Старше 12 лет или больше 45 кг — 400 мг в сутки. При БГСА-инфекциях курс не меньше 10 дней.",
+   src:"Супракс — РЛС (актуализация 24.09.2024): 8 мг/кг/сут в 1 или 2 приёма по 4 мг/кг; с 6 мес; > 12 лет или > 45 кг — 400 мг/сут. КР «Отит средний острый» и «Острый тонзиллит и фарингит» (2024): 8 мг/кг/сут, максимум 400 мг/сут."},
+
+  {id:"dex",g:"Круп и бронхообструкция",n:"Дексаметазон при крупе",kind:"once",
+   regs:[{id:"a",n:"0,15 мг/кг",mgkg:0.15},{id:"b",n:"0,3 мг/кг",mgkg:0.3},{id:"c",n:"0,6 мг/кг",mgkg:0.6}],
+   forms:[{n:"раствор 4 мг/мл (в/м, в/в или внутрь)",mg:4,u:"мл"},{n:"таблетки 0,5 мг",mg:0.5,u:"табл"}],
+   note:"Однократно всем детям с крупом независимо от степени стеноза; внутрь предпочтительно 0,15 мг/кг. Повторное введение обычно не нужно. Максимальную разовую дозу КР не указывают.",
+   src:"КР «Острый обструктивный ларингит [круп] и эпиглоттит» (Союз педиатров России): дексаметазон 0,15–0,6 мг/кг."},
+  {id:"pred",g:"Круп и бронхообструкция",n:"Преднизолон при крупе",kind:"once",
+   regs:[{id:"a",n:"1 мг/кг",mgkg:1},{id:"b",n:"2 мг/кг",mgkg:2}],
+   forms:[{n:"таблетки 5 мг",mg:5,u:"табл"},{n:"раствор 30 мг/мл",mg:30,u:"мл"}],
+   note:"Если нет дексаметазона; 1–2 мг/кг соответствуют 0,15–0,6 мг/кг дексаметазона. После преднизолона чаще возвращаются симптомы.",
+   src:"КР «Острый обструктивный ларингит [круп] и эпиглоттит»: преднизолон 1–2 мг/кг."},
+  {id:"bud",g:"Круп и бронхообструкция",n:"Будесонид через небулайзер при крупе",kind:"fixed",dose:2,unitD:"мг",minAgeM:6,
+   forms:[{n:"суспензия 0,5 мг/мл (Пульмикорт)",mg:0.5,u:"мл"},{n:"суспензия 0,25 мг/мл (Пульмикорт)",mg:0.25,u:"мл"}],
+   note:"2 мг однократно или 2 раза по 1 мг с интервалом 30 минут. С 6 месяцев. Рутинно добавлять к дексаметазону не рекомендуется.",
+   src:"Пульмикорт — РЛС (инструкция 23.08.2021): при ложном крупе 2 мг/сут, с 6 мес. КР «Острый обструктивный ларингит [круп] и эпиглоттит»."},
+  {id:"salb",g:"Круп и бронхообструкция",n:"Сальбутамол через небулайзер",kind:"fixed",dose:2.5,unitD:"мг",minAgeM:18,
+   forms:[{n:"раствор 1 мг/мл, небула 2,5 мл (Вентолин Небулы)",mg:1,u:"мл"}],
+   note:"Стартовая доза 2,5 мг (1 небула), при необходимости до 5 мг; до 4 ингаляций в сутки. Противопоказан до 18 месяцев.",
+   src:"Вентолин Небулы — инструкция (08.01.2020): детям 4–11 лет 2,5 мг, при необходимости до 5 мг, до 4 раз в сутки; до 18 мес противопоказан."},
+
+  {id:"fe",g:"Железо",n:"Препараты железа",kind:"iron"},
+  {id:"vd",g:"Витамин D",n:"Колекальциферол",kind:"vitd"}
+  ];
+
+  /* ---------- состояние ---------- */
+  var S={drug:"par",reg:{},n:{},custom:{}};
+  try{var sv=JSON.parse(localStorage.getItem("vrach-doses-v1")||"{}");if(sv.drug)S.drug=sv.drug}catch(e){}
+  function save(){try{localStorage.setItem("vrach-doses-v1",JSON.stringify({drug:S.drug}))}catch(e){}}
+
+  function dget(id){for(var i=0;i<DR.length;i++)if(DR[i].id===id)return DR[i]}
+  function amt(mg,form){
+    var x=mg/form.mg;
+    if(form.u==="мл"){var r=x<2?Math.round(x*20)/20:Math.round(x*10)/10;return {t:f1(r,x<2?2:1).replace(/,?0+$/,"").replace(/,$/,"")+" мл",real:r*form.mg}}
+    if(form.u==="табл"){var q=Math.round(x*4)/4;var t=q===0?"меньше ¼ таблетки":fr(q)+" "+(q<=1?"таблетка":q<5?"таблетки":"таблеток");return {t:t,real:q*form.mg,frac:q%1!==0}}
+    if(form.u==="кап"){var k=Math.round(x);return {t:k+" "+C.pl(k,"капля","капли","капель"),real:k*form.mg}}
+    return {t:f1(x,1)+" "+form.u,real:mg};
+  }
+  function fr(q){var w=Math.floor(q),r=q-w,m={0.25:"¼",0.5:"½",0.75:"¾"}[r]||"";return (w?w:"")+(m?(w?" ":"")+m:"")||"0"}
+  function mg(x){return f1(x,x<1?2:x<10?1:0)+" мг"}
+  function warn(t,c){return "<p style='margin-top:6px'><span class='tag "+(c||"t-warn")+"'>"+t+"</span></p>"}
+
+  /* ---------- UI ---------- */
+  var groups=[];DR.forEach(function(d){if(groups.indexOf(d.g)<0)groups.push(d.g)});
+  var pick=$("drugPick"),h="";
+  groups.forEach(function(g){h+="<div class='dgrp'><span class='mini'>"+g+"</span><div class='dchips'>";DR.forEach(function(d){if(d.g===g)h+="<button type='button' data-d='"+d.id+"' aria-pressed='false'>"+(d.kind==="iron"?"Железо":d.kind==="vitd"?"Витамин D":d.n.replace(/ при крупе| через небулайзер/,""))+"</button>"});h+="</div></div>"});
+  pick.innerHTML=h;
+  pick.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;S.drug=b.dataset.d;save();render()});
+  var box=$("drugOut");
+  box.addEventListener("click",function(e){var b=e.target.closest("button[data-k]");if(!b)return;var k=b.dataset.k,v=b.dataset.v;if(k==="reg")S.reg[S.drug]=v;else if(k==="n")S.n[S.drug]=+v;else S[k]=v;render()});
+  box.addEventListener("input",function(e){var t=e.target;if(t.id==="dCustom"){S.custom[S.drug]=t.value;renderBody()}else if(t.id==="vdLvl"){S.vdLvl=t.value;renderBody()}});
+
+  function seg(k,opts,cur){return "<div class='seg' role='group'>"+opts.map(function(o){return "<button type='button' data-k='"+k+"' data-v='"+o[0]+"' aria-pressed='"+(String(o[0])===String(cur))+"'>"+o[1]+"</button>"}).join("")+"</div>"}
+
+  function render(){
+    [].forEach.call(pick.querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.d===S.drug?"true":"false")});
+    var d=dget(S.drug);if(!d){S.drug="par";d=dget("par")}
+    var top="<h3>"+d.n+"</h3>";
+    if(d.kind==="course"||d.kind==="once"){
+      var regs=d.regs.slice(),cur=S.reg[d.id]||regs[0].id;
+      var opts=regs.map(function(r){return [r.id,r.n]});if(d.kind==="course")opts.push(["custom","своя"]);
+      top+="<div class='f' style='margin-top:8px'><span class='lab'>Доза</span>"+seg("reg",opts,cur)+"</div>";
+      if(cur==="custom")top+="<div class='f' style='margin-top:8px;max-width:220px'><label for='dCustom'>мг/кг в сутки</label><input id='dCustom' type='number' inputmode='decimal' step='0.5' value='"+(S.custom[d.id]||"")+"'></div>";
+      if(d.n2&&d.n2.length>1){var nn=S.n[d.id]||d.n2[0];top+="<div class='f' style='margin-top:8px'><span class='lab'>Приёмов в сутки</span>"+seg("n",d.n2.map(function(x){return [x,x+" "+C.pl(x,"раз","раза","раз")]}),nn)+"</div>"}
+    }
+    if(d.kind==="iron"){top="<h3>Препараты железа</h3><div class='f' style='margin-top:8px'><span class='lab'>Цель</span>"+seg("feMode",[["treat","лечение ЖДА"],["prev","профилактика"]],S.feMode||"treat")+"</div>"}
+    if(d.kind==="vitd"){top="<h3>Колекальциферол (витамин D)</h3><div class='f' style='margin-top:8px'><span class='lab'>Цель</span>"+seg("vdMode",[["prev","профилактика"],["treat","лечение по 25(OH)D"]],S.vdMode||"prev")+"</div>"+((S.vdMode||"prev")==="treat"?"<div class='f' style='margin-top:8px;max-width:240px'><label for='vdLvl'>25(OH)D, нг/мл</label><input id='vdLvl' type='number' inputmode='decimal' value='"+(S.vdLvl||"")+"'><small>нмоль/л ÷ 2,5 = нг/мл</small></div>":"")}
+    box.innerHTML="<div id='dTop'>"+top+"</div><div id='dBody' class='res'></div>";
+    renderBody();
+  }
+
+  function renderBody(){
+    var d=dget(S.drug),o=$("dBody");if(!o)return;
+    var w=C.num("wt"),a=C.ageInfo(),mo=a?a.months:null,h="";
+    if(d.kind==="iron"){o.innerHTML=iron(w,a,mo);return}
+    if(d.kind==="vitd"){o.innerHTML=vitd(a,mo);return}
+    if(d.minAgeM&&mo!=null&&mo<d.minAgeM)h+=warn("Не назначается младше "+(d.minAgeM<12?d.minAgeM+" мес":d.minAgeM/12+" лет")+(d.minAgeM===18?" (18 мес)":""),"t-sev");
+    if(d.minW&&w!=null&&w<d.minW)h+=warn("Противопоказан при массе меньше "+d.minW+" кг","t-sev");
+    if(d.kind==="fixed"){
+      h="<p>Доза: <b>"+f1(d.dose,1)+" "+d.unitD+"</b></p><table class='zt' style='margin-top:6px'><tbody>"+d.forms.map(function(fm){return "<tr><td>"+fm.n+"</td><td class='num'><b>"+amt(d.dose,fm).t+"</b></td></tr>"}).join("")+"</tbody></table>"+h;
+      o.innerHTML=h+foot(d);return;
+    }
+    if(w==null){o.innerHTML="<p class='empty'>Укажите вес в карточке пациента.</p>"+foot(d);return}
+    if(d.kind==="single"){
+      var single=d.mgkg*w,capS=false,maxD=Math.min(d.maxDayKg*w,d.maxDay);
+      if(single>d.maxSingle){single=d.maxSingle;capS=true}
+      h=h+"<div class='big'><b>"+mg(single)+"</b><span>на приём ("+d.range+")</span></div><p class='mini'>Не больше <b>"+mg(maxD)+"</b> в сутки ("+d.maxDayKg+" мг/кг"+(maxD===d.maxDay?", но не больше "+d.maxDay+" мг":"")+"), до "+d.maxDoses+" раз.</p>"+(capS?warn("Ограничено максимальной разовой дозой "+d.maxSingle+" мг"):"");
+      h+=formsTable(d,single,null);
+      o.innerHTML=h+foot(d);return;
+    }
+    // course / once
+    var cur=S.reg[d.id]||d.regs[0].id,r=null;d.regs.forEach(function(x){if(x.id===cur)r=x});
+    var mgkg=r?r.mgkg:parseFloat(String(S.custom[d.id]||"").replace(",","."));
+    if(!(mgkg>0)){o.innerHTML="<p class='empty'>Введите дозу в мг/кг в сутки.</p>"+foot(d);return}
+    if(d.kind==="once"){
+      var dose=mgkg*w;
+      h=h+"<div class='big'><b>"+mg(dose)+"</b><span>однократно ("+f1(mgkg,2).replace(/,?0+$/,"")+" мг/кг)</span></div>"+formsTable(d,dose,null);
+      o.innerHTML=h+foot(d);return;
+    }
+    var n=S.n[d.id]||d.n2[0];
+    var day=mgkg*w,notes=[],capRef=r||d.regs[0];
+    var capDay=capRef.capDay,capSingle=capRef.capSingle;
+    if(capDay&&day>capDay){notes.push(warn("Суточная доза ограничена "+capDay+" мг — "+(cur==="custom"?"максимум для стандартного режима":"доза взрослых / максимум по инструкции")));day=capDay}
+    var single=day/n;
+    if(capSingle&&single>capSingle){notes.push(warn("Разовая доза ограничена "+capSingle+" мг"));single=capSingle;day=single*n}
+    if(d.instrMaxKg&&mgkg>d.instrMaxKg)notes.push(warn("Выше максимальной дозы по инструкции ("+d.instrMaxKg+" мг/кг/сут) — назначение по КР","t-n"));
+    if(d.id==="amx"&&w>=40)notes.push(warn("Масса ≥ 40 кг — дозы взрослых: 500–1000 мг 3 раза в сутки","t-n"));
+    if(d.id==="amc"&&w>=40)notes.push(warn("Масса ≥ 40 кг — 875/125 мг 2 раза в сутки","t-n"));
+    if(d.id==="cfx"&&((a&&a.years>=12)||w>45))notes.push(warn("Старше 12 лет или > 45 кг — 400 мг 1 раз в сутки","t-n"));
+    h=h+"<div class='big'><b>"+mg(day)+"</b><span>в сутки ("+f1(day/w,1).replace(/,0$/,"")+" мг/кг)</span><b>"+mg(single)+"</b><span>× "+n+" "+C.pl(n,"раз","раза","раз")+"</span></div>"+(r?"<p class='mini'>"+r.range+"</p>":"")+notes.join("");
+    h+=formsTable(d,single,day,n,w);
+    o.innerHTML=h+foot(d);
+  }
+  function formsTable(d,single,day,n,w){
+    var t="<table class='zt' style='margin-top:8px'><thead><tr><th>Форма</th><th>На приём</th></tr></thead><tbody>";
+    d.forms.forEach(function(fm){
+      var x=amt(single,fm),extra="";
+      if(fm.u==="табл"&&x.real===0)extra="<small>дозировка слишком большая</small>";
+      else if(fm.u==="табл"&&Math.abs(x.real-single)/single>0.15)extra="<small>≈ "+mg(x.real)+" — заметно отличается от расчётной</small>";
+      if(d.clav&&w){var cl=day/fm.r/w;var bad=cl>(fm.clavMax||10);extra+="<small"+(bad?" style='color:var(--bad-ink);font-weight:700'":"")+">клавуланат "+f1(cl,1)+" мг/кг/сут"+(bad?" — больше "+(fm.clavMax&&cl>fm.clavMax?fm.clavMax+" мг/кг (инструкция)":"10 мг/кг (КР)"):"")+"</small>";
+        var am=day/w;if(fm.instr&&am>fm.instr+0.01)extra+="<small style='color:var(--bad-ink);font-weight:700'>амоксициллин "+f1(am,0)+" мг/кг/сут — больше "+fm.instr+" мг/кг по инструкции</small>";
+        if(fm.nr&&n&&fm.nr!==n)extra+="<small>по инструкции — "+fm.nr+" раза в сутки</small>";}
+      t+="<tr><td>"+fm.n+extra+"</td><td class='num'><b>"+x.t+"</b></td></tr>";
+    });
+    return t+"</tbody></table>";
+  }
+  function foot(d){return (d.note?"<p class='mini' style='margin-top:8px'>"+d.note+"</p>":"")+(d.src?"<details class='src'><summary>Источник</summary><div>"+d.src+"</div></details>":"")}
+
+  /* ---------- железо ---------- */
+  function iron(w,a,mo){
+    var mode=S.feMode||"treat";
+    if(!a||w==null)return "<p class='empty'>Нужны дата рождения и вес.</p>";
+    var y=a.years,h="",target,ttxt;
+    if(mode==="treat"){
+      var lo=null;
+      if(y<3){target=3*w;ttxt="3 мг/кг/сут (до 3 лет)"}else{lo=45;target=60;ttxt=y>=12?"старше 3 лет 45–60 мг/сут; подросткам — не больше 120 мг/сут (выше — больше побочных эффектов)":"старше 3 лет"}
+      h+="<div class='big'><b>"+(lo?lo+"–"+target+" мг":mg(target))+"</b><span>элементарного железа в сутки — "+ttxt+"</span></div><p class='mini'>Курс 1–3 месяца в зависимости от глубины дефицита; запасы восполняются за 3–6 месяцев (ферритин > 30 нг/мл). Контроль: ретикулоциты на 7–10-й день, гемоглобин +10 г/л к концу 4-й недели.</p>";
+    }else{
+      var pre=C.num("ga");pre=pre&&pre<37;
+      target=(pre?2:1)*w;ttxt=pre?"2 мг/кг/сут — недоношенным на грудном вскармливании с 1 мес до смесей с железом или прикорма":"1 мг/кг/сут — доношенным на грудном/смешанном вскармливании с 4 мес до введения прикорма";
+      h+="<div class='big'><b>"+mg(target)+"</b><span>в сутки</span></div><p class='mini'>"+ttxt+".</p>";
+    }
+    var rows=[];
+    // Ферромальт
+    var drops=Math.round(target/2.5),dtxt=(mode==="treat"&&y>=3?Math.round(45/2.5)+"–":"")+drops,fr="";
+    if(mode==="treat"){fr=w<15?"по инструкции при ЖДА "+Math.round(w)+"–"+Math.round(2*w)+" капель (1–2 капли/кг)":w<=30?"по инструкции при ЖДА 20–40 капель":"по инструкции при ЖДА 40–120 капель"}
+    else fr=w<15?"по инструкции при дефиците без анемии "+Math.round(w)+" капель (1 капля/кг)":w<=30?"по инструкции без анемии 10–20 капель":"по инструкции без анемии 20–40 капель";
+    rows.push(["Ферромальт, капли 50 мг/мл (1 капля = 2,5 мг)",dtxt+" "+C.pl(drops,"капля","капли","капель")+" в сутки",fr]);
+    // Тотема
+    var tm=target,tnote="";
+    if(mo!=null&&mo<3){rows.push(["Тотема, 50 мг железа в ампуле 10 мл","—","с 3 месяцев"])}
+    else{
+      if(mode==="treat"){var t3=Math.min(3*w,60);tm=t3;tnote="по инструкции: 3 мг/кг/сут, не больше 60 мг"}
+      else{if(y<6){tm=Math.min(2*w,30);tnote="по инструкции: 2 мг/кг/сут, не больше 30 мг (3 мес – 5 лет)"}else{tm=50;tnote="по инструкции: с 6 лет — 1 ампула в сутки"}}
+      rows.push(["Тотема, 50 мг железа в ампуле 10 мл (5 мг/мл)",f1(tm/5,1)+" мл в сутки ("+mg(tm)+")",tnote]);
+    }
+    // Тардиферон
+    rows.push(["Тардиферон, таблетки 80 мг железа",y<6?"—":y<=10?"1 таблетка в сутки":"1–2 таблетки в сутки",y<6?"противопоказан до 6 лет":"по инструкции"+(mode==="prev"?" (детская профилактическая доза не указана)":"")]);
+    rows.push(["Сорбифер Дурулес, таблетки 100 мг железа",y<12?"—":"1–2 таблетки в сутки (при ЖДА до 3–4, максимум 4)",y<12?"противопоказан до 12 лет":"по инструкции"+(mode==="prev"?" (детская профилактическая доза не указана)":"")]);
+    h+="<table class='zt' style='margin-top:8px'><thead><tr><th>Препарат</th><th>Доза</th></tr></thead><tbody>"+rows.map(function(r){return "<tr><td>"+r[0]+"<small>"+r[2]+"</small></td><td class='num'><b>"+r[1]+"</b></td></tr>"}).join("")+"</tbody></table>";
+    h+="<p class='mini' style='margin-top:8px'>Детям КР отмечают преимущества препаратов трёхвалентного железа (меньше риск отравления, не окрашивают зубы, лучше переносятся); двухвалентные чаще вызывают отказ от лечения.</p>";
+    h+="<details class='src'><summary>Источник</summary><div>КР «Железодефицитная анемия» (2024, ID 669): до 3 лет 3 мг/кг/сут, старше 3 лет 45–60 мг/сут, подросткам до 120 мг/сут; профилактика 1 мг/кг (доношенные с 4 мес) и 2 мг/кг (недоношенные с 1 мес). Ферромальт — инструкция (ЛП-008751, 07.03.2023). Тотема — РЛС (инструкция 30.06.2025). Тардиферон — РЛС (инструкция 26.05.2008). Сорбифер Дурулес — РЛС (инструкция 30.09.2024).</div></details>";
+    return h;
+  }
+
+  /* ---------- витамин D ---------- */
+  function vitd(a,mo){
+    var mode=S.vdMode||"prev";
+    if(!a)return "<p class='empty'>Нужна дата рождения.</p>";
+    var y=a.years,ul=mo<6?1000:mo<12?1400:y<11?2000:4000,h="",dose,txt;
+    var pre=C.num("ga");pre=pre&&pre<37;
+    if(mode==="prev"){
+      if(pre&&mo<4){dose="500–1000";txt="недоношенным — первые 3–4 месяца, не больше 1000 МЕ/сут"}
+      else if(a.days<30){dose="500";txt="доношенным новорождённым — через несколько дней после рождения до 1 месяца"}
+      else if(mo<12){dose="500–1000";txt="1–12 месяцев"}
+      else{dose="1000–2000";txt="12 месяцев – 18 лет"}
+      var parts=dose.split("–").map(Number);
+      h="<div class='big'><b>"+dose+"</b><span>МЕ в сутки — "+txt+"</span></div><p>Аквадетрим или Вигантол (1 капля ≈ 500 МЕ): <b>"+parts.map(function(x){return x/500}).join("–")+" "+C.pl(parts[parts.length-1]/500,"капля","капли","капель")+"</b> в сутки</p>";
+    }else{
+      var lv=parseFloat(String(S.vdLvl||"").replace(",","."));
+      if(!(lv>0))return "<p class='empty'>Введите уровень 25(OH)D.</p>";
+      if(lv>=30){h="<div class='big'><b>"+f1(lv,0)+"</b><span>нг/мл — норма (≥ 30)</span></div><p>Лечебная доза не нужна — профилактическая доза по возрасту.</p>"}
+      else{var dd=lv>20?2000:lv>10?3000:4000;h="<div class='big'><b>"+dd+"</b><span>МЕ в сутки, 1 месяц</span></div><p>Аквадетрим или Вигантол: <b>"+dd/500+" капель</b> в сутки. Первые 3–5 дней — 1000 МЕ (2 капли).</p><p class='mini'>"+(lv>20?"Недостаточность (21–29 нг/мл)":lv>10?"Дефицит (11–20 нг/мл)":"Выраженный дефицит (≤ 10 нг/мл)")+". Через месяц — контроль 25(OH)D; если ниже 30 нг/мл, лечебную дозу продлевают на 15 дней. После достижения ≥ 30 нг/мл — профилактическая доза по возрасту.</p>"}
+    }
+    h+="<p class='mini' style='margin-top:6px'>Максимально допустимая суточная доза (без контроля) для этого возраста: <b>"+ul+" МЕ</b>.</p>";
+    h+="<details class='src'><summary>Источник</summary><div>КР «Недостаточность витамина D. Рахит» (2026, ID 1059_1). Аквадетрим — РЛС (инструкция 03.10.2019): 15 000 МЕ/мл, 1 капля ≈ 500 МЕ. Вигантол — инструкция (31.03.2019): 20 000 МЕ/мл, 1 капля ≈ 500 МЕ. Национальная программа «Недостаточность витамина D у детей и подростков РФ» (2021) даёт для 1–6 мес 1000 МЕ, для 1–3 лет 1500 МЕ, для 3–18 лет 1000 МЕ — в КР 2026 диапазоны шире.</div></details>";
+    return h;
+  }
+
+  C.onChange(renderBody);
+  render();
+})();
+
 </script>
 
 <script>

@@ -56,7 +56,7 @@
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;scroll-padding-top:64px}
+html{scroll-padding-top:110px}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;margin:0}
 .wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.15;text-wrap:balance}
@@ -71,23 +71,28 @@ button,input,select{font:inherit;color:inherit}
 .mini{font-size:.86rem;color:var(--muted)}
 .mono{font-family:var(--f-mono)}
 
-/* hero */
-.hero{background:radial-gradient(110% 90% at 90% 0%,rgba(242,184,75,.55) 0%,rgba(242,184,75,0) 45%),linear-gradient(155deg,#0B1F4A 0%,#1F4FA3 55%,#0E7C86 100%);color:#fff}
-.hero .wrap{padding-block:30px 26px}
-.byline{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;opacity:.95}
-.byline b{color:#FFE2A6}
-.hero h1{font-size:clamp(1.8rem,6vw,2.8rem);font-weight:800;margin:14px 0 10px}
-.hero p{max-width:52ch;opacity:.95}
-.hero .warn{margin-top:14px;font-size:.85rem;background:rgba(255,255,255,.12);border-radius:12px;padding:10px 12px;max-width:60ch}
-
-/* nav */
-.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
-.nav .wrap::-webkit-scrollbar{display:none}
-.nav a{flex:none;text-decoration:none;color:var(--ink);font-weight:700;font-size:.9rem;padding:7px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line)}
-.nav a.pt{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
-
-section{padding-block:28px 4px}
+/* app bar */
+.bar{position:sticky;top:0;z-index:30;background:linear-gradient(155deg,#0B1F4A 0%,#1F4FA3 70%,#0E7C86 140%);color:#fff;padding-top:env(safe-area-inset-top,0px);box-shadow:0 6px 18px -12px rgba(0,0,0,.6)}
+.bar-in{display:flex;align-items:center;gap:8px;min-height:50px}
+.back{flex:none;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;color:#fff;text-decoration:none;font-size:1.9rem;line-height:1;background:rgba(255,255,255,.14);padding-bottom:4px}
+.bar-t{display:flex;flex-direction:column;min-width:0}
+.bar-t b{font-family:var(--f-display);font-size:1.05rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-t .by{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.ptchip{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.14);color:#fff;text-decoration:none;font-weight:700;font-size:.92rem}
+.ptchip span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptchip.empty span{color:#FFE2A6}
+.ptchip i{font-style:normal;opacity:.8}
+.screen{padding-block:14px 24px}
+.lead{color:var(--muted);font-size:.9rem;margin:0 2px 10px}
+h3.sub{margin:18px 2px 8px;font-size:1rem}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{display:flex;flex-direction:column;gap:3px;padding:14px;border-radius:18px;background:var(--card);box-shadow:var(--shadow);text-decoration:none;color:var(--ink);min-height:112px;border:1px solid var(--line)}
+.tile svg{width:28px;height:28px;fill:none;stroke:var(--brand);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
+.tile b{font-size:1rem;line-height:1.2}
+.tile small{color:var(--muted);font-size:.8rem;line-height:1.3}
+.tile small.v{color:var(--brand);font-weight:800}
+.disc{margin:16px 2px 0;font-size:.82rem;color:var(--muted)}
+.about-link{display:inline-block;margin:10px 2px 0;font-weight:700;font-size:.9rem}
 .sec-head{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
 .sec-head p{color:var(--muted);font-size:.95rem}
 
@@ -140,18 +145,47 @@ details.src li{margin:3px 0}
 .chk{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:.94rem}
 .chk:last-child{border-bottom:0}
 .chk input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:var(--brand)}
-.q{display:grid;gap:6px;padding:10px 0;border-bottom:1px solid var(--line)}
+.q{display:grid;gap:5px;padding:8px 0;border-bottom:1px solid var(--line)}
 .q:last-child{border-bottom:0}
 .q .lab{font-weight:700;font-size:.92rem}
-.q .seg button{font-size:.84rem;padding:7px 10px}
+.q .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:5px}
+.q .opts button span{min-width:0}
+#cds .opts{grid-template-columns:1fr}
+.q .opts button{border:1.5px solid var(--line);background:var(--field);border-radius:10px;padding:7px 8px;font-size:.84rem;font-weight:700;cursor:pointer;text-align:left;display:flex;justify-content:space-between;gap:6px;align-items:baseline;color:var(--ink)}
+.q .opts button i{font-style:normal;font-family:var(--f-mono);font-size:.76rem;color:var(--muted)}
+.q .opts button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.q .opts button[aria-pressed="true"] i{color:var(--on-brand)}
+.sbar{position:sticky;bottom:0;margin:10px -18px -18px;padding:10px 18px;background:var(--card);border-top:1px solid var(--line);border-radius:0 0 20px 20px}
 .score{position:sticky;bottom:8px;margin-top:10px}
-.dgrp{display:grid;gap:5px;margin-bottom:8px}
-.dchips{display:flex;flex-wrap:wrap;gap:6px}
-.dchips button{border:1.5px solid var(--line);background:var(--field);border-radius:99px;padding:7px 12px;font-weight:700;font-size:.88rem;cursor:pointer;color:var(--ink)}
-.dchips button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
-#drugOut{border-top:1px solid var(--line);padding-top:12px}
+.dsearch input{width:100%;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:11px 14px;font-size:1rem;margin-bottom:10px}
+details.dg{background:var(--card);border-radius:16px;box-shadow:var(--shadow);margin-bottom:8px;border:1px solid var(--line);overflow:hidden}
+details.dg summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:13px 16px;cursor:pointer}
+details.dg summary::-webkit-details-marker{display:none}
+details.dg summary span{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);background:var(--chip);border-radius:99px;padding:1px 9px}
+details.dg summary::after{content:"▾";margin-left:8px;color:var(--muted);transition:transform .2s}
+details.dg[open] summary::after{transform:rotate(180deg)}
+details.dg summary b{flex:1}
+.dl a{display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:700}
+.dl a span{flex:1;min-width:0}
+.dl a small{display:block;font-weight:500;color:var(--muted);font-size:.78rem}
+.dl a i{font-style:normal;color:var(--muted);font-size:1.3rem}
+.dhead h3{font-size:1.15rem}
+.dctl{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
+.dctl .seg button{padding:7px 11px;font-size:.86rem}
+.dctl .cust{flex:1 1 160px}
+.dres{background:var(--chip);border-radius:16px;padding:14px}
+.dmain{font-size:1.05rem}
+.dmain b{font-family:var(--f-display);font-size:1.55rem;font-weight:700;margin-right:4px}
+.dsub{color:var(--muted);font-size:.85rem;margin-top:4px}
+.dform{display:flex;gap:10px;align-items:center;margin-top:12px;padding-top:12px;border-top:1px dashed color-mix(in srgb,var(--muted) 40%,transparent)}
+.dform select,.dform .fone{flex:1;min-width:0;border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:9px 10px;font-size:.88rem;color:var(--ink)}
+.dform .fone{border:0;background:none;padding:0}
+.dform .amt{flex:none;font-family:var(--f-display);font-size:1.4rem;color:var(--brand);white-space:nowrap}
+ul.dw{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+ul.dw li{border-radius:10px;padding:5px 10px;font-size:.82rem;font-weight:700}
+#drugOut{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:16px}
 
-footer{padding:36px 0 48px;color:var(--muted);font-size:.85rem}
+footer{padding:8px 0 40px;color:var(--muted);font-size:.8rem}
 footer .refs{margin-top:10px}
 footer li{margin:4px 0}
 
@@ -160,14 +194,14 @@ footer li{margin:4px 0}
   .card{padding:16px}
   .zt th:nth-child(4),.zt td:nth-child(4){display:none}
 }
-@media print{.nav,.hero .warn,.btn{display:none}.card{box-shadow:none;border:1px solid #ccc}}
+@media print{.bar,.btn,.tiles{display:none}.card{box-shadow:none;border:1px solid #ccc}}
 </style>
 
 <style>
 .install{padding-block:28px 0}
 .install-card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;border:2px dashed color-mix(in srgb,var(--brand) 40%,transparent)}
 .install-card img{width:72px;height:72px;border-radius:18px;box-shadow:0 8px 18px -8px rgba(31,79,163,.6)}
-.install-card h2{font-size:1.4rem}
+.install-card h2{font-size:1.1rem}.install-card img{width:52px!important;height:52px!important}.install-card p{font-size:.88rem}
 .install-card p{color:var(--muted);margin-top:6px}
 .inst-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
 .inst-steps div{background:var(--chip);border-radius:14px;padding:12px 14px;font-size:.92rem}
@@ -178,25 +212,24 @@ footer li{margin:4px 0}
 </style>
 </head>
 <body>
-<header class="hero">
-  <div class="wrap">
-    <div class="byline">Для врачей · <b>врач-педиатр Корчагина Ю.А.</b></div>
-    <h1>Калькуляторы педиатра</h1>
-    <p>Физическое развитие по ВОЗ, нутритивный статус, ИМТ, давление, СКФ, жидкость и шкалы — на одном экране, на телефоне.</p>
-    <p class="warn">Инструмент помогает считать, но не заменяет клиническое решение. Данные пациента никуда не отправляются и не сохраняются: после закрытия страницы они стираются.</p>
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="back" id="back" href="#home" aria-label="Назад" hidden>‹</a>
+    <div class="bar-t"><span class="by">врач-педиатр Корчагина Ю.А.</span><b id="barTitle">Калькуляторы педиатра</b></div>
   </div>
+  <div class="wrap"><a class="ptchip" id="ptChip" href="#pt"><span id="ptSum">Пациент не указан — заполнить</span><i aria-hidden="true">✎</i></a></div>
 </header>
 
-<nav class="nav" aria-label="Разделы">
-  <div class="wrap">
-    <a href="#pt" class="pt">Пациент</a><a href="#doses">Дозы</a><a href="#grow">Развитие</a><a href="#ben">Питание и ИМТ</a><a href="#bp">Давление</a><a href="#gfr">СКФ</a><a href="#fluid">Жидкость</a><a href="#feed">Питание до года</a><a href="#scores">Шкалы</a>
-  </div>
-</nav>
-
 <main>
-<section id="pt">
+<section id="home" class="screen">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Шаг 1</span><h2>Пациент</h2><p>Данные вводятся один раз и подставляются во все калькуляторы.</p></div>
+    <div class="tiles"><a class="tile" href="#doses"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v4l3 5v9H6v-9l3-5z M6 13h12"/></svg><b>Дозы</b><small id="tile-doses">препараты по весу</small></a><a class="tile" href="#grow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V4 M4 20h16 M6 16c4-2 7-6 13-9"/></svg><b>Развитие и ИМТ</b><small id="tile-grow">z-score ВОЗ, БЭН, ожирение</small></a><a class="tile" href="#bp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg><b>Давление</b><small id="tile-bp">перцентили АД</small></a><a class="tile" href="#gfr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8 M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg><b>СКФ</b><small id="tile-gfr">формула Шварца</small></a><a class="tile" href="#fluid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></svg><b>Жидкость</b><small id="tile-fluid">Холлидей–Сегар, CDS, ОРС</small></a><a class="tile" href="#feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6 M10 3v3l-2 3v11h8V9l-2-3V3 M8 13h8"/></svg><b>Питание до года</b><small id="tile-feed">суточный объём смеси</small></a><a class="tile" href="#scores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12 M8 12h12 M8 18h12 M4 6h.01 M4 12h.01 M4 18h.01"/></svg><b>Шкалы</b><small id="tile-scores">МакАйзек, Уэстли</small></a></div>
+    <p class="disc">Инструмент помогает считать, но не заменяет клиническое решение. Данные пациента не отправляются и не сохраняются — после закрытия страницы они стираются.</p>
+    <a class="about-link" href="#about">Источники и как считается</a>
+  </div>
+</section>
+<section id="pt" class="screen" hidden>
+  <div class="wrap">
     <div class="card">
       <div class="grid">
         <div class="f full"><span class="lab">Пол</span><div class="seg" id="sex"><button type="button" data-v="1" aria-pressed="false">Мальчик</button><button type="button" data-v="2" aria-pressed="false">Девочка</button></div></div>
@@ -210,24 +243,19 @@ footer li{margin:4px 0}
         <div class="f" id="corrWrap" hidden><span class="lab">Скорректированный возраст</span><label class="chk" style="border:0;padding:6px 0"><input type="checkbox" id="useCorr" checked> учитывать для оценки развития</label></div>
       </div>
       <div class="age" id="ageOut">Укажите пол и дату рождения.</div>
-      <div class="row" style="margin-top:12px"><button type="button" class="btn" id="reset">Новый пациент</button></div>
+      <div class="row" style="margin-top:12px"><button type="button" class="btn pri" id="ptDone">Готово</button><button type="button" class="btn" id="reset">Новый пациент</button></div>
     </div>
   </div>
 </section>
-
-<section id="doses">
+<section id="doses" class="screen" hidden>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">По весу и возрасту</span><h2>Дозы препаратов</h2><p>Доза на приём и в сутки с учётом максимальных доз, объём суспензии или число таблеток.</p></div>
-    <div class="card calc">
-      <div id="drugPick"></div>
-      <div id="drugOut"></div>
-    </div>
+    <div id="drugPick"></div>
+    <div id="drugOut" hidden></div>
   </div>
 </section>
-
-<section id="grow">
+<section id="grow" class="screen" hidden>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">ВОЗ 2006 · 2007</span><h2>Физическое развитие</h2><p>Z-score и перцентили: до 5 лет — стандарты роста ВОЗ 2006, с 5 до 19 лет — референсы ВОЗ 2007.</p></div>
+    <p class="lead">До 5 лет — стандарты роста ВОЗ 2006, с 5 до 19 лет — референсы ВОЗ 2007.</p>
     <div class="card">
       <div id="growOut" class="empty">Укажите пол, дату рождения, вес и рост.</div>
       <details class="src"><summary>Как считается</summary><div>
@@ -239,12 +267,8 @@ footer li{margin:4px 0}
           <li>Скорректированный возраст = фактический − (40 − срок гестации) недель; учитывается до 2 лет.</li>
         </ul></div></details>
     </div>
-  </div>
-</section>
-
-<section id="ben">
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">БЭН · ожирение</span><h2>Нутритивный статус и ИМТ</h2><p>Классификация по ВОЗ и по российским документам — по тем же z-score.</p></div>
+  
+    <h3 class="sub">Нутритивный статус и ИМТ</h3>
     <div class="card"><div id="benOut" class="empty">Нужны пол, дата рождения, вес и рост.</div>
       <details class="src"><summary>Критерии</summary><div>
         <ul>
@@ -256,15 +280,13 @@ footer li{margin:4px 0}
     </div>
   </div>
 </section>
-
-<section id="bp">
+<section id="bp" class="screen" hidden>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">1–17 лет</span><h2>Артериальное давление</h2><p>Пороги подбираются по полу, возрасту и перцентилю роста ребёнка.</p></div>
     <div class="card calc">
       <div class="f"><span class="lab">Таблицы и классификация</span><div class="seg" id="bpStd"><button type="button" data-v="ru" aria-pressed="true">КР РФ 2016</button><button type="button" data-v="aap" aria-pressed="false">AAP 2017</button></div></div>
       <div class="grid">
-        <div class="f"><label for="sbp">Систолическое</label><div class="unit"><input id="sbp" type="number" inputmode="numeric" min="40" max="260"><span>мм рт. ст.</span></div></div>
-        <div class="f"><label for="dbp">Диастолическое</label><div class="unit"><input id="dbp" type="number" inputmode="numeric" min="20" max="180"><span>мм рт. ст.</span></div></div>
+        <div class="f"><label for="sbp">Систолическое</label><div class="unit"><input id="sbp" type="number" inputmode="numeric" min="40" max="260"><span>мм</span></div></div>
+        <div class="f"><label for="dbp">Диастолическое</label><div class="unit"><input id="dbp" type="number" inputmode="numeric" min="20" max="180"><span>мм</span></div></div>
       </div>
       <div id="bpOut" class="empty">Нужны пол, дата рождения и рост.</div>
       <details class="src"><summary>Критерии</summary><div>
@@ -277,10 +299,9 @@ footer li{margin:4px 0}
     </div>
   </div>
 </section>
-
-<section id="gfr">
+<section id="gfr" class="screen" hidden>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Шварц, 2009</span><h2>СКФ по формуле Шварца</h2><p>«Прикроватная» формула для детей 1–18 лет по креатинину, измеренному ферментативным методом.</p></div>
+    <p class="lead">«Прикроватная» формула для детей 1–18 лет; креатинин — ферментативным методом.</p>
     <div class="card calc">
       <div class="grid">
         <div class="f"><label for="cr">Креатинин крови</label><input id="cr" type="number" inputmode="decimal" step="0.01" min="0.05" max="2000"></div>
@@ -296,19 +317,18 @@ footer li{margin:4px 0}
     </div>
   </div>
 </section>
-
-<section id="fluid">
+<section id="fluid" class="screen" hidden>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Холлидей–Сегар · ВОЗ</span><h2>Жидкость и регидратация</h2></div>
+    <div class="seg" id="flTab" style="margin-bottom:10px"><button type="button" data-v="hs" aria-pressed="true">Объём в сутки</button><button type="button" data-v="cds" aria-pressed="false">CDS</button><button type="button" data-v="ors" aria-pressed="false">Регидратация</button></div>
     <div class="card calc">
-      <h3>Поддерживающий объём (Холлидей–Сегар)</h3>
-      <div id="hsOut" class="empty">Нужен вес.</div>
-      <h3 style="margin-top:6px">Степень обезвоживания — шкала CDS</h3>
+      <div id="flHs"><h3>Поддерживающий объём (Холлидей–Сегар)</h3>
+      <div id="hsOut" class="empty">Нужен вес.</div></div>
+      <div id="flCds" hidden><h3>Степень обезвоживания — шкала CDS</h3>
       <p class="mini">Clinical Dehydration Scale; в КР «Вирусные кишечные инфекции (гастроэнтериты) у детей» (2025) — приложение Г1.</p>
       <div id="cds"></div>
-      <div id="cdsOut"></div>
-      <h3 style="margin-top:6px">Объёмы регидратации (планы ВОЗ)</h3>
-      <div id="orsOut" class="empty">Нужен вес.</div>
+      <div id="cdsOut" class="sbar"></div></div>
+      <div id="flOrs" hidden><h3>Объёмы регидратации (планы ВОЗ)</h3>
+      <div id="orsOut" class="empty">Нужен вес.</div></div>
       <details class="src"><summary>Формулы и источники</summary><div>
         <ul>
           <li>Холлидей–Сегар: 100 мл/кг на первые 10 кг + 50 мл/кг на следующие 10 кг + 20 мл/кг на каждый кг сверх 20 кг в сутки; в час — 4 / 2 / 1 мл/кг. NICE NG29 рекомендует эту формулу для расчёта поддерживающей инфузии; при инфузии у больных детей объём часто ограничивают до 50–80 % из-за риска гипонатриемии.</li>
@@ -319,10 +339,9 @@ footer li{margin:4px 0}
     </div>
   </div>
 </section>
-
-<section id="feed">
+<section id="feed" class="screen" hidden>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Национальная программа, 2019</span><h2>Суточный объём питания до года</h2><p>Калорийный метод на фактическую массу тела.</p></div>
+    <p class="lead">Калорийный метод на фактическую массу тела (Национальная программа, 2019).</p>
     <div class="card calc">
       <div class="grid">
         <div class="f"><label for="kcal">Калорийность смеси</label><div class="unit"><input id="kcal" type="number" inputmode="decimal" step="1" min="40" max="110" value="67"><span>ккал/100 мл</span></div><small>Указана на банке</small></div>
@@ -339,21 +358,43 @@ footer li{margin:4px 0}
     </div>
   </div>
 </section>
-
-<section id="scores">
+<section id="scores" class="screen" hidden>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Шкалы</span><h2>Тонзиллофарингит и круп</h2></div>
-    <div class="card calc">
+    <div class="seg" id="scTab" style="margin-bottom:10px"><button type="button" data-v="mci" aria-pressed="true">Тонзиллофарингит</button><button type="button" data-v="wst" aria-pressed="false">Круп</button></div>
+    <div class="card calc" id="scMci">
       <h3>Шкала МакАйзека (модифицированная шкала Центора)</h3>
       <div id="mci"></div>
-      <div id="mciOut"></div>
+      <div id="mciOut" class="sbar"></div>
       <details class="src"><summary>Источник</summary><div>КР «Острый тонзиллит и фарингит (острый тонзиллофарингит)», 2024, ID 306, приложение Г1. В тексте КР в перечне признаков указан возраст «5–14 лет», а в таблице вероятности — «3–14 лет»; в исходной шкале McIsaac (1998) +1 балл дают в 3–14 лет — так считает и калькулятор. Экспресс-тест на БГСА рекомендован детям старше 3 лет, до 3 лет рутинно не проводится.</div></details>
     </div>
-    <div class="card calc" style="margin-top:14px">
+    <div class="card calc" id="scWst" hidden>
       <h3>Шкала Уэстли (круп)</h3>
       <div id="wst"></div>
-      <div id="wstOut"></div>
+      <div id="wstOut" class="sbar"></div>
       <details class="src"><summary>Источник</summary><div>Westley CR, Cotton EK, Brooks JG. Am J Dis Child. 1978;132(5):484–7; градации тяжести — по MSD Manual. КР «Острый обструктивный ларингит [круп] и эпиглоттит» упоминают шкалу Уэстли, но баллы не приводят; там же — степени стеноза по Ундрицу.</div></details>
+    </div>
+  </div>
+</section>
+<section id="about" class="screen" hidden>
+  <div class="wrap">
+    <div class="card"><h3>Источники</h3>
+    <ol class="refs">
+      <li>WHO Child Growth Standards (2006) и WHO Growth Reference 5–19 years (2007): таблицы LMS из пакетов ВОЗ anthro и anthroplus (github.com/WorldHealthOrganization).</li>
+      <li>Национальная программа оптимизации вскармливания детей первого года жизни в Российской Федерации, 2019.</li>
+      <li>КР «Недостаточность питания у детей старше 1 года (белково-энергетическая недостаточность)», 2026, ID 1041_1.</li>
+      <li>WHO guideline on the prevention and management of wasting and nutritional oedema in infants and children under 5 years, 2023.</li>
+      <li>КР «Артериальная гипертензия у детей», 2016, КР571; The Fourth Report on the Diagnosis, Evaluation, and Treatment of High Blood Pressure in Children and Adolescents. Pediatrics. 2004;114:555–76.</li>
+      <li>Flynn JT et al. Clinical Practice Guideline for Screening and Management of High Blood Pressure in Children and Adolescents (AAP). Pediatrics. 2017;140(3):e20171904.</li>
+      <li>CDC 2000 Growth Charts — LMS для длины и роста к возрасту.</li>
+      <li>Mosteller RD. Simplified calculation of body-surface area. N Engl J Med. 1987;317:1098 (площадь поверхности тела).</li>
+      <li>Schwartz GJ et al. New equations to estimate GFR in children with CKD. J Am Soc Nephrol. 2009;20:629–37. KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of CKD.</li>
+      <li>Holliday MA, Segar WE. Pediatrics. 1957;19:823–32. NICE NG29 «Intravenous fluid therapy in children and young people in hospital» (2015, обновлено 2020).</li>
+      <li>КР «Вирусные кишечные инфекции (гастроэнтериты) у детей», 2025, ID 925_1 (шкала CDS). WHO. The treatment of diarrhoea: a manual for physicians and other senior health workers, 2005 (планы A, B, C).</li>
+      <li>КР «Острый тонзиллит и фарингит (острый тонзиллофарингит)», 2024, ID 306.</li>
+      <li>Инструкции к препаратам (ГРЛС/РЛС): Детский Панадол, Нурофен для детей, Флемоксин Солютаб, Аугментин (7:1), Флемоклав Солютаб, Сумамед форте, Клацид, Супракс, Пульмикорт, Вентолин Небулы, Ферромальт, Тотема, Тардиферон, Сорбифер Дурулес, Аквадетрим, Вигантол — даты в разделе «Дозы».</li>
+      <li>КР «Отит средний острый» (2024, ID 314); КР «Железодефицитная анемия» (2024, ID 669); КР «Недостаточность витамина D. Рахит» (2026, ID 1059_1).</li>
+      <li>Westley CR et al. Am J Dis Child. 1978;132:484–7; КР «Острый обструктивный ларингит [круп] и эпиглоттит».</li>
+    </ol>
     </div>
   </div>
 </section>
@@ -380,26 +421,7 @@ footer li{margin:4px 0}
   </section>
 
 <footer>
-  <div class="wrap">
-    <p>Калькуляторы педиатра · врач-педиатр Корчагина Ю.А. · версия от 16.11.2026</p>
-    <ol class="refs">
-      <li>WHO Child Growth Standards (2006) и WHO Growth Reference 5–19 years (2007): таблицы LMS из пакетов ВОЗ anthro и anthroplus (github.com/WorldHealthOrganization).</li>
-      <li>Национальная программа оптимизации вскармливания детей первого года жизни в Российской Федерации, 2019.</li>
-      <li>КР «Недостаточность питания у детей старше 1 года (белково-энергетическая недостаточность)», 2026, ID 1041_1.</li>
-      <li>WHO guideline on the prevention and management of wasting and nutritional oedema in infants and children under 5 years, 2023.</li>
-      <li>КР «Артериальная гипертензия у детей», 2016, КР571; The Fourth Report on the Diagnosis, Evaluation, and Treatment of High Blood Pressure in Children and Adolescents. Pediatrics. 2004;114:555–76.</li>
-      <li>Flynn JT et al. Clinical Practice Guideline for Screening and Management of High Blood Pressure in Children and Adolescents (AAP). Pediatrics. 2017;140(3):e20171904.</li>
-      <li>CDC 2000 Growth Charts — LMS для длины и роста к возрасту.</li>
-      <li>Mosteller RD. Simplified calculation of body-surface area. N Engl J Med. 1987;317:1098 (площадь поверхности тела).</li>
-      <li>Schwartz GJ et al. New equations to estimate GFR in children with CKD. J Am Soc Nephrol. 2009;20:629–37. KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of CKD.</li>
-      <li>Holliday MA, Segar WE. Pediatrics. 1957;19:823–32. NICE NG29 «Intravenous fluid therapy in children and young people in hospital» (2015, обновлено 2020).</li>
-      <li>КР «Вирусные кишечные инфекции (гастроэнтериты) у детей», 2025, ID 925_1 (шкала CDS). WHO. The treatment of diarrhoea: a manual for physicians and other senior health workers, 2005 (планы A, B, C).</li>
-      <li>КР «Острый тонзиллит и фарингит (острый тонзиллофарингит)», 2024, ID 306.</li>
-      <li>Инструкции к препаратам (ГРЛС/РЛС): Детский Панадол, Нурофен для детей, Флемоксин Солютаб, Аугментин (7:1), Флемоклав Солютаб, Сумамед форте, Клацид, Супракс, Пульмикорт, Вентолин Небулы, Ферромальт, Тотема, Тардиферон, Сорбифер Дурулес, Аквадетрим, Вигантол — даты в разделе «Дозы».</li>
-      <li>КР «Отит средний острый» (2024, ID 314); КР «Железодефицитная анемия» (2024, ID 669); КР «Недостаточность витамина D. Рахит» (2026, ID 1059_1).</li>
-      <li>Westley CR et al. Am J Dis Child. 1978;132:484–7; КР «Острый обструктивный ларингит [круп] и эпиглоттит».</li>
-    </ol>
-  </div>
+  <div class="wrap"><p>Калькуляторы педиатра · врач-педиатр Корчагина Ю.А. · версия от 16.11.2026</p></div>
 </footer>
 
 <script>
@@ -613,12 +635,12 @@ window.VD={"who":{"wfa":{"1":[[0,0.3487,3.3464,0.14602],[1,0.3127,3.3174,0.14693
       "<div class='box'><h3>План C — тяжёлое обезвоживание, внутривенно</h3><p>"+(a?(inf?"До 12 мес: <b>"+f1(30*w,0)+" мл</b> за 1 ч, затем <b>"+f1(70*w,0)+" мл</b> за 5 ч":"С 12 мес: <b>"+f1(30*w,0)+" мл</b> за 30 мин, затем <b>"+f1(70*w,0)+" мл</b> за 2,5 ч"):"30 мл/кг = <b>"+f1(30*w,0)+" мл</b>, затем 70 мл/кг = <b>"+f1(70*w,0)+" мл</b> (время зависит от возраста — укажите дату рождения)")+"</p><p class='mini' style='margin-top:4px'>Раствор Рингера лактат или 0,9 % NaCl. Если пульс остаётся слабым — первые 30 мл/кг повторяют.</p></div>";
   }
   var CDS=[["Внешний вид",["нормальный","жажда, беспокойство, раздражительность","вялость, сонливость"]],["Глазные яблоки",["тургор нормальный","слегка запавшие","запавшие"]],["Слизистые оболочки",["влажные","липкие, суховатые","сухие"]],["Слёзы",["есть","снижены","отсутствуют"]]];
-  function buildQ(el,items,name){
-    var h="";items.forEach(function(it,i){h+="<div class='q'><span class='lab'>"+it[0]+"</span><div class='seg' data-q='"+i+"'>";it[1].forEach(function(t,j){var pts=it[2]?it[2][j]:j;h+="<button type='button' data-p='"+pts+"' aria-pressed='false'>"+t+(it[2]||name==="cds"?" <span class='mono'>("+(pts>0?"+":"")+pts+")</span>":"")+"</button>"});h+="</div></div>"});
+  function buildQ(el,items){
+    var h="";items.forEach(function(it,i){h+="<div class='q'><span class='lab'>"+it[0]+"</span><div class='opts'>";it[1].forEach(function(t,j){var pts=it[2]?it[2][j]:j;h+="<button type='button' data-p='"+pts+"' aria-pressed='false'><span>"+t+"</span><i>"+(pts>0?"+":"")+pts+"</i></button>"});h+="</div></div>"});
     el.innerHTML=h;
     el.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var g=b.parentNode;[].forEach.call(g.children,function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});scores()});
   }
-  function sumQ(el){var s=0,n=0,tot=el.querySelectorAll(".seg").length;el.querySelectorAll("button[aria-pressed='true']").forEach(function(b){s+=+b.dataset.p;n++});return {s:s,n:n,tot:tot}}
+  function sumQ(el){var s=0,n=0,tot=el.querySelectorAll(".opts").length;el.querySelectorAll("button[aria-pressed='true']").forEach(function(b){s+=+b.dataset.p;n++});return {s:s,n:n,tot:tot}}
   var MCI=[["Температура выше 38 °C",["нет","да"],[0,1]],["Отёк и гиперемия миндалин, налёты на миндалинах",["нет","да"],[0,1]],["Нет кашля и катаральных явлений",["нет (кашель есть)","да (кашля нет)"],[0,1]],["Увеличены и болезненны передние шейные / подчелюстные лимфоузлы",["нет","да"],[0,1]],["Возраст",["3–14 лет","15–44 года","45 лет и старше"],[1,0,-1]]];
   var WST=[["Сознание",["норма, в т. ч. сон","нарушено (дезориентация)"],[0,5]],["Цианоз",["нет","при возбуждении","в покое"],[0,4,5]],["Стридор",["нет","при возбуждении","в покое"],[0,1,2]],["Проведение воздуха",["норма","снижено","резко снижено"],[0,1,2]],["Втяжения",["нет","лёгкие","умеренные","выраженные"],[0,1,2,3]]];
   function scores(){
@@ -665,7 +687,30 @@ window.VD={"who":{"wfa":{"1":[[0,0.3487,3.3464,0.14602],[1,0.3127,3.3174,0.14693
     o.innerHTML=t;
   }
   var LST=[];
-  function all(){renderAge();var G=growth();renderGrowth(G);renderBen(G);renderBP();renderGFR();renderFluid();renderFeed();scores();LST.forEach(function(f){f()})}
+  function all(){renderAge();ptSummary();var G=growth();tiles(G);renderGrowth(G);renderBen(G);renderBP();renderGFR();renderFluid();renderFeed();scores();LST.forEach(function(f){f()})}
+  var TITLES={home:"Калькуляторы педиатра",pt:"Пациент",doses:"Дозы препаратов",grow:"Развитие и ИМТ",bp:"Артериальное давление",gfr:"СКФ по Шварцу",fluid:"Жидкость и регидратация",feed:"Питание до года",scores:"Шкалы",about:"Источники"};
+  var cur="home",prev="home";
+  function route(){
+    var h=(location.hash||"#home").slice(1),scr=h.split("/")[0];if(!TITLES[scr])scr="home";
+    if(scr!==cur){window.scrollTo(0,0);if(scr==="pt")prev=cur}
+    cur=scr;
+    [].forEach.call(document.querySelectorAll(".screen"),function(x){x.hidden=x.id!==scr});
+    $("barTitle").textContent=TITLES[scr];$("back").hidden=scr==="home";$("back").setAttribute("href",h.indexOf("/")>0?"#"+scr:"#home");
+    $("ptChip").hidden=scr==="pt"||scr==="about";
+    LST.forEach(function(f){f()});
+  }
+  window.addEventListener("hashchange",route);
+  function ptSummary(){
+    var a=ageInfo(),w=num("wt"),h=num("ht"),p=[];
+    if(P.sex)p.push(P.sex===1?"М":"Д");if(a)p.push(ageText(a.days));if(w)p.push(f1(w,w<10?2:1).replace(/,?0+$/,"")+" кг");if(h)p.push(f1(h,1).replace(/,0$/,"")+" см");
+    var el=$("ptChip");$("ptSum").textContent=p.length?p.join(" · "):"Пациент не указан — заполнить";el.classList.toggle("empty",!p.length);
+  }
+  function tile(id,t,v){var e=$("tile-"+id);if(!e)return;e.textContent=t;e.classList.toggle("v",!!v)}
+  function tiles(G){
+    tile("grow",G&&G.bmi!=null?"ИМТ "+f1(G.bmi,1)+(G.z.waz!=null?" · вес z "+f1(G.z.waz,1):""):"z-score ВОЗ, БЭН, ожирение",G&&G.bmi!=null);
+    var w=num("wt");if(w){var r=hs(w);tile("fluid","поддерживающий "+f1(r[0],0)+" мл/сут",true)}else tile("fluid","Холлидей–Сегар, CDS, ОРС");
+    var h=num("ht"),cr=num("cr");if(h&&cr){tile("gfr","СКФ "+f1(pref.crU==="mg"?0.413*h/cr:36.5*h/cr,0)+" мл/мин/1,73 м²",true)}else tile("gfr","формула Шварца");
+  }
   window.VCALC={$:$,f1:f1,num:num,ageInfo:ageInfo,pl:pl,pref:pref,onChange:function(f){LST.push(f)}};
 
   function segInit(id,key,cb){
@@ -678,7 +723,9 @@ window.VD={"who":{"wfa":{"1":[[0,0.3487,3.3464,0.14602],[1,0.3127,3.3174,0.14693
   var setSex=segInit("sex",null,function(v){P.sex=+v;all()});
   segInit("bpStd","bpStd",function(v){pref.bpStd=v;savePref();renderBP()});
   segInit("crU","crU",function(v){pref.crU=v;savePref();renderGFR()});
-  buildQ($("cds"),CDS,"cds");buildQ($("mci"),MCI);buildQ($("wst"),WST);
+  segInit("flTab",null,function(v){$("flHs").hidden=v!=="hs";$("flCds").hidden=v!=="cds";$("flOrs").hidden=v!=="ors"});
+  segInit("scTab",null,function(v){$("scMci").hidden=v!=="mci";$("scWst").hidden=v!=="wst"});
+  buildQ($("cds"),CDS);buildQ($("mci"),MCI);buildQ($("wst"),WST);
   $("dov").value=iso(new Date());
   ["dob","dov","wt","ht","hc","muac","ga","sbp","dbp","cr","kcal","nfeed"].forEach(function(id){$(id).addEventListener("input",all);$(id).addEventListener("change",all)});
   $("useCorr").addEventListener("change",all);
@@ -688,7 +735,8 @@ window.VD={"who":{"wfa":{"1":[[0,0.3487,3.3464,0.14602],[1,0.3127,3.3174,0.14693
     document.querySelectorAll("#cds button,#mci button,#wst button").forEach(function(b){b.setAttribute("aria-pressed","false")});
     all();location.hash="#pt";
   });
-  all();
+  $("ptDone").addEventListener("click",function(){location.hash="#"+(prev&&prev!=="pt"?prev:"home")});
+  all();route();
 })();
 </script>
 <script>
@@ -756,14 +804,17 @@ window.VD={"who":{"wfa":{"1":[[0,0.3487,3.3464,0.14602],[1,0.3127,3.3174,0.14693
    note:"Стартовая доза 2,5 мг (1 небула), при необходимости до 5 мг; до 4 ингаляций в сутки. Противопоказан до 18 месяцев.",
    src:"Вентолин Небулы — инструкция (08.01.2020): детям 4–11 лет 2,5 мг, при необходимости до 5 мг, до 4 раз в сутки; до 18 мес противопоказан."},
 
-  {id:"fe",g:"Железо",n:"Препараты железа",kind:"iron"},
-  {id:"vd",g:"Витамин D",n:"Колекальциферол",kind:"vitd"}
+  {id:"fe_fm",g:"Железо",n:"Ферромальт (капли)",kind:"iron",prod:"fm",sub:"железа (III) гидроксид полимальтозат, 50 мг/мл"},
+  {id:"fe_tm",g:"Железо",n:"Тотема",kind:"iron",prod:"tm",sub:"железа глюконат, 50 мг в ампуле 10 мл"},
+  {id:"fe_td",g:"Железо",n:"Тардиферон",kind:"iron",prod:"td",sub:"железа сульфат, 80 мг в таблетке, с 6 лет"},
+  {id:"fe_sd",g:"Железо",n:"Сорбифер Дурулес",kind:"iron",prod:"sd",sub:"железа сульфат, 100 мг в таблетке, с 12 лет"},
+  {id:"vd",g:"Витамин D",n:"Колекальциферол (Аквадетрим, Вигантол)",kind:"vitd"}
   ];
 
   /* ---------- состояние ---------- */
-  var S={drug:"par",reg:{},n:{},custom:{}};
-  try{var sv=JSON.parse(localStorage.getItem("vrach-doses-v1")||"{}");if(sv.drug)S.drug=sv.drug}catch(e){}
-  function save(){try{localStorage.setItem("vrach-doses-v1",JSON.stringify({drug:S.drug}))}catch(e){}}
+  var S={drug:null,reg:{},n:{},custom:{},form:{},q:""};
+  try{var sv=JSON.parse(localStorage.getItem("vrach-doses-v2")||"{}");if(sv.form)S.form=sv.form;if(sv.reg)S.reg=sv.reg;if(sv.n)S.n=sv.n}catch(e){}
+  function save(){try{localStorage.setItem("vrach-doses-v2",JSON.stringify({form:S.form,reg:S.reg,n:S.n}))}catch(e){}}
 
   function dget(id){for(var i=0;i<DR.length;i++)if(DR[i].id===id)return DR[i]}
   function amt(mg,form){
@@ -775,157 +826,160 @@ window.VD={"who":{"wfa":{"1":[[0,0.3487,3.3464,0.14602],[1,0.3127,3.3174,0.14693
   }
   function fr(q){var w=Math.floor(q),r=q-w,m={0.25:"¼",0.5:"½",0.75:"¾"}[r]||"";return (w?w:"")+(m?(w?" ":"")+m:"")||"0"}
   function mg(x){return f1(x,x<1?2:x<10?1:0)+" мг"}
-  function warn(t,c){return "<p style='margin-top:6px'><span class='tag "+(c||"t-warn")+"'>"+t+"</span></p>"}
+  function warn(t,c){return "<li class='"+(c||"t-warn")+"'>"+t+"</li>"}
 
   /* ---------- UI ---------- */
   var groups=[];DR.forEach(function(d){if(groups.indexOf(d.g)<0)groups.push(d.g)});
-  var pick=$("drugPick"),h="";
-  groups.forEach(function(g){h+="<div class='dgrp'><span class='mini'>"+g+"</span><div class='dchips'>";DR.forEach(function(d){if(d.g===g)h+="<button type='button' data-d='"+d.id+"' aria-pressed='false'>"+(d.kind==="iron"?"Железо":d.kind==="vitd"?"Витамин D":d.n.replace(/ при крупе| через небулайзер/,""))+"</button>"});h+="</div></div>"});
-  pick.innerHTML=h;
-  pick.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;S.drug=b.dataset.d;save();render()});
-  var box=$("drugOut");
-  box.addEventListener("click",function(e){var b=e.target.closest("button[data-k]");if(!b)return;var k=b.dataset.k,v=b.dataset.v;if(k==="reg")S.reg[S.drug]=v;else if(k==="n")S.n[S.drug]=+v;else S[k]=v;render()});
+  var listEl=$("drugPick"),box=$("drugOut"),openG={};
+  function short(d){return d.n}
+  function renderList(){
+    var q=S.q.trim().toLowerCase(),h="<div class='dsearch'><input id='dq' type='search' placeholder='Поиск препарата' value='"+S.q.replace(/'/g,"")+"' autocomplete='off'></div>";
+    groups.forEach(function(g){
+      var items=DR.filter(function(d){return d.g===g&&(!q||(d.n+" "+(d.sub||"")+" "+g).toLowerCase().indexOf(q)>-1)});
+      if(!items.length)return;
+      var open=q||openG[g];
+      h+="<details class='dg'"+(open?" open":"")+" data-g='"+g+"'><summary><b>"+g+"</b><span>"+items.length+"</span></summary><div class='dl'>"+items.map(function(d){return "<a href='#doses/"+d.id+"'><span>"+short(d)+(d.sub?"<small>"+d.sub+"</small>":"")+"</span><i>›</i></a>"}).join("")+"</div></details>";
+    });
+    listEl.innerHTML=h;
+  }
+  listEl.addEventListener("input",function(e){if(e.target.id==="dq"){S.q=e.target.value;var pos=e.target.selectionStart;renderList();var i=$("dq");i.focus();try{i.setSelectionRange(pos,pos)}catch(x){}}});
+  listEl.addEventListener("toggle",function(e){var d=e.target;if(d.dataset&&d.dataset.g&&!S.q)openG[d.dataset.g]=d.open},true);
+  box.addEventListener("click",function(e){var b=e.target.closest("button[data-k]");if(!b)return;var k=b.dataset.k,v=b.dataset.v;if(k==="reg")S.reg[S.drug]=v;else if(k==="n")S.n[S.drug]=+v;else S[k]=v;save();render()});
   box.addEventListener("input",function(e){var t=e.target;if(t.id==="dCustom"){S.custom[S.drug]=t.value;renderBody()}else if(t.id==="vdLvl"){S.vdLvl=t.value;renderBody()}});
+  box.addEventListener("change",function(e){if(e.target.id==="dForm"){S.form[S.drug]=+e.target.value;save();renderBody()}});
 
   function seg(k,opts,cur){return "<div class='seg' role='group'>"+opts.map(function(o){return "<button type='button' data-k='"+k+"' data-v='"+o[0]+"' aria-pressed='"+(String(o[0])===String(cur))+"'>"+o[1]+"</button>"}).join("")+"</div>"}
 
+  function route(){
+    var h=(location.hash||"").slice(1).split("/");
+    if(h[0]!=="doses")return;
+    var id=h[1]&&dget(h[1])?h[1]:null;
+    if(id!==S.drug){S.drug=id;window.scrollTo(0,0)}
+    listEl.hidden=!!id;box.hidden=!id;
+    if(id)render();else renderList();
+  }
   function render(){
-    [].forEach.call(pick.querySelectorAll("button"),function(b){b.setAttribute("aria-pressed",b.dataset.d===S.drug?"true":"false")});
-    var d=dget(S.drug);if(!d){S.drug="par";d=dget("par")}
-    var top="<h3>"+d.n+"</h3>";
+    var d=dget(S.drug);if(!d)return;
+    var top="<div class='dhead'><h3>"+d.n+"</h3></div><div class='dctl'>";
     if(d.kind==="course"||d.kind==="once"){
       var regs=d.regs.slice(),cur=S.reg[d.id]||regs[0].id;
       var opts=regs.map(function(r){return [r.id,r.n]});if(d.kind==="course")opts.push(["custom","своя"]);
-      top+="<div class='f' style='margin-top:8px'><span class='lab'>Доза</span>"+seg("reg",opts,cur)+"</div>";
-      if(cur==="custom")top+="<div class='f' style='margin-top:8px;max-width:220px'><label for='dCustom'>мг/кг в сутки</label><input id='dCustom' type='number' inputmode='decimal' step='0.5' value='"+(S.custom[d.id]||"")+"'></div>";
-      if(d.n2&&d.n2.length>1){var nn=S.n[d.id]||d.n2[0];top+="<div class='f' style='margin-top:8px'><span class='lab'>Приёмов в сутки</span>"+seg("n",d.n2.map(function(x){return [x,x+" "+C.pl(x,"раз","раза","раз")]}),nn)+"</div>"}
+      top+=seg("reg",opts,cur);
+      if(d.n2&&d.n2.length>1){var nn=S.n[d.id]||d.n2[0];top+=seg("n",d.n2.map(function(x){return [x,x+" "+C.pl(x,"раз","раза","раз")+" в день"]}),nn)}
+      if(cur==="custom")top+="<div class='f cust'><div class='unit'><input id='dCustom' type='number' inputmode='decimal' step='0.5' placeholder='мг/кг в сутки' value='"+(S.custom[d.id]||"")+"'><span>мг/кг/сут</span></div></div>";
     }
-    if(d.kind==="iron"){top="<h3>Препараты железа</h3><div class='f' style='margin-top:8px'><span class='lab'>Цель</span>"+seg("feMode",[["treat","лечение ЖДА"],["prev","профилактика"]],S.feMode||"treat")+"</div>"}
-    if(d.kind==="vitd"){top="<h3>Колекальциферол (витамин D)</h3><div class='f' style='margin-top:8px'><span class='lab'>Цель</span>"+seg("vdMode",[["prev","профилактика"],["treat","лечение по 25(OH)D"]],S.vdMode||"prev")+"</div>"+((S.vdMode||"prev")==="treat"?"<div class='f' style='margin-top:8px;max-width:240px'><label for='vdLvl'>25(OH)D, нг/мл</label><input id='vdLvl' type='number' inputmode='decimal' value='"+(S.vdLvl||"")+"'><small>нмоль/л ÷ 2,5 = нг/мл</small></div>":"")}
-    box.innerHTML="<div id='dTop'>"+top+"</div><div id='dBody' class='res'></div>";
+    if(d.kind==="iron")top+=seg("feMode",[["treat","лечение ЖДА"],["prev","профилактика"]],S.feMode||"treat");
+    if(d.kind==="vitd"){top+=seg("vdMode",[["prev","профилактика"],["treat","лечение по 25(OH)D"]],S.vdMode||"prev");if((S.vdMode||"prev")==="treat")top+="<div class='f cust'><div class='unit'><input id='vdLvl' type='number' inputmode='decimal' placeholder='25(OH)D' value='"+(S.vdLvl||"")+"'><span>нг/мл</span></div><small>нмоль/л ÷ 2,5 = нг/мл</small></div>"}
+    top+="</div>";
+    box.innerHTML=top+"<div id='dBody'></div>";
     renderBody();
   }
-
+  function formPick(d,single,ctx){
+    // выбранная форма + количество крупно
+    var fi=S.form[d.id];if(!(fi>=0&&fi<d.forms.length))fi=0;var fm=d.forms[fi],x=amt(single,fm);
+    var sel=d.forms.length>1?"<select id='dForm' aria-label='Форма выпуска'>"+d.forms.map(function(f,i){return "<option value='"+i+"'"+(i===fi?" selected":"")+">"+f.n+"</option>"}).join("")+"</select>":"<span class='fone'>"+fm.n+"</span>";
+    var w=[];
+    if(fm.u==="табл"&&x.real===0)w.push(warn("таблетка слишком большая для этой дозы","t-bad"));
+    else if(fm.u==="табл"&&Math.abs(x.real-single)/single>0.15)w.push(warn("≈ "+mg(x.real)+" — заметно отличается от расчётной","t-warn"));
+    if(ctx&&d.clav&&ctx.w){var cl=ctx.day/fm.r/ctx.w,lim=fm.clavMax&&cl>fm.clavMax?[fm.clavMax,"инструкция"]:[10,"КР"];w.push(warn("клавуланат "+f1(cl,1)+" мг/кг/сут"+(cl>10?" — больше "+lim[0]+" мг/кг ("+lim[1]+")":""),cl>10?"t-bad":"t-n"));
+      var am=ctx.day/ctx.w;if(fm.instr&&am>fm.instr+0.01)w.push(warn("амоксициллин "+f1(am,0)+" мг/кг/сут — больше "+fm.instr+" по инструкции","t-bad"));
+      if(fm.nr&&ctx.n&&fm.nr!==ctx.n)w.push(warn("по инструкции — "+fm.nr+" раза в день","t-n"));}
+    return {html:"<div class='dform'>"+sel+"<b class='amt'>"+x.t+"</b></div>",warn:w};
+  }
+  function allForms(d,single){
+    if(d.forms.length<2)return "";
+    return "<details class='src'><summary>Все формы выпуска</summary><table class='zt'><tbody>"+d.forms.map(function(fm){return "<tr><td>"+fm.n+"</td><td class='num'><b>"+amt(single,fm).t+"</b></td></tr>"}).join("")+"</tbody></table></details>";
+  }
+  function card(main,sub,fp,warns,d,single){
+    return "<div class='dres'><div class='dmain'>"+main+"</div>"+(sub?"<div class='dsub'>"+sub+"</div>":"")+(fp?fp.html:"")+"</div>"+((warns.length||(fp&&fp.warn.length))?"<ul class='dw'>"+warns.concat(fp?fp.warn:[]).join("")+"</ul>":"")+(single!=null?allForms(d,single):"")+foot(d);
+  }
   function renderBody(){
-    var d=dget(S.drug),o=$("dBody");if(!o)return;
-    var w=C.num("wt"),a=C.ageInfo(),mo=a?a.months:null,h="";
-    if(d.kind==="iron"){o.innerHTML=iron(w,a,mo);return}
+    var d=dget(S.drug),o=$("dBody");if(!o||!d)return;
+    var w=C.num("wt"),a=C.ageInfo(),mo=a?a.months:null,W=[];
+    if(d.kind==="iron"){o.innerHTML=iron(w,a,mo,d);return}
     if(d.kind==="vitd"){o.innerHTML=vitd(a,mo);return}
-    if(d.minAgeM&&mo!=null&&mo<d.minAgeM)h+=warn("Не назначается младше "+(d.minAgeM<12?d.minAgeM+" мес":d.minAgeM/12+" лет")+(d.minAgeM===18?" (18 мес)":""),"t-sev");
-    if(d.minW&&w!=null&&w<d.minW)h+=warn("Противопоказан при массе меньше "+d.minW+" кг","t-sev");
-    if(d.kind==="fixed"){
-      h="<p>Доза: <b>"+f1(d.dose,1)+" "+d.unitD+"</b></p><table class='zt' style='margin-top:6px'><tbody>"+d.forms.map(function(fm){return "<tr><td>"+fm.n+"</td><td class='num'><b>"+amt(d.dose,fm).t+"</b></td></tr>"}).join("")+"</tbody></table>"+h;
-      o.innerHTML=h+foot(d);return;
-    }
-    if(w==null){o.innerHTML="<p class='empty'>Укажите вес в карточке пациента.</p>"+foot(d);return}
+    if(d.minAgeM&&mo!=null&&mo<d.minAgeM)W.push(warn("не назначается младше "+(d.minAgeM<12||d.minAgeM===18?d.minAgeM+" мес":d.minAgeM/12+" лет"),"t-sev"));
+    if(d.minW&&w!=null&&w<d.minW)W.push(warn("противопоказан при массе меньше "+d.minW+" кг","t-sev"));
+    if(d.kind==="fixed"){o.innerHTML=card("<b>"+f1(d.dose,1).replace(/,0$/,"")+" "+d.unitD+"</b>",null,formPick(d,d.dose),W,d,d.dose);return}
+    if(w==null){o.innerHTML="<p class='empty'>Укажите вес — нажмите на строку пациента вверху.</p>"+foot(d);return}
     if(d.kind==="single"){
-      var single=d.mgkg*w,capS=false,maxD=Math.min(d.maxDayKg*w,d.maxDay);
-      if(single>d.maxSingle){single=d.maxSingle;capS=true}
-      h=h+"<div class='big'><b>"+mg(single)+"</b><span>на приём ("+d.range+")</span></div><p class='mini'>Не больше <b>"+mg(maxD)+"</b> в сутки ("+d.maxDayKg+" мг/кг"+(maxD===d.maxDay?", но не больше "+d.maxDay+" мг":"")+"), до "+d.maxDoses+" раз.</p>"+(capS?warn("Ограничено максимальной разовой дозой "+d.maxSingle+" мг"):"");
-      h+=formsTable(d,single,null);
-      o.innerHTML=h+foot(d);return;
+      var single=d.mgkg*w,maxD=Math.min(d.maxDayKg*w,d.maxDay);
+      if(single>d.maxSingle){single=d.maxSingle;W.push(warn("ограничено максимальной разовой дозой "+d.maxSingle+" мг"))}
+      o.innerHTML=card("<b>"+mg(single)+"</b> на приём","не больше "+mg(maxD)+" в сутки · до "+d.maxDoses+" раз · "+d.range,formPick(d,single),W,d,single);return;
     }
-    // course / once
     var cur=S.reg[d.id]||d.regs[0].id,r=null;d.regs.forEach(function(x){if(x.id===cur)r=x});
     var mgkg=r?r.mgkg:parseFloat(String(S.custom[d.id]||"").replace(",","."));
     if(!(mgkg>0)){o.innerHTML="<p class='empty'>Введите дозу в мг/кг в сутки.</p>"+foot(d);return}
-    if(d.kind==="once"){
-      var dose=mgkg*w;
-      h=h+"<div class='big'><b>"+mg(dose)+"</b><span>однократно ("+f1(mgkg,2).replace(/,?0+$/,"")+" мг/кг)</span></div>"+formsTable(d,dose,null);
-      o.innerHTML=h+foot(d);return;
-    }
-    var n=S.n[d.id]||d.n2[0];
-    var day=mgkg*w,notes=[],capRef=r||d.regs[0];
-    var capDay=capRef.capDay,capSingle=capRef.capSingle;
-    if(capDay&&day>capDay){notes.push(warn("Суточная доза ограничена "+capDay+" мг — "+(cur==="custom"?"максимум для стандартного режима":"доза взрослых / максимум по инструкции")));day=capDay}
+    if(d.kind==="once"){var dose=mgkg*w;o.innerHTML=card("<b>"+mg(dose)+"</b> однократно",f1(mgkg,2).replace(/,?0+$/,"")+" мг/кг",formPick(d,dose),W,d,dose);return}
+    var n=S.n[d.id]||d.n2[0],day=mgkg*w,capRef=r||d.regs[0],capDay=capRef.capDay,capSingle=capRef.capSingle;
+    if(capDay&&day>capDay){W.push(warn("суточная доза ограничена "+capDay+" мг"+(cur==="custom"?" (максимум стандартного режима)":" (доза взрослых)")));day=capDay}
     var single=day/n;
-    if(capSingle&&single>capSingle){notes.push(warn("Разовая доза ограничена "+capSingle+" мг"));single=capSingle;day=single*n}
-    if(d.instrMaxKg&&mgkg>d.instrMaxKg)notes.push(warn("Выше максимальной дозы по инструкции ("+d.instrMaxKg+" мг/кг/сут) — назначение по КР","t-n"));
-    if(d.id==="amx"&&w>=40)notes.push(warn("Масса ≥ 40 кг — дозы взрослых: 500–1000 мг 3 раза в сутки","t-n"));
-    if(d.id==="amc"&&w>=40)notes.push(warn("Масса ≥ 40 кг — 875/125 мг 2 раза в сутки","t-n"));
-    if(d.id==="cfx"&&((a&&a.years>=12)||w>45))notes.push(warn("Старше 12 лет или > 45 кг — 400 мг 1 раз в сутки","t-n"));
-    h=h+"<div class='big'><b>"+mg(day)+"</b><span>в сутки ("+f1(day/w,1).replace(/,0$/,"")+" мг/кг)</span><b>"+mg(single)+"</b><span>× "+n+" "+C.pl(n,"раз","раза","раз")+"</span></div>"+(r?"<p class='mini'>"+r.range+"</p>":"")+notes.join("");
-    h+=formsTable(d,single,day,n,w);
-    o.innerHTML=h+foot(d);
+    if(capSingle&&single>capSingle){W.push(warn("разовая доза ограничена "+capSingle+" мг"));single=capSingle;day=single*n}
+    if(d.instrMaxKg&&mgkg>d.instrMaxKg)W.push(warn("выше максимума по инструкции ("+d.instrMaxKg+" мг/кг/сут) — по КР","t-n"));
+    if(d.id==="amx"&&w>=40)W.push(warn("≥ 40 кг — дозы взрослых: 500–1000 мг × 3","t-n"));
+    if(d.id==="amc"&&w>=40)W.push(warn("≥ 40 кг — 875/125 мг × 2","t-n"));
+    if(d.id==="cfx"&&((a&&a.years>=12)||w>45))W.push(warn("старше 12 лет или > 45 кг — 400 мг × 1","t-n"));
+    o.innerHTML=card("<b>"+mg(single)+"</b> × "+n+" "+C.pl(n,"раз","раза","раз")+" в день","= "+mg(day)+" в сутки · "+f1(day/w,1).replace(/,0$/,"")+" мг/кг/сут"+(r?" · "+r.range:""),formPick(d,single,{w:w,day:day,n:n}),W,d,single);
   }
-  function formsTable(d,single,day,n,w){
-    var t="<table class='zt' style='margin-top:8px'><thead><tr><th>Форма</th><th>На приём</th></tr></thead><tbody>";
-    d.forms.forEach(function(fm){
-      var x=amt(single,fm),extra="";
-      if(fm.u==="табл"&&x.real===0)extra="<small>дозировка слишком большая</small>";
-      else if(fm.u==="табл"&&Math.abs(x.real-single)/single>0.15)extra="<small>≈ "+mg(x.real)+" — заметно отличается от расчётной</small>";
-      if(d.clav&&w){var cl=day/fm.r/w;var bad=cl>(fm.clavMax||10);extra+="<small"+(bad?" style='color:var(--bad-ink);font-weight:700'":"")+">клавуланат "+f1(cl,1)+" мг/кг/сут"+(bad?" — больше "+(fm.clavMax&&cl>fm.clavMax?fm.clavMax+" мг/кг (инструкция)":"10 мг/кг (КР)"):"")+"</small>";
-        var am=day/w;if(fm.instr&&am>fm.instr+0.01)extra+="<small style='color:var(--bad-ink);font-weight:700'>амоксициллин "+f1(am,0)+" мг/кг/сут — больше "+fm.instr+" мг/кг по инструкции</small>";
-        if(fm.nr&&n&&fm.nr!==n)extra+="<small>по инструкции — "+fm.nr+" раза в сутки</small>";}
-      t+="<tr><td>"+fm.n+extra+"</td><td class='num'><b>"+x.t+"</b></td></tr>";
-    });
-    return t+"</tbody></table>";
-  }
-  function foot(d){return (d.note?"<p class='mini' style='margin-top:8px'>"+d.note+"</p>":"")+(d.src?"<details class='src'><summary>Источник</summary><div>"+d.src+"</div></details>":"")}
+  function foot(d){return (d.note||d.src)?"<details class='src'><summary>Подробнее и источник</summary><div>"+(d.note?"<p>"+d.note+"</p>":"")+(d.src?"<p style='margin-top:6px'>"+d.src+"</p>":"")+"</div></details>":""}
 
   /* ---------- железо ---------- */
-  function iron(w,a,mo){
-    var mode=S.feMode||"treat";
-    if(!a||w==null)return "<p class='empty'>Нужны дата рождения и вес.</p>";
-    var y=a.years,h="",target,ttxt;
-    if(mode==="treat"){
-      var lo=null;
-      if(y<3){target=3*w;ttxt="3 мг/кг/сут (до 3 лет)"}else{lo=45;target=60;ttxt=y>=12?"старше 3 лет 45–60 мг/сут; подросткам — не больше 120 мг/сут (выше — больше побочных эффектов)":"старше 3 лет"}
-      h+="<div class='big'><b>"+(lo?lo+"–"+target+" мг":mg(target))+"</b><span>элементарного железа в сутки — "+ttxt+"</span></div><p class='mini'>Курс 1–3 месяца в зависимости от глубины дефицита; запасы восполняются за 3–6 месяцев (ферритин > 30 нг/мл). Контроль: ретикулоциты на 7–10-й день, гемоглобин +10 г/л к концу 4-й недели.</p>";
+  var FE_SRC="КР «Железодефицитная анемия» (2024, ID 669): до 3 лет 3 мг/кг/сут, старше 3 лет 45–60 мг/сут, подросткам не больше 120 мг/сут; курс 1–3 мес; профилактика 1 мг/кг/сут доношенным на грудном/смешанном вскармливании с 4 мес до прикорма, 2 мг/кг/сут недоношенным с 1 мес. Детям КР отмечают преимущества препаратов трёхвалентного железа. ";
+  var FE_I={fm:"Ферромальт — инструкция (ЛП-008751, 07.03.2023): капли 50 мг/мл, 1 капля = 2,5 мг; при ЖДА до 15 кг 1–2 капли/кг, 15–30 кг 20–40 капель, > 30 кг 40–120 капель; без анемии — вдвое меньше.",
+    tm:"Тотема — РЛС (инструкция 30.06.2025): 50 мг железа в ампуле 10 мл; с 3 мес; лечение 3 мг/кг/сут, не больше 60 мг; профилактика 3 мес – 5 лет 2 мг/кг/сут, не больше 30 мг, с 6 лет 50 мг/сут.",
+    td:"Тардиферон — РЛС (инструкция 26.05.2008): 80 мг железа в таблетке; с 6 лет; 6–10 лет 1 таблетка, старше 10 лет 1–2 таблетки в сутки.",
+    sd:"Сорбифер Дурулес — РЛС (инструкция 30.09.2024): 100 мг железа в таблетке; с 12 лет; 1–2 таблетки, при ЖДА до 3–4, максимум 4 в сутки."};
+  function iron(w,a,mo,d){
+    var mode=S.feMode||"treat",W=[],ft={note:null,src:FE_SRC+FE_I[d.prod]};
+    if(!a||w==null)return "<p class='empty'>Нужны дата рождения и вес.</p>"+foot(ft);
+    var y=a.years,lo=null,target,ttxt,pre=C.num("ga");pre=pre&&pre<37;
+    if(mode==="treat"){if(y<3){target=3*w;ttxt="3 мг/кг/сут до 3 лет"}else{lo=45;target=60;ttxt=y>=12?"45–60 мг/сут; подросткам не больше 120":"45–60 мг/сут старше 3 лет"}}
+    else{target=(pre?2:1)*w;ttxt=pre?"2 мг/кг/сут — недоношенным с 1 мес":"1 мг/кг/сут — доношенным с 4 мес до прикорма"}
+    var kr="по КР: "+(lo?lo+"–"+target+" мг":mg(target))+" железа в сутки ("+ttxt+")",main,sub=kr;
+    if(d.prod==="fm"){
+      var dr=Math.round(target/2.5),dlo=lo?Math.round(lo/2.5):null;
+      main="<b>"+(dlo?dlo+"–":"")+dr+" "+C.pl(dr,"капля","капли","капель")+"</b> в сутки";
+      var ins=mode==="treat"?(w<15?Math.round(w)+"–"+Math.round(2*w)+" капель (1–2 капли/кг)":w<=30?"20–40 капель":"40–120 капель"):(w<15?Math.round(w)+" капель (1 капля/кг)":w<=30?"10–20 капель":"20–40 капель");
+      sub=kr+"<br>по инструкции: "+ins;
+    }else if(d.prod==="tm"){
+      if(mo!=null&&mo<3){W.push(warn("с 3 месяцев","t-sev"));main="—"}
+      else{var tm,tn;if(mode==="treat"){tm=Math.min(3*w,60);tn="3 мг/кг/сут, не больше 60 мг"}else if(y<6){tm=Math.min(2*w,30);tn="2 мг/кг/сут, не больше 30 мг"}else{tm=50;tn="с 6 лет — 1 ампула"}
+        main="<b>"+f1(tm/5,1).replace(/,0$/,"")+" мл</b> в сутки";sub="= "+mg(tm)+" железа · по инструкции "+tn+"<br>"+kr+". 1 ампула = 10 мл = 50 мг"}
+    }else if(d.prod==="td"){
+      if(y<6){W.push(warn("противопоказан до 6 лет","t-sev"));main="—"}else main="<b>"+(y<=10?"1 таблетка":"1–2 таблетки")+"</b> в сутки";
+      sub="1 таблетка = 80 мг железа · "+kr+(mode==="prev"?"<br>детская профилактическая доза в инструкции не указана":"");
     }else{
-      var pre=C.num("ga");pre=pre&&pre<37;
-      target=(pre?2:1)*w;ttxt=pre?"2 мг/кг/сут — недоношенным на грудном вскармливании с 1 мес до смесей с железом или прикорма":"1 мг/кг/сут — доношенным на грудном/смешанном вскармливании с 4 мес до введения прикорма";
-      h+="<div class='big'><b>"+mg(target)+"</b><span>в сутки</span></div><p class='mini'>"+ttxt+".</p>";
+      if(y<12){W.push(warn("противопоказан до 12 лет","t-sev"));main="—"}else main="<b>1–2 таблетки</b> в сутки";
+      sub="1 таблетка = 100 мг железа · при ЖДА до 3–4, максимум 4 · "+kr+(mode==="prev"?"<br>детская профилактическая доза в инструкции не указана":"");
     }
-    var rows=[];
-    // Ферромальт
-    var drops=Math.round(target/2.5),dtxt=(mode==="treat"&&y>=3?Math.round(45/2.5)+"–":"")+drops,fr="";
-    if(mode==="treat"){fr=w<15?"по инструкции при ЖДА "+Math.round(w)+"–"+Math.round(2*w)+" капель (1–2 капли/кг)":w<=30?"по инструкции при ЖДА 20–40 капель":"по инструкции при ЖДА 40–120 капель"}
-    else fr=w<15?"по инструкции при дефиците без анемии "+Math.round(w)+" капель (1 капля/кг)":w<=30?"по инструкции без анемии 10–20 капель":"по инструкции без анемии 20–40 капель";
-    rows.push(["Ферромальт, капли 50 мг/мл (1 капля = 2,5 мг)",dtxt+" "+C.pl(drops,"капля","капли","капель")+" в сутки",fr]);
-    // Тотема
-    var tm=target,tnote="";
-    if(mo!=null&&mo<3){rows.push(["Тотема, 50 мг железа в ампуле 10 мл","—","с 3 месяцев"])}
-    else{
-      if(mode==="treat"){var t3=Math.min(3*w,60);tm=t3;tnote="по инструкции: 3 мг/кг/сут, не больше 60 мг"}
-      else{if(y<6){tm=Math.min(2*w,30);tnote="по инструкции: 2 мг/кг/сут, не больше 30 мг (3 мес – 5 лет)"}else{tm=50;tnote="по инструкции: с 6 лет — 1 ампула в сутки"}}
-      rows.push(["Тотема, 50 мг железа в ампуле 10 мл (5 мг/мл)",f1(tm/5,1)+" мл в сутки ("+mg(tm)+")",tnote]);
-    }
-    // Тардиферон
-    rows.push(["Тардиферон, таблетки 80 мг железа",y<6?"—":y<=10?"1 таблетка в сутки":"1–2 таблетки в сутки",y<6?"противопоказан до 6 лет":"по инструкции"+(mode==="prev"?" (детская профилактическая доза не указана)":"")]);
-    rows.push(["Сорбифер Дурулес, таблетки 100 мг железа",y<12?"—":"1–2 таблетки в сутки (при ЖДА до 3–4, максимум 4)",y<12?"противопоказан до 12 лет":"по инструкции"+(mode==="prev"?" (детская профилактическая доза не указана)":"")]);
-    h+="<table class='zt' style='margin-top:8px'><thead><tr><th>Препарат</th><th>Доза</th></tr></thead><tbody>"+rows.map(function(r){return "<tr><td>"+r[0]+"<small>"+r[2]+"</small></td><td class='num'><b>"+r[1]+"</b></td></tr>"}).join("")+"</tbody></table>";
-    h+="<p class='mini' style='margin-top:8px'>Детям КР отмечают преимущества препаратов трёхвалентного железа (меньше риск отравления, не окрашивают зубы, лучше переносятся); двухвалентные чаще вызывают отказ от лечения.</p>";
-    h+="<details class='src'><summary>Источник</summary><div>КР «Железодефицитная анемия» (2024, ID 669): до 3 лет 3 мг/кг/сут, старше 3 лет 45–60 мг/сут, подросткам до 120 мг/сут; профилактика 1 мг/кг (доношенные с 4 мес) и 2 мг/кг (недоношенные с 1 мес). Ферромальт — инструкция (ЛП-008751, 07.03.2023). Тотема — РЛС (инструкция 30.06.2025). Тардиферон — РЛС (инструкция 26.05.2008). Сорбифер Дурулес — РЛС (инструкция 30.09.2024).</div></details>";
-    return h;
+    if(mode==="treat")ft.note="Курс 1–3 месяца; запасы восполняются за 3–6 месяцев (ферритин > 30 нг/мл). Контроль: ретикулоциты на 7–10-й день, гемоглобин +10 г/л к концу 4-й недели.";
+    return card(main,sub,null,W,ft,null);
   }
 
   /* ---------- витамин D ---------- */
+  var VD_SRC="КР «Недостаточность витамина D. Рахит» (2026, ID 1059_1): профилактика — доношенным до 1 мес 500 МЕ, 1–12 мес 500–1000 МЕ, с 12 мес до 18 лет 1000–2000 МЕ, недоношенным 500–1000 МЕ; лечение 1 месяц: 21–29 нг/мл — 2000 МЕ, 11–20 — 3000 МЕ, ≤ 10 — 4000 МЕ. Аквадетрим — РЛС (03.10.2019) и Вигантол — инструкция (31.03.2019): 1 капля ≈ 500 МЕ. Национальная программа (2021) даёт для 1–6 мес 1000 МЕ, 1–3 лет 1500 МЕ, 3–18 лет 1000 МЕ.";
   function vitd(a,mo){
-    var mode=S.vdMode||"prev";
-    if(!a)return "<p class='empty'>Нужна дата рождения.</p>";
-    var y=a.years,ul=mo<6?1000:mo<12?1400:y<11?2000:4000,h="",dose,txt;
-    var pre=C.num("ga");pre=pre&&pre<37;
+    var mode=S.vdMode||"prev",ft={src:VD_SRC};
+    if(!a)return "<p class='empty'>Нужна дата рождения.</p>"+foot(ft);
+    var y=a.years,ul=mo<6?1000:mo<12?1400:y<11?2000:4000,pre=C.num("ga");pre=pre&&pre<37;
+    var ulT="допустимый максимум без контроля для возраста — "+ul+" МЕ/сут";
     if(mode==="prev"){
-      if(pre&&mo<4){dose="500–1000";txt="недоношенным — первые 3–4 месяца, не больше 1000 МЕ/сут"}
-      else if(a.days<30){dose="500";txt="доношенным новорождённым — через несколько дней после рождения до 1 месяца"}
-      else if(mo<12){dose="500–1000";txt="1–12 месяцев"}
-      else{dose="1000–2000";txt="12 месяцев – 18 лет"}
+      var dose,txt;
+      if(pre&&mo<4){dose="500–1000";txt="недоношенным, первые 3–4 месяца"}else if(a.days<30){dose="500";txt="до 1 месяца"}else if(mo<12){dose="500–1000";txt="1–12 месяцев"}else{dose="1000–2000";txt="с 12 месяцев до 18 лет"}
       var parts=dose.split("–").map(Number);
-      h="<div class='big'><b>"+dose+"</b><span>МЕ в сутки — "+txt+"</span></div><p>Аквадетрим или Вигантол (1 капля ≈ 500 МЕ): <b>"+parts.map(function(x){return x/500}).join("–")+" "+C.pl(parts[parts.length-1]/500,"капля","капли","капель")+"</b> в сутки</p>";
-    }else{
-      var lv=parseFloat(String(S.vdLvl||"").replace(",","."));
-      if(!(lv>0))return "<p class='empty'>Введите уровень 25(OH)D.</p>";
-      if(lv>=30){h="<div class='big'><b>"+f1(lv,0)+"</b><span>нг/мл — норма (≥ 30)</span></div><p>Лечебная доза не нужна — профилактическая доза по возрасту.</p>"}
-      else{var dd=lv>20?2000:lv>10?3000:4000;h="<div class='big'><b>"+dd+"</b><span>МЕ в сутки, 1 месяц</span></div><p>Аквадетрим или Вигантол: <b>"+dd/500+" капель</b> в сутки. Первые 3–5 дней — 1000 МЕ (2 капли).</p><p class='mini'>"+(lv>20?"Недостаточность (21–29 нг/мл)":lv>10?"Дефицит (11–20 нг/мл)":"Выраженный дефицит (≤ 10 нг/мл)")+". Через месяц — контроль 25(OH)D; если ниже 30 нг/мл, лечебную дозу продлевают на 15 дней. После достижения ≥ 30 нг/мл — профилактическая доза по возрасту.</p>"}
+      return card("<b>"+parts.map(function(x){return x/500}).join("–")+" "+C.pl(parts[parts.length-1]/500,"капля","капли","капель")+"</b> в сутки",dose+" МЕ — "+txt+" · Аквадетрим / Вигантол, 1 капля ≈ 500 МЕ<br>"+ulT,null,[],ft,null);
     }
-    h+="<p class='mini' style='margin-top:6px'>Максимально допустимая суточная доза (без контроля) для этого возраста: <b>"+ul+" МЕ</b>.</p>";
-    h+="<details class='src'><summary>Источник</summary><div>КР «Недостаточность витамина D. Рахит» (2026, ID 1059_1). Аквадетрим — РЛС (инструкция 03.10.2019): 15 000 МЕ/мл, 1 капля ≈ 500 МЕ. Вигантол — инструкция (31.03.2019): 20 000 МЕ/мл, 1 капля ≈ 500 МЕ. Национальная программа «Недостаточность витамина D у детей и подростков РФ» (2021) даёт для 1–6 мес 1000 МЕ, для 1–3 лет 1500 МЕ, для 3–18 лет 1000 МЕ — в КР 2026 диапазоны шире.</div></details>";
-    return h;
+    var lv=parseFloat(String(S.vdLvl||"").replace(",","."));
+    if(!(lv>0))return "<p class='empty'>Введите уровень 25(OH)D.</p>"+foot(ft);
+    if(lv>=30)return card("<b>профилактическая доза</b>",f1(lv,0)+" нг/мл — норма (≥ 30)",null,[],ft,null);
+    var dd=lv>20?2000:lv>10?3000:4000;
+    ft.note="Первые 3–5 дней — 1000 МЕ (2 капли). Через месяц — контроль 25(OH)D; если ниже 30 нг/мл, лечебную дозу продлевают на 15 дней. После ≥ 30 нг/мл — профилактическая доза по возрасту.";
+    return card("<b>"+dd/500+" капель</b> в сутки, 1 месяц",dd+" МЕ · "+(lv>20?"недостаточность 21–29 нг/мл":lv>10?"дефицит 11–20 нг/мл":"выраженный дефицит ≤ 10 нг/мл")+"<br>"+ulT,null,[],ft,null);
   }
 
-  C.onChange(renderBody);
-  render();
+  C.onChange(function(){var h=(location.hash||'').slice(1).split('/');if(h[0]==='doses'){if((h[1]||null)!==S.drug||(!S.drug&&!listEl.innerHTML))route();else if(S.drug)renderBody()}});
+  window.addEventListener('hashchange',route);
+  route();
 })();
 
 </script>

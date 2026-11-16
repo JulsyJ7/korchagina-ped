@@ -1,0 +1,29 @@
+{
+  "name": "Калькуляторы педиатра",
+  "short_name": "Калькуляторы",
+  "description": "Калькуляторы для педиатров: развитие по ВОЗ, давление, СКФ, жидкость, шкалы. Врач-педиатр Корчагина Ю.А.",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F2F5FA",
+  "theme_color": "#1F4FA3",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

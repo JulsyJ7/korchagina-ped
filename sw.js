@@ -1,5 +1,5 @@
 /* Офлайн-кэш главной страницы. Версия меняется при каждом обновлении index.html. */
-const VERSION = "home-a088bdd026";
+const VERSION = "home-fd7a0d0ffa";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./favicon-32.png", "./photo.jpg"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));

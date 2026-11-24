@@ -97,6 +97,12 @@ section{padding-block:40px 8px}
 
 .memo-u{font-size:.8rem;color:var(--muted);font-weight:700}
 footer p+p{margin-top:6px}
+.more{margin-top:12px}
+.more summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:800;color:var(--accent-2)}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"";width:8px;height:8px;border-right:2.2px solid currentColor;border-bottom:2.2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.more[open] summary::after{transform:translateY(2px) rotate(-135deg)}
+.more[open] summary{margin-bottom:8px}
 /* how */
 .how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .how div{background:var(--card);border-radius:18px;padding:16px 18px;border:1px solid var(--line)}
@@ -193,13 +199,16 @@ footer .wrap{border-top:1px solid var(--line);padding-top:18px}
           <li><span>2026</span><div><b>Фармаконадзор</b><p>Нежелательные реакции лекарственных средств</p></div></li>
           <li><span>2025</span><div><b>Неотложные состояния</b><p>Кардиология, пульмонология, нефрология и эндокринология: алгоритмы действий врача-педиатра</p></div></li>
           <li><span>2025</span><div><b>Грудное вскармливание</b><p>Современные подходы к поддержке грудного вскармливания</p></div></li>
+        </ul>
+        <details class="more"><summary>Ещё 6 курсов</summary>
+        <ul class="tl">
           <li><span>2025</span><div><b>Инфекционные болезни у детей</b><p>Особенности течения инфекционных заболеваний у детей</p></div></li>
           <li><span>2025</span><div><b>ОРЗ, грипп и пневмонии</b><p>Диагностика, лечение и профилактика острых респираторных заболеваний, гриппа и внебольничных пневмоний у детей</p></div></li>
           <li><span>2025</span><div><b>Педиатрия</b><p>Московский центр аккредитации и профессионального развития в сфере здравоохранения</p></div></li>
           <li><span>2025</span><div><b>Перинатология</b><p>Ведение новорождённого ребёнка в первичном звене</p></div></li>
           <li><span>2024</span><div><b>Вакцинация</b><p>Актуальные вопросы вакцинации, тактика иммунизации детей с отклонениями в состоянии здоровья</p></div></li>
           <li><span>2024</span><div><b>Сердечно-лёгочная реанимация</b><p>На догоспитальном этапе, для врачей поликлиник</p></div></li>
-        </ul>
+        </ul></details>
       </div>
       <div class="edu-c">
         <h3>Коротко</h3>

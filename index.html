@@ -31,7 +31,7 @@
 :root{
   --bg:#F3F8F6; --card:#FFFFFF; --ink:#12332E; --muted:#4A625D; --line:#D3E5DF; --chip:#E3F1EC;
   --accent:#B4502F; --accent-2:#0F6E5E; --gold:#E07A5F;
-  --hero-bg:linear-gradient(165deg,#E4F3EE 0%,#D3EDE4 62%,#F7E1D8 135%); --hero-ink:#12332E; --hero-eye:#0F6E5E;
+  --hero-bg:linear-gradient(165deg,rgba(228,243,238,.82) 0%,rgba(211,237,228,.76) 62%,rgba(247,225,216,.8) 135%),url(pattern-light.webp) center top/440px repeat,#E4F3EE; --hero-ink:#12332E; --hero-eye:#0F6E5E;
   --tag-bg:#FFFFFF; --tag-ink:#0F5E50; --tag-line:#BFE0D5; --ring:#FFFFFF;
   --shadow:0 14px 34px -20px rgba(18,51,46,.35);
   --f-display:"Unbounded","Manrope",system-ui,sans-serif; --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
@@ -39,13 +39,13 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0F1A18; --card:#162522; --ink:#E6F2EF; --muted:#A1B8B2; --line:#25403A; --chip:#1C302C;
   --accent:#F2A48C; --accent-2:#7FD8C4; --gold:#F2A48C;
-  --hero-bg:linear-gradient(165deg,#103B35 0%,#0F2F2B 70%,#2A2422 140%); --hero-ink:#E6F2EF; --hero-eye:#9FE3D2;
+  --hero-bg:linear-gradient(165deg,rgba(16,59,53,.5) 0%,rgba(15,47,43,.58) 70%,rgba(42,36,34,.66) 140%),url(pattern-dark.webp) center top/440px repeat,#103B35; --hero-ink:#E6F2EF; --hero-eye:#9FE3D2;
   --tag-bg:rgba(255,255,255,.08); --tag-ink:#DDF3EC; --tag-line:rgba(159,227,210,.28); --ring:rgba(230,242,239,.9);
   --shadow:0 14px 34px -20px rgba(0,0,0,.8); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0F1A18; --card:#162522; --ink:#E6F2EF; --muted:#A1B8B2; --line:#25403A; --chip:#1C302C;
   --accent:#F2A48C; --accent-2:#7FD8C4; --gold:#F2A48C;
-  --hero-bg:linear-gradient(165deg,#103B35 0%,#0F2F2B 70%,#2A2422 140%); --hero-ink:#E6F2EF; --hero-eye:#9FE3D2;
+  --hero-bg:linear-gradient(165deg,rgba(16,59,53,.5) 0%,rgba(15,47,43,.58) 70%,rgba(42,36,34,.66) 140%),url(pattern-dark.webp) center top/440px repeat,#103B35; --hero-ink:#E6F2EF; --hero-eye:#9FE3D2;
   --tag-bg:rgba(255,255,255,.08); --tag-ink:#DDF3EC; --tag-line:rgba(159,227,210,.28); --ring:rgba(230,242,239,.9);
   --shadow:0 14px 34px -20px rgba(0,0,0,.8); color-scheme:dark}
 *{box-sizing:border-box}

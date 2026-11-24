@@ -551,8 +551,20 @@ details.acc>.acc-b>.dd,details.acc>.acc-b>.mx,details.acc>.acc-b>.steps,details.
 .offline-ok{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:.86rem;font-weight:700;color:var(--ok-ink)}
 @media (max-width:640px){.install-card{grid-template-columns:1fr}.inst-steps{grid-template-columns:1fr}}
 </style>
+<style>
+.kp-bar{background:#1B2230;color:#E9EDF4;font:600 13px/1.2 "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;position:relative;z-index:60}
+.kp-bar-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:38px;padding:0 max(16px,env(safe-area-inset-left,0px)) 0 max(16px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
+.kp-bar a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;margin-left:-6px;border-radius:10px}
+.kp-bar a:hover{background:rgba(255,255,255,.1)}
+.kp-bar a:focus-visible{outline:2px solid #F2B84B;outline-offset:1px}
+.kp-bar svg{width:16px;height:16px;flex:none}
+.kp-bar span{opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media print{.kp-bar{display:none}}
+</style>
 </head>
 <body>
+<nav class="kp-bar" aria-label="Сайт"><div class="kp-bar-in"><a href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg>Все памятки</a><span>врач-педиатр Корчагина Ю.А.</span></div></nav>
+
 
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">

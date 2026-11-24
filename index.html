@@ -24,10 +24,17 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Памятки педиатра">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Manrope:wght@400;500;700;800&display=swap">
+<link rel="preload" href="font-lora-cyrillic-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="font-manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Lora";font-style:normal;font-weight:700;font-display:swap;src:url(font-lora-cyrillic-700.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Lora";font-style:normal;font-weight:700;font-display:swap;src:url(font-lora-latin-700.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:400;font-display:swap;src:url(font-manrope-cyrillic-400.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:400;font-display:swap;src:url(font-manrope-latin-400.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:700;font-display:swap;src:url(font-manrope-cyrillic-700.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:700;font-display:swap;src:url(font-manrope-latin-700.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:800;font-display:swap;src:url(font-manrope-cyrillic-800.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:800;font-display:swap;src:url(font-manrope-latin-800.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --bg:#F3F8F6; --card:#FFFFFF; --ink:#12332E; --muted:#4A625D; --line:#D3E5DF; --chip:#E3F1EC;
   --accent:#B4502F; --accent-2:#0F6E5E; --gold:#E07A5F;
@@ -61,7 +68,7 @@ a{color:inherit}
 /* hero */
 .hero{background:var(--hero-bg);color:var(--hero-ink);padding-top:env(safe-area-inset-top,0px)}
 .hero .wrap{padding-block:44px 40px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center}
-.avatar{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;background:#9FD9C8;color:#12332E;font-family:var(--f-display);font-weight:800;font-size:2.6rem;box-shadow:0 18px 40px -18px rgba(18,51,46,.55);border:4px solid var(--ring);overflow:hidden}
+.avatar{width:200px;height:200px;border-radius:50%;display:grid;place-items:center;background:#9FD9C8;color:#12332E;font-family:var(--f-display);font-weight:800;font-size:2.6rem;box-shadow:0 18px 40px -18px rgba(18,51,46,.55);border:4px solid var(--ring);overflow:hidden}
 .avatar img{width:100%;height:100%;object-fit:cover}
 .hero .eyebrow{color:var(--hero-eye)}
 .hero h1{font-size:clamp(2rem,5.6vw,3.2rem);font-weight:700;margin:10px 0 12px}
@@ -88,6 +95,8 @@ section{padding-block:40px 8px}
 .memo-go{margin-top:auto;padding-top:8px;display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.9rem}
 .memo-go svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 
+.memo-u{font-size:.8rem;color:var(--muted);font-weight:700}
+footer p+p{margin-top:6px}
 /* how */
 .how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .how div{background:var(--card);border-radius:18px;padding:16px 18px;border:1px solid var(--line)}
@@ -100,7 +109,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:18px}
 
 @media (max-width:720px){
   .hero .wrap{grid-template-columns:1fr;gap:18px;padding-block:32px 30px}
-  .avatar{width:96px;height:96px;font-size:1.9rem}
+  .avatar{width:148px;height:148px;font-size:1.9rem}
   .how{grid-template-columns:1fr}
 }
 /* about */
@@ -134,7 +143,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:18px}
     <div>
       <span class="eyebrow">Врач-педиатр · Москва</span>
       <h1>Корчагина Юлия Алексеевна</h1>
-      <p>Врач-педиатр детской поликлиники. Пишу для родителей короткие и понятные памятки — то, что обычно не успеваешь рассказать на приёме. Всё, что в них написано, основано на рекомендациях ВОЗ, Американской академии педиатрии и клинических рекомендациях Минздрава России.</p>
+      <p>Врач-педиатр детской поликлиники. Пишу для родителей памятки — то, что не успеваю рассказать на приёме. Всё по рекомендациям ВОЗ, Американской академии педиатрии и Минздрава России.</p>
       <div class="tags"><span>Особенно — первый год жизни</span><span>Доказательная медицина</span></div>
       <div class="hero-links"><a href="#about">Образование</a><a href="https://prodoctorov.ru/moskva/vrach/1077684-zhilochkina/" target="_blank" rel="noopener">Отзывы на ПроДокторов <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div>
     </div>
@@ -146,25 +155,25 @@ footer .wrap{border-top:1px solid var(--line);padding-top:18px}
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Памятки</span><h2>Памятки для родителей</h2><p>Каждая памятка — отдельная страница: её можно сохранить на телефон, и дальше она открывается без интернета.</p></div>
     <div class="memos">
-      <a class="memo" href="aptechka/" style="--c:#0D5C6B">
-        <img src="aptechka/og-image.png" alt="" loading="lazy" width="1200" height="630">
-        <div class="memo-t"><h3>Аптечка в путешествие</h3><span class="memo-s">что взять ребёнку в поездку</span><p>Чек-лист аптечки, дозы жаропонижающих по весу, репелленты и солнцезащитные средства по возрасту, тревожные признаки.</p><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
-      <a class="memo" href="privivki/" style="--c:#A3245A">
-        <img src="privivki/og-image.png" alt="" loading="lazy" width="1200" height="630">
-        <div class="memo-t"><h3>Прививки ребёнку</h3><span class="memo-s">до, во время и после</span><p>Календарь по возрасту, мой график прививок, калькулятор следующей прививки, реакции на каждую вакцину и тревожные признаки.</p><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
-      <a class="memo" href="lihoradka/" style="--c:#C9444F">
-        <img src="lihoradka/og-image.png" alt="" loading="lazy" width="1200" height="630">
-        <div class="memo-t"><h3>Лихорадка у ребёнка</h3><span class="memo-s">что делать и когда к врачу</span><p>Доза жаропонижающего по весу, что делать дома при температуре, дневник температуры, когда вызывать скорую.</p><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </a>
       <a class="memo" href="malysh/" style="--c:#2F6AA3">
-        <img src="malysh/og-image.png" alt="" loading="lazy" width="1200" height="630">
-        <div class="memo-t"><h3>Наш малыш</h3><span class="memo-s">инструкция на первый месяц</span><p>Уход за новорождённым, кормление грудью и смесью, сон, аптечка и тревожные признаки.</p><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+        <img src="thumb-malysh.webp" alt="" loading="lazy" width="720" height="378">
+        <div class="memo-t"><h3>Наш малыш</h3><span class="memo-s">инструкция на первый месяц</span><p>Уход за новорождённым, кормление грудью и смесью, сон, аптечка и тревожные признаки.</p><span class="memo-u">Обновлено 12.11.2026</span><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a>
       <a class="memo" href="prikorm/" style="--c:#12684A">
-        <img src="prikorm/og-image.png" alt="" loading="lazy" width="1200" height="630">
-        <div class="memo-t"><h3>Прикорм</h3><span class="memo-s">от 4 до 12 месяцев</span><p>Когда начинать, порции по месяцам, аллергены, безопасность, прикорм кусочками и дневник продуктов.</p><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+        <img src="thumb-prikorm.webp" alt="" loading="lazy" width="720" height="378">
+        <div class="memo-t"><h3>Прикорм</h3><span class="memo-s">от 4 до 12 месяцев</span><p>Когда начинать, порции по месяцам, аллергены, безопасность, прикорм кусочками и дневник продуктов.</p><span class="memo-u">Обновлено 12.11.2026</span><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="memo" href="privivki/" style="--c:#A3245A">
+        <img src="thumb-privivki.webp" alt="" loading="lazy" width="720" height="378">
+        <div class="memo-t"><h3>Прививки ребёнку</h3><span class="memo-s">до, во время и после</span><p>Календарь по возрасту, мой график прививок, калькулятор следующей прививки, реакции на каждую вакцину и тревожные признаки.</p><span class="memo-u">Обновлено 24.11.2026</span><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="memo" href="lihoradka/" style="--c:#C9444F">
+        <img src="thumb-lihoradka.webp" alt="" loading="lazy" width="720" height="378">
+        <div class="memo-t"><h3>Лихорадка у ребёнка</h3><span class="memo-s">что делать и когда к врачу</span><p>Доза жаропонижающего по весу, что делать дома при температуре, дневник температуры, когда вызывать скорую.</p><span class="memo-u">Обновлено 08.11.2026</span><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="memo" href="aptechka/" style="--c:#0D5C6B">
+        <img src="thumb-aptechka.webp" alt="" loading="lazy" width="720" height="378">
+        <div class="memo-t"><h3>Аптечка в путешествие</h3><span class="memo-s">что взять ребёнку в поездку</span><p>Чек-лист аптечки, дозы жаропонижающих по весу, репелленты и солнцезащитные средства по возрасту, тревожные признаки.</p><span class="memo-u">Обновлено 11.11.2026</span><span class="memo-go">Открыть памятку <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </a>
     </div>
   </div>
@@ -183,7 +192,6 @@ footer .wrap{border-top:1px solid var(--line);padding-top:18px}
         <ul class="tl">
           <li><span>2025</span><div><b>Педиатрия</b><p>Московский центр аккредитации и профессионального развития в сфере здравоохранения</p></div></li>
           <li><span>2025</span><div><b>Перинатология</b><p>Ведение новорождённого ребёнка в первичном звене</p></div></li>
-          <li><span>2025</span><div><b>Психология общения</b><p>Основы конфликтологии и профилактика конфликтных ситуаций</p></div></li>
           <li><span>2024</span><div><b>Сердечно-лёгочная реанимация</b><p>На догоспитальном этапе, для врачей поликлиник</p></div></li>
         </ul>
       </div>
@@ -196,6 +204,17 @@ footer .wrap{border-top:1px solid var(--line);padding-top:18px}
         </ul>
         <a class="rev" href="https://prodoctorov.ru/moskva/vrach/1077684-zhilochkina/" target="_blank" rel="noopener"><b>Отзывы пациентов</b><span>на ПроДокторов — почитать или оставить свой</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Принципы</span><h2>Как я пишу памятки</h2></div>
+    <div class="how">
+      <div><b>Только проверенные источники</b><p>Рекомендации ВОЗ, Американской академии педиатрии, NICE и клинические рекомендации Минздрава России. У каждой памятки — список источников с датами.</p></div>
+      <div><b>Лекарства — по инструкции</b><p>Дозы и ограничения сверяю с официальными инструкциями из государственного реестра лекарственных средств.</p></div>
+      <div><b>Без сомнительного</b><p>Не включаю препараты с недоказанной эффективностью. Памятки обновляю, когда меняются рекомендации.</p></div>
     </div>
   </div>
 </section>
@@ -214,7 +233,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:18px}
 </main>
 
 <footer>
-  <div class="wrap">Памятки врача-педиатра Корчагиной Ю.А. · julsyj7.github.io/korchagina-ped</div>
+  <div class="wrap"><p>© 2026 врач-педиатр Корчагина Ю.А. · julsyj7.github.io/korchagina-ped</p><p>Материалы сайта носят информационный характер и не являются медицинской консультацией.</p>
 </footer>
 <script>
 (function(){

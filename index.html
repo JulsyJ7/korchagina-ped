@@ -26,7 +26,7 @@
 <meta name="apple-mobile-web-app-title" content="Памятки педиатра">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Manrope:wght@400;500;700;800&display=swap">
 <style>
 :root{
   --bg:#F3F8F6; --card:#FFFFFF; --ink:#12332E; --muted:#4A625D; --line:#D3E5DF; --chip:#E3F1EC;
@@ -34,7 +34,7 @@
   --hero-bg:linear-gradient(165deg,rgba(228,243,238,.82) 0%,rgba(211,237,228,.76) 62%,rgba(247,225,216,.8) 135%),url(pattern-light.webp) center top/440px repeat,#E4F3EE; --hero-ink:#12332E; --hero-eye:#0F6E5E;
   --tag-bg:#FFFFFF; --tag-ink:#0F5E50; --tag-line:#BFE0D5; --ring:#FFFFFF;
   --shadow:0 14px 34px -20px rgba(18,51,46,.35);
-  --f-display:"Unbounded","Manrope",system-ui,sans-serif; --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --f-display:"Lora",Georgia,"Times New Roman",serif; --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"Manrope",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0F1A18; --card:#162522; --ink:#E6F2EF; --muted:#A1B8B2; --line:#25403A; --chip:#1C302C;
@@ -56,7 +56,7 @@ h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.15;text-wrap:balanc
 p{margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}
-.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.eyebrow{font-family:var(--f-body);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);font-weight:800}
 
 /* hero */
 .hero{background:var(--hero-bg);color:var(--hero-ink);padding-top:env(safe-area-inset-top,0px)}
@@ -64,7 +64,7 @@ a{color:inherit}
 .avatar{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;background:#9FD9C8;color:#12332E;font-family:var(--f-display);font-weight:800;font-size:2.6rem;box-shadow:0 18px 40px -18px rgba(18,51,46,.55);border:4px solid var(--ring);overflow:hidden}
 .avatar img{width:100%;height:100%;object-fit:cover}
 .hero .eyebrow{color:var(--hero-eye)}
-.hero h1{font-size:clamp(1.8rem,5.2vw,3rem);font-weight:800;margin:10px 0 12px}
+.hero h1{font-size:clamp(2rem,5.6vw,3.2rem);font-weight:700;margin:10px 0 12px}
 .hero p{max-width:60ch;font-size:1.04rem}
 .hero .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .hero .tags span{background:var(--tag-bg);color:var(--tag-ink);border:1px solid var(--tag-line);border-radius:99px;padding:5px 12px;font-size:.84rem;font-weight:700}
@@ -116,7 +116,7 @@ footer .wrap{border-top:1px solid var(--line);padding-top:18px}
 .edu-c h3:not(:first-child){margin-top:22px}
 .tl{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .tl li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px}
-.tl span{font-family:var(--f-mono);font-weight:700;color:var(--accent-2);font-size:.9rem;padding-top:1px}
+.tl span{font-family:var(--f-body);font-weight:800;color:var(--accent-2);font-size:.9rem;padding-top:1px}
 .tl b{display:block}
 .tl p{color:var(--muted);font-size:.92rem}
 .facts{margin:0 0 16px;padding-left:1.1em;display:grid;gap:6px}

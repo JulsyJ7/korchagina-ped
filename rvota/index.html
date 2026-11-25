@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Памятки врача-педиатра Корчагиной Ю.А.">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://julsyj7.github.io/korchagina-ped/rvota/">
+<meta property="og:title" content="Рвота и диарея у ребёнка: как отпаивать и когда к врачу — памятка педиатра">
+<meta property="og:description" content="Сколько раствора давать по весу, признаки обезвоживания, дневник стула и рвоты, когда вызывать скорую. Работает без интернета.">
+<meta property="og:image" content="https://julsyj7.github.io/korchagina-ped/rvota/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Рвота и диарея у ребёнка: как отпаивать и когда к врачу — памятка педиатра">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<meta name="theme-color" content="#1E6FA8">
+<meta name="description" content="Памятка для родителей от врача-педиатра Корчагиной Ю.А.: что делать при рвоте и поносе у ребёнка, сколько раствора давать по весу, признаки обезвоживания и когда к врачу.">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Рвота и диарея">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>html{color-scheme:light}body{margin:0;font-size:16px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Рвота и диарея у ребёнка — памятка</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Синий + бирюза («вода»): герой → что это → обезвоживание → что делать → сколько поить → дневник → когда к врачу → как не заразить → вопросы → источники. */
+:root{
+  --pri:#1E6FA8; --pri-fill:#1E6FA8; --sec:#13808C; --sun:#FFC56B;
+  --bg:#F4F8FB; --card:#FFFFFF; --ink:#16232E; --muted:#56646F; --line:#D9E4EC;
+  --chip:#E3EEF8; --tchip:#DCF1F2; --alert-bg:#FFE5E7; --alert-ink:#9A1830; --ok-ink:#0E626A;
+  --warm-bg:#FFF2E2; --warm-ink:#7A3F00;
+  --shadow:0 12px 30px -16px rgba(30,111,168,.36);
+  --f-display:"Unbounded","Manrope",system-ui,sans-serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --pri:#86BFF2; --pri-fill:#1F5F92; --sec:#5FD3DB; --sun:#FFC56B;
+  --bg:#10181E; --card:#1A252E; --ink:#EAF1F6; --muted:#A9B8C3; --line:#2C3A45;
+  --chip:#1B2F42; --tchip:#163A3D; --alert-bg:#3E161C; --alert-ink:#FFB3BC; --ok-ink:#86E3E9;
+  --warm-bg:#3B2A14; --warm-ink:#FFD09A;
+  --shadow:0 12px 30px -16px rgba(0,0,0,.7); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --pri:#86BFF2; --pri-fill:#1F5F92; --sec:#5FD3DB; --sun:#FFC56B;
+  --bg:#10181E; --card:#1A252E; --ink:#EAF1F6; --muted:#A9B8C3; --line:#2C3A45;
+  --chip:#1B2F42; --tchip:#163A3D; --alert-bg:#3E161C; --alert-ink:#FFB3BC; --ok-ink:#86E3E9;
+  --warm-bg:#3B2A14; --warm-ink:#FFD09A;
+  --shadow:0 12px 30px -16px rgba(0,0,0,.7); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:700}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+a{color:var(--pri)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sec);font-weight:700}
+section{padding-block:56px 8px}
+.sec-head{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;max-width:64ch}
+.sec-head p{color:var(--muted)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:6px}
+.card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px;min-width:0}
+.mut{color:var(--muted)}
+
+/* ---------- HERO ---------- */
+.hero{background:radial-gradient(120% 90% at 85% 10%,#7FD3E0 0%,rgba(127,211,224,0) 55%),linear-gradient(160deg,#124F7C 0%,#1E6FA8 50%,#2793B0 100%);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{padding-block:40px 30px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:center}
+.byline{display:flex;flex-wrap:wrap;gap:8px 16px;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;opacity:.95}
+.byline b{color:#BFF0F5}
+.hero h1{font-size:clamp(2.1rem,5.8vw,3.9rem);font-weight:800;margin:18px 0 14px;letter-spacing:-.01em}
+.hero h1 span{color:#BFF0F5;display:block;font-size:.55em;margin-top:8px}
+.hero .lead{font-size:1.08rem;max-width:46ch;opacity:.95}
+.hero-art{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"sachet cup" "sachet spoon";gap:8px 14px;align-items:center;justify-items:center;max-width:420px;width:100%;justify-self:center}
+.flo{display:block;height:auto;max-width:100%;filter:drop-shadow(0 16px 18px rgba(0,30,60,.35));animation:bob 6s ease-in-out infinite}
+.flo.a{grid-area:sachet;width:78%;rotate:-10deg}
+.flo.b{grid-area:cup;width:74%;animation-delay:-2s}
+.flo.c{grid-area:spoon;width:80%;animation-delay:-4s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.flo{animation:none}html{scroll-behavior:auto}}
+.wave{display:block;width:100%;height:46px;color:var(--bg)}
+
+/* ---------- nav ---------- */
+.topnav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topnav .wrap{display:flex;align-items:center;gap:10px;padding-block:8px}
+.kid{flex:none;border:0;border-radius:99px;background:var(--pri-fill);color:#fff;font-weight:800;font-size:.84rem;padding:7px 12px;cursor:pointer;white-space:nowrap}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:700;font-size:.88rem;padding:7px 12px;border-radius:99px;white-space:nowrap}
+.tabs a.on{background:var(--tchip);color:var(--ok-ink)}
+.fab-sos{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 9px;border-radius:99px;background:#9A1830;color:#fff;text-decoration:none;font-weight:800;font-size:.95rem;box-shadow:0 10px 24px -8px rgba(154,24,48,.6);transition:opacity .25s,transform .25s}
+.fab-dot{width:28px;height:28px;border-radius:50%;background:#fff;color:#9A1830;display:grid;place-items:center;font-weight:900;position:relative}
+.fab-dot::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #fff;animation:ring 2.2s ease-out infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+.fab-sos.away{opacity:0;transform:translateY(20px);pointer-events:none}
+
+/* ---------- блоки ---------- */
+.howto{padding-top:28px}
+.caution{display:flex;gap:12px;align-items:flex-start;background:var(--warm-bg);color:var(--warm-ink);border-radius:16px;padding:14px 16px;font-size:.92rem}
+.caution svg{flex:none;width:22px;height:22px;margin-top:2px}
+.caution.sm{font-size:.86rem;margin-top:16px}
+.caution.red{background:var(--alert-bg);color:var(--alert-ink)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.def{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.def .big{font-family:var(--f-display);font-weight:800;font-size:clamp(2.2rem,6vw,3rem);color:var(--pri);line-height:1}
+.def .big small{font-size:.38em;color:var(--muted);display:block;margin-top:8px;font-family:var(--f-body);font-weight:700}
+.def p{color:var(--muted);font-size:.93rem;margin-top:10px}
+.def .main{background:linear-gradient(135deg,var(--chip),var(--tchip))}
+.def .main b{font-family:var(--f-display);font-size:1.1rem;display:block;color:var(--ink)}
+.signs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.sign{text-align:center;padding:18px 12px}
+.sign svg{width:54px;height:54px;display:block;margin:0 auto 10px}
+.sign b{display:block;font-size:.95rem}
+.sign small{display:block;color:var(--muted);font-size:.82rem;margin-top:4px}
+.risk{margin-top:20px}
+.risk h3{margin-bottom:6px}
+.risk>p{color:var(--muted);font-size:.92rem}
+ul.plain{margin:10px 0 0;padding-left:20px;display:grid;gap:7px;font-size:.94rem;list-style:disc}
+.dd ul{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.dd li{position:relative;padding-left:32px}
+.dd li::before{position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.8rem}
+.dd .yes li{counter-increment:st}
+.dd .yes ul{counter-reset:st}
+.dd .yes li::before{content:counter(st);background:var(--tchip);color:var(--ok-ink)}
+.dd .no li::before{content:"✕";background:var(--alert-bg);color:var(--alert-ink)}
+.dd li small{display:block;color:var(--muted);font-size:.88rem;margin-top:2px}
+.dd h3{display:flex;align-items:center;gap:10px}
+.pill{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:99px;font-weight:700}
+.pill.y{background:var(--tchip);color:var(--ok-ink)}.pill.n{background:var(--alert-bg);color:var(--alert-ink)}
+details.fold{padding:0}
+details.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:20px}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"";margin-left:auto;width:9px;height:9px;border-right:2.5px solid var(--muted);border-bottom:2.5px solid var(--muted);transform:rotate(45deg);transition:transform .2s}
+details.fold[open]>summary::after{transform:rotate(-135deg)}
+details.fold>ul{padding:0 20px 20px!important;margin-top:0!important}
+.fold-hint{color:var(--muted);font-size:.86rem;font-weight:600}
+.after{margin-top:20px;display:flex;gap:16px;align-items:center;background:var(--pri-fill);color:#fff;border-radius:22px;padding:18px 20px}
+.after b{font-family:var(--f-display);font-size:1.05rem;display:block}
+.after p{opacity:.92;font-size:.93rem;margin-top:4px}
+.after svg{flex:none;width:42px;height:42px}
+.calm{margin-top:20px;display:flex;gap:16px;align-items:center;background:linear-gradient(120deg,var(--tchip),var(--chip));border-radius:22px;padding:18px 20px}
+.calm b{font-family:var(--f-display);font-size:1.05rem}
+.calm p{color:var(--muted);font-size:.93rem;margin-top:4px}
+.calm svg{flex:none;width:46px;height:46px}
+
+/* ---------- калькулятор ---------- */
+.kidbar{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px 24px;align-items:end}
+.field label,.flabel{display:block;font-weight:800;font-size:.9rem;margin-bottom:8px}
+.wrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.wrow input[type=range]{flex:1;min-width:160px;accent-color:var(--pri)}
+.wrow input[type=number]{width:84px;height:46px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:800;-moz-appearance:textfield}
+.wrow small{color:var(--muted);font-weight:700}
+.agein{display:flex;gap:10px;flex-wrap:wrap}
+.agein label{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--muted)}
+.agein input{width:76px;height:46px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:800;color:var(--ink);-moz-appearance:textfield}
+.agein input:focus{border-color:var(--pri);outline:none}
+.from{display:block;color:var(--muted);font-size:.8rem;margin-top:6px}
+.kids{padding:12px 14px;margin-bottom:14px}
+.kids-row{display:flex;flex-wrap:wrap;gap:8px}
+.kids-row button{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:7px 14px;font-weight:800;font-size:.9rem;cursor:pointer;color:var(--muted)}
+.kids-row button[aria-pressed="true"]{background:var(--pri-fill);border-color:var(--pri-fill);color:#fff}
+.kids-row .kadd{border-style:dashed;color:var(--pri)}
+.kids-edit{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:10px}
+.kids-edit label{display:flex;align-items:center;gap:8px;font-weight:800;font-size:.88rem}
+.kids-edit input{height:40px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:700;color:var(--ink);width:180px}
+.kdel{border:0;background:none;color:var(--muted);text-decoration:underline;font-size:.84rem;cursor:pointer;padding:4px 0}
+.vols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
+.vol{display:flex;flex-direction:column;gap:8px}
+.vol h3 small{display:block;font-family:var(--f-body);font-weight:600;color:var(--muted);font-size:.84rem;margin-top:4px}
+.vol .bigd{font-family:var(--f-display);font-weight:800;font-size:2.4rem;color:var(--pri);line-height:1}
+.vol .bigd small{font-size:1rem;margin-left:4px}
+.vol .sub{font-family:var(--f-mono);font-size:.82rem;color:var(--muted);font-weight:700}
+.vol .rule{background:var(--tchip);color:var(--ok-ink);border-radius:12px;padding:8px 12px;font-size:.88rem;font-weight:700}
+.vol .meta{font-size:.9rem;color:var(--muted)}
+.vol .meta b{color:var(--ink)}
+.vol.a{border-top:6px solid var(--pri)}
+.vol.b{border-top:6px solid var(--sec)}
+.vol.b .bigd{color:var(--sec)}
+.vol .rows{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:.92rem}
+.vol .rows b{font-family:var(--f-display);font-size:1.05rem}
+.vtab{margin-top:16px}
+.vtab table{width:100%;border-collapse:collapse;font-size:.92rem}
+.vtab th,.vtab td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+.vtab th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.vtab tr.hit td{background:var(--tchip);font-weight:800}
+
+/* ---------- дневник ---------- */
+.dia{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:start}
+.dia-form .when{display:block;width:100%;height:48px;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:0 12px;font-size:16px;-webkit-appearance:none;appearance:none;min-width:0}
+.ev-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.ev-btns button{border:0;border-radius:16px;padding:14px 10px;font-weight:800;font-size:.95rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:84px;justify-content:center;line-height:1.2}
+.ev-btns .s{background:var(--warm-bg);color:var(--warm-ink)}
+.ev-btns .v{background:var(--alert-bg);color:var(--alert-ink)}
+.ev-btns .p{background:var(--tchip);color:var(--ok-ink)}
+.ors{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px;background:var(--chip);border-radius:16px;padding:12px}
+.ors label{font-weight:800;font-size:.9rem;width:100%}
+.ors input{width:90px;height:46px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:0 10px;font-size:16px;font-weight:800}
+.ors button{flex:1 1 150px;border:0;border-radius:99px;background:var(--pri-fill);color:#fff;font-weight:800;padding:12px 16px;cursor:pointer;min-height:46px}
+.dia-msg{min-height:1.4em;margin-top:8px;font-weight:700;font-size:.88rem;color:var(--ok-ink)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:var(--bg);border-radius:16px;padding:12px 14px}
+.stat b{display:block;font-family:var(--f-display);font-size:1.6rem;line-height:1.1}
+.stat span{font-size:.84rem;color:var(--muted);font-weight:700}
+.stat.wide{grid-column:1/-1}
+.bar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--sec);border-radius:99px;width:0}
+.dia-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline;margin-bottom:10px}
+.dia-top b{font-family:var(--f-display);font-size:1.02rem}
+.dia-top span{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);font-weight:700}
+.hints{display:grid;gap:10px;margin-top:16px}
+.hints div{display:flex;gap:10px;align-items:flex-start;border-radius:14px;padding:11px 14px;font-size:.92rem;font-weight:700}
+.hints .h-red{background:var(--alert-bg);color:var(--alert-ink)}
+.hints .h-warm{background:var(--warm-bg);color:var(--warm-ink)}
+.hints .h-ok{background:var(--tchip);color:var(--ok-ink)}
+.listf{margin-top:16px}
+.elist{list-style:none;margin:0;padding:0 20px 16px;display:grid;gap:6px}
+.elist li{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding:7px 0;font-size:.9rem}
+.elist .tt{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);min-width:9ch}
+.elist .ts{flex:1}
+.elist button{border:0;background:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:2px 6px}
+.dia-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.dia-actions button{flex:1 1 200px;min-height:48px;border-radius:99px;font-weight:800;font-size:.92rem;padding:10px 18px;cursor:pointer}
+.copy{border:0;background:var(--sec);color:#fff}
+:root[data-theme="dark"] .copy{background:#16707A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .copy{background:#16707A}}
+.renew{border:2px solid var(--line);background:transparent;color:var(--muted)}
+.docsum{white-space:pre-wrap;font-family:var(--f-body);font-size:.9rem;background:var(--bg);border-radius:14px;padding:12px 14px;margin:10px 0 0;line-height:1.5}
+
+/* ---------- флаги ---------- */
+.flags{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.flags .card h3{margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.flags .card>p{color:var(--muted);font-size:.92rem;margin-bottom:10px}
+.flags ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.flags li{background:var(--alert-bg);border-radius:12px;padding:9px 12px;font-weight:600;font-size:.92rem}
+.flags .soon li{background:var(--warm-bg)}
+.flags .plan li{background:var(--chip)}
+.flags .plan{grid-column:1/-1}
+.n103{display:inline-grid;place-items:center;background:#9A1830;color:#fff;border-radius:10px;padding:2px 10px;font-family:var(--f-display);font-size:1rem}
+.myths{display:grid;gap:10px}
+.myths details{padding:0}
+.myths summary{cursor:pointer;padding:16px 18px;font-weight:800;list-style:none;display:flex;gap:10px;align-items:center}
+.myths summary::-webkit-details-marker{display:none}
+.myths summary::before{content:"?";flex:none;width:26px;height:26px;border-radius:50%;background:var(--chip);color:var(--pri);display:grid;place-items:center;font-family:var(--f-display);font-size:.85rem}
+.myths details[open] summary::before{content:"!";background:var(--sec);color:#fff}
+.myths p{padding:0 18px 16px 54px;color:var(--muted)}
+
+.finale{padding-block:64px 24px;text-align:center}
+.finale h2{font-size:clamp(1.7rem,4.6vw,2.8rem);color:var(--pri)}
+.finale h2 span{color:var(--sec)}
+.finale p{color:var(--muted);margin-top:10px}
+.src{font-size:.84rem;color:var(--muted)}
+.src-fold>summary{cursor:pointer;font-weight:800;color:var(--ink);font-size:.95rem;margin-bottom:10px}
+.src ol{padding-left:20px;display:grid;gap:6px;margin-top:8px}
+.disc{margin-top:16px;font-size:.84rem;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:18px;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+footer{padding-bottom:90px}
+
+@media (max-width:900px){.signs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:820px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-art{max-width:300px}
+  .kidbar,.dia,.def{grid-template-columns:1fr}
+}
+@media (max-width:680px){.grid2,.vols,.flags{grid-template-columns:1fr}.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.topnav,.fab-sos,.wave,#diary{display:none}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+</style>
+
+<style>
+.install{padding-block:40px 0}
+.install-card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;border:2px dashed color-mix(in srgb,var(--pri-fill) 40%,transparent)}
+.install-card img{width:72px;height:72px;border-radius:18px;box-shadow:0 8px 18px -8px rgba(30,111,168,.6)}
+.install-card h2{font-size:1.4rem}
+.install-card p{color:var(--muted);margin-top:6px}
+.inst-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.inst-steps div{background:var(--chip);border-radius:14px;padding:12px 14px;font-size:.92rem}
+.inst-steps b{display:block;margin-bottom:4px;color:var(--pri)}
+.inst-btn{margin-top:14px;border:0;border-radius:99px;background:var(--pri-fill);color:#fff;font-weight:800;padding:10px 18px;cursor:pointer}
+.offline-ok{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:.86rem;font-weight:700;color:var(--ok-ink)}
+@media (max-width:640px){.install-card{grid-template-columns:1fr}.inst-steps{grid-template-columns:1fr}}
+</style>
+<style>
+.kp-bar{background:#0F6E5E;color:#E6F2EF;font:600 13px/1.2 "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;position:relative;z-index:60}
+.kp-bar-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:38px;padding:0 max(16px,env(safe-area-inset-left,0px)) 0 max(16px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
+.kp-bar a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;margin-left:-6px;border-radius:10px}
+.kp-bar a:hover{background:rgba(255,255,255,.1)}
+.kp-bar a:focus-visible{outline:2px solid #F2A48C;outline-offset:1px}
+.kp-bar svg{width:16px;height:16px;flex:none}
+.kp-bar span{opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kp-fab{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;min-width:52px;padding:0 14px;border-radius:99px;background:#0F6E5E;color:#fff;font:700 14px/1 "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;text-decoration:none;box-shadow:0 10px 24px -10px rgba(15,60,52,.7),0 0 0 2px rgba(255,255,255,.9);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s}
+.kp-fab.on{opacity:1;transform:none;pointer-events:auto}
+.kp-fab svg{width:22px;height:22px;flex:none}
+.kp-fab b{font-weight:700}
+@media (max-width:419px){.kp-fab{padding:0;width:52px}.kp-fab b{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+@media (prefers-color-scheme:dark){.kp-fab{box-shadow:0 10px 24px -10px rgba(0,0,0,.8),0 0 0 2px rgba(230,242,239,.35)}}
+@media (prefers-reduced-motion:reduce){.kp-fab{transition:none}}
+@media print{.kp-bar,.kp-fab{display:none}}
+</style>
+</head>
+<body>
+<nav class="kp-bar" aria-label="Сайт"><div class="kp-bar-in"><a href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg>Все памятки</a><span>врач-педиатр Корчагина Ю.А.</span></div></nav>
+<a class="kp-fab" href="../" title="Все памятки"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg><b>Все памятки</b></a>
+<script>(function(){var b=document.querySelector(".kp-bar"),f=document.querySelector(".kp-fab");if(!b||!f)return;if(!("IntersectionObserver" in window)){f.classList.add("on");return}new IntersectionObserver(function(e){f.classList.toggle("on",!e[0].isIntersecting)}).observe(b)})()</script>
+
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gSea" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9FD4F7"/><stop offset="1" stop-color="#2F86C6"/></linearGradient>
+    <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".97"/><stop offset="1" stop-color="#E5F3F7" stop-opacity=".92"/></linearGradient>
+    <linearGradient id="gWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9E9EE"/><stop offset="1" stop-color="#3CB2C2"/></linearGradient>
+  </defs>
+  <symbol id="a-sachet" viewBox="0 0 120 170">
+    <path d="M14 14h92l-4 10 4 10v122a8 8 0 01-8 8H22a8 8 0 01-8-8V34l4-10z" fill="url(#gGlass)" stroke="#fff" stroke-width="3"/>
+    <rect x="14" y="40" width="92" height="64" fill="url(#gSea)"/>
+    <path d="M60 52c-9 11-13 17-13 23a13 13 0 0026 0c0-6-4-12-13-23z" fill="#fff"/>
+    <rect x="28" y="116" width="64" height="8" rx="4" fill="#9FD4F7"/><rect x="28" y="132" width="44" height="8" rx="4" fill="#CFE7F7"/>
+  </symbol>
+  <symbol id="a-cup" viewBox="0 0 140 150">
+    <path d="M24 30h92l-10 106a10 10 0 01-10 9H44a10 10 0 01-10-9z" fill="url(#gGlass)" stroke="#fff" stroke-width="3"/>
+    <path d="M31 62h78l-7 72a7 7 0 01-7 6H45a7 7 0 01-7-6z" fill="url(#gWater)"/>
+    <circle cx="56" cy="92" r="5" fill="#fff" opacity=".7"/><circle cx="74" cy="110" r="3.5" fill="#fff" opacity=".7"/>
+  </symbol>
+  <symbol id="a-spoon" viewBox="0 0 170 90">
+    <ellipse cx="40" cy="45" rx="32" ry="22" fill="url(#gGlass)" stroke="#fff" stroke-width="3"/>
+    <ellipse cx="40" cy="45" rx="22" ry="13" fill="url(#gWater)"/>
+    <rect x="68" y="39" width="96" height="12" rx="6" fill="#FFC56B"/>
+  </symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5"/></g></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3c-4 5-6 8-6 11a6 6 0 0012 0c0-3-2-6-6-11z" fill="currentColor"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#2BA3B3"/><path d="M14 27c4 6 16 6 20 0" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/><circle cx="17" cy="19" r="2.6" fill="#fff"/><circle cx="31" cy="19" r="2.6" fill="#fff"/></symbol>
+  <!-- признаки обезвоживания -->
+  <symbol id="s-sleep" viewBox="0 0 64 64"><circle cx="32" cy="34" r="22" fill="#FFE1C7"/><path d="M21 34q4 3 8 0M35 34q4 3 8 0" stroke="#7A4A2A" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M27 45q5-2 10 0" stroke="#7A4A2A" stroke-width="2.4" fill="none" stroke-linecap="round"/><text x="46" y="16" font-family="Arial" font-weight="700" font-size="12" fill="#1E6FA8">z</text><text x="53" y="9" font-family="Arial" font-weight="700" font-size="9" fill="#1E6FA8">z</text></symbol>
+  <symbol id="s-lips" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#FFE1C7"/><path d="M18 36q14-10 28 0q-14 10-28 0z" fill="#E8A79A" stroke="#B0675A" stroke-width="2"/><path d="M24 36l3-2M30 37l2-3M36 37l2-3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="s-tear" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#FFE1C7"/><path d="M20 30q4-4 8 0M36 30q4-4 8 0" stroke="#7A4A2A" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M25 46q7-6 14 0" stroke="#7A4A2A" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M47 40c-2 3-3 4-3 6a3 3 0 006 0c0-2-1-3-3-6z" fill="none" stroke="#1E6FA8" stroke-width="2" stroke-dasharray="2 2"/></symbol>
+  <symbol id="s-diaper" viewBox="0 0 64 64"><path d="M8 20h48l-4 16q-6 14-20 16Q18 50 12 36z" fill="#fff" stroke="#9FB4C4" stroke-width="2.4"/><rect x="8" y="16" width="48" height="8" rx="3" fill="#CFE7F7"/><path d="M26 34h12" stroke="#C9A04B" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="s-eyes" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="#FFE1C7"/><ellipse cx="23" cy="29" rx="6" ry="5" fill="#E8C3A8"/><ellipse cx="41" cy="29" rx="6" ry="5" fill="#E8C3A8"/><circle cx="23" cy="30" r="2.4" fill="#4A2E1C"/><circle cx="41" cy="30" r="2.4" fill="#4A2E1C"/><path d="M26 44h12" stroke="#7A4A2A" stroke-width="2.4" stroke-linecap="round"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="byline"><span>Памятка для родителей</span><span>врач-педиатр <b>Корчагина Ю.А.</b></span></div>
+      <h1>Рвота и диарея <span>как отпаивать ребёнка и когда к врачу</span></h1>
+      <p class="lead">Чем поить, сколько раствора нужно по весу, как заметить обезвоживание и признаки, при которых нельзя ждать.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg class="flo a" viewBox="0 0 120 170"><use href="#a-sachet"/></svg>
+      <svg class="flo b" viewBox="0 0 140 150"><use href="#a-cup"/></svg>
+      <svg class="flo c" viewBox="0 0 170 90"><use href="#a-spoon"/></svg>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 46V22c120 14 240 22 360 18S600 10 720 10s240 26 360 28 240-14 360-24v32z" fill="currentColor"/></svg>
+</header>
+
+<nav class="topnav" aria-label="Разделы памятки">
+  <div class="wrap">
+    <button type="button" class="kid" id="kidSum" hidden>Ребёнок</button>
+    <div class="tabs">
+      <a href="#what">Что это</a><a href="#dehyd">Обезвоживание</a><a href="#todo">Что делать</a><a href="#calc">Сколько поить</a><a href="#diary">Дневник</a><a href="#flags">Когда к врачу</a><a href="#care">Как не заразить</a><a href="#faq">Вопросы</a>
+    </div>
+  </div>
+</nav>
+<a href="#flags" class="fab-sos" id="fabSos"><span class="fab-dot" aria-hidden="true">!</span>Тревожно?</a>
+
+<main>
+
+  <section id="what">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Что это</span><h2>Чаще всего — вирусная кишечная инфекция</h2>
+        <p>Рвоту и понос у детей обычно вызывают вирусы, например ротавирус или норовирус. Инфекция заразна и проходит сама. Антибиотики на вирусы не действуют.</p></div>
+      <div class="def">
+        <div class="card"><div class="big">1–2 дня<small>обычно длится рвота</small></div><p>У большинства детей прекращается за 3 дня.</p></div>
+        <div class="card"><div class="big">5–7 дней<small>обычно длится понос</small></div><p>У большинства детей проходит за 2 недели.</p></div>
+        <div class="card main"><b>Главная опасность — обезвоживание</b><p>Особенно у малышей до года: они теряют воду быстрее. Поэтому лечение — раствор для питья и кормление.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dehyd">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Следите</span><h2>Признаки обезвоживания</h2><p>Если заметили хотя бы один — поите раствором активнее и смотрите раздел <a href="#flags">«Когда к врачу»</a>.</p></div>
+      <div class="signs">
+        <div class="card sign"><svg aria-hidden="true"><use href="#s-sleep"/></svg><b>Вялость</b><small>сонливый или, наоборот, раздражительный</small></div>
+        <div class="card sign"><svg aria-hidden="true"><use href="#s-lips"/></svg><b>Сухие губы и язык</b><small>и сильная жажда</small></div>
+        <div class="card sign"><svg aria-hidden="true"><use href="#s-tear"/></svg><b>Нет слёз</b><small>плачет без слёз</small></div>
+        <div class="card sign"><svg aria-hidden="true"><use href="#s-diaper"/></svg><b>Мало мочи</b><small>сухой подгузник много часов, моча тёмная</small></div>
+        <div class="card sign"><svg aria-hidden="true"><use href="#s-eyes"/></svg><b>Запавшие глаза</b><small>«ввалившиеся», с тенями</small></div>
+      </div>
+      <div class="card risk"><h3>Кому обезвоживание грозит быстрее</h3><p>Этим детям раствор нужен с первых часов болезни, а врача стоит позвать раньше:</p>
+        <ul class="plain">
+          <li>малыши до года, особенно до 6 месяцев;</li>
+          <li>дети, родившиеся с низким весом;</li>
+          <li>больше 5 раз жидкий стул за сутки;</li>
+          <li>рвота больше 2 раз за сутки;</li>
+          <li>ребёнок не пьёт или его рвёт после питья;</li>
+          <li>малыш во время болезни перестал брать грудь;</li>
+          <li>ребёнок плохо прибавлял в весе ещё до болезни.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="todo">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Дома</span><h2>Что делать</h2><p>Главная задача — восполнить потерянную жидкость и не допустить обезвоживания.</p></div>
+      <div class="dd grid2">
+        <div class="card yes"><h3><span class="pill y">Нужно</span></h3><ul>
+          <li>Поить раствором для оральной регидратации<small>Порошок или готовый раствор из аптеки. Разводите строго по инструкции: не крепче и не слабее.</small></li>
+          <li>Часто и понемногу<small>Малышу до 2 лет — по чайной ложке каждые 1–2 минуты, из ложки или шприца без иглы, не из бутылочки. Старшим — маленькими глотками из чашки.</small></li>
+          <li>Вырвало — подождать 10 минут и продолжать<small>Ещё медленнее, меньшими порциями. Рвота не значит, что поить нельзя.</small></li>
+          <li>После каждого жидкого стула — дополнительная порция раствора<small>Сколько — по весу ребёнка в разделе <a href="#calc">«Сколько поить»</a>.</small></li>
+          <li>Не прекращать кормление<small>Грудь — чаще и дольше. Смесь — обычную, в обычном разведении, не разбавляйте сильнее.</small></li>
+          <li>Едой не заставлять<small>Когда рвота стихла и появился аппетит, возвращайте ребёнку его обычную еду.</small></li>
+        </ul></div>
+        <details class="card no fold" open><summary><span class="pill n">Не нужно</span><span class="fold-hint">что делать не нужно</span></summary><ul>
+          <li>Давать лекарства «от поноса» и «от рвоты» без врача<small>Средства, которые замедляют работу кишечника, детям при кишечной инфекции не показаны.</small></li>
+          <li>Давать антибиотики без назначения врача<small>Вирусную инфекцию они не лечат.</small></li>
+          <li>Заменять раствор соком, газировкой, сладким чаем или бульоном<small>Соки и газировка могут усилить понос. Вернуть их можно, когда понос прекратится.</small></li>
+          <li>Держать ребёнка на голоде или поить только водой</li>
+          <li>Самим переводить на лечебную смесь<small>Безлактозную или другую лечебную смесь подбирает врач.</small></li>
+        </ul></details>
+      </div>
+      <div class="after"><svg aria-hidden="true"><use href="#i-drop"/></svg><div><b>После каждого жидкого стула — раствор</b><p>Это главное правило. Объём по весу — в калькуляторе ниже.</p></div></div>
+    </div>
+  </section>
+
+  <section id="calc">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Калькулятор</span><h2>Сколько поить: объём по весу</h2><p>Укажите вес и возраст — памятка посчитает, сколько раствора давать после каждого жидкого стула и сколько нужно, если врач разрешил лечить лёгкое обезвоживание дома.</p></div>
+      <div class="kids card"><div class="kids-row" data-kids></div><div class="kids-edit"><label>Имя <input type="text" class="kname" maxlength="20" placeholder="например, Маша"></label><button type="button" class="kdel">Удалить</button></div></div>
+      <div class="card kidbar">
+        <div class="field"><label for="kwR">Вес ребёнка</label>
+          <div class="wrow"><input type="range" id="kwR" min="2" max="60" step="0.5" value="10" aria-label="Вес ребёнка, ползунок"><input type="number" id="kwN" min="2" max="60" step="0.5" value="10" inputmode="decimal" aria-label="Вес ребёнка, кг"><small>кг</small></div>
+          <span class="from" id="kwFrom"></span>
+        </div>
+        <div><span class="flabel">Возраст</span>
+          <div class="agein"><label><input type="number" id="agY" min="0" max="17" step="1" inputmode="numeric" placeholder="—"><span>лет</span></label><label><input type="number" id="agM" min="0" max="11" step="1" inputmode="numeric" placeholder="—"><span>мес</span></label></div>
+          <span class="from" id="agHint"></span>
+        </div>
+      </div>
+      <div class="caution red sm" id="young" hidden><svg aria-hidden="true"><use href="#i-info"/></svg><div id="youngTxt"></div></div>
+      <div class="vols">
+        <div class="card vol a">
+          <h3>После каждого жидкого стула<small>в дополнение к обычному питью и кормлению</small></h3>
+          <div><span class="bigd" id="pMl">100</span><span class="bigd"><small>мл</small></span> <span class="sub" id="pSp"></span></div>
+          <div class="rule" id="pHow">По чайной ложке каждые 1–2 минуты</div>
+          <p class="meta">Давайте маленькими порциями. Если ребёнок хочет пить больше — можно больше.</p>
+        </div>
+        <div class="card vol b">
+          <h3>Лёгкое обезвоживание<small>жажда, беспокойство, суховатые губы — и врач разрешил лечение дома</small></h3>
+          <div><span class="bigd" id="dTot">500</span><span class="bigd"><small>мл за 4 часа</small></span></div>
+          <div class="rows"><span>в час</span><b id="dH">125 мл</b><span>каждые 5 минут</span><b id="d5">≈ 10 мл</b></div>
+          <div class="rule">50 мл на 1 кг веса за 4 часа — равномерно, малыми порциями</div>
+          <p class="meta">Это <b>сверх</b> порций после каждого стула. Через 4 часа оцените состояние ещё раз. Если признаки обезвоживания остаются — к врачу.</p>
+        </div>
+      </div>
+      <details class="card fold vtab" id="vtab"><summary><b>Таблица: раствор после каждого жидкого стула</b><span class="fold-hint">по весу</span></summary>
+        <div style="padding:0 20px 20px">
+          <table><thead><tr><th>Вес ребёнка</th><th>Раствор после каждого жидкого стула</th></tr></thead>
+            <tbody><tr data-b="0"><td>до 5 кг</td><td>50 мл</td></tr><tr data-b="1"><td>5–10 кг</td><td>100 мл</td></tr><tr data-b="2"><td>10–20 кг</td><td>200 мл</td></tr><tr data-b="3"><td>больше 20 кг</td><td>300 мл</td></tr></tbody></table>
+          <p class="from" style="margin-top:10px">Чайная ложка — 5 мл, стакан — 200 мл. Малышам удобнее всего давать шприцем без иглы.</p>
+        </div>
+      </details>
+      <div class="caution sm"><svg aria-hidden="true"><use href="#i-info"/></svg><div>Раствор — только аптечный, по инструкции к нему. Расчёт — ориентир для детей без признаков тяжёлого обезвоживания. Если появился хотя бы один признак из раздела <a href="#flags">«Когда к врачу»</a> — не лечите дома.</div></div>
+    </div>
+  </section>
+
+  <section id="diary">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Дневник</span><h2>Отмечайте стул, рвоту и питьё</h2><p>Одно нажатие — одна запись. Памятка посчитает, сколько было за сутки, сколько раствора выпито и сколько нужно, и подскажет, когда пора к врачу. Записи хранятся только на вашем телефоне.</p></div>
+      <div class="kids card"><div class="kids-row" data-kids></div><p class="from" style="margin-top:6px">У каждого ребёнка свой вес, возраст и записи — удобно, если болеют несколько детей.</p></div>
+      <div class="dia">
+        <div class="card dia-form">
+          <label class="flabel" for="evW">Когда</label>
+          <input type="datetime-local" id="evW" class="when">
+          <div class="ev-btns">
+            <button type="button" class="s" data-k="s">+ Жидкий стул</button>
+            <button type="button" class="v" data-k="v">+ Рвота</button>
+            <button type="button" class="p" data-k="p" style="grid-column:1/-1;min-height:60px">+ Пописал · мокрый подгузник</button>
+          </div>
+          <div class="ors"><label for="orsMl">Выпил раствора</label><input type="number" id="orsMl" min="5" max="1000" step="5" inputmode="numeric" value="100"><span>мл</span><button type="button" id="orsAdd">Записать питьё</button></div>
+          <p class="dia-msg" id="evMsg" role="status"></p>
+        </div>
+        <div class="card">
+          <div class="dia-top"><b id="dDay">Записей пока нет</b><span>последние 24 часа</span></div>
+          <div class="stats">
+            <div class="stat"><b id="sS">0</b><span>раз жидкий стул</span></div>
+            <div class="stat"><b id="sV">0</b><span>раз рвота</span></div>
+            <div class="stat wide"><b id="sO">0 мл</b><span id="sOt">выпито раствора</span><div class="bar"><i id="sBar"></i></div></div>
+            <div class="stat wide"><b id="sP">—</b><span>последний раз мочился</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="hints" class="hints"></div>
+      <details class="card fold listf" id="listF"><summary><b>Все записи</b><span class="fold-hint" id="eCount"></span></summary><ul id="eList" class="elist"></ul></details>
+      <div class="card" style="margin-top:16px"><h3>Сводка для врача</h3><pre id="docSum" class="docsum">Добавьте записи — сводка появится здесь.</pre>
+        <div class="dia-actions"><button type="button" class="copy" id="docCopy">Скопировать сводку</button><button type="button" class="renew" id="eNew">Начать заново (новая болезнь)</button></div><span class="from" id="docCopied"></span></div>
+    </div>
+  </section>
+
+  <section id="flags">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Не ждите</span><h2>Когда к врачу и в скорую</h2></div>
+      <div class="flags">
+        <div class="card"><h3><span class="n103">103</span> Звоните сразу</h3><p>Не дожидаясь утра, если:</p><ul>
+          <li>Ребёнок вялый, сонный, его трудно разбудить — или он необычно раздражительный, не успокаивается</li>
+          <li>Кожа бледная или «мраморная», руки и ноги холодные</li>
+          <li>Дышит часто или тяжело</li>
+          <li>Глаза запавшие, рот и язык сухие, плачет без слёз, давно сухой подгузник</li>
+          <li>Не удерживает даже маленькие порции жидкости</li>
+          <li>Рвота зелёного цвета</li>
+          <li>Кровь в стуле</li>
+          <li>Сильная или постоянная боль в животе, живот вздутый или твёрдый</li>
+          <li>Сыпь, которая не бледнеет при надавливании стаканом</li>
+          <li>Ребёнку трудно наклонить голову к груди; у малыша выбухает родничок</li>
+          <li>Малышу меньше 3 месяцев и температура 38 °C и выше</li>
+        </ul></div>
+        <div class="card soon"><h3>Врач в тот же день</h3><p>Позвоните в поликлинику или вызовите врача на дом, если:</p><ul>
+          <li>Ребёнку 3 месяца и больше и температура 39 °C и выше</li>
+          <li>Малышу меньше 6 месяцев или он родился с низким весом</li>
+          <li>Ребёнку до года, и за сутки больше 5 раз жидкий стул или больше 2 раз рвота</li>
+          <li>Отказывается пить раствор или его рвёт после каждого питья</li>
+          <li>В стуле слизь</li>
+          <li>Лечили лёгкое обезвоживание 4 часа, а признаки остаются</li>
+        </ul></div>
+        <div class="card plan"><h3>Запишитесь к врачу</h3><ul>
+          <li>Рвота продолжается дольше 3 дней</li>
+          <li>Понос продолжается дольше 7 дней</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="care">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Семья</span><h2>Как не заразить других</h2></div>
+      <div class="grid2">
+        <div class="card"><h3>Дома</h3><ul class="plain">
+          <li>Мойте руки с мылом тёплой проточной водой и тщательно вытирайте — особенно после смены подгузника и перед едой.</li>
+          <li>У ребёнка — своё полотенце; не давайте его другим.</li>
+          <li>Отдельная посуда для больного ребёнка.</li>
+          <li>Бельё стирайте при температуре выше 60 °C.</li>
+          <li>Каждый день — влажная уборка; обрабатывайте горшок и туалет.</li>
+        </ul></div>
+        <div class="card"><h3>Сад, школа, бассейн</h3><ul class="plain">
+          <li><b>В сад и школу</b> — не раньше чем через 48 часов после последнего жидкого стула или рвоты.</li>
+          <li><b>В бассейн</b> — не раньше чем через 2 недели после последнего жидкого стула.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Частые вопросы</span><h2>Что спрашивают родители</h2></div>
+      <div class="myths">
+        <details class="card"><summary>«Можно ли кормить, если понос?»</summary><p>Да. Грудное вскармливание не прерывают — прикладывайте чаще. Смесь дают обычную и в обычной концентрации. Старшим детям, когда рвота стихла и появился аппетит, возвращают их обычную еду. Голодные паузы не нужны.</p></details>
+        <details class="card"><summary>«Почему нельзя просто поить водой или компотом?»</summary><p>С рвотой и поносом ребёнок теряет не только воду, но и соли. Аптечный раствор восполняет и то и другое. Соки и газировка могут усилить понос — их лучше вернуть, когда стул наладится.</p></details>
+        <details class="card"><summary>«Его рвёт от каждого глотка — может, не поить?»</summary><p>Поить нужно, но очень маленькими порциями: по чайной ложке каждые 1–2 минуты. После рвоты сделайте паузу 10 минут и продолжайте ещё медленнее. Если не удерживает даже такие порции — это повод звонить 103.</p></details>
+        <details class="card"><summary>«Нужен ли антибиотик?»</summary><p>Чаще всего нет: рвоту и понос у детей обычно вызывают вирусы, на которые антибиотики не действуют. Нужен ли антибиотик, решает врач после осмотра.</p></details>
+        <details class="card"><summary>«Надо ли переходить на безлактозную смесь?»</summary><p>Обычно нет — ребёнок продолжает есть свою смесь. Лечебную смесь подбирает врач, если для неё есть причина.</p></details>
+      </div>
+      <div class="calm"><svg aria-hidden="true"><use href="#i-leaf"/></svg><div><b>И самое главное — спокойствие.</b><p>Большинство детей справляются с кишечной инфекцией дома, если вовремя и правильно их поить.</p></div></div>
+    </div>
+  </section>
+
+
+  <section class="install" id="install">
+    <div class="wrap">
+      <div class="install-card">
+        <img src="icon-192.png" alt="">
+        <div>
+          <span class="eyebrow">Без интернета</span>
+          <h2>Сохраните памятку на телефон</h2>
+          <p>После первого открытия памятка работает без интернета — в очереди к кабинету, в дороге, без мобильной сети. Добавьте её на экран «Домой», чтобы открывать как приложение.</p>
+          <div class="inst-steps">
+            <div><b>iPhone и iPad (Safari)</b>Кнопка «Поделиться» <span aria-hidden="true">⎙</span> → «На экран „Домой“» → «Добавить».</div>
+            <div><b>Android (Chrome)</b>Меню ⋮ → «Установить приложение» или «Добавить на главный экран».</div>
+          </div>
+          <button type="button" class="inst-btn" id="installBtn" hidden>Установить на телефон</button>
+          <div class="offline-ok" id="offlineOk" hidden>✓ Памятка сохранена и откроется без интернета</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="finale">
+    <div class="wrap">
+      <h2>Поить, кормить <span>и наблюдать</span></h2>
+      <p>Если сомневаетесь — позвоните врачу. Вы знаете своего ребёнка лучше всех.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <details class="src src-fold"><summary>Источники</summary>
+      <ol>
+        <li>NICE. Diarrhoea and vomiting caused by gastroenteritis in under 5s: diagnosis and management (CG84). Опубликовано 22.04.2009, последний пересмотр 31.10.2018 — длительность рвоты и диареи, группы риска обезвоживания, красные флаги и признаки шока, признаки другого диагноза (в т. ч. температура 38 °C и выше до 3 месяцев и 39 °C и выше с 3 месяцев), регидратация 50 мл/кг за 4 часа, питание, гигиена, возвращение в сад и школу через 48 часов, бассейн — через 2 недели.</li>
+        <li>Клинические рекомендации «Вирусные кишечные инфекции (гастроэнтериты) у детей», Минздрав России, 2025 (ID 925_1) — растворы со сниженной осмолярностью, сохранение грудного вскармливания, противодиарейные препараты, снижающие моторику кишечника, не показаны; лечебные смеси — по назначению.</li>
+        <li>ВОЗ. План лечения диареи A и B — в редакции MSF Clinical guidelines, Appendix 14 «WHO rehydration plan in patients with diarrhoea»: раствор после каждого жидкого стула по весу (50 / 100 / 200 / 300 мл), детям до 2 лет — по чайной ложке каждые 1–2 минуты, не из бутылочки; после рвоты — пауза 10 минут.</li>
+        <li>Guarino A. и соавт. ESPGHAN/ESPID evidence-based guidelines for the management of acute gastroenteritis in children in Europe: update 2014. J Pediatr Gastroenterol Nutr. 2014;59(1):132–152.</li>
+        <li>Churgay C.A., Aftab Z. Gastroenteritis in children: Part II. Prevention and management. Am Fam Physician. 2012;85(11):1066–1070 — 50 мл/кг за 3–4 часа, примерно 1 мл/кг каждые 5 минут шприцем.</li>
+        <li>Памятка «Рвота и диарея» врача-педиатра Корчагиной Ю.А. — исходная печатная версия (2026).</li>
+      </ol>
+      </details>
+      <p class="disc">Памятка для пациентов. Составлена по рекомендациям NICE (CG84), ВОЗ, ESPGHAN/ESPID и клиническим рекомендациям Минздрава России «Вирусные кишечные инфекции (гастроэнтериты) у детей» (2025). Не заменяет осмотр врача.</p>
+      <div class="foot"><span>Врач-педиатр Корчагина Ю.А.</span><span>Ноябрь 2026</span></div>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="rvota-app-v1";
+  function $(id){return document.getElementById(id)}
+  var ROOT={};try{ROOT=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){ROOT={}}
+  if(!ROOT.kids||!ROOT.kids.length)ROOT={kids:[{}],cur:0};
+  if(!(ROOT.cur>=0&&ROOT.cur<ROOT.kids.length))ROOT.cur=0;
+  function norm(k){if(typeof k.w!=="number")k.w=10;k.ev=(k.ev||[]).filter(function(e){return e&&typeof e.t==="number"&&/^[svpo]$/.test(e.k)});return k}
+  ROOT.kids.forEach(norm);
+  var st=ROOT.kids[ROOT.cur];
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(ROOT))}catch(e){}}
+  function kname(k,i){return (k.name||"").trim()||("Ребёнок "+(i+1))}
+  function fmt(x){return (Math.round(x*10)/10).toString().replace(".",",")}
+  function pad(n){return ("0"+n).slice(-2)}
+  function hm(t){var d=new Date(t);return pad(d.getHours())+":"+pad(d.getMinutes())}
+  function dm(t){var d=new Date(t);return pad(d.getDate())+"."+pad(d.getMonth()+1)+" "+hm(t)}
+  function locIso(t){var d=new Date(t);return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+"T"+hm(t)}
+  var H=36e5,DAY=864e5,MO=30.44*DAY;
+
+  /* ---------- возраст ---------- */
+  function ageMo(){return typeof st.b==="number"?Math.max(0,Math.floor((Date.now()-st.b)/MO)):null}
+  function ageTxt(m){if(m===null)return "";var y=Math.floor(m/12),r=m%12,yw=y%10===1&&y%100!==11?"год":(y%10>=2&&y%10<=4&&(y%100<10||y%100>=20))?"года":"лет";return (y?y+" "+yw:"")+(y&&r?" ":"")+(r||!y?r+" мес":"")}
+  var agY=$("agY"),agM=$("agM");
+  function showAge(){var m=ageMo();if(m===null){agY.value="";agM.value="";$("agHint").textContent="Укажите возраст — от него зависят подсказки"}else{agY.value=Math.floor(m/12);agM.value=m%12;$("agHint").textContent=""}}
+  function readAge(){var y=parseInt(agY.value,10),mo=parseInt(agM.value,10);
+    if(isNaN(y)&&isNaN(mo)){delete st.b;save();showAge();calc();return}
+    y=Math.max(0,y||0);mo=Math.max(0,mo||0);y+=Math.floor(mo/12);mo=mo%12;y=Math.min(17,y);
+    var renorm=mo!==(parseInt(agM.value,10)||0)||parseInt(agY.value,10)>17;st.b=Date.now()-(y*12+mo+.5)*MO;$("agHint").textContent="";save();if(renorm)showAge();calc()}
+  agY.addEventListener("change",readAge);agM.addEventListener("change",readAge);
+
+  /* ---------- вес и расчёт ---------- */
+  var kwR=$("kwR"),kwN=$("kwN");
+  function setW(w,from){var raw=w;w=Math.min(60,Math.max(2,Math.round(w*2)/2));st.w=w;if(from!=="r")kwR.value=w;kwN.value=w;
+    $("kwFrom").textContent=raw>60?"Калькулятор считает до 60 кг":raw<2?"Минимальный вес для расчёта — 2 кг":"";calc();save()}
+  kwR.addEventListener("input",function(){setW(+kwR.value,"r")});
+  kwN.addEventListener("change",function(){var v=parseFloat(String(kwN.value).replace(",","."));if(v>0)setW(v,"n");else{kwN.value=st.w;$("kwFrom").textContent="Введите вес ребёнка в килограммах"}});
+  /* ВОЗ, план A (MSF Appendix 14): после каждого жидкого стула по весу */
+  function band(w){return w<5?0:w<10?1:w<=20?2:3}
+  function portion(w){return [50,100,200,300][band(w)]}
+  function spoons(ml){var n=ml/5;return n===1?"1 чайная ложка":(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?n+" чайные ложки":n+" чайных ложек"}
+  function calc(){
+    var w=st.w,am=ageMo(),p=portion(w);
+    $("pMl").textContent=p;$("pSp").textContent=p<=100?"≈ "+spoons(p):p===200?"≈ 1 стакан":"≈ 1,5 стакана";
+    var small=am!==null?am<24:w<12;
+    $("pHow").textContent=small?"Малышу до 2 лет — по чайной ложке (5 мл) каждые 1–2 минуты":"Маленькими глотками из чашки";
+    /* NICE CG84: 50 мл/кг за 4 часа; AAFP 2012: ~1 мл/кг каждые 5 минут */
+    var tot=Math.round(50*w/5)*5;$("dTot").textContent=tot;$("dH").textContent=Math.round(tot/4)+" мл";$("d5").textContent="≈ "+fmt(Math.round(tot/48*2)/2)+" мл";
+    [].forEach.call(document.querySelectorAll("#vtab tr[data-b]"),function(tr){tr.classList.toggle("hit",+tr.dataset.b===band(w))});
+    var y=$("young"),yt=$("youngTxt");
+    if(am!==null&&am<3){y.hidden=false;yt.innerHTML="<b>Малышу меньше 3 месяцев.</b> При рвоте и поносе покажите его врачу в тот же день, а при температуре 38 °C и выше — сразу звоните <b>103</b>."}
+    else if(am!==null&&am<6){y.hidden=false;yt.innerHTML="<b>Малышу меньше 6 месяцев</b> — обезвоживание у него наступает быстрее. Поите раствором с первых часов и покажите ребёнка врачу в тот же день."}
+    else y.hidden=true;
+    var o=$("orsMl");if(document.activeElement!==o)o.value=p;
+    var ks=$("kidSum");ks.hidden=false;ks.textContent=(ROOT.kids.length>1?kname(st,ROOT.cur)+" · ":"")+fmt(w)+" кг"+(am===null?"":" · "+ageTxt(am));
+    render();
+  }
+
+  /* ---------- дневник ---------- */
+  var evW=$("evW"),NAME={s:"жидкий стул",v:"рвота",p:"пописал",o:"раствор"};
+  function resetWhen(){evW.value=locIso(Date.now())}
+  function msg(t){var m=$("evMsg");m.textContent=t;clearTimeout(msg.t);msg.t=setTimeout(function(){m.textContent=""},3000)}
+  function when(){var t=evW.value?new Date(evW.value).getTime():Date.now();if(!t||isNaN(t))t=Date.now();return t}
+  function add(k,ml){var t=when();if(t>Date.now()+5*6e4){msg("Время в будущем — проверьте дату и время.");return}
+    var e={t:t,k:k};if(ml)e.ml=ml;st.ev.push(e);st.ev.sort(function(a,b){return a.t-b.t});save();resetWhen();render();
+    msg("Записано: "+NAME[k]+(ml?" "+ml+" мл":"")+" в "+hm(t)+" ✓")}
+  [].forEach.call(document.querySelectorAll(".ev-btns button"),function(b){b.addEventListener("click",function(){add(b.dataset.k)})});
+  $("orsAdd").addEventListener("click",function(){var v=Math.round(parseFloat(String($("orsMl").value).replace(",",".")));if(!(v>0&&v<=1000)){msg("Укажите, сколько выпил: от 5 до 1000 мл.");return}add("o",v)});
+  $("eList").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;st.ev.splice(+b.dataset.i,1);save();render()});
+  var armed=0;$("eNew").addEventListener("click",function(){var b=$("eNew");if(!st.ev.length)return;
+    if(!(armed&&Date.now()-armed<4000)){armed=Date.now();b.textContent="Нажмите ещё раз, чтобы стереть все записи";setTimeout(function(){if(armed){armed=0;b.textContent="Начать заново (новая болезнь)"}},4000);return}
+    armed=0;b.textContent="Начать заново (новая болезнь)";st.ev=[];save();render()});
+  function win(k,ms){var now=Date.now();return st.ev.filter(function(e){return e.k===k&&now-e.t<ms&&e.t<=now+5*6e4})}
+  function first(k){var L=st.ev.filter(function(e){return e.k===k});return L.length?L[0].t:null}
+  function last(k){var L=st.ev.filter(function(e){return e.k===k});return L.length?L[L.length-1].t:null}
+  function agoTxt(t){var m=Math.round((Date.now()-t)/6e4);if(m<1)return "только что";if(m<60)return m+" мин назад";var h=Math.floor(m/60);return h+" ч "+(m%60?pad(m%60)+" мин ":"")+"назад"}
+  function stats(){var S=win("s",DAY).length,V=win("v",DAY).length,O=win("o",DAY).reduce(function(a,e){return a+(e.ml||0)},0),need=S*portion(st.w);return {S:S,V:V,O:O,need:need}}
+  function hints(){
+    var X=[],now=Date.now(),s=stats(),am=ageMo();if(!st.ev.length)return X;
+    var under1=am!==null?am<12:null;
+    if(am===null&&(s.S>5||s.V>2))X.push(["h-warm","Укажите возраст в калькуляторе. Если ребёнку меньше года — при таком числе эпизодов <b>покажите его врачу сегодня</b>."]);
+    if(under1&&s.S>5)X.push(["h-warm","Ребёнку меньше года, и за сутки <b>больше 5 раз жидкий стул</b> — покажите его врачу сегодня."]);
+    if(under1&&s.V>2)X.push(["h-warm","Ребёнку меньше года, и за сутки <b>больше 2 раз рвота</b> — покажите его врачу сегодня."]);
+    if(am!==null&&am<6&&(s.S||s.V))X.push(["h-warm","Малышу меньше 6 месяцев — <b>покажите его врачу в тот же день</b>, даже если рвота или понос были один раз."]);
+    var fv=first("v"),lv=last("v");if(fv&&lv&&now-lv<DAY&&lv-fv>=3*DAY)X.push(["h-warm","Рвота продолжается <b>дольше 3 дней</b> — нужен осмотр врача."]);
+    var fs=first("s"),ls=last("s");if(fs&&ls&&now-ls<DAY&&ls-fs>=7*DAY)X.push(["h-warm","Понос продолжается <b>дольше 7 дней</b> — запишитесь к врачу."]);
+    if(s.need&&s.O>=s.need)X.push(["h-ok","Раствора за сутки выпито не меньше, чем нужно после стула ("+s.need+" мл). Продолжайте и следите за признаками обезвоживания."]);
+    else if(s.need&&s.O<s.need/2&&win("s",6*H).length)X.push(["h-warm","После стула выпито меньше половины нужного раствора. Поите чаще, по чайной ложке — и следите за признаками обезвоживания."]);
+    var lp=last("p");if((s.S||s.V)&&lp)X.push(["h-ok","Последний раз пописал "+agoTxt(lp)+". Если подгузник сухой много часов, а ребёнок вялый — смотрите раздел «Когда к врачу»."]);
+    else if((s.S||s.V)&&!lp)X.push(["h-warm","Отмечайте, когда ребёнок писает: редкое мочеиспускание — признак обезвоживания."]);
+    return X;
+  }
+  function summary(){
+    var s=stats(),am=ageMo(),out=[],now=Date.now();
+    out.push((ROOT.kids.length>1||st.name?kname(st,ROOT.cur)+". ":"")+"Вес: "+fmt(st.w)+" кг; возраст: "+(am===null?"не указан":ageTxt(am))+".");
+    var fs=first("s"),fv=first("v");
+    if(fv)out.push("Рвота с "+dm(fv)+", последняя — "+dm(last("v"))+"; за сутки — "+s.V+".");
+    if(fs)out.push("Жидкий стул с "+dm(fs)+", последний — "+dm(last("s"))+"; за сутки — "+s.S+".");
+    out.push("Раствор за сутки: "+s.O+" мл"+(s.need?" (после стула нужно было около "+s.need+" мл)":"")+".");
+    var lp=last("p");out.push(lp?"Последний раз пописал: "+dm(lp)+".":"Мочеиспускание не отмечали.");
+    return out.join("\n");
+  }
+  function render(){
+    var s=stats(),now=Date.now();
+    var fe=st.ev.length?st.ev[0].t:null;$("dDay").textContent=!fe?"Записей пока нет":(Math.floor((now-fe)/DAY)+1)+"-е сутки болезни";
+    $("sS").textContent=s.S;$("sV").textContent=s.V;$("sO").textContent=s.O+" мл";
+    $("sOt").textContent=s.need?"выпито раствора · нужно после стула ≈ "+s.need+" мл":"выпито раствора";
+    $("sBar").style.width=(s.need?Math.min(100,Math.round(s.O/s.need*100)):s.O?100:0)+"%";
+    var lp=last("p");$("sP").textContent=lp?agoTxt(lp):"—";
+    $("hints").innerHTML=hints().map(function(h){return '<div class="'+h[0]+'"><span>'+(h[0]==="h-ok"?"✓":"!")+'</span><span>'+h[1]+'</span></div>'}).join("");
+    var items=st.ev.map(function(e,i){return {t:e.t,h:'<span class="tt">'+dm(e.t)+'</span><span class="ts">'+NAME[e.k]+(e.ml?" · "+e.ml+" мл":"")+'</span><button type="button" data-i="'+i+'" aria-label="Удалить запись">×</button>'}}).reverse();
+    $("eList").innerHTML=items.map(function(x){return "<li>"+x.h+"</li>"}).join("")||'<li class="ts">Пока пусто</li>';
+    $("eCount").textContent=items.length?items.length+" шт.":"";
+    $("docSum").textContent=st.ev.length?summary():"Добавьте записи — сводка появится здесь.";
+  }
+  $("docCopy").addEventListener("click",function(){var t=$("docSum").textContent,ok=function(){$("docCopied").textContent="Скопировано — можно вставить в сообщение врачу"};
+    function fallback(){var r=document.createRange();r.selectNodeContents($("docSum"));var sl=getSelection();sl.removeAllRanges();sl.addRange(r);try{document.execCommand("copy");ok()}catch(x){$("docCopied").textContent="Выделите текст и скопируйте вручную"}}
+    try{navigator.clipboard.writeText(t).then(ok,fallback)}catch(e){fallback()}});
+  setInterval(render,60000);
+  $("kidSum").addEventListener("click",function(){$("calc").scrollIntoView({behavior:"smooth"})});
+
+  /* ---------- несколько детей ---------- */
+  function renderKids(){
+    var h=ROOT.kids.map(function(k,i){return '<button type="button" data-ki="'+i+'" aria-pressed="'+(i===ROOT.cur)+'">'+kname(k,i).replace(/[<>&"]/g,"")+'</button>'}).join("")+(ROOT.kids.length<6?'<button type="button" class="kadd" data-ki="add">+ ребёнок</button>':"");
+    [].forEach.call(document.querySelectorAll("[data-kids]"),function(el){el.innerHTML=h});
+    [].forEach.call(document.querySelectorAll(".kname"),function(el){if(document.activeElement!==el)el.value=st.name||""});
+    [].forEach.call(document.querySelectorAll(".kdel"),function(el){el.hidden=ROOT.kids.length<2;el.textContent="Удалить";delete el.dataset.arm});
+  }
+  function switchKid(i){ROOT.cur=i;st=ROOT.kids[i];save();loadKid()}
+  function loadKid(){kwR.value=st.w;kwN.value=st.w;$("kwFrom").textContent="";showAge();resetWhen();renderKids();calc()}
+  document.addEventListener("click",function(e){var b=e.target.closest("[data-kids] button");if(!b)return;
+    if(b.dataset.ki==="add"){ROOT.kids.push(norm({}));switchKid(ROOT.kids.length-1);var n=document.querySelector(".kname");if(n)n.focus()}
+    else switchKid(+b.dataset.ki)});
+  [].forEach.call(document.querySelectorAll(".kname"),function(el){el.addEventListener("input",function(){st.name=el.value.slice(0,20);save();
+    [].forEach.call(document.querySelectorAll('[data-kids] button[data-ki="'+ROOT.cur+'"]'),function(b){b.textContent=kname(st,ROOT.cur)});calc()})});
+  [].forEach.call(document.querySelectorAll(".kdel"),function(el){el.addEventListener("click",function(){if(ROOT.kids.length<2)return;
+    if(!el.dataset.arm){el.dataset.arm=1;el.textContent="Нажмите ещё раз: удалить все записи «"+kname(st,ROOT.cur)+"»";setTimeout(function(){if(el.dataset.arm){delete el.dataset.arm;el.textContent="Удалить"}},4000);return}
+    ROOT.kids.splice(ROOT.cur,1);switchKid(Math.max(0,ROOT.cur-1))})});
+  loadKid();
+
+  /* ---------- активная вкладка и кнопка «Тревожно?» ---------- */
+  var tabs=[].slice.call(document.querySelectorAll(".tabs a")),secs=tabs.map(function(a){return $(a.getAttribute("href").slice(1))});
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target);tabs.forEach(function(t,j){t.classList.toggle("on",j===i)});if(tabs[i])try{tabs[i].parentNode.scrollTo({left:tabs[i].offsetLeft-40,behavior:"smooth"})}catch(x){}}})},{rootMargin:"-45% 0px -50% 0px"});
+    secs.forEach(function(s){s&&io.observe(s)});
+    var fab=$("fabSos"),io2=new IntersectionObserver(function(es){fab.classList.toggle("away",es[0].isIntersecting)},{threshold:.15});io2.observe($("flags"));
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  if(!("serviceWorker" in navigator) || location.protocol!=="https:" && location.hostname!=="localhost") return;
+  navigator.serviceWorker.register("sw.js").then(function(){
+    return navigator.serviceWorker.ready;
+  }).then(function(){
+    var ok=document.getElementById("offlineOk"); if(ok) ok.hidden=false;
+  }).catch(function(){});
+  var deferred=null, btn=document.getElementById("installBtn");
+  window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferred=e;if(btn)btn.hidden=false;});
+  if(btn) btn.addEventListener("click",function(){if(!deferred)return;deferred.prompt();deferred.userChoice.finally(function(){deferred=null;btn.hidden=true;});});
+})();
+</script>
+</body>
+</html>

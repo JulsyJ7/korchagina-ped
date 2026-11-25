@@ -1,0 +1,29 @@
+{
+  "name": "Рвота и диарея у ребёнка — памятка педиатра",
+  "short_name": "Рвота и понос",
+  "description": "Сколько раствора давать по весу, признаки обезвоживания, когда к врачу. Врач-педиатр Корчагина Ю.А.",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F4F8FB",
+  "theme_color": "#1E6FA8",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

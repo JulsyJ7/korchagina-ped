@@ -355,18 +355,27 @@ footer{padding-bottom:90px}
 @media (max-width:640px){.install-card{grid-template-columns:1fr}.inst-steps{grid-template-columns:1fr}}
 </style>
 <style>
-.kp-bar{background:#1B2230;color:#E9EDF4;font:600 13px/1.2 "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;position:relative;z-index:60}
+.kp-bar{background:#0F6E5E;color:#E6F2EF;font:600 13px/1.2 "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;position:relative;z-index:60}
 .kp-bar-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:38px;padding:0 max(16px,env(safe-area-inset-left,0px)) 0 max(16px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
 .kp-bar a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;margin-left:-6px;border-radius:10px}
 .kp-bar a:hover{background:rgba(255,255,255,.1)}
-.kp-bar a:focus-visible{outline:2px solid #F2B84B;outline-offset:1px}
+.kp-bar a:focus-visible{outline:2px solid #F2A48C;outline-offset:1px}
 .kp-bar svg{width:16px;height:16px;flex:none}
 .kp-bar span{opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media print{.kp-bar{display:none}}
+.kp-fab{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;min-width:52px;padding:0 14px;border-radius:99px;background:#0F6E5E;color:#fff;font:700 14px/1 "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;text-decoration:none;box-shadow:0 10px 24px -10px rgba(15,60,52,.7),0 0 0 2px rgba(255,255,255,.9);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s}
+.kp-fab.on{opacity:1;transform:none;pointer-events:auto}
+.kp-fab svg{width:22px;height:22px;flex:none}
+.kp-fab b{font-weight:700}
+@media (max-width:419px){.kp-fab{padding:0;width:52px}.kp-fab b{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+@media (prefers-color-scheme:dark){.kp-fab{box-shadow:0 10px 24px -10px rgba(0,0,0,.8),0 0 0 2px rgba(230,242,239,.35)}}
+@media (prefers-reduced-motion:reduce){.kp-fab{transition:none}}
+@media print{.kp-bar,.kp-fab{display:none}}
 </style>
 </head>
 <body>
 <nav class="kp-bar" aria-label="Сайт"><div class="kp-bar-in"><a href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg>Все памятки</a><span>врач-педиатр Корчагина Ю.А.</span></div></nav>
+<a class="kp-fab" href="../" title="Все памятки"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg><b>Все памятки</b></a>
+<script>(function(){var b=document.querySelector(".kp-bar"),f=document.querySelector(".kp-fab");if(!b||!f)return;if(!("IntersectionObserver" in window)){f.classList.add("on");return}new IntersectionObserver(function(e){f.classList.toggle("on",!e[0].isIntersecting)}).observe(b)})()</script>
 
 <style>
 .field input[type=date],.field input[type=text],.wcalc input,.fcalc input{display:block;width:100%;height:50px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:0 12px;font:inherit;font-size:16px;-webkit-appearance:none;appearance:none;min-width:0}

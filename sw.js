@@ -1,6 +1,6 @@
 /* Офлайн-кэш главной страницы. Версия меняется при каждом обновлении index.html. */
-const VERSION = "home-02a17ad325";
-const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icon-home-192.png", "./icon-home-512.png", "./apple-touch-icon-home.png", "./favicon-home-32.png", "./photo.jpg", "./pattern-light.webp", "./pattern-dark.webp", "./thumb-malysh.webp", "./thumb-prikorm.webp", "./thumb-privivki.webp", "./thumb-lihoradka.webp", "./thumb-rvota.webp", "./thumb-aptechka.webp", "./font-lora-cyrillic-700.woff2", "./font-lora-latin-700.woff2", "./font-manrope-cyrillic-400.woff2", "./font-manrope-cyrillic-700.woff2", "./font-manrope-cyrillic-800.woff2", "./font-manrope-latin-400.woff2", "./font-manrope-latin-700.woff2", "./font-manrope-latin-800.woff2"];
+const VERSION = "home-54741e32a3";
+const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icon-steth-192.png", "./icon-steth-512.png", "./apple-touch-icon-steth.png", "./favicon-steth-32.png", "./photo.jpg", "./pattern-light.webp", "./pattern-dark.webp", "./thumb-malysh.webp", "./thumb-prikorm.webp", "./thumb-privivki.webp", "./thumb-lihoradka.webp", "./thumb-rvota.webp", "./thumb-aptechka.webp", "./font-lora-cyrillic-700.woff2", "./font-lora-latin-700.woff2", "./font-manrope-cyrillic-400.woff2", "./font-manrope-cyrillic-700.woff2", "./font-manrope-cyrillic-800.woff2", "./font-manrope-latin-400.woff2", "./font-manrope-latin-700.woff2", "./font-manrope-latin-800.woff2"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
 });
